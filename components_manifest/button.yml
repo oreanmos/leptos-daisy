@@ -1,0 +1,110 @@
+# Button Component Manifest
+#
+# DaisyUI Button component documentation for leptos-daisyui
+
+name: Button
+doc: https://daisyui.com/components/button/
+
+base:
+  - "btn"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "btn-primary"
+    - "btn-secondary"
+    - "btn-accent"
+    - "btn-neutral"
+    - "btn-info"
+    - "btn-success"
+    - "btn-warning"
+    - "btn-error"
+  
+  # Size modifiers
+  size:
+    - "btn-xs"
+    - "btn-sm"
+    - "btn-md"
+    - "btn-lg"
+    - "btn-wide"
+    - "btn-block"
+  
+  # Variant modifiers
+  variant:
+    - "btn-outline"
+    - "btn-ghost"
+    - "btn-link"
+    - "btn-soft"
+    - "btn-dash"
+  
+  # State modifiers
+  state:
+    - "btn-active"
+    - "btn-disabled"
+    - "btn-loading"
+  
+  # Shape modifiers
+  shape:
+    - "btn-square"
+    - "btn-circle"
+  
+  # Other modifiers
+  other:
+    - "glass"
+    - "no-animation"
+
+patterns:
+  - "icon-only"
+  - "button-group"
+  - "with-loading-spinner"
+  - "responsive-sizing"
+
+examples:
+  - id: "basic"
+    description: "Basic button with text"
+  - id: "all-variants"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "all-modifiers"
+    description: "Shows all modifier combinations"
+  - id: "with-icon"
+    description: "Button with icon"
+  - id: "icon-only"
+    description: "Icon-only button"
+  - id: "button-group"
+    description: "Button group using join"
+  - id: "loading-state"
+    description: "Button in loading state"
+  - id: "disabled-state"
+    description: "Disabled button"
+  - id: "interactive"
+    description: "Button with click handler"
+
+accessibility:
+  semantic_element: "button"
+  aria_attributes:
+    - "aria-label"
+    - "aria-disabled"
+    - "aria-busy"
+  keyboard_navigation: true
+  default_attributes:
+    type: "button"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic button
+  tested: true
+  documented: true
+
+notes: |
+  The button component is one of the most comprehensive in the library.
+  It supports all DaisyUI button variants, sizes, and modifiers.
+  
+  Special considerations:
+  - Always include type="button" to prevent form submission
+  - Loading state should disable the button
+  - Icon-only buttons need proper aria-label for accessibility
+  - Button groups use the "join" class for horizontal grouping

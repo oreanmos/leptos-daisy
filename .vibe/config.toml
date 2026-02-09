@@ -1,0 +1,13 @@
+textual_theme = "catppuccin-mocha"
+
+[[mcp_servers]]
+name = "context7"
+transport = "stdio"
+command = "npx"
+args = [
+    "-y",
+    "@upstash/context7-mcp",
+]
+
+[mcp_servers.env]
+CONTEXT7_API_KEY = "ctx7sk-392d1c4d-db79-49f2-bc50-35b89bb5e9b5"

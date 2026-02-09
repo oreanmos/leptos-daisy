@@ -1,0 +1,82 @@
+# DaisyUI Component Manifest Template
+#
+# This template defines the structure for documenting DaisyUI components
+# and their variations in the leptos-daisyui library.
+
+# Component name (PascalCase)
+name: ComponentName
+
+# Link to official DaisyUI documentation
+doc: https://daisyui.com/components/component-name/
+
+# Base DaisyUI classes required for this component
+base:
+  - "component-base-class"
+
+# Component parts (sub-elements with their own classes)
+parts:
+  - name: "PartName"
+    classes:
+      - "part-base-class"
+    description: "Description of this part"
+
+# Component modifiers (variants, sizes, states, etc.)
+modifiers:
+  # Color modifiers
+  color:
+    - "component-primary"
+    - "component-secondary"
+    - "component-accent"
+    # ... other colors
+  
+  # Size modifiers  
+  size:
+    - "component-xs"
+    - "component-sm"
+    - "component-md"
+    - "component-lg"
+  
+  # Variant modifiers
+  variant:
+    - "component-outline"
+    - "component-ghost"
+    # ... other variants
+  
+  # State modifiers
+  state:
+    - "component-active"
+    - "component-disabled"
+    - "component-loading"
+
+# Documented patterns or recipes for this component
+patterns:
+  - "pattern-name"
+  - "another-pattern"
+
+# Examples that should be implemented in the demo app
+examples:
+  - id: "basic"
+    description: "Basic usage example"
+  - id: "with-icon"
+    description: "Example with icon"
+  - id: "all-variants"
+    description: "Shows all variant combinations"
+
+# Accessibility considerations
+accessibility:
+  semantic_element: "div" # or button, a, etc.
+  aria_attributes:
+    - "aria-label"
+    - "aria-disabled"
+  keyboard_navigation: false
+
+# Implementation status
+status:
+  tier_a: false # Pure wrapper implemented
+  tier_b: false # Interactive helper implemented
+  tested: false
+  documented: false
+
+# Notes or special considerations
+notes: |
+  Any special implementation notes or considerations for this component.

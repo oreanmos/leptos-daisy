@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Leptos App",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/leptos-daisy",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "RUST_BACKTRACE": "1"
+      }
+    },
+    {
+      "name": "Run Tests",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/target/debug/deps/leptos_daisy-*",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "RUST_BACKTRACE": "1"
+      }
+    }
+  ]
+}

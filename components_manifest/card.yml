@@ -1,0 +1,105 @@
+# Card Component Manifest
+#
+# DaisyUI Card component documentation for leptos-daisyui
+
+name: Card
+doc: https://daisyui.com/components/card/
+
+base:
+  - "card"
+
+parts:
+  - name: "CardHeader"
+    classes:
+      - "card-header"
+    description: "Card header section"
+  - name: "CardBody"
+    classes:
+      - "card-body"
+    description: "Main card content area"
+  - name: "CardTitle"
+    classes:
+      - "card-title"
+    description: "Card title/heading"
+  - name: "CardActions"
+    classes:
+      - "card-actions"
+    description: "Container for card action buttons"
+  - name: "CardImage"
+    classes:
+      - "card-image"
+    description: "Container for card images"
+  - name: "CardFigure"
+    classes:
+      - "figure"
+    description: "Figure element within card"
+
+modifiers:
+  # Layout modifiers
+  layout:
+    - "card-bordered"
+    - "card-compact"
+    - "card-normal"
+    - "card-side"
+  
+  # Size modifiers
+  size:
+    - "card-sm"
+    - "card-md"
+    - "card-lg"
+
+patterns:
+  - "with-header"
+  - "with-footer"
+  - "with-image"
+  - "side-image"
+  - "compact-layout"
+  - "bordered-card"
+  - "card-with-actions"
+
+examples:
+  - id: "basic"
+    description: "Basic card with content"
+  - id: "with-header"
+    description: "Card with header section"
+  - id: "with-footer"
+    description: "Card with footer/actions"
+  - id: "with-title"
+    description: "Card with title"
+  - id: "with-image"
+    description: "Card with image"
+  - id: "side-image"
+    description: "Card with side-by-side image and content"
+  - id: "compact"
+    description: "Compact card layout"
+  - id: "bordered"
+    description: "Card with border"
+  - id: "all-modifiers"
+    description: "Shows all card modifier combinations"
+  - id: "complex"
+    description: "Complex card with header, image, content, and actions"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+    - "aria-describedby"
+  keyboard_navigation: false
+  landmark: true
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic card
+  tested: false
+  documented: false
+
+notes: |
+  Cards are versatile containers for displaying content.
+  
+  Special considerations:
+  - Cards should have proper heading structure for accessibility
+  - Consider using landmark roles for complex card layouts
+  - Side layout (card-side) changes the flex direction
+  - Compact layout reduces padding for denser content
+  - Bordered cards have a subtle border by default
+  - Cards can be nested but be careful with styling conflicts

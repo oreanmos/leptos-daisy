@@ -1,0 +1,105 @@
+# Alert Component Manifest
+#
+# DaisyUI Alert component documentation for leptos-daisyui
+
+name: Alert
+doc: https://daisyui.com/components/alert/
+
+base:
+  - "alert"
+
+parts:
+  - name: "AlertIcon"
+    classes:
+      - "alert-icon"
+    description: "Container for alert icon"
+  - name: "AlertTitle"
+    classes:
+      - "alert-title"
+    description: "Alert title/heading"
+  - name: "AlertContent"
+    classes:
+      - "alert-content"
+    description: "Main alert content"
+  - name: "AlertActions"
+    classes:
+      - "alert-actions"
+    description: "Container for alert actions/buttons"
+
+modifiers:
+  # Color modifiers (variants)
+  color:
+    - "alert-info"
+    - "alert-success"
+    - "alert-warning"
+    - "alert-error"
+  
+  # Style modifiers
+  style:
+    - "alert-outline"
+    - "alert-dash"
+    - "alert-soft"
+  
+  # Layout modifiers
+  layout:
+    - "alert-vertical"
+    - "alert-horizontal"
+  
+  # State modifiers
+  state:
+    - "alert-icon" # Shows icon
+
+patterns:
+  - "with-icon"
+  - "with-title"
+  - "with-actions"
+  - "dismissible"
+  - "stacked-alerts"
+
+examples:
+  - id: "basic"
+    description: "Basic alert with text content"
+  - id: "all-variants"
+    description: "Shows all color variants (info, success, warning, error)"
+  - id: "all-styles"
+    description: "Shows all style variants (default, outline, dash, soft)"
+  - id: "with-icon"
+    description: "Alert with icon"
+  - id: "with-title"
+    description: "Alert with title and content"
+  - id: "with-actions"
+    description: "Alert with action buttons"
+  - id: "vertical-layout"
+    description: "Alert with vertical layout"
+  - id: "horizontal-layout"
+    description: "Alert with horizontal layout"
+  - id: "reactive"
+    description: "Reactive alert that changes dynamically"
+  - id: "dismissible"
+    description: "Dismissible alert with close button"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+    - "aria-describedby"
+    - "aria-live"
+  keyboard_navigation: false
+  default_attributes:
+    role: "alert"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic alert
+  tested: true
+  documented: true
+
+notes: |
+  Alerts are used to display important messages to users.
+  
+  Special considerations:
+  - Always include role="alert" for screen readers
+  - Use appropriate aria-live attributes for dynamic alerts
+  - Consider using alert-icon for better visual hierarchy
+  - Dismissible alerts need proper focus management
+  - Multiple alerts should be stacked with appropriate spacing
