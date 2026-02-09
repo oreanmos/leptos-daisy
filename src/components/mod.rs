@@ -4,8 +4,11 @@
 
 // Re-export implemented components for easy access
 pub mod alert;
+pub mod badge;
 pub mod button;
 pub mod card;
+pub mod modal;
+pub mod navbar;
 
 // Placeholder for unimplemented components
 // As we implement more components, we'll add them here
@@ -46,8 +49,8 @@ pub mod card;
 // pub mod mockup_code;
 // pub mod mockup_phone;
 // pub mod mockup_window;
-// pub mod modal;
-// pub mod navbar;
+
+
 // pub mod pagination;
 // pub mod progress;
 // pub mod radial_progress;

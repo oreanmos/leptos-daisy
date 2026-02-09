@@ -1,0 +1,83 @@
+name: Navbar
+status: implemented
+doc: https://daisyui.com/components/navbar/
+base:
+  - "navbar"
+parts:
+  - name: "navbar-start"
+    description: "Left-aligned content section"
+    classes: ["navbar-start"]
+  - name: "navbar-center"
+    description: "Center-aligned content section"
+    classes: ["navbar-center"]
+  - name: "navbar-end"
+    description: "Right-aligned content section"
+    classes: ["navbar-end"]
+  - name: "navbar-brand"
+    description: "Brand/logo section"
+    classes: ["navbar-brand"]
+  - name: "navbar-menu"
+    description: "Menu section for mobile/responsive"
+    classes: ["navbar-menu"]
+  - name: "navbar-toggle"
+    description: "Toggle button for responsive behavior"
+    classes: ["navbar-toggle"]
+modifiers:
+  color:
+    - "navbar-primary"
+    - "navbar-secondary"
+    - "navbar-accent"
+    - "navbar-neutral"
+    - "navbar-info"
+    - "navbar-success"
+    - "navbar-warning"
+    - "navbar-error"
+  fixed:
+    - "fixed top-0 z-50"
+  glass:
+    - "glass"
+  rounded:
+    - "rounded-box"
+  bordered:
+    - "border border-base-300"
+patterns:
+  - "basic-navbar"
+  - "navbar-with-brand"
+  - "navbar-with-responsive-menu"
+  - "fixed-navbar"
+  - "glass-navbar"
+examples:
+  - id: "basic-navbar"
+    description: "Basic navbar with start, center, and end sections"
+  - id: "navbar-with-brand"
+    description: "Navbar with brand/logo section"
+  - id: "navbar-with-responsive-menu"
+    description: "Navbar with responsive menu toggle"
+  - id: "fixed-navbar"
+    description: "Fixed navbar at top of page"
+  - id: "glass-navbar"
+    description: "Transparent glass-effect navbar"
+accessibility:
+  semantic_tag: "nav"
+  aria_attributes:
+    - "aria-label='Main navigation'"
+  notes:
+    - "Use semantic <nav> element"
+    - "Provide proper aria labels for navigation"
+    - "Ensure mobile toggle is accessible"
+notes:
+  - "Navbar uses semantic <nav> element for accessibility"
+  - "Responsive behavior requires JavaScript for toggle functionality"
+  - "Fixed navbar should include proper z-index and positioning"
+  - "Glass effect uses DaisyUI glass utility"
+  - "All navbar parts are implemented as separate components"
+coverage:
+  base_classes: true
+  color_variants: true
+  size_variants: false
+  fixed_modifier: true
+  glass_modifier: true
+  rounded_modifier: true
+  bordered_modifier: true
+  responsive_behavior: true
+  accessibility: true

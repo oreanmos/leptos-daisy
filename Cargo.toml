@@ -12,6 +12,8 @@ categories = ["gui", "web-programming", "wasm"]
 leptos = { version = "0.8.15", features = ["csr", "hydrate"] }
 leptos_meta = "0.8.5"
 leptos_router = "0.8.11"
+uuid = { version = "1.8.0", features = ["v4"] }
+log = "0.4.21"
 
 [dev-dependencies]
 leptos = { version = "0.8.15", features = ["csr", "hydrate", "ssr"] }

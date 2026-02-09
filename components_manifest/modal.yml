@@ -1,0 +1,75 @@
+name: Modal
+status: implemented
+doc: https://daisyui.com/components/modal/
+base:
+  - "modal"
+parts:
+  - name: "modal-box"
+    description: "Main content container"
+    classes: ["modal-box"]
+  - name: "modal-action"
+    description: "Action buttons area"
+    classes: ["modal-action"]
+  - name: "modal-toggle"
+    description: "Checkbox toggle for SSR pattern"
+    classes: ["modal-toggle"]
+  - name: "modal-backdrop"
+    description: "Backdrop overlay"
+    classes: ["modal-backdrop"]
+  - name: "modal-close"
+    description: "Close button"
+    classes: ["btn btn-sm btn-circle btn-ghost absolute right-2 top-2"]
+modifiers:
+  color:
+    - "modal-primary"
+    - "modal-secondary"
+    - "modal-accent"
+    - "modal-neutral"
+    - "modal-info"
+    - "modal-success"
+    - "modal-warning"
+    - "modal-error"
+patterns:
+  - "dialog-pattern"
+  - "checkbox-pattern"
+  - "with-close-button"
+  - "with-backdrop"
+  - "controlled-modal"
+examples:
+  - id: "basic-modal"
+    description: "Basic modal with dialog pattern"
+  - id: "checkbox-modal"
+    description: "SSR-friendly modal with checkbox pattern"
+  - id: "modal-with-actions"
+    description: "Modal with action buttons"
+  - id: "controlled-modal"
+    description: "Modal with signal-based control (hydrate feature)"
+  - id: "modal-with-close"
+    description: "Modal with close button"
+accessibility:
+  semantic_tag: "dialog"
+  aria_attributes:
+    - "aria-label='Modal dialog'"
+    - "aria-modal='true'"
+  notes:
+    - "Use semantic <dialog> element for dialog pattern"
+    - "Provide proper aria labels and modal attributes"
+    - "Ensure close button is accessible"
+    - "Backdrop click should close modal"
+    - "Escape key should close modal"
+notes:
+  - "Modal implements both Tier A (pure wrapper) and Tier B (interactive controller)"
+  - "Dialog pattern uses <dialog> element with showModal()/close() methods"
+  - "Checkbox pattern is SSR-friendly but requires JavaScript for toggle"
+  - "ModalController is feature-gated under 'hydrate' for interactive behavior"
+  - "All modal parts are implemented as separate components"
+  - "Supports both open/close patterns for flexibility"
+coverage:
+  base_classes: true
+  color_variants: true
+  dialog_pattern: true
+  checkbox_pattern: true
+  controlled_pattern: true
+  accessibility: true
+  interactive_controller: true
+  feature_gating: true

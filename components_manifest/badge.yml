@@ -1,0 +1,91 @@
+# Badge Component Manifest
+#
+# DaisyUI Badge component documentation for leptos-daisyui
+
+name: Badge
+doc: https://daisyui.com/components/badge/
+
+base:
+  - "badge"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "badge-primary"
+    - "badge-secondary"
+    - "badge-accent"
+    - "badge-neutral"
+    - "badge-info"
+    - "badge-success"
+    - "badge-warning"
+    - "badge-error"
+  
+  # Size modifiers
+  size:
+    - "badge-xs"
+    - "badge-sm"
+    - "badge-md"
+    - "badge-lg"
+  
+  # Variant modifiers
+  variant:
+    - "badge-outline"
+    - "badge-ghost"
+    - "badge-link"
+    - "badge-soft"
+    - "badge-dash"
+  
+  # State modifiers
+  state:
+    - "badge-active"
+    - "badge-disabled"
+
+patterns:
+  - "with-icon"
+  - "notification-badge"
+  - "status-indicator"
+  - "pill-badge"
+
+examples:
+  - id: "basic"
+    description: "Basic badge with text content"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "outline-variants"
+    description: "Shows outline style variants"
+  - id: "with-icon"
+    description: "Badge with icon"
+  - id: "notification"
+    description: "Notification badge with counter"
+  - id: "status"
+    description: "Status indicator badge"
+  - id: "pill"
+    description: "Pill-shaped badge"
+
+accessibility:
+  semantic_element: "span"
+  aria_attributes:
+    - "aria-label"
+    - "aria-hidden"
+  keyboard_navigation: false
+  role: "status"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed
+  tested: true
+  documented: true
+
+notes: |
+  Badges are small, versatile components used for notifications, status indicators, and labels.
+  
+  Special considerations:
+  - Use appropriate ARIA attributes for screen readers
+  - Consider using aria-hidden="true" for decorative badges
+  - Notification badges should have proper aria-label for accessibility
+  - Badges can be combined with icons for better visual hierarchy
+  - Outline variants provide subtle styling for secondary information
