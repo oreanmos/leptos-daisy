@@ -11,7 +11,8 @@
 			"targets": "aarch64-unknown-linux-gnu",
 			"components": "rust-analyzer,rust-src,rustfmt,clippy"
 		}
-	}
+	},
+	"forwardPorts": [3000, 3001]
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},

@@ -1,0 +1,87 @@
+# Select Component Manifest
+#
+# DaisyUI Select component documentation for leptos-daisyui
+
+name: Select
+doc: https://daisyui.com/components/select/
+
+base:
+  - "select"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "select-primary"
+    - "select-secondary"
+    - "select-accent"
+    - "select-neutral"
+    - "select-info"
+    - "select-success"
+    - "select-warning"
+    - "select-error"
+  
+  # Size modifiers
+  size:
+    - "select-xs"
+    - "select-sm"
+    - "select-md"
+    - "select-lg"
+    - "select-xl"
+  
+  # Style modifiers
+  style:
+    - "select-bordered"
+    - "select-ghost"
+
+patterns:
+  - "with-icon"
+  - "with-label"
+  - "with-validator"
+  - "disabled-state"
+  - "multiple-select"
+
+examples:
+  - id: "basic"
+    description: "Basic select dropdown"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "bordered-vs-ghost"
+    description: "Compares bordered and ghost styles"
+  - id: "with-options"
+    description: "Select with multiple options"
+  - id: "disabled"
+    description: "Disabled select field"
+  - id: "with-icon"
+    description: "Select with icon"
+  - id: "with-label"
+    description: "Select with label"
+  - id: "interactive"
+    description: "Select with change handler"
+
+accessibility:
+  semantic_element: "select"
+  aria_attributes:
+    - "aria-label"
+    - "aria-describedby"
+    - "aria-invalid"
+  keyboard_navigation: true
+  default_attributes: {}
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic select
+  tested: true
+  documented: true
+
+notes: |
+  The select component supports all DaisyUI select variants, sizes, and modifiers.
+  
+  Special considerations:
+  - Always include proper option elements
+  - Disabled selects should not be focusable
+  - Select with icons need proper aria-label for accessibility
+  - Consider using select groups for complex option organization

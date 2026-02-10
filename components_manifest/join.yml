@@ -1,0 +1,54 @@
+# Join Component Manifest
+#
+# DaisyUI Join component documentation for leptos-daisyui
+# https://daisyui.com/components/join/
+
+name: Join
+doc: https://daisyui.com/components/join/
+
+base:
+  - "join"
+
+parts:
+  - name: "join-item"
+    description: "Individual item within a join group"
+    classes: ["join-item"]
+
+modifiers:
+  # Layout modifiers
+  layout:
+    - "join-vertical"
+    - "join-horizontal"
+
+patterns:
+  - "button-group"
+  - "input-with-button"
+  - "pagination"
+  - "radio-group"
+  - "checkbox-group"
+
+examples:
+  - id: "basic"
+    description: "Basic horizontal join with buttons"
+  - id: "vertical"
+    description: "Vertical join layout"
+  - id: "input-button"
+    description: "Input with attached button"
+  - id: "responsive"
+    description: "Responsive join (vertical on mobile)"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "role"
+    - "aria-label"
+  keyboard_navigation: true
+  notes: |
+    When used as a button group, add role="group" and
+    appropriate aria-label for screen readers.
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

@@ -1,0 +1,42 @@
+# List Component Manifest
+#
+# DaisyUI List component documentation for leptos-daisyui
+
+name: List
+doc: https://daisyui.com/components/list/
+
+base:
+  - "list"
+
+parts:
+  - name: "ListItem"
+    classes:
+      - ""
+    description: "Individual list item"
+  - name: "ListCol"
+    classes:
+      - "list-col"
+      - "list-col-grow"
+    description: "Column within a list row"
+
+modifiers:
+  # Layout modifiers
+  layout:
+    - "list-row"
+  
+  # Column modifiers
+  column:
+    - "list-col-grow"
+
+patterns:
+  - name: "vertical"
+    description: "Standard vertical list"
+  - name: "row"
+    description: "Horizontal row layout"
+  - name: "with_columns"
+    description: "List with multiple columns"
+
+examples:
+  - "list_basic"
+  - "list_row"
+  - "list_columns"

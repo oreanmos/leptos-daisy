@@ -1,0 +1,45 @@
+name: Pagination
+status: implemented
+doc: https://daisyui.com/components/pagination/
+
+base:
+  - "join"
+  - "join-item"
+
+parts:
+  - name: "pagination-item"
+    description: "Individual page button"
+    classes: ["join-item", "btn"]
+
+modifiers:
+  size:
+    - "btn-xs"
+    - "btn-sm"
+    - "btn-md"
+    - "btn-lg"
+  
+  state:
+    - "btn-active"
+    - "btn-disabled"
+
+patterns:
+  - "basic-pagination"
+  - "pagination-with-first-last"
+  - "pagination-with-prev-next"
+  - "sized-pagination"
+  - "ellipsis-pagination"
+
+examples:
+  - id: "basic-pagination"
+    description: "Basic page number buttons"
+  - id: "pagination-with-navigation"
+    description: "Pagination with prev/next buttons"
+  - id: "pagination-with-first-last"
+    description: "Pagination with first/last buttons"
+  - id: "sized-pagination"
+    description: "Pagination with size variants"
+
+accessibility:
+  - "Current page should have aria-current='page'"
+  - "Disabled buttons should have aria-disabled"
+  - "Use semantic <button> elements for actions"

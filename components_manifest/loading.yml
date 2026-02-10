@@ -1,0 +1,64 @@
+# Loading Component Manifest
+#
+# DaisyUI Loading component documentation for leptos-daisyui
+
+name: Loading
+doc: https://daisyui.com/components/loading/
+
+base:
+  - "loading"
+
+parts: []
+
+modifiers:
+  # Variant modifiers (animation styles)
+  variant:
+    - "loading-spinner"
+    - "loading-dots"
+    - "loading-ring"
+    - "loading-ball"
+    - "loading-bars"
+    - "loading-infinity"
+
+  # Size modifiers
+  size:
+    - "loading-xs"
+    - "loading-sm"
+    - "loading-md"
+    - "loading-lg"
+    - "loading-xl"
+
+  # Color modifiers (using text-* colors)
+  color:
+    - "text-primary"
+    - "text-secondary"
+    - "text-accent"
+    - "text-neutral"
+    - "text-info"
+    - "text-success"
+    - "text-warning"
+    - "text-error"
+
+patterns:
+  - "with-label"
+  - "centered"
+  - "inline"
+  - "button-loading"
+
+examples:
+  - id: "spinner"
+    description: "Default spinner loading indicator"
+  - id: "dots"
+    description: "Dots loading animation"
+  - id: "ring"
+    description: "Ring loading animation"
+  - id: "ball"
+    description: "Ball loading animation"
+  - id: "bars"
+    description: "Bars loading animation"
+  - id: "infinity"
+    description: "Infinity loading animation"
+  - id: "sizes"
+    description: "All size variants"
+  - id: "colors"
+    description: "All color variants"

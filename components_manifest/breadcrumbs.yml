@@ -1,0 +1,33 @@
+name: Breadcrumbs
+status: implemented
+doc: https://daisyui.com/components/breadcrumbs/
+
+base:
+  - "breadcrumbs"
+
+parts: []
+
+modifiers:
+  size:
+    - "text-xs"
+    - "text-sm"
+    - "text-md"
+    - "text-lg"
+
+patterns:
+  - "basic-breadcrumbs"
+  - "breadcrumbs-with-icons"
+  - "scrollable-breadcrumbs"
+
+examples:
+  - id: "basic-breadcrumbs"
+    description: "Basic breadcrumb navigation"
+  - id: "breadcrumbs-with-icons"
+    description: "Breadcrumbs with icons"
+  - id: "scrollable-breadcrumbs"
+    description: "Scrollable breadcrumbs for many items"
+
+accessibility:
+  - "Use semantic <nav> or <div> with aria-label='breadcrumb'"
+  - "Current page should have aria-current='page'"
+  - "Use ordered list structure for breadcrumb items"

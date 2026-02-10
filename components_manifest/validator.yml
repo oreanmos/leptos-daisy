@@ -1,0 +1,36 @@
+# Validator Component Manifest
+#
+# DaisyUI Validator component documentation for leptos-daisyui
+
+name: Validator
+doc: https://daisyui.com/components/validator/
+
+base:
+  - "validator"
+
+parts:
+  - name: "hint"
+    description: "Validation message hint"
+    classes: ["validator-hint"]
+
+modifiers:
+  # State modifiers
+  state:
+    - "validator-error"
+    - "validator-success"
+
+patterns:
+  - "with-input"
+  - "error-state"
+  - "success-state"
+  - "with-hint"
+
+examples:
+  - id: "basic"
+    description: "Basic validator wrapper"
+  - id: "error"
+    description: "Validator with error state"
+  - id: "success"
+    description: "Validator with success state"
+  - id: "with-hint"
+    description: "Validator with hint message"

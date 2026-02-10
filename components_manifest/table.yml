@@ -1,0 +1,64 @@
+# Table Component Manifest
+#
+# DaisyUI Table component documentation for leptos-daisyui
+
+name: Table
+doc: https://daisyui.com/components/table/
+
+base:
+  - "table"
+
+parts:
+  - name: "TableHeader"
+    classes:
+      - ""
+    description: "Table header (thead)"
+  - name: "TableBody"
+    classes:
+      - ""
+    description: "Table body (tbody)"
+  - name: "TableFooter"
+    classes:
+      - ""
+    description: "Table footer (tfoot)"
+  - name: "TableRow"
+    classes:
+      - ""
+    description: "Table row (tr)"
+  - name: "TableHead"
+    classes:
+      - ""
+    description: "Table header cell (th)"
+  - name: "TableCell"
+    classes:
+      - ""
+    description: "Table data cell (td)"
+
+modifiers:
+  # Size modifiers
+  size:
+    - "table-xs"
+    - "table-sm"
+    - "table-md"
+    - "table-lg"
+    - "table-xl"
+  
+  # Style modifiers
+  style:
+    - "table-zebra"
+    - "table-pin-rows"
+    - "table-pin-cols"
+
+patterns:
+  - name: "basic"
+    description: "Basic table structure"
+  - name: "zebra"
+    description: "Zebra-striped rows"
+  - name: "pinned"
+    description: "Pinned rows/columns"
+
+examples:
+  - "table_basic"
+  - "table_zebra"
+  - "table_sizes"
+  - "table_pinned"

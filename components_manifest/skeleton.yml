@@ -1,0 +1,35 @@
+# Skeleton Component Manifest
+#
+# DaisyUI Skeleton component documentation for leptos-daisyui
+
+name: Skeleton
+doc: https://daisyui.com/components/skeleton/
+
+base:
+  - "skeleton"
+
+parts: []
+
+modifiers:
+  # Text animation modifier
+  style:
+    - "skeleton-text"
+
+patterns:
+  - "card-skeleton"
+  - "avatar-skeleton"
+  - "list-skeleton"
+  - "table-skeleton"
+  - "paragraph-skeleton"
+
+examples:
+  - id: "basic"
+    description: "Basic skeleton placeholder"
+  - id: "text"
+    description: "Skeleton with text animation"
+  - id: "circle"
+    description: "Circular skeleton for avatars"
+  - id: "card"
+    description: "Card skeleton layout"
+  - id: "list"
+    description: "List skeleton layout"

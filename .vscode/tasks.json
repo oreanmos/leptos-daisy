@@ -49,6 +49,126 @@
       "type": "cargo",
       "command": "clean",
       "problemMatcher": []
+    },
+    {
+      "label": "Showcase: Serve (cargo leptos)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["leptos", "serve"],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase",
+        "env": {
+          "LEPTOS_SITE_ADDR": "0.0.0.0:3000"
+        }
+      },
+      "problemMatcher": ["$rustc"],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Showcase: Serve (trunk)",
+      "type": "shell",
+      "command": "trunk",
+      "args": ["serve", "--address", "0.0.0.0", "--port", "3000"],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase",
+        "env": {
+          "NO_COLOR": "false"
+        }
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Showcase: Build (cargo leptos)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["leptos", "build"],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase"
+      },
+      "problemMatcher": ["$rustc"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Showcase: Build Release (cargo leptos)",
+      "type": "shell",
+      "command": "cargo",
+      "args": ["leptos", "build", "--release"],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase"
+      },
+      "problemMatcher": ["$rustc"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Showcase: Build CSS (Tailwind)",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "@tailwindcss/cli",
+        "-i", "./style/main.css",
+        "-o", "./style/output.css",
+        "--watch"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Showcase: Build CSS Once (Tailwind)",
+      "type": "shell",
+      "command": "npx",
+      "args": [
+        "@tailwindcss/cli",
+        "-i", "./style/main.css",
+        "-o", "./style/output.css"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/crates/showcase"
+      },
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
     }
   ]
 }

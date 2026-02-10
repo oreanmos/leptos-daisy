@@ -1,0 +1,50 @@
+# Toast Component Manifest
+#
+# DaisyUI Toast component documentation for leptos-daisyui
+
+name: Toast
+doc: https://daisyui.com/components/toast/
+
+base:
+  - "toast"
+
+parts: []
+
+modifiers:
+  # Vertical position modifiers
+  vertical:
+    - "toast-top"
+    - "toast-bottom"
+
+  # Horizontal position modifiers
+  horizontal:
+    - "toast-start"
+    - "toast-center"
+    - "toast-end"
+
+patterns:
+  - "top-start"
+  - "top-center"
+  - "top-end"
+  - "bottom-start"
+  - "bottom-center"
+  - "bottom-end"
+  - "with-alert"
+  - "auto-dismiss"
+  - "stacked"
+
+examples:
+  - id: "bottom-end"
+    description: "Toast positioned at bottom-end (default)"
+  - id: "top-end"
+    description: "Toast positioned at top-end"
+  - id: "bottom-start"
+    description: "Toast positioned at bottom-start"
+  - id: "top-start"
+    description: "Toast positioned at top-start"
+  - id: "center"
+    description: "Toast positioned at center"
+  - id: "with-alert"
+    description: "Toast containing alert components"
+  - id: "stacked"
+    description: "Multiple stacked toasts"

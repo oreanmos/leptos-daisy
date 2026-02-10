@@ -1,0 +1,43 @@
+# Backdrop Component Manifest
+#
+# DaisyUI Backdrop overlay component for leptos-daisyui
+# Used by Modal and Drawer components
+
+name: Backdrop
+doc: https://daisyui.com/components/modal/  # Backdrop is part of modal/drawer
+
+base:
+  - "modal-backdrop"
+  - "drawer-overlay"
+
+parts:
+  - name: "modal-backdrop"
+    description: "Backdrop overlay for modal dialogs"
+    classes: ["modal-backdrop"]
+  - name: "drawer-overlay"
+    description: "Backdrop overlay for drawer components"
+    classes: ["drawer-overlay"]
+
+modifiers:
+  # No specific modifiers for backdrop
+
+patterns:
+  - "modal-backdrop"
+  - "drawer-backdrop"
+  - "click-to-close"
+
+examples:
+  - id: "modal-backdrop"
+    description: "Backdrop for modal dialog"
+  - id: "drawer-backdrop"
+    description: "Backdrop for drawer component"
+
+accessibility:
+  semantic_element: "label"
+  aria_attributes:
+    - "aria-hidden"
+  notes: |
+    The backdrop is a label element that targets a checkbox input.
+    Clicking the backdrop closes the modal/drawer by unchecking the
+    controlling checkbox. It is marked aria-hidden since it's purely
+    a visual/interactive element.

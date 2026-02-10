@@ -1,0 +1,49 @@
+# Footer Component Manifest
+#
+# DaisyUI Footer component documentation for leptos-daisyui
+# https://daisyui.com/components/footer/
+
+name: Footer
+doc: https://daisyui.com/components/footer/
+
+base:
+  - "footer"
+
+parts:
+  - name: "footer-title"
+    description: "Title/heading for a footer section"
+    classes: ["footer-title"]
+
+modifiers:
+  # Layout modifiers
+  layout:
+    - "footer-center"
+    - "footer-horizontal"
+    - "footer-vertical"
+
+patterns:
+  - "multi-column"
+  - "with-links"
+  - "with-social-icons"
+  - "with-newsletter"
+
+examples:
+  - id: "basic"
+    description: "Basic footer with text"
+  - id: "centered"
+    description: "Centered footer content"
+  - id: "horizontal"
+    description: "Horizontal layout footer"
+  - id: "multi-column"
+    description: "Multi-column footer with sections"
+
+accessibility:
+  semantic_element: "footer"
+  aria_attributes: []
+  keyboard_navigation: false
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

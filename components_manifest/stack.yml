@@ -1,0 +1,43 @@
+# Stack Component Manifest
+#
+# DaisyUI Stack component documentation for leptos-daisyui
+# https://daisyui.com/components/stack/
+
+name: Stack
+doc: https://daisyui.com/components/stack/
+
+base:
+  - "stack"
+
+parts: []
+
+modifiers: {}
+
+patterns:
+  - "image-stack"
+  - "card-stack"
+  - "notification-stack"
+  - "avatar-group"
+
+examples:
+  - id: "basic"
+    description: "Basic stack with images"
+  - id: "image-cards"
+    description: "Stack of image cards"
+  - id: "notification-stack"
+    description: "Stacked notifications"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+  keyboard_navigation: false
+  notes: |
+    Stack creates an overlapping visual effect.
+    Consider adding aria-label for screen readers.
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

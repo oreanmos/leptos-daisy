@@ -1,0 +1,54 @@
+# Collapse Component Manifest
+#
+# DaisyUI Collapse component documentation for leptos-daisyui
+
+name: Collapse
+doc: https://daisyui.com/components/collapse/
+
+base:
+  - "collapse"
+
+parts:
+  - name: "CollapseTitle"
+    classes:
+      - "collapse-title"
+    description: "Collapse title/heading"
+  - name: "CollapseContent"
+    classes:
+      - "collapse-content"
+    description: "Collapsible content area"
+  - name: "Accordion"
+    classes:
+      - ""
+    description: "Container for accordion group"
+
+modifiers:
+  # Trigger types (implementation-based)
+  trigger:
+    - "checkbox"
+    - "details"
+    - "radio"
+  
+  # State
+  state:
+    - "collapse-open"
+    - "collapse-close"
+
+patterns:
+  - name: "checkbox"
+    description: "Checkbox-based collapse toggle"
+  - name: "details"
+    description: "Details/summary-based collapse"
+  - name: "accordion"
+    description: "Radio-based accordion (only one open at a time)"
+  - name: "with_arrow"
+    description: "Collapse with arrow indicator"
+  - name: "with_plus"
+    description: "Collapse with plus/minus indicator"
+
+examples:
+  - "collapse_checkbox"
+  - "collapse_details"
+  - "collapse_accordion"
+  - "collapse_arrow"
+  - "collapse_plus"

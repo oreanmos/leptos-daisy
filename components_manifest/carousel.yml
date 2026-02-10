@@ -1,0 +1,46 @@
+# Carousel Component Manifest
+#
+# DaisyUI Carousel component documentation for leptos-daisyui
+
+name: Carousel
+doc: https://daisyui.com/components/carousel/
+
+base:
+  - "carousel"
+
+parts:
+  - name: "CarouselItem"
+    classes:
+      - "carousel-item"
+    description: "Individual carousel slide/item"
+
+modifiers:
+  # Snap position
+  snap:
+    - "carousel-start"
+    - "carousel-center"
+    - "carousel-end"
+  
+  # Orientation
+  orientation:
+    - "carousel-horizontal"
+    - "carousel-vertical"
+
+patterns:
+  - name: "horizontal"
+    description: "Horizontal scrolling carousel"
+  - name: "vertical"
+    description: "Vertical scrolling carousel"
+  - name: "with_snap"
+    description: "Carousel with snap points"
+  - name: "with_indicators"
+    description: "Carousel with indicator dots"
+  - name: "with_arrows"
+    description: "Carousel with navigation arrows"
+
+examples:
+  - "carousel_basic"
+  - "carousel_horizontal"
+  - "carousel_vertical"
+  - "carousel_with_indicators"
+  - "carousel_with_arrows"

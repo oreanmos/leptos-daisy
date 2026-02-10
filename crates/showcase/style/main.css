@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: all;
+}
+
+/* Scan the library crate for daisyUI classes */
+@source "../../crates/leptos-daisyui/src";
+@source "../src";

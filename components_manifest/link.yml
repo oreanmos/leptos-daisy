@@ -1,0 +1,43 @@
+name: Link
+status: implemented
+doc: https://daisyui.com/components/link/
+
+base:
+  - "link"
+
+parts: []
+
+modifiers:
+  color:
+    - "link-neutral"
+    - "link-primary"
+    - "link-secondary"
+    - "link-accent"
+    - "link-info"
+    - "link-success"
+    - "link-warning"
+    - "link-error"
+  
+  hover:
+    - "link-hover"
+
+patterns:
+  - "basic-link"
+  - "colored-link"
+  - "hover-effect-link"
+  - "external-link"
+
+examples:
+  - id: "basic-link"
+    description: "Basic styled link"
+  - id: "colored-link"
+    description: "Link with color variant"
+  - id: "hover-effect-link"
+    description: "Link with hover underline effect"
+  - id: "external-link"
+    description: "External link with target blank"
+
+accessibility:
+  - "Use semantic <a> element for navigation"
+  - "External links should indicate they open in new tab"
+  - "Ensure sufficient color contrast for all color variants"

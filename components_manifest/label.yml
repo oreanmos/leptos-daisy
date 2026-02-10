@@ -1,0 +1,29 @@
+# Label Component Manifest
+#
+# DaisyUI Label component documentation for leptos-daisyui
+
+name: Label
+doc: https://daisyui.com/components/label/
+
+base:
+  - "label"
+
+parts: []
+
+modifiers:
+  # Style modifiers
+  style:
+    - "floating-label"
+
+patterns:
+  - "basic-label"
+  - "floating-label"
+  - "with-input"
+
+examples:
+  - id: "basic"
+    description: "Basic label for form input"
+  - id: "floating"
+    description: "Floating label style"
+  - id: "with-input"
+    description: "Label associated with input"

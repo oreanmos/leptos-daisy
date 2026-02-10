@@ -1,0 +1,35 @@
+# Mockup Browser Component Manifest
+#
+# DaisyUI Mockup Browser component documentation for leptos-daisyui
+# https://daisyui.com/components/mockup/
+
+name: MockupBrowser
+doc: https://daisyui.com/components/mockup/
+
+base:
+  - "mockup-browser"
+
+parts:
+  - "mockup-browser-toolbar"
+  - "input"
+
+modifiers: {}
+
+patterns:
+  - "website-preview"
+  - "screenshot-showcase"
+  - "design-mockup"
+  - "portfolio-demo"
+
+examples:
+  - id: "basic"
+    description: "Basic browser mockup"
+  - id: "with-url"
+    description: "Browser mockup with custom URL"
+  - id: "with-content"
+    description: "Browser mockup with content inside"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"

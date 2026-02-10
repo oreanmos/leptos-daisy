@@ -1,0 +1,50 @@
+name: Steps
+status: implemented
+doc: https://daisyui.com/components/steps/
+
+base:
+  - "steps"
+
+parts:
+  - name: "step"
+    description: "Individual step item"
+    classes: ["step"]
+
+modifiers:
+  orientation:
+    - "steps-horizontal"
+    - "steps-vertical"
+  
+  color:
+    - "step-primary"
+    - "step-secondary"
+    - "step-accent"
+    - "step-neutral"
+    - "step-info"
+    - "step-success"
+    - "step-warning"
+    - "step-error"
+
+patterns:
+  - "horizontal-steps"
+  - "vertical-steps"
+  - "steps-with-description"
+  - "steps-with-custom-icons"
+  - "colored-steps"
+
+examples:
+  - id: "horizontal-steps"
+    description: "Horizontal step indicator"
+  - id: "vertical-steps"
+    description: "Vertical step indicator"
+  - id: "steps-with-description"
+    description: "Steps with title and description"
+  - id: "steps-with-icons"
+    description: "Steps with custom icons"
+  - id: "colored-steps"
+    description: "Steps with color variants"
+
+accessibility:
+  - "Use semantic <ul> and <li> elements"
+  - "Current step should have aria-current='step'"
+  - "Completed steps should indicate completion status"

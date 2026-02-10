@@ -1,0 +1,58 @@
+# Drawer Component Manifest
+#
+# DaisyUI Drawer component documentation for leptos-daisyui
+# https://daisyui.com/components/drawer/
+
+name: Drawer
+doc: https://daisyui.com/components/drawer/
+
+base:
+  - "drawer"
+
+parts:
+  - name: "drawer-content"
+    description: "The main content area that remains visible"
+    classes: ["drawer-content"]
+  - name: "drawer-side"
+    description: "The sliding side panel"
+    classes: ["drawer-side"]
+  - name: "drawer-overlay"
+    description: "The overlay that closes the drawer when clicked"
+    classes: ["drawer-overlay"]
+
+modifiers:
+  # Position modifiers
+  position:
+    - "drawer-end"  # Right-side drawer
+
+patterns:
+  - "left-navigation"
+  - "right-navigation"
+  - "responsive-sidebar"
+  - "mobile-menu"
+
+examples:
+  - id: "basic-left"
+    description: "Basic drawer from left side"
+  - id: "right-side"
+    description: "Drawer from right side"
+  - id: "with-menu"
+    description: "Drawer with navigation menu"
+  - id: "responsive"
+    description: "Responsive drawer for mobile"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-expanded"
+    - "aria-controls"
+  keyboard_navigation: true
+  notes: |
+    Uses checkbox hack for SSR-safe state management.
+    The overlay is a label that targets the checkbox.
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

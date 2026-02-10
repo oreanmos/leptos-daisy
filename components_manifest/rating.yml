@@ -1,0 +1,82 @@
+# Rating Component Manifest
+#
+# DaisyUI Rating component documentation for leptos-daisyui
+
+name: Rating
+doc: https://daisyui.com/components/rating/
+
+base:
+  - "rating"
+
+parts:
+  - name: "rating"
+    description: "The rating container"
+    classes: ["rating"]
+  - name: "input"
+    description: "Individual star input elements"
+    classes: ["mask", "mask-star-2", "mask-half-1"]
+
+modifiers:
+  # Size modifiers
+  size:
+    - "rating-xs"
+    - "rating-sm"
+    - "rating-md"
+    - "rating-lg"
+    - "rating-xl"
+  
+  # Other modifiers
+  other:
+    - "rating-half"
+    - "rating-hidden"
+
+patterns:
+  - "with-label"
+  - "half-stars"
+  - "custom-stars"
+  - "disabled"
+  - "read-only"
+
+examples:
+  - id: "basic"
+    description: "Basic 5-star rating"
+  - id: "all-sizes"
+    description: "Shows all size variants"
+  - id: "half-stars"
+    description: "Rating with half-star precision"
+  - id: "custom-stars"
+    description: "Rating with custom number of stars"
+  - id: "with-label"
+    description: "Rating with label"
+  - id: "disabled"
+    description: "Disabled rating"
+  - id: "interactive"
+    description: "Interactive rating with change handler"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+  keyboard_navigation: true
+  default_attributes:
+    role: "slider"
+    aria-orientation: "horizontal"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic rating
+  tested: true
+  documented: true
+
+notes: |
+  The rating component supports all DaisyUI rating variants and features.
+  
+  Special considerations:
+  - Always include proper ARIA attributes for accessibility
+  - Rating value should be between 0 and max_stars
+  - Half-star ratings require proper mask classes
+  - Consider using rating components for user feedback and reviews
+  - Rating components should be keyboard navigable
+  - For read-only ratings, use disabled state

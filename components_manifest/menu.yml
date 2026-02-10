@@ -1,0 +1,60 @@
+name: Menu
+status: implemented
+doc: https://daisyui.com/components/menu/
+
+base:
+  - "menu"
+
+parts:
+  - name: "menu-title"
+    description: "Section title/header within menu"
+    classes: ["menu-title"]
+  - name: "menu-item"
+    description: "Individual menu item"
+    classes: []
+  - name: "menu-dropdown"
+    description: "Dropdown submenu container"
+    classes: ["menu-dropdown"]
+
+modifiers:
+  size:
+    - "menu-xs"
+    - "menu-sm"
+    - "menu-md"
+    - "menu-lg"
+    - "menu-xl"
+  
+  orientation:
+    - "menu-vertical"
+    - "menu-horizontal"
+  
+  state:
+    - "menu-disabled"
+    - "menu-active"
+    - "menu-focus"
+
+patterns:
+  - "basic-menu"
+  - "vertical-menu"
+  - "horizontal-menu"
+  - "menu-with-titles"
+  - "menu-with-dropdown"
+  - "responsive-menu"
+
+examples:
+  - id: "basic-menu"
+    description: "Basic vertical menu"
+  - id: "horizontal-menu"
+    description: "Horizontal menu layout"
+  - id: "menu-with-titles"
+    description: "Menu with section titles"
+  - id: "menu-with-dropdown"
+    description: "Menu with dropdown submenus"
+  - id: "sized-menu"
+    description: "Menu with different size variants"
+
+accessibility:
+  - "Use semantic <ul> and <li> elements"
+  - "Disabled items should use aria-disabled"
+  - "Active items should use aria-current"
+  - "Dropdowns should support keyboard navigation"

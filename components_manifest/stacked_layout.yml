@@ -1,0 +1,215 @@
+# Stacked Layout Components Manifest
+# Full-width page shell with header, navigation, content area, and optional footer
+# Inspired by Tailwind Plus "stacked" application shell layouts
+
+components:
+  - name: StackedLayout
+    description: "Root shell component for stacked layouts with variant support"
+    base_class: "min-h-screen flex flex-col"
+    variants:
+      - name: variant
+        type: StackedLayoutVariant
+        values:
+          - Light          # bg-base-100, text-base-content
+          - LightBordered  # bg-base-100 with border-b border-base-300
+          - Dark           # bg-neutral, text-neutral-content
+          - Primary        # bg-primary, text-primary-content
+    props:
+      - variant: StackedLayoutVariant
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    context:
+      - provides: StackedLayoutContext
+        fields:
+          - variant: StackedLayoutVariant
+    examples:
+      - "Simple header with nav tabs (light)"
+      - "Header with border and nav tabs (light)"
+      - "Dark header with nav tabs"
+      - "Indigo branded header with nav tabs"
+      - "Dark header with overlap content area"
+      - "Indigo branded header with overlap content area"
+      - "Indigo branded header with search and secondary nav"
+      - "Dark header with compact nav"
+      - "Indigo header with centered search and footer"
+
+  - name: StackedLayoutHeader
+    description: "Context-aware header with variant styling"
+    base_class: "navbar"
+    context:
+      - consumes: StackedLayoutContext
+        uses: variant for background/text colors
+    props:
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Header with logo and navigation"
+      - "Header with search input"
+      - "Header with actions"
+
+  - name: StackedLayoutContent
+    description: "Main content area with optional overlap support"
+    base_class: "flex-1"
+    props:
+      - overlap: bool  # Apply negative margin for overlap effect
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Standard content area"
+      - "Overlapping content card"
+
+  - name: StackedLayoutNav
+    description: "Navigation container with style variants"
+    base_class: "menu menu-horizontal"
+    variants:
+      - name: style
+        type: NavStyle
+        values:
+          - Tabs     # Standard horizontal tabs
+          - Pills    # Rounded pill-style navigation
+          - Compact  # Minimal padding, icon-focused
+    props:
+      - style: NavStyle
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Horizontal tab navigation"
+      - "Pill-style navigation"
+      - "Compact minimal navigation"
+
+  - name: StackedLayoutNavItem
+    description: "Navigation item with active state support"
+    base_class: ""
+    context:
+      - consumes: StackedLayoutContext
+        uses: variant for active state styling
+    props:
+      - active: bool
+      - href: MaybeProp<String>
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Active navigation item"
+      - "Inactive navigation item"
+      - "Navigation item with icon"
+
+  - name: StackedLayoutSearch
+    description: "Header-integrated search input"
+    base_class: "input input-sm"
+    context:
+      - consumes: StackedLayoutContext
+        uses: variant for styling
+    props:
+      - placeholder: MaybeProp<String>
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Search in light header"
+      - "Search in dark header"
+      - "Search in primary header"
+
+  - name: StackedLayoutFooter
+    description: "Optional footer component"
+    base_class: "footer"
+    props:
+      - class: MaybeProp<String>
+      - attrs: Vec<Attribute>
+    examples:
+      - "Simple footer with links"
+      - "Footer with copyright"
+
+enums:
+  - name: StackedLayoutVariant
+    description: "Color scheme variants for stacked layout"
+    values:
+      - Light:         "bg-base-100 text-base-content"
+      - LightBordered: "bg-base-100 text-base-content border-b border-base-300"
+      - Dark:          "bg-neutral text-neutral-content"
+      - Primary:       "bg-primary text-primary-content"
+
+  - name: NavStyle
+    description: "Navigation style variants"
+    values:
+      - Tabs:    "Standard horizontal tabs with menu menu-horizontal"
+      - Pills:   "Rounded pill-style nav items"
+      - Compact: "Minimal padding, icon-focused navigation"
+
+patterns:
+  - name: "Simple header with nav tabs (light)"
+    description: "Basic light header with horizontal tab navigation"
+    components:
+      - StackedLayout (variant: Light)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutNavItem
+      - StackedLayoutContent
+
+  - name: "Header with border and nav tabs (light)"
+    description: "Light header with bottom border and tab navigation"
+    components:
+      - StackedLayout (variant: LightBordered)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutNavItem
+      - StackedLayoutContent
+
+  - name: "Dark header with nav tabs"
+    description: "Dark neutral background header with tabs"
+    components:
+      - StackedLayout (variant: Dark)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutNavItem
+      - StackedLayoutContent
+
+  - name: "Indigo branded header with nav tabs"
+    description: "Primary-colored header with tab navigation"
+    components:
+      - StackedLayout (variant: Primary)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutNavItem
+      - StackedLayoutContent
+
+  - name: "Dark header with overlap content area"
+    description: "Dark header with content card overlapping into header"
+    components:
+      - StackedLayout (variant: Dark)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutContent (overlap: true)
+
+  - name: "Indigo branded header with overlap content area"
+    description: "Primary header with overlapping content card"
+    components:
+      - StackedLayout (variant: Primary)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutContent (overlap: true)
+
+  - name: "Indigo branded header with search and secondary nav"
+    description: "Primary header with search input and secondary navigation"
+    components:
+      - StackedLayout (variant: Primary)
+      - StackedLayoutHeader
+      - StackedLayoutSearch
+      - StackedLayoutNav (style: Tabs)
+      - StackedLayoutContent
+
+  - name: "Dark header with compact nav"
+    description: "Dark header with compact minimal navigation"
+    components:
+      - StackedLayout (variant: Dark)
+      - StackedLayoutHeader
+      - StackedLayoutNav (style: Compact)
+      - StackedLayoutNavItem
+      - StackedLayoutContent
+
+  - name: "Indigo header with centered search and footer"
+    description: "Primary header with centered search and page footer"
+    components:
+      - StackedLayout (variant: Primary)
+      - StackedLayoutHeader
+      - StackedLayoutSearch
+      - StackedLayoutContent
+      - StackedLayoutFooter

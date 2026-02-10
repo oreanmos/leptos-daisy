@@ -1,0 +1,50 @@
+# Range Component Manifest
+#
+# DaisyUI Range component documentation for leptos-daisyui
+
+name: Range
+doc: https://daisyui.com/components/range/
+
+base:
+  - "range"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "range-primary"
+    - "range-secondary"
+    - "range-accent"
+    - "range-neutral"
+    - "range-info"
+    - "range-success"
+    - "range-warning"
+    - "range-error"
+
+  # Size modifiers
+  size:
+    - "range-xs"
+    - "range-sm"
+    - "range-md"
+    - "range-lg"
+    - "range-xl"
+
+patterns:
+  - "basic"
+  - "with-labels"
+  - "disabled-state"
+  - "all-colors"
+  - "all-sizes"
+
+examples:
+  - id: "basic"
+    description: "Basic range slider"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size variants"
+  - id: "with-values"
+    description: "Range with min/max/step values"
+  - id: "disabled"
+    description: "Disabled range slider"

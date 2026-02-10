@@ -1,0 +1,82 @@
+# Progress Component Manifest
+#
+# DaisyUI Progress component documentation for leptos-daisyui
+
+name: Progress
+doc: https://daisyui.com/components/progress/
+
+base:
+  - "progress"
+
+parts:
+  - name: "progress"
+    description: "The progress container"
+    classes: ["progress"]
+  - name: "progress-bar"
+    description: "The progress bar element"
+    classes: ["progress-bar"]
+
+modifiers:
+  # Color modifiers
+  color:
+    - "progress-primary"
+    - "progress-secondary"
+    - "progress-accent"
+    - "progress-neutral"
+    - "progress-info"
+    - "progress-success"
+    - "progress-warning"
+    - "progress-error"
+
+patterns:
+  - "with-label"
+  - "indeterminate"
+  - "custom-width"
+  - "animated"
+  - "striped"
+
+examples:
+  - id: "basic"
+    description: "Basic progress bar"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "with-label"
+    description: "Progress bar with label"
+  - id: "custom-max"
+    description: "Progress bar with custom maximum value"
+  - id: "indeterminate"
+    description: "Indeterminate progress bar"
+  - id: "animated"
+    description: "Animated progress bar"
+  - id: "interactive"
+    description: "Progress bar with dynamic value"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-valuenow"
+    - "aria-valuemin"
+    - "aria-valuemax"
+    - "aria-valuetext"
+  keyboard_navigation: false
+  default_attributes:
+    role: "progressbar"
+    aria-valuemin: "0"
+    aria-valuemax: "100"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic progress
+  tested: true
+  documented: true
+
+notes: |
+  The progress component supports all DaisyUI progress variants.
+  
+  Special considerations:
+  - Always include proper ARIA attributes for accessibility
+  - Progress value should be between 0 and max (default 100)
+  - Consider using progress bars for loading states and completion indicators
+  - Progress bars should not be used for interactive controls
+  - For indeterminate progress, use CSS animation
+  - Progress bars can be customized with different widths and colors

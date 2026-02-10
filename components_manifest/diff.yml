@@ -1,0 +1,38 @@
+# Diff Component Manifest
+#
+# DaisyUI Diff component documentation for leptos-daisyui
+
+name: Diff
+doc: https://daisyui.com/components/diff/
+
+base:
+  - "diff"
+
+parts:
+  - name: "DiffItem1"
+    classes:
+      - "diff-item-1"
+    description: "First image (before)"
+  - name: "DiffItem2"
+    classes:
+      - "diff-item-2"
+    description: "Second image (after)"
+  - name: "DiffResizer"
+    classes:
+      - "diff-resizer"
+    description: "Draggable resizer handle"
+
+modifiers: {}
+
+patterns:
+  - name: "basic"
+    description: "Basic before/after comparison"
+  - name: "images"
+    description: "Image comparison"
+  - name: "text"
+    description: "Text content comparison"
+
+examples:
+  - "diff_basic"
+  - "diff_images"
+  - "diff_text"

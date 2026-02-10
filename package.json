@@ -1,0 +1,30 @@
+{
+  "name": "leptos-daisy",
+  "version": "1.0.0",
+  "description": "A comprehensive Leptos implementation of all DaisyUI components. This library provides Rust/Leptos components that wrap DaisyUI's Tailwind CSS components, making it easy to use DaisyUI in your Leptos applications.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oreanmos/leptos-daisy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oreanmos/leptos-daisy/issues"
+  },
+  "homepage": "https://github.com/oreanmos/leptos-daisy#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "daisyui": "^5.5.18",
+    "tailwindcss": "^4.1.18"
+  }
+}

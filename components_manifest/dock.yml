@@ -1,0 +1,51 @@
+name: Dock
+status: implemented
+doc: https://daisyui.com/components/dock/
+
+base:
+  - "dock"
+
+parts:
+  - name: "dock-icon"
+    description: "Icon container for dock item"
+    classes: ["dock-icon"]
+  - name: "dock-label"
+    description: "Label text for dock item"
+    classes: ["dock-label"]
+
+modifiers:
+  size:
+    - "dock-xs"
+    - "dock-sm"
+    - "dock-md"
+    - "dock-lg"
+    - "dock-xl"
+  
+  state:
+    - "dock-active"
+
+patterns:
+  - "basic-dock"
+  - "dock-with-icons"
+  - "sized-dock"
+  - "mobile-dock"
+
+examples:
+  - id: "basic-dock"
+    description: "Basic bottom navigation dock"
+  - id: "dock-with-icons"
+    description: "Dock with icon and label items"
+  - id: "sized-dock"
+    description: "Dock with size variants"
+  - id: "mobile-dock"
+    description: "Mobile-optimized dock with safe area"
+
+accessibility:
+  - "Active item should have aria-current='page'"
+  - "Use semantic <button> or <a> elements"
+  - "Ensure touch targets are at least 44x44px"
+  - "Consider safe-area-inset-bottom for mobile devices"
+
+notes:
+  - "Replaces deprecated bottom-navigation component"
+  - "Designed for mobile bottom navigation patterns"

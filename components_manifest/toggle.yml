@@ -1,0 +1,92 @@
+# Toggle Component Manifest
+#
+# DaisyUI Toggle component documentation for leptos-daisyui
+
+name: Toggle
+doc: https://daisyui.com/components/toggle/
+
+base:
+  - "toggle"
+
+parts:
+  - name: "input"
+    description: "The actual toggle input element"
+    classes: ["toggle"]
+  - name: "label"
+    description: "Optional label text"
+    classes: ["label", "label-text"]
+
+modifiers:
+  # Color modifiers
+  color:
+    - "toggle-primary"
+    - "toggle-secondary"
+    - "toggle-accent"
+    - "toggle-neutral"
+    - "toggle-info"
+    - "toggle-success"
+    - "toggle-warning"
+    - "toggle-error"
+  
+  # Size modifiers
+  size:
+    - "toggle-xs"
+    - "toggle-sm"
+    - "toggle-md"
+    - "toggle-lg"
+    - "toggle-xl"
+
+patterns:
+  - "with-label"
+  - "toggle-group"
+  - "disabled-state"
+  - "custom-colors"
+  - "with-icons"
+  - "horizontal-layout"
+
+examples:
+  - id: "basic"
+    description: "Basic toggle without label"
+  - id: "with-label"
+    description: "Toggle with label text"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "toggle-group"
+    description: "Multiple toggles in a group"
+  - id: "disabled"
+    description: "Disabled toggle"
+  - id: "interactive"
+    description: "Toggle with change handler"
+  - id: "horizontal-group"
+    description: "Toggle group with horizontal layout"
+
+accessibility:
+  semantic_element: "input[type=checkbox]"
+  aria_attributes:
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "aria-checked"
+  keyboard_navigation: true
+  default_attributes:
+    type: "checkbox"
+    role: "switch"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic toggle
+  tested: true
+  documented: true
+
+notes: |
+  The toggle component supports all DaisyUI toggle variants and sizes.
+  
+  Special considerations:
+  - Always include proper label association for accessibility
+  - Disabled toggles should not be focusable
+  - Toggle groups should use proper fieldset/legend for accessibility
+  - Label text should be clear and descriptive for screen readers
+  - Consider using toggle groups for related boolean options
+  - Toggle uses role="switch" for better accessibility

@@ -1,0 +1,49 @@
+# Hero Component Manifest
+#
+# DaisyUI Hero component documentation for leptos-daisyui
+# https://daisyui.com/components/hero/
+
+name: Hero
+doc: https://daisyui.com/components/hero/
+
+base:
+  - "hero"
+
+parts:
+  - name: "hero-content"
+    description: "Content container within the hero"
+    classes: ["hero-content"]
+  - name: "hero-overlay"
+    description: "Overlay for the hero background"
+    classes: ["hero-overlay"]
+
+modifiers: {}
+
+patterns:
+  - "with-background-image"
+  - "with-overlay"
+  - "with-cta"
+  - "centered-content"
+  - "two-column"
+
+examples:
+  - id: "basic"
+    description: "Basic hero with text"
+  - id: "with-overlay"
+    description: "Hero with background overlay"
+  - id: "centered"
+    description: "Hero with centered content"
+  - id: "custom-height"
+    description: "Hero with custom minimum height"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+  keyboard_navigation: false
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

@@ -1,0 +1,28 @@
+# Fieldset Component Manifest
+#
+# DaisyUI Fieldset component documentation for leptos-daisyui
+
+name: Fieldset
+doc: https://daisyui.com/components/fieldset/
+
+base:
+  - "fieldset"
+
+parts:
+  - name: "legend"
+    description: "The legend element for the fieldset"
+    classes: ["fieldset-legend"]
+
+modifiers: {}
+
+patterns:
+  - "with-legend"
+  - "form-grouping"
+
+examples:
+  - id: "basic"
+    description: "Basic fieldset without legend"
+  - id: "with-legend"
+    description: "Fieldset with legend text"
+  - id: "form-group"
+    description: "Fieldset grouping multiple inputs"

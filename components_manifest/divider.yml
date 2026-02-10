@@ -1,0 +1,56 @@
+# Divider Component Manifest
+#
+# DaisyUI Divider component documentation for leptos-daisyui
+# https://daisyui.com/components/divider/
+
+name: Divider
+doc: https://daisyui.com/components/divider/
+
+base:
+  - "divider"
+
+parts: []
+
+modifiers:
+  # Orientation modifiers
+  orientation:
+    - "divider-horizontal"
+    - "divider-vertical"
+
+  # Color modifiers
+  color:
+    - "divider-primary"
+    - "divider-secondary"
+    - "divider-accent"
+    - "divider-neutral"
+    - "divider-info"
+    - "divider-success"
+    - "divider-warning"
+    - "divider-error"
+
+patterns:
+  - "with-text"
+  - "with-icon"
+  - "responsive-orientation"
+
+examples:
+  - id: "basic"
+    description: "Basic horizontal divider"
+  - id: "vertical"
+    description: "Vertical divider"
+  - id: "with-text"
+    description: "Divider with text content"
+  - id: "colored"
+    description: "Divider with color variants"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-orientation"
+  keyboard_navigation: false
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

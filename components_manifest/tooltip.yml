@@ -1,0 +1,65 @@
+# Tooltip Component Manifest
+#
+# DaisyUI Tooltip component documentation for leptos-daisyui
+# https://daisyui.com/components/tooltip/
+
+name: Tooltip
+doc: https://daisyui.com/components/tooltip/
+
+base:
+  - "tooltip"
+
+parts:
+  - name: "tooltip-content"
+    description: "The tooltip text content (rendered via data-tip attribute)"
+    classes: ["tooltip-content"]
+
+modifiers:
+  # Position modifiers
+  position:
+    - "tooltip-top"
+    - "tooltip-bottom"
+    - "tooltip-left"
+    - "tooltip-right"
+
+  # State modifiers
+  state:
+    - "tooltip-open"  # Always visible
+
+  # Color modifiers
+  color:
+    - "tooltip-primary"
+    - "tooltip-secondary"
+    - "tooltip-accent"
+    - "tooltip-neutral"
+    - "tooltip-info"
+    - "tooltip-success"
+    - "tooltip-warning"
+    - "tooltip-error"
+
+patterns:
+  - "hover-tooltip"
+  - "always-visible"
+  - "colored-tooltip"
+  - "button-with-tooltip"
+  - "icon-with-tooltip"
+
+examples:
+  - id: "basic-tooltip"
+    description: "Basic tooltip on hover"
+  - id: "tooltip-positions"
+    description: "All four position variations"
+  - id: "tooltip-colors"
+    description: "All color variants"
+  - id: "always-open"
+    description: "Tooltip that is always visible"
+  - id: "button-tooltip"
+    description: "Tooltip on a button element"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-describedby"  # Can be used to associate tooltip with trigger
+  notes: |
+    Tooltips appear on hover/focus. Ensure content is also accessible
+    via other means for touch and keyboard users.

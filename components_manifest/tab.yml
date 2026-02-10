@@ -1,0 +1,64 @@
+name: Tab
+status: implemented
+doc: https://daisyui.com/components/tab/
+
+base:
+  - "tabs"
+
+parts:
+  - name: "tab"
+    description: "Individual tab button"
+    classes: ["tab"]
+  - name: "tab-content"
+    description: "Content panel for a tab"
+    classes: ["tab-content"]
+
+modifiers:
+  size:
+    - "tabs-xs"
+    - "tabs-sm"
+    - "tabs-md"
+    - "tabs-lg"
+    - "tabs-xl"
+  
+  variant:
+    - "tabs-lift"
+    - "tabs-box"
+    - "tabs-border"
+  
+  position:
+    - "tabs-bottom"
+  
+  state:
+    - "tab-active"
+    - "tab-disabled"
+
+patterns:
+  - "basic-tabs"
+  - "lifted-tabs"
+  - "boxed-tabs"
+  - "bordered-tabs"
+  - "tabs-with-content"
+  - "radio-tabs"
+  - "bottom-tabs"
+
+examples:
+  - id: "basic-tabs"
+    description: "Basic tab navigation"
+  - id: "lifted-tabs"
+    description: "Tabs with lift shadow effect"
+  - id: "boxed-tabs"
+    description: "Boxed style tabs"
+  - id: "bordered-tabs"
+    description: "Bordered style tabs"
+  - id: "tabs-with-content"
+    description: "Tabs with content panels"
+  - id: "radio-tabs"
+    description: "Radio-based tabs for state management"
+
+accessibility:
+  - "Use role='tablist' for the container"
+  - "Use role='tab' for individual tabs"
+  - "Use role='tabpanel' for content panels"
+  - "Active tab should have aria-selected='true'"
+  - "Disabled tabs should have aria-disabled='true'"

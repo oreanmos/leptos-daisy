@@ -1,0 +1,29 @@
+# Filter Component Manifest
+#
+# DaisyUI Filter component documentation for leptos-daisyui
+
+name: Filter
+doc: https://daisyui.com/components/filter/
+
+base:
+  - "filter"
+
+parts:
+  - name: "reset"
+    description: "Reset button for clearing filter selection"
+    classes: ["filter-reset"]
+
+modifiers: {}
+
+patterns:
+  - "radio-group"
+  - "with-reset"
+  - "filter-chips"
+
+examples:
+  - id: "basic"
+    description: "Basic filter with radio buttons"
+  - id: "with-reset"
+    description: "Filter with reset button"
+  - id: "filter-chips"
+    description: "Filter styled as chips"

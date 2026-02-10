@@ -1,0 +1,47 @@
+# Mockup Code Component Manifest
+#
+# DaisyUI Mockup Code component documentation for leptos-daisyui
+# https://daisyui.com/components/mockup/
+
+name: MockupCode
+doc: https://daisyui.com/components/mockup/
+
+base:
+  - "mockup-code"
+
+parts:
+  - "pre"
+  - "code"
+
+modifiers:
+  # Line color modifiers (applied to individual pre elements)
+  color:
+    - "text-primary"
+    - "text-secondary"
+    - "text-accent"
+    - "text-neutral"
+    - "text-info"
+    - "text-success"
+    - "text-warning"
+    - "text-error"
+
+patterns:
+  - "code-snippet"
+  - "terminal-output"
+  - "syntax-highlighting"
+  - "cli-demo"
+
+examples:
+  - id: "basic"
+    description: "Basic code mockup"
+  - id: "with-line-numbers"
+    description: "Code mockup with line numbers"
+  - id: "with-colors"
+    description: "Code mockup with syntax highlighting colors"
+  - id: "terminal"
+    description: "Terminal-style output"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"

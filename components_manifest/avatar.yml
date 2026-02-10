@@ -1,0 +1,53 @@
+# Avatar Component Manifest
+#
+# DaisyUI Avatar component documentation for leptos-daisyui
+
+name: Avatar
+doc: https://daisyui.com/components/avatar/
+
+base:
+  - "avatar"
+
+parts:
+  - name: "AvatarImage"
+    classes:
+      - ""
+    description: "Avatar image element"
+  - name: "AvatarPlaceholderContent"
+    classes:
+      - ""
+    description: "Placeholder content (initials/icon)"
+  - name: "AvatarGroup"
+    classes:
+      - "avatar-group"
+    description: "Container for grouped avatars"
+
+modifiers:
+  # Status modifiers
+  status:
+    - "avatar-online"
+    - "avatar-offline"
+  
+  # Placeholder modifiers
+  placeholder:
+    - "avatar-placeholder"
+  
+  # Group layout
+  layout:
+    - "avatar-group-vertical"
+
+patterns:
+  - name: "single"
+    description: "Single avatar with optional status"
+  - name: "group"
+    description: "Group of avatars with overlap"
+  - name: "placeholder"
+    description: "Avatar with text/icon placeholder"
+
+examples:
+  - "avatar_basic"
+  - "avatar_online"
+  - "avatar_offline"
+  - "avatar_placeholder"
+  - "avatar_group"
+  - "avatar_group_vertical"

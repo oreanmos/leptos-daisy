@@ -1,0 +1,33 @@
+# Kbd Component Manifest
+#
+# DaisyUI Kbd component documentation for leptos-daisyui
+
+name: Kbd
+doc: https://daisyui.com/components/kbd/
+
+base:
+  - "kbd"
+
+parts: []
+
+modifiers:
+  # Size modifiers
+  size:
+    - "kbd-xs"
+    - "kbd-sm"
+    - "kbd-md"
+    - "kbd-lg"
+    - "kbd-xl"
+
+patterns:
+  - name: "single"
+    description: "Single keyboard key"
+  - name: "combination"
+    description: "Key combination (e.g., Ctrl+C)"
+  - name: "in_text"
+    description: "Kbd used inline with text"
+
+examples:
+  - "kbd_basic"
+  - "kbd_sizes"
+  - "kbd_combination"

@@ -1,32 +1,20 @@
-[package]
-name = "leptos-daisy"
-version = "0.1.0"
-edition = "2024"
-license = "MIT OR Apache-2.0"
-description = "Leptos components for DaisyUI - Tailwind CSS component library"
-repository = "https://github.com/yourusername/leptos-daisy"
-keywords = ["leptos", "daisyui", "tailwind", "components", "web"]
-categories = ["gui", "web-programming", "wasm"]
+[workspace]
+members = ["crates/leptos-daisyui", "crates/showcase"]
+resolver = "2"
 
-[dependencies]
-leptos = { version = "0.8.15", features = ["csr", "hydrate"] }
-leptos_meta = "0.8.5"
-leptos_router = "0.8.11"
-uuid = { version = "1.8.0", features = ["v4"] }
-log = "0.4.21"
+# Cargo-leptos metadata for the showcase app
+[[workspace.metadata.leptos]]
+name = "showcase"
+output-name = "showcase"
+site-root = "target/site"
+style-file = "crates/showcase/style/main.css"
+assets-dir = "crates/showcase/assets"
+site-addr = "127.0.0.1:3000"
+reload-port = 3001
+browserquery = "defaults"
+bin-package = "showcase"
+lib-package = "showcase"
+bin-features = ["ssr"]
+lib-features = ["hydrate"]
 
-[dev-dependencies]
-leptos = { version = "0.8.15", features = ["csr", "hydrate", "ssr"] }
 
-[features]
-default = ["csr"]
-csr = ["leptos/csr"]
-ssr = ["leptos/ssr", "leptos_meta/ssr"]
-hydrate = ["leptos/hydrate"]
-
-[package.metadata.docs.rs]
-all-features = true
-rustdoc-args = ["--cfg", "docsrs"]
-
-[lib]
-crate-type = ["cdylib", "rlib"]

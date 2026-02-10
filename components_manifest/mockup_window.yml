@@ -1,0 +1,36 @@
+# Mockup Window Component Manifest
+#
+# DaisyUI Mockup Window component documentation for leptos-daisyui
+# https://daisyui.com/components/mockup/
+
+name: MockupWindow
+doc: https://daisyui.com/components/mockup/
+
+base:
+  - "mockup-window"
+
+parts:
+  - "mockup-window-toolbar"
+  - "mockup-window-title"
+  - "mockup-window-content"
+
+modifiers: {}
+
+patterns:
+  - "desktop-app-preview"
+  - "screenshot-showcase"
+  - "design-mockup"
+  - "terminal-window"
+
+examples:
+  - id: "basic"
+    description: "Basic window mockup"
+  - id: "with-title"
+    description: "Window mockup with title"
+  - id: "with-content"
+    description: "Window mockup with content inside"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"

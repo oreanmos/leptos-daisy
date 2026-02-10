@@ -1,0 +1,34 @@
+# RadialProgress Component Manifest
+#
+# DaisyUI RadialProgress component documentation for leptos-daisyui
+
+name: RadialProgress
+doc: https://daisyui.com/components/radial-progress/
+
+base:
+  - "radial-progress"
+
+parts: []
+
+modifiers:
+  # Uses CSS variables
+  css_variables:
+    - "--value"
+    - "--size"
+    - "--thickness"
+
+patterns:
+  - name: "basic"
+    description: "Basic radial progress"
+  - name: "custom_size"
+    description: "Custom size via CSS variable"
+  - name: "custom_thickness"
+    description: "Custom thickness via CSS variable"
+  - name: "with_color"
+    description: "Colored radial progress"
+
+examples:
+  - "radial_progress_basic"
+  - "radial_progress_custom_size"
+  - "radial_progress_custom_thickness"
+  - "radial_progress_colors"

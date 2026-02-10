@@ -1,0 +1,92 @@
+# Radio Component Manifest
+#
+# DaisyUI Radio component documentation for leptos-daisyui
+
+name: Radio
+doc: https://daisyui.com/components/radio/
+
+base:
+  - "radio"
+
+parts:
+  - name: "input"
+    description: "The actual radio input element"
+    classes: ["radio"]
+  - name: "label"
+    description: "Optional label text"
+    classes: ["label", "label-text"]
+
+modifiers:
+  # Color modifiers
+  color:
+    - "radio-primary"
+    - "radio-secondary"
+    - "radio-accent"
+    - "radio-neutral"
+    - "radio-info"
+    - "radio-success"
+    - "radio-warning"
+    - "radio-error"
+  
+  # Size modifiers
+  size:
+    - "radio-xs"
+    - "radio-sm"
+    - "radio-md"
+    - "radio-lg"
+    - "radio-xl"
+
+patterns:
+  - "with-label"
+  - "radio-group"
+  - "disabled-state"
+  - "custom-colors"
+  - "horizontal-layout"
+
+examples:
+  - id: "basic"
+    description: "Basic radio button without label"
+  - id: "with-label"
+    description: "Radio button with label text"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "radio-group"
+    description: "Multiple radio buttons in a group"
+  - id: "disabled"
+    description: "Disabled radio button"
+  - id: "interactive"
+    description: "Radio button with change handler"
+  - id: "horizontal-group"
+    description: "Radio group with horizontal layout"
+
+accessibility:
+  semantic_element: "input[type=radio]"
+  aria_attributes:
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "aria-checked"
+  keyboard_navigation: true
+  default_attributes:
+    type: "radio"
+    role: "radio"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic radio
+  tested: true
+  documented: true
+
+notes: |
+  The radio component supports all DaisyUI radio variants and sizes.
+  
+  Special considerations:
+  - Always include proper name attribute for radio groups
+  - All radio buttons in a group should have the same name
+  - Only one radio button in a group can be selected
+  - Disabled radio buttons should not be focusable
+  - Radio groups should use proper fieldset/legend for accessibility
+  - Label text should be clear and descriptive for screen readers
+  - Consider using radio groups for mutually exclusive options

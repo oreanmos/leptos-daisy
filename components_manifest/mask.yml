@@ -1,0 +1,66 @@
+# Mask Component Manifest
+#
+# DaisyUI Mask component documentation for leptos-daisyui
+# https://daisyui.com/components/mask/
+
+name: Mask
+doc: https://daisyui.com/components/mask/
+
+base:
+  - "mask"
+
+parts: []
+
+modifiers:
+  # Shape modifiers
+  shape:
+    - "mask-squircle"
+    - "mask-heart"
+    - "mask-hexagon"
+    - "mask-diamond"
+    - "mask-circle"
+    - "mask-star"
+    - "mask-triangle"
+    - "mask-half-1"
+    - "mask-half-2"
+    - "mask-parallelogram"
+    - "mask-parallelogram-2"
+    - "mask-parallelogram-3"
+    - "mask-pentagon"
+    - "mask-hexagon-2"
+    - "mask-square"
+    - "mask-decagon"
+    - "mask-diamond-2"
+    - "mask-star-2"
+    - "mask-triangle-2"
+    - "mask-triangle-3"
+    - "mask-triangle-4"
+    - "mask-circle-half"
+    - "mask-rectangle"
+    - "mask-oval"
+
+patterns:
+  - "avatar-masking"
+  - "image-gallery"
+  - "decorative-images"
+  - "profile-pictures"
+
+examples:
+  - id: "squircle"
+    description: "Squircle mask shape"
+  - id: "heart"
+    description: "Heart mask shape"
+  - id: "hexagon"
+    description: "Hexagon mask shape"
+  - id: "diamond"
+    description: "Diamond mask shape"
+  - id: "circle"
+    description: "Circle mask shape"
+  - id: "star"
+    description: "Star mask shape"
+  - id: "triangle"
+    description: "Triangle mask shape"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes: []

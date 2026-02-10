@@ -1,0 +1,60 @@
+# Timeline Component Manifest
+#
+# DaisyUI Timeline component documentation for leptos-daisyui
+
+name: Timeline
+doc: https://daisyui.com/components/timeline/
+
+base:
+  - "timeline"
+  - "timeline-item"
+
+parts:
+  - name: "TimelineItem"
+    classes:
+      - "timeline-item"
+    description: "Individual timeline item"
+  - name: "TimelineStart"
+    classes:
+      - "timeline-start"
+    description: "Timeline content on start side"
+  - name: "TimelineMiddle"
+    classes:
+      - "timeline-middle"
+    description: "Timeline middle dot/icon"
+  - name: "TimelineEnd"
+    classes:
+      - "timeline-end"
+    description: "Timeline content on end side"
+  - name: "TimelineBox"
+    classes:
+      - ""
+    description: "Timeline content box"
+
+modifiers:
+  # Orientation
+  orientation:
+    - "timeline-vertical"
+    - "timeline-horizontal"
+  
+  # Position modifiers
+  position:
+    - "timeline-start"
+    - "timeline-middle"
+    - "timeline-end"
+
+patterns:
+  - name: "vertical"
+    description: "Vertical timeline (default)"
+  - name: "horizontal"
+    description: "Horizontal timeline"
+  - name: "with_icon"
+    description: "Timeline with icon in middle"
+  - name: "alternating"
+    description: "Alternating left/right content"
+
+examples:
+  - "timeline_vertical"
+  - "timeline_horizontal"
+  - "timeline_with_icon"
+  - "timeline_alternating"

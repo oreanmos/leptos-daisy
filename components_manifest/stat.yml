@@ -1,0 +1,59 @@
+# Stat Component Manifest
+#
+# DaisyUI Stat component documentation for leptos-daisyui
+
+name: Stat
+doc: https://daisyui.com/components/stat/
+
+base:
+  - "stats"
+  - "stat"
+
+parts:
+  - name: "Stat"
+    classes:
+      - "stat"
+    description: "Individual stat item"
+  - name: "StatTitle"
+    classes:
+      - "stat-title"
+    description: "Stat title/label"
+  - name: "StatValue"
+    classes:
+      - "stat-value"
+    description: "Stat value (main number)"
+  - name: "StatDesc"
+    classes:
+      - "stat-desc"
+    description: "Stat description/subtitle"
+  - name: "StatFigure"
+    classes:
+      - "stat-figure"
+    description: "Stat icon/figure"
+  - name: "StatActions"
+    classes:
+      - "stat-actions"
+    description: "Container for stat action buttons"
+
+modifiers:
+  # Layout modifiers
+  layout:
+    - "stats-vertical"
+    - "stats-horizontal"
+
+patterns:
+  - name: "horizontal"
+    description: "Stats arranged horizontally"
+  - name: "vertical"
+    description: "Stats arranged vertically"
+  - name: "with_figure"
+    description: "Stat with icon/figure"
+  - name: "with_actions"
+    description: "Stat with action buttons"
+
+examples:
+  - "stat_basic"
+  - "stat_horizontal"
+  - "stat_vertical"
+  - "stat_with_figure"
+  - "stat_with_actions"

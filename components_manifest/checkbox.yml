@@ -1,0 +1,91 @@
+# Checkbox Component Manifest
+#
+# DaisyUI Checkbox component documentation for leptos-daisyui
+
+name: Checkbox
+doc: https://daisyui.com/components/checkbox/
+
+base:
+  - "checkbox"
+
+parts:
+  - name: "input"
+    description: "The actual checkbox input element"
+    classes: ["checkbox"]
+  - name: "label"
+    description: "Optional label text"
+    classes: ["label", "label-text"]
+
+modifiers:
+  # Color modifiers
+  color:
+    - "checkbox-primary"
+    - "checkbox-secondary"
+    - "checkbox-accent"
+    - "checkbox-neutral"
+    - "checkbox-info"
+    - "checkbox-success"
+    - "checkbox-warning"
+    - "checkbox-error"
+  
+  # Size modifiers
+  size:
+    - "checkbox-xs"
+    - "checkbox-sm"
+    - "checkbox-md"
+    - "checkbox-lg"
+    - "checkbox-xl"
+
+patterns:
+  - "with-label"
+  - "checkbox-group"
+  - "disabled-state"
+  - "indeterminate-state"
+  - "custom-colors"
+
+examples:
+  - id: "basic"
+    description: "Basic checkbox without label"
+  - id: "with-label"
+    description: "Checkbox with label text"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "checkbox-group"
+    description: "Multiple checkboxes in a group"
+  - id: "disabled"
+    description: "Disabled checkbox"
+  - id: "interactive"
+    description: "Checkbox with change handler"
+  - id: "indeterminate"
+    description: "Indeterminate state checkbox"
+
+accessibility:
+  semantic_element: "input[type=checkbox]"
+  aria_attributes:
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+    - "aria-checked"
+  keyboard_navigation: true
+  default_attributes:
+    type: "checkbox"
+    role: "checkbox"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic checkbox
+  tested: true
+  documented: true
+
+notes: |
+  The checkbox component supports all DaisyUI checkbox variants and sizes.
+  
+  Special considerations:
+  - Always include proper label association for accessibility
+  - Disabled checkboxes should not be focusable
+  - Checkbox groups should use proper fieldset/legend for accessibility
+  - Indeterminate state requires JavaScript manipulation
+  - Consider using checkbox groups for related options
+  - Label text should be clear and descriptive for screen readers

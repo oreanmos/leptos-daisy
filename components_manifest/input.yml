@@ -1,0 +1,88 @@
+# Input Component Manifest
+#
+# DaisyUI Input component documentation for leptos-daisyui
+
+name: Input
+doc: https://daisyui.com/components/input/
+
+base:
+  - "input"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "input-primary"
+    - "input-secondary"
+    - "input-accent"
+    - "input-neutral"
+    - "input-info"
+    - "input-success"
+    - "input-warning"
+    - "input-error"
+  
+  # Size modifiers
+  size:
+    - "input-xs"
+    - "input-sm"
+    - "input-md"
+    - "input-lg"
+    - "input-xl"
+  
+  # Style modifiers
+  style:
+    - "input-bordered"
+    - "input-ghost"
+
+patterns:
+  - "with-icon"
+  - "with-label"
+  - "with-validator"
+  - "disabled-state"
+  - "loading-state"
+
+examples:
+  - id: "basic"
+    description: "Basic input field"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "bordered-vs-ghost"
+    description: "Compares bordered and ghost styles"
+  - id: "with-placeholder"
+    description: "Input with placeholder text"
+  - id: "disabled"
+    description: "Disabled input field"
+  - id: "with-icon"
+    description: "Input with icon"
+  - id: "with-label"
+    description: "Input with label"
+  - id: "interactive"
+    description: "Input with change handler"
+
+accessibility:
+  semantic_element: "input"
+  aria_attributes:
+    - "aria-label"
+    - "aria-describedby"
+    - "aria-invalid"
+  keyboard_navigation: true
+  default_attributes:
+    type: "text"
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic input
+  tested: true
+  documented: true
+
+notes: |
+  The input component supports all DaisyUI input variants, sizes, and modifiers.
+  
+  Special considerations:
+  - Always include proper type attribute for accessibility
+  - Disabled inputs should not be focusable
+  - Input with icons need proper aria-label for accessibility
+  - Consider using input groups for complex layouts

@@ -1,0 +1,33 @@
+# Countdown Component Manifest
+#
+# DaisyUI Countdown component documentation for leptos-daisyui
+
+name: Countdown
+doc: https://daisyui.com/components/countdown/
+
+base:
+  - "countdown"
+
+parts:
+  - name: "CountdownTimer"
+    classes:
+      - "countdown"
+    description: "Multi-unit countdown timer"
+
+modifiers:
+  # Uses CSS variables
+  css_variables:
+    - "--value"
+
+patterns:
+  - name: "single"
+    description: "Single countdown value"
+  - name: "timer"
+    description: "Full timer with days/hours/minutes/seconds"
+  - name: "with_labels"
+    description: "Countdown with unit labels"
+
+examples:
+  - "countdown_single"
+  - "countdown_timer"
+  - "countdown_with_labels"

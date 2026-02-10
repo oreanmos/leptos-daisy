@@ -1,0 +1,57 @@
+# FileInput Component Manifest
+#
+# DaisyUI FileInput component documentation for leptos-daisyui
+
+name: FileInput
+doc: https://daisyui.com/components/file-input/
+
+base:
+  - "file-input"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "file-input-primary"
+    - "file-input-secondary"
+    - "file-input-accent"
+    - "file-input-neutral"
+    - "file-input-info"
+    - "file-input-success"
+    - "file-input-warning"
+    - "file-input-error"
+
+  # Size modifiers
+  size:
+    - "file-input-xs"
+    - "file-input-sm"
+    - "file-input-md"
+    - "file-input-lg"
+    - "file-input-xl"
+
+  # Style modifiers
+  style:
+    - "file-input-bordered"
+    - "file-input-ghost"
+
+patterns:
+  - "basic"
+  - "with-label"
+  - "disabled-state"
+  - "all-colors"
+  - "all-sizes"
+
+examples:
+  - id: "basic"
+    description: "Basic file input"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size variants"
+  - id: "bordered"
+    description: "Bordered style file input"
+  - id: "ghost"
+    description: "Ghost style file input"
+  - id: "disabled"
+    description: "Disabled file input"

@@ -1,0 +1,61 @@
+# Indicator Component Manifest
+#
+# DaisyUI Indicator component documentation for leptos-daisyui
+# https://daisyui.com/components/indicator/
+
+name: Indicator
+doc: https://daisyui.com/components/indicator/
+
+base:
+  - "indicator"
+
+parts:
+  - name: "indicator-item"
+    description: "The indicator badge/dot element"
+    classes: ["indicator-item"]
+
+modifiers:
+  # Horizontal position modifiers
+  horizontal:
+    - "indicator-start"
+    - "indicator-center"
+    # default is end (right)
+
+  # Vertical position modifiers
+  vertical:
+    - "indicator-middle"
+    - "indicator-bottom"
+    # default is top
+
+patterns:
+  - "notification-badge"
+  - "status-dot"
+  - "avatar-with-status"
+  - "button-with-count"
+  - "card-with-badge"
+
+examples:
+  - id: "basic"
+    description: "Basic indicator with badge"
+  - id: "status-dot"
+    description: "Status indicator dot"
+  - id: "notification-count"
+    description: "Notification count badge"
+  - id: "positioned"
+    description: "Indicator with custom positioning"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+    - "aria-live"
+  keyboard_navigation: false
+  notes: |
+    Indicators should have appropriate aria-labels
+    for screen reader users.
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

@@ -1,0 +1,61 @@
+# Artboard Component Manifest
+#
+# DaisyUI Artboard component documentation for leptos-daisyui
+# https://daisyui.com/components/artboard/
+
+name: Artboard
+doc: https://daisyui.com/components/artboard/
+
+base:
+  - "artboard"
+
+parts: []
+
+modifiers:
+  # Size modifiers
+  size:
+    - "artboard-phone-1"
+    - "artboard-phone-2"
+    - "artboard-phone-3"
+    - "artboard-phone-4"
+    - "artboard-phone-5"
+    - "artboard-phone-6"
+
+  # Orientation modifiers
+  orientation:
+    - "artboard-horizontal"
+
+  # Demo mode
+  demo:
+    - "artboard-demo"
+
+patterns:
+  - "phone-mockup"
+  - "screenshot-preview"
+  - "mobile-design-showcase"
+  - "app-demo"
+
+examples:
+  - id: "basic"
+    description: "Basic artboard with default size"
+  - id: "phone-sizes"
+    description: "All phone size variants"
+  - id: "horizontal"
+    description: "Horizontal orientation"
+  - id: "demo-mode"
+    description: "Artboard with demo grid background"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"
+  keyboard_navigation: false
+  notes: |
+    Artboard is a visual presentation component.
+    Add aria-label to describe what is being showcased.
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true

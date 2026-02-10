@@ -1,0 +1,24 @@
+[package]
+name = "showcase"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+leptos = { version = "0.8", default-features = false }
+leptos_router = { version = "0.8", default-features = false }
+leptos-daisyui = { path = "../leptos-daisyui" }
+console_error_panic_hook = "0.1"
+web-sys = { version = "0.3", features = ["Storage", "Window", "Document", "HtmlElement", "Navigator", "Clipboard"] }
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "showcase_bin"
+path = "src/main.rs"
+
+[features]
+default = ["csr"]
+csr = ["leptos/csr", "leptos-daisyui/csr"]
+ssr = ["leptos/ssr", "leptos_router/ssr", "leptos-daisyui/ssr"]
+hydrate = ["leptos/hydrate", "leptos-daisyui/hydrate"]

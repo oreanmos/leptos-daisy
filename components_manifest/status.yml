@@ -1,0 +1,50 @@
+# Status Component Manifest
+#
+# DaisyUI Status component documentation for leptos-daisyui
+
+name: Status
+doc: https://daisyui.com/components/status/
+
+base:
+  - "status"
+
+parts: []
+
+modifiers:
+  # Size modifiers
+  size:
+    - "status-xs"
+    - "status-sm"
+    - "status-md"
+    - "status-lg"
+    - "status-xl"
+  
+  # Color modifiers
+  color:
+    - "status-primary"
+    - "status-secondary"
+    - "status-accent"
+    - "status-neutral"
+    - "status-info"
+    - "status-success"
+    - "status-warning"
+    - "status-error"
+
+patterns:
+  - name: "basic"
+    description: "Basic status indicator"
+  - name: "online"
+    description: "Online status (success color)"
+  - name: "offline"
+    description: "Offline status (neutral color)"
+  - name: "busy"
+    description: "Busy status (error color)"
+  - name: "away"
+    description: "Away status (warning color)"
+
+examples:
+  - "status_basic"
+  - "status_sizes"
+  - "status_colors"
+  - "status_online"
+  - "status_offline"

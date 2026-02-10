@@ -1,0 +1,83 @@
+use leptos::prelude::*;
+use leptos_daisyui::prelude::*;
+
+#[component]
+pub fn BackdropPage() -> impl IntoView {
+    view! {
+        <div class="space-y-8">
+            <h1 class="text-3xl font-bold">"Backdrop"</h1>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Modal Backdrop"</h2>
+                <p class="mb-4 text-base-content/70">
+                    "A backdrop is used to dim the content behind modals and drawers. Click the button to see it in action."
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Card>
+                        <CardBody>
+                            <h3 class="card-title">"Modal Usage"</h3>
+                            <p>"Backdrops are automatically included with Modal components. They provide visual focus on the modal content."</p>
+                        </CardBody>
+                    </Card>
+                    <Card>
+                        <CardBody>
+                            <h3 class="card-title">"Drawer Usage"</h3>
+                            <p>"Drawers can optionally include backdrops. When enabled, clicking the backdrop closes the drawer."</p>
+                        </CardBody>
+                    </Card>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Visual Example"</h2>
+                <div class="relative h-64 bg-base-200 rounded-lg overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <p class="text-base-content/50">"Content behind backdrop"</p>
+                    </div>
+                    <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
+                        <div class="bg-base-100 p-6 rounded-lg shadow-xl max-w-sm">
+                            <h4 class="font-bold mb-2">"Modal Content"</h4>
+                            <p class="text-sm">"The dark overlay is the backdrop. It dims the content underneath."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Modal with Backdrop"</h2>
+                <Modal open=true>
+                    <ModalBox>
+                        <ModalTitle>"Modal with Backdrop"</ModalTitle>
+                        <p class="py-4">"This modal has a backdrop that dims the content behind it."</p>
+                        <ModalActions>
+                            <Button>"Close"</Button>
+                        </ModalActions>
+                    </ModalBox>
+                </Modal>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Drawer with Backdrop"</h2>
+                <Drawer id="drawer-backdrop-demo">
+                    <DrawerContent>
+                        <div class="p-8 bg-base-200 h-64">
+                            <label for="drawer-backdrop-demo" class="btn btn-primary drawer-button">
+                                "Open Drawer"
+                            </label>
+                        </div>
+                    </DrawerContent>
+                    <DrawerSide>
+                        <DrawerOverlay drawer_id="drawer-backdrop-demo" />
+                        <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+                            <li><a>"Home"</a></li>
+                            <li><a>"About"</a></li>
+                            <li><a>"Services"</a></li>
+                            <li><a>"Contact"</a></li>
+                        </ul>
+                    </DrawerSide>
+                </Drawer>
+            </section>
+        </div>
+    }
+}

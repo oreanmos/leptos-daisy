@@ -1,0 +1,92 @@
+# Textarea Component Manifest
+#
+# DaisyUI Textarea component documentation for leptos-daisyui
+
+name: Textarea
+doc: https://daisyui.com/components/textarea/
+
+base:
+  - "textarea"
+
+parts: []
+
+modifiers:
+  # Color modifiers
+  color:
+    - "textarea-primary"
+    - "textarea-secondary"
+    - "textarea-accent"
+    - "textarea-neutral"
+    - "textarea-info"
+    - "textarea-success"
+    - "textarea-warning"
+    - "textarea-error"
+  
+  # Size modifiers
+  size:
+    - "textarea-xs"
+    - "textarea-sm"
+    - "textarea-md"
+    - "textarea-lg"
+    - "textarea-xl"
+  
+  # Style modifiers
+  style:
+    - "textarea-bordered"
+    - "textarea-ghost"
+
+patterns:
+  - "with-icon"
+  - "with-label"
+  - "with-validator"
+  - "disabled-state"
+  - "resizable"
+  - "auto-height"
+
+examples:
+  - id: "basic"
+    description: "Basic textarea field"
+  - id: "all-colors"
+    description: "Shows all color variants"
+  - id: "all-sizes"
+    description: "Shows all size options"
+  - id: "bordered-vs-ghost"
+    description: "Compares bordered and ghost styles"
+  - id: "with-placeholder"
+    description: "Textarea with placeholder text"
+  - id: "disabled"
+    description: "Disabled textarea field"
+  - id: "with-rows"
+    description: "Textarea with specific row count"
+  - id: "with-icon"
+    description: "Textarea with icon"
+  - id: "with-label"
+    description: "Textarea with label"
+  - id: "interactive"
+    description: "Textarea with change handler"
+
+accessibility:
+  semantic_element: "textarea"
+  aria_attributes:
+    - "aria-label"
+    - "aria-describedby"
+    - "aria-invalid"
+  keyboard_navigation: true
+  default_attributes:
+    rows: 3
+
+status:
+  tier_a: true # Pure wrapper implemented
+  tier_b: false # No interactive helper needed for basic textarea
+  tested: true
+  documented: true
+
+notes: |
+  The textarea component supports all DaisyUI textarea variants, sizes, and modifiers.
+  
+  Special considerations:
+  - Always include proper rows attribute for accessibility
+  - Disabled textareas should not be focusable
+  - Textarea with icons need proper aria-label for accessibility
+  - Consider using textarea groups for complex layouts
+  - Auto-height can be achieved with CSS resize: vertical

@@ -1,0 +1,49 @@
+# Swap Component Manifest
+#
+# DaisyUI Swap component documentation for leptos-daisyui
+# https://daisyui.com/components/swap/
+
+name: Swap
+doc: https://daisyui.com/components/swap/
+
+base:
+  - "swap"
+
+parts:
+  - "swap-on"
+  - "swap-off"
+  - "swap-input"
+
+modifiers:
+  # Animation effect modifiers
+  effect:
+    - "swap-rotate"
+    - "swap-flip"
+
+  # State modifiers
+  state:
+    - "swap-active"
+
+patterns:
+  - "theme-toggle"
+  - "icon-toggle"
+  - "favorite-button"
+  - "play-pause-toggle"
+
+examples:
+  - id: "rotate"
+    description: "Swap with rotate animation"
+  - id: "flip"
+    description: "Swap with flip animation"
+  - id: "active-state"
+    description: "Swap with active state controlled"
+  - id: "checkbox"
+    description: "Swap controlled by checkbox"
+  - id: "theme-toggle"
+    description: "Theme toggle with sun/moon icons"
+
+accessibility:
+  semantic_element: "label"
+  aria_attributes:
+    - "aria-checked"
+    - "aria-label"

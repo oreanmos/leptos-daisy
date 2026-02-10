@@ -1,0 +1,323 @@
+# Dropdown Component Manifest
+# DaisyUI Dropdown - https://daisyui.com/components/dropdown/
+
+component: Dropdown
+base: "dropdown"
+parts:
+  - name: "dropdown-content"
+    description: "Container for dropdown menu items"
+    classes: ["dropdown-content"]
+  - name: "dropdown-item"
+    description: "Individual dropdown menu item"
+    classes: ["dropdown-item"]
+  - name: "dropdown-divider"
+    description: "Divider between dropdown items"
+    classes: ["dropdown-divider"]
+
+modifiers:
+  positions:
+    - "dropdown-top"      # Opens upwards
+    - "dropdown-bottom"   # Opens downwards (default)
+    - "dropdown-left"     # Opens to the left
+    - "dropdown-right"    # Opens to the right
+    - "dropdown-start"    # Opens to the start (left in LTR, right in RTL)
+    - "dropdown-end"      # Opens to the end (right in LTR, left in RTL)
+    - "dropdown-center"   # Dropdown content is centered
+
+  state:
+    - "dropdown-open"     # Forces dropdown to be open
+    - "dropdown-close"    # Forces dropdown to be closed
+  
+  hover_behavior:
+    - "dropdown-hover"    # Opens on hover (default)
+    - "dropdown-click"    # Opens on click
+  
+  colors:
+    - "dropdown-primary"
+    - "dropdown-secondary"
+    - "dropdown-accent"
+    - "dropdown-info"
+    - "dropdown-success"
+    - "dropdown-warning"
+    - "dropdown-error"
+    - "dropdown-ghost"
+
+patterns:
+  - name: "basic-dropdown"
+    description: "Basic dropdown with button trigger"
+    classes: ["dropdown", "dropdown-content"]
+  
+  - name: "with-divider"
+    description: "Dropdown with divider between items"
+    classes: ["dropdown", "dropdown-content", "dropdown-divider"]
+  
+  - name: "active-item"
+    description: "Dropdown with active item"
+    classes: ["dropdown", "dropdown-content", "dropdown-item", "active"]
+  
+  - name: "disabled-item"
+    description: "Dropdown with disabled item"
+    classes: ["dropdown", "dropdown-content", "dropdown-item", "disabled"]
+
+examples:
+  - id: "basic-dropdown"
+    title: "Basic Dropdown"
+    description: "Simple dropdown with button trigger"
+    code: |
+      <Dropdown
+        trigger={view! { <button class="btn">"Menu"</button> }}
+        content={view! {
+          <DropdownContent>
+            <DropdownItem>"Item 1"</DropdownItem>
+            <DropdownItem>"Item 2"</DropdownItem>
+            <DropdownItem>"Item 3"</DropdownItem>
+          </DropdownContent>
+        }}
+      />
+  
+  - id: "dropdown-with-divider"
+    title: "Dropdown with Divider"
+    description: "Dropdown with divider between items"
+    code: |
+      <Dropdown
+        trigger={view! { <button class="btn">"Menu"</button> }}
+        content={view! {
+          <DropdownContent>
+            <DropdownItem>"Item 1"</DropdownItem>
+            <DropdownItem>"Item 2"</DropdownItem>
+            <DropdownDivider/>
+            <DropdownItem>"Item 3"</DropdownItem>
+          </DropdownContent>
+        }}
+      />
+  
+  - id: "dropdown-positions"
+    title: "Dropdown Positions"
+    description: "Dropdowns with different positions"
+    code: |
+      <div class="flex gap-4">
+        <Dropdown
+          trigger={view! { <button class="btn">"Top"</button> }}
+          position={DropdownPosition::Top}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Bottom"</button> }}
+          position={DropdownPosition::Bottom}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Left"</button> }}
+          position={DropdownPosition::Left}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Right"</button> }}
+          position={DropdownPosition::Right}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+      </div>
+  
+  - id: "dropdown-hover-vs-click"
+    title: "Hover vs Click Behavior"
+    description: "Dropdowns with different trigger behaviors"
+    code: |
+      <div class="flex gap-4">
+        <Dropdown
+          trigger={view! { <button class="btn">"Hover"</button> }}
+          hover={DropdownHover::Hover}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Click"</button> }}
+          hover={DropdownHover::Click}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+      </div>
+  
+  - id: "dropdown-colors"
+    title: "Dropdown Colors"
+    description: "Dropdowns with different color variants"
+    code: |
+      <div class="flex gap-4">
+        <Dropdown
+          trigger={view! { <button class="btn">"Primary"</button> }}
+          color={Color::Primary}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Secondary"</button> }}
+          color={Color::Secondary}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Accent"</button> }}
+          color={Color::Accent}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+      </div>
+
+  - id: "dropdown-start-end"
+    title: "Dropdown Start and End Positions"
+    description: "Dropdowns with start and end positions"
+    code: |
+      <div class="flex gap-4">
+        <Dropdown
+          trigger={view! { <button class="btn">"Start"</button> }}
+          position={DropdownPosition::Start}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"End"</button> }}
+          position={DropdownPosition::End}
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+      </div>
+
+  - id: "dropdown-center"
+    title: "Dropdown Center"
+    description: "Dropdown with centered content"
+    code: |
+      <Dropdown
+        trigger={view! { <button class="btn">"Centered Dropdown"</button> }}
+        content={view! {
+          <DropdownContent class="dropdown-center">
+            <DropdownItem>"Item 1"</DropdownItem>
+            <DropdownItem>"Item 2"</DropdownItem>
+            <DropdownItem>"Item 3"</DropdownItem>
+          </DropdownContent>
+        }}
+      />
+
+  - id: "dropdown-open-close"
+    title: "Dropdown Open/Close State"
+    description: "Dropdowns with forced open/close states"
+    code: |
+      <div class="flex gap-4">
+        <Dropdown
+          trigger={view! { <button class="btn">"Forced Open"</button> }}
+          open=true
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+        
+        <Dropdown
+          trigger={view! { <button class="btn">"Forced Closed"</button> }}
+          open=false
+          content={view! {
+            <DropdownContent>
+              <DropdownItem>"Item 1"</DropdownItem>
+              <DropdownItem>"Item 2"</DropdownItem>
+            </DropdownContent>
+          }}
+        />
+      </div>
+  
+  - id: "simple-dropdown"
+    title: "Simple Dropdown"
+    description: "Simple dropdown using SimpleDropdown component"
+    code: |
+      <SimpleDropdown
+        button_text="Menu"
+        content={view! {
+          <DropdownContent>
+            <DropdownItem>"Item 1"</DropdownItem>
+            <DropdownItem>"Item 2"</DropdownItem>
+            <DropdownItem>"Item 3"</DropdownItem>
+          </DropdownContent>
+        }}
+      />
+  
+  - id: "dropdown-with-active-disabled"
+    title: "Dropdown with Active and Disabled Items"
+    description: "Dropdown showing active and disabled states"
+    code: |
+      <Dropdown
+        trigger={view! { <button class="btn">"Menu"</button> }}
+        content={view! {
+          <DropdownContent>
+            <DropdownItem active=true>"Active Item"</DropdownItem>
+            <DropdownItem>"Normal Item"</DropdownItem>
+            <DropdownItem disabled=true>"Disabled Item"</DropdownItem>
+          </DropdownContent>
+        }}
+      />
+
+accessibility:
+  - "Use semantic HTML for dropdown items"
+  - "Add aria-disabled for disabled items"
+  - "Ensure keyboard navigation support"
+  - "Provide proper focus management"
+
+notes:
+  - "Dropdown requires proper Tailwind CSS setup with DaisyUI plugin"
+  - "For interactive dropdowns, use InteractiveDropdown with hydration feature"
+  - "Dropdown content should be wrapped in DropdownContent for proper styling"
+  - "Use DropdownItem for individual menu items"
+  - "DropdownDivider can be used to separate groups of items"

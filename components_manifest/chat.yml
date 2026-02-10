@@ -1,0 +1,65 @@
+# Chat Component Manifest
+#
+# DaisyUI Chat component documentation for leptos-daisyui
+
+name: Chat
+doc: https://daisyui.com/components/chat/
+
+base:
+  - "chat"
+  - "chat-bubble"
+
+parts:
+  - name: "ChatImage"
+    classes:
+      - "chat-image"
+    description: "Avatar/image wrapper for chat message"
+  - name: "ChatHeader"
+    classes:
+      - "chat-header"
+    description: "Chat message header (name, time)"
+  - name: "ChatBubble"
+    classes:
+      - "chat-bubble"
+    description: "Main chat message bubble"
+  - name: "ChatFooter"
+    classes:
+      - "chat-footer"
+    description: "Chat message footer (status, time)"
+
+modifiers:
+  # Position modifiers
+  position:
+    - "chat-start"
+    - "chat-end"
+  
+  # Bubble color modifiers
+  color:
+    - "chat-bubble-primary"
+    - "chat-bubble-secondary"
+    - "chat-bubble-accent"
+    - "chat-bubble-neutral"
+    - "chat-bubble-info"
+    - "chat-bubble-success"
+    - "chat-bubble-warning"
+    - "chat-bubble-error"
+
+patterns:
+  - name: "start"
+    description: "Message aligned to start (left)"
+  - name: "end"
+    description: "Message aligned to end (right)"
+  - name: "with_image"
+    description: "Message with avatar image"
+  - name: "with_header"
+    description: "Message with header (name/time)"
+  - name: "with_footer"
+    description: "Message with footer (status)"
+
+examples:
+  - "chat_start"
+  - "chat_end"
+  - "chat_colors"
+  - "chat_with_image"
+  - "chat_with_header"
+  - "chat_with_footer"

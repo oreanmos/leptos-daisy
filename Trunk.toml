@@ -1,0 +1,11 @@
+[build]
+target = "crates/showcase/index.html"
+dist = "dist"
+
+[watch]
+watch = ["crates/showcase/src", "crates/leptos-daisyui/src"]
+
+[[hooks]]
+stage = "pre_build"
+command = "npx"
+command_arguments = ["@tailwindcss/cli", "-i", "crates/showcase/style/main.css", "-o", "crates/showcase/style/output.css", "--minify"]

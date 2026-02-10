@@ -1,0 +1,35 @@
+# Mockup Phone Component Manifest
+#
+# DaisyUI Mockup Phone component documentation for leptos-daisyui
+# https://daisyui.com/components/mockup/
+
+name: MockupPhone
+doc: https://daisyui.com/components/mockup/
+
+base:
+  - "mockup-phone"
+
+parts:
+  - "mockup-phone-camera"
+  - "mockup-phone-display"
+
+modifiers: {}
+
+patterns:
+  - "mobile-app-preview"
+  - "screenshot-showcase"
+  - "responsive-demo"
+  - "app-store-screenshot"
+
+examples:
+  - id: "basic"
+    description: "Basic phone mockup"
+  - id: "with-content"
+    description: "Phone mockup with screen content"
+  - id: "app-preview"
+    description: "Mobile app preview"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "aria-label"

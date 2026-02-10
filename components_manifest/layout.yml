@@ -1,0 +1,206 @@
+# DaisyUI Layout Components Manifest
+# Layout utilities and components for building responsive layouts
+
+components:
+  - name: Container
+    description: "Responsive container with max-width constraints"
+    base_class: "container"
+    variants:
+      - "container-sm"
+      - "container-md"
+      - "container-lg"
+      - "container-xl"
+    responsive: true
+    examples:
+      - "Basic container with default max-width"
+      - "Container with specific size variant"
+      - "Fluid container (no max-width)"
+
+  - name: Divider
+    description: "Horizontal or vertical divider line"
+    base_class: "divider"
+    variants:
+      - "divider-horizontal"  # default
+      - "divider-vertical"
+      - "divider-neutral"
+      - "divider-primary"
+      - "divider-secondary"
+      - "divider-accent"
+      - "divider-success"
+      - "divider-warning"
+      - "divider-error"
+    examples:
+      - "Basic horizontal divider"
+      - "Vertical divider"
+      - "Colored divider"
+      - "Divider with text"
+
+  - name: Stack
+    description: "Stack elements vertically or horizontally with consistent spacing"
+    base_class: "stack"
+    variants:
+      - "stack-xs"  # extra small gap
+      - "stack-sm"  # small gap
+      - "stack-md"  # medium gap (default)
+      - "stack-lg"  # large gap
+      - "stack-xl"  # extra large gap
+    examples:
+      - "Vertical stack"
+      - "Horizontal stack"
+      - "Stack with different gap sizes"
+
+  - name: Join
+    description: "Join elements together with no gap"
+    base_class: "join"
+    examples:
+      - "Joined buttons"
+      - "Joined input with button"
+      - "Vertical join"
+
+  - name: Grid
+    description: "CSS Grid layout system"
+    base_class: "grid"
+    variants:
+      - "grid-cols-1" to "grid-cols-12"
+      - "grid-rows-1" to "grid-rows-12"
+      - "grid-flow-row"
+      - "grid-flow-col"
+      - "grid-flow-dense"
+    responsive: true
+    examples:
+      - "Basic grid layout"
+      - "Responsive grid"
+      - "Grid with gap"
+      - "Complex grid patterns"
+
+  - name: Flex
+    description: "Flexbox layout utilities"
+    base_class: "flex"
+    variants:
+      - "flex-row" / "flex-row-reverse"
+      - "flex-col" / "flex-col-reverse"
+      - "flex-wrap" / "flex-wrap-reverse" / "flex-nowrap"
+      - "flex-1", "flex-auto", "flex-initial", "flex-none"
+      - "justify-start", "justify-center", "justify-end", "justify-between", "justify-around", "justify-evenly"
+      - "items-start", "items-center", "items-end", "items-stretch", "items-baseline"
+    responsive: true
+    examples:
+      - "Basic flex container"
+      - "Flex with justify content"
+      - "Flex with align items"
+      - "Responsive flex layout"
+
+  - name: Gap
+    description: "Gap utilities for flex and grid layouts"
+    base_class: "gap"
+    variants:
+      - "gap-0" to "gap-96" (in increments of 4)
+      - "gap-x-0" to "gap-x-96" (horizontal gap)
+      - "gap-y-0" to "gap-y-96" (vertical gap)
+    examples:
+      - "Grid with gap"
+      - "Flex with gap"
+      - "Different horizontal and vertical gaps"
+
+  - name: Hero
+    description: "Hero section with background image and overlay"
+    base_class: "hero"
+    variants:
+      - "hero-overlay"
+      - "hero-content"
+    examples:
+      - "Basic hero with background"
+      - "Hero with overlay"
+      - "Hero with gradient"
+
+  - name: Mockup
+    description: "Mockup components for showcasing designs"
+    base_class: "mockup"
+    variants:
+      - "mockup-browser"
+      - "mockup-phone"
+      - "mockup-code"
+      - "mockup-window"
+    examples:
+      - "Browser mockup"
+      - "Phone mockup"
+      - "Code mockup"
+
+  - name: Grid
+    description: "CSS Grid layout system"
+    base_class: "grid"
+    variants:
+      - "grid-cols-1" to "grid-cols-12"
+      - "grid-rows-1" to "grid-rows-12"
+      - "grid-flow-row"
+      - "grid-flow-col"
+      - "grid-flow-dense"
+    responsive: true
+    examples:
+      - "Basic grid layout"
+      - "Responsive grid"
+      - "Grid with gap"
+      - "Complex grid patterns"
+
+  - name: Flex
+    description: "Flexbox layout utilities"
+    base_class: "flex"
+    variants:
+      - "flex-row" / "flex-row-reverse"
+      - "flex-col" / "flex-col-reverse"
+      - "flex-wrap" / "flex-wrap-reverse" / "flex-nowrap"
+      - "flex-1", "flex-auto", "flex-initial", "flex-none"
+      - "justify-start", "justify-center", "justify-end", "justify-between", "justify-around", "justify-evenly"
+      - "items-start", "items-center", "items-end", "items-stretch", "items-baseline"
+    responsive: true
+    examples:
+      - "Basic flex container"
+      - "Flex with justify content"
+      - "Flex with align items"
+      - "Responsive flex layout"
+
+  - name: Gap
+    description: "Gap utilities for flex and grid layouts"
+    base_class: "gap"
+    variants:
+      - "gap-0" to "gap-96" (in increments of 4)
+      - "gap-x-0" to "gap-x-96" (horizontal gap)
+      - "gap-y-0" to "gap-y-96" (vertical gap)
+    examples:
+      - "Grid with gap"
+      - "Flex with gap"
+      - "Different horizontal and vertical gaps"
+
+  - name: Hero
+    description: "Hero section with background image and overlay"
+    base_class: "hero"
+    variants:
+      - "hero-overlay"
+      - "hero-content"
+    examples:
+      - "Basic hero with background"
+      - "Hero with overlay"
+      - "Hero with gradient"
+
+  - name: Mockup
+    description: "Mockup components for showcasing designs"
+    base_class: "mockup"
+    variants:
+      - "mockup-browser"
+      - "mockup-phone"
+      - "mockup-code"
+      - "mockup-window"
+    examples:
+      - "Browser mockup"
+      - "Phone mockup"
+      - "Code mockup"
+
+  - name: Artboard
+    description: "Artboard for showcasing designs with device frames"
+    base_class: "artboard"
+    variants:
+      - "artboard-demo"
+      - "artboard-phone-1" to "artboard-phone-6"
+    examples:
+      - "Artboard with phone frame"
+      - "Artboard with demo content"

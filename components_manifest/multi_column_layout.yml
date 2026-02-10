@@ -1,0 +1,81 @@
+# Multi-Column Layout Components Manifest
+# Extended layout system for complex dashboard patterns
+
+components:
+  - name: SecondaryColumn
+    description: "A secondary column between sidebar and main content for navigation or filters"
+    base_class: "flex flex-col overflow-y-auto"
+    variants:
+      - name: width
+        values:
+          - "w-64"  # Narrow
+          - "w-80"  # Default
+          - "w-96"  # Wide
+      - name: variant
+        values:
+          - ""           # Default (transparent)
+          - "bg-base-100" # Light
+          - "bg-base-200" # Muted
+          - "bg-neutral"  # Dark
+    props:
+      - width: SecondaryColumnWidth
+      - variant: ColumnVariant
+      - bordered: bool
+    examples:
+      - "Secondary column with channel list"
+      - "Secondary column as filter panel"
+      - "Dark variant secondary column"
+
+  - name: RightPanel
+    description: "Fixed right-side panel for secondary content, visible on xl+ screens"
+    base_class: "fixed inset-y-0 right-0 overflow-y-auto"
+    variants:
+      - name: width
+        values:
+          - "w-64"  # Narrow
+          - "w-80"  # Default
+          - "w-96"  # Wide
+      - name: breakpoint
+        values:
+          - "lg:block"  # Large screens
+          - "xl:block"  # Extra large (default)
+    props:
+      - width: RightPanelWidth
+      - breakpoint: Breakpoint
+      - fixed: bool
+    examples:
+      - "Right panel with activity feed"
+      - "Right panel with details"
+      - "Static right panel (not fixed)"
+
+  - name: ColumnVariant
+    description: "Background color variants for columns"
+    type: enum
+    values:
+      - Default
+      - Light
+      - Muted
+      - Dark
+
+  - name: SecondaryColumnWidth
+    description: "Width options for secondary columns"
+    type: enum
+    values:
+      - Narrow   # w-64
+      - Default  # w-80
+      - Wide     # w-96
+
+  - name: RightPanelWidth
+    description: "Width options for right panels"
+    type: enum
+    values:
+      - Narrow   # w-64
+      - Default  # w-80
+      - Wide     # w-96
+
+  - name: Breakpoint
+    description: "Responsive breakpoints for showing panels"
+    type: enum
+    values:
+      - Large      # lg
+      - ExtraLarge # xl

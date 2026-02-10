@@ -1,1 +1,43 @@
 /target
+# Rust
+/target/
+/**/*.rs.bk
+Cargo.lock
+
+# Leptos
+/leptos_output/
+/dist/
+/site/
+/target/site/
+/target/leptos/
+/target/wasm32-unknown-unknown/
+
+# Node/Tailwind/daisyUI
+node_modules/
+/.pnpm-store/
+/.npm/
+/.yarn/
+/.yarn-cache/
+/.yarn-unplugged/
+/.yarn-build-state.yml
+/.pnp.*
+/package-lock.json
+/pnpm-lock.yaml
+/yarn.lock
+/.turbo/
+/.parcel-cache/
+/.vite/
+/.out/
+/.next/
+/svelte-kit/
+/.vercel/
+/netlify/
+/tailwind.config.js.bak
+
+# Env/OS/IDE
+.env
+.env.*
+*.log
+.DS_Store
+.idea/
+.vscode/
