@@ -1,5 +1,5 @@
 //! Badge component — daisyUI `badge`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::variant::Variant;
@@ -11,6 +11,7 @@ pub fn Badge(
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] variant: Option<Variant>,
+    #[prop(optional)] outline: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
     let mut m = Vec::new();
@@ -29,16 +30,10 @@ pub fn Badge(
             m.push(s);
         }
     }
+    if outline {
+        m.push("badge-outline".into());
+    }
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "badge",
-        &r,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <span class={cls}>{children()}</span> }
+    let cls = class_signal("badge", &r, class);
+    view! { <span class=cls>{children()}</span> }
 }

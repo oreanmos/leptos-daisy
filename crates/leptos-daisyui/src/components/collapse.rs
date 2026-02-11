@@ -1,140 +1,127 @@
 //! Collapse component — daisyUI `collapse` + accordion support.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Collapse trigger type.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum CollapseTrigger {
-    /// Uses checkbox for toggle (default).
     #[default]
     Checkbox,
-    /// Uses details/summary elements.
     Details,
-    /// Uses radio for accordion behavior.
     Radio,
 }
 
-/// Collapse component for collapsible content.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum CollapseIcon {
+    #[default]
+    None,
+    Arrow,
+    Plus,
+}
+
+impl CollapseIcon {
+    fn class(self) -> &'static str {
+        match self {
+            Self::None => "",
+            Self::Arrow => "collapse-arrow",
+            Self::Plus => "collapse-plus",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum CollapseState {
+    #[default]
+    Auto,
+    Open,
+    Close,
+}
+
+impl CollapseState {
+    fn class(self) -> &'static str {
+        match self {
+            Self::Auto => "",
+            Self::Open => "collapse-open",
+            Self::Close => "collapse-close",
+        }
+    }
+}
+
 #[component]
 pub fn Collapse(
-    children: Children,
-    #[prop(optional, into)] title: Option<String>,
-    #[prop(optional)] open: bool,
-    #[prop(optional)] trigger: CollapseTrigger,
-    #[prop(optional, into)] radio_name: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] title: Option<String>,
+    #[prop(optional)] trigger: CollapseTrigger,
+    #[prop(optional)] icon: CollapseIcon,
+    #[prop(optional)] state: CollapseState,
+    #[prop(optional, into)] radio_name: MaybeProp<String>,
+    #[prop(optional, into)] open: MaybeProp<bool>,
+    children: Children,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "collapse",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
+    let mut mods: Vec<&str> = Vec::new();
+    let icon_cls = icon.class();
+    if !icon_cls.is_empty() {
+        mods.push(icon_cls);
+    }
+    let state_cls = state.class();
+    if !state_cls.is_empty() {
+        mods.push(state_cls);
+    }
+    let cls = class_signal("collapse", &mods, class);
 
     match trigger {
         CollapseTrigger::Details => view! {
-            <details class={cls} open={open}>
+            <details class=cls open=move || open.get().unwrap_or(false)>
                 {title.map(|t| view! { <summary class="collapse-title">{t}</summary> })}
                 <div class="collapse-content">{children()}</div>
             </details>
         }
         .into_any(),
-        CollapseTrigger::Checkbox => {
-            let checkbox_id = format!(
-                "collapse-{:x}",
-                std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .unwrap_or_default()
-                    .as_millis() as u64
-            );
-            view! {
-                <div class={cls}>
-                    <input type="checkbox" id={&checkbox_id} checked={open} />
-                    {title.map(|t| view! { <label for={&checkbox_id} class="collapse-title">{t}</label> })}
-                    <div class="collapse-content">{children()}</div>
-                </div>
-            }
-            .into_any()
+        CollapseTrigger::Checkbox => view! {
+            <div class=cls>
+                <input type="checkbox" checked=move || open.get().unwrap_or(false) />
+                {title.map(|t| view! { <div class="collapse-title">{t}</div> })}
+                <div class="collapse-content">{children()}</div>
+            </div>
         }
-        CollapseTrigger::Radio => {
-            let name = radio_name
-                .get()
-                .unwrap_or_else(|| "collapse-radio".to_string());
-            let radio_id = format!(
-                "{}-{:x}",
-                name,
-                std::time::SystemTime::now()
-                    .duration_since(std::time::UNIX_EPOCH)
-                    .unwrap_or_default()
-                    .as_millis() as u64
-            );
-            view! {
-                <div class={cls}>
-                    <input type="radio" name={name} id={&radio_id} checked={open} />
-                    {title.map(|t| view! { <label for={&radio_id} class="collapse-title">{t}</label> })}
-                    <div class="collapse-content">{children()}</div>
-                </div>
-            }
-            .into_any()
+        .into_any(),
+        CollapseTrigger::Radio => view! {
+            <div class=cls>
+                <input
+                    type="radio"
+                    name=move || radio_name.get().unwrap_or_else(|| "collapse-radio".to_string())
+                    checked=move || open.get().unwrap_or(false)
+                />
+                {title.map(|t| view! { <div class="collapse-title">{t}</div> })}
+                <div class="collapse-content">{children()}</div>
+            </div>
         }
+        .into_any(),
     }
 }
 
-/// Collapse title component (for custom title content).
 #[component]
 pub fn CollapseTitle(
-    children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    children: Children,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "collapse-title",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("collapse-title", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Collapse content component.
 #[component]
 pub fn CollapseContent(
-    children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    children: Children,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "collapse-content",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("collapse-content", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Accordion group container for radio-based collapses.
 #[component]
 pub fn Accordion(
-    children: Children,
-    #[prop(optional, into)] name: String,
     #[prop(optional, into)] class: MaybeProp<String>,
+    children: Children,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class("", &[], None);
-    let final_cls = format!("{} {}", cls, uc);
-    view! {
-        <div class={final_cls} data-accordion={name}>
-            {children()}
-        </div>
-    }
+    let cls = class_signal("join join-vertical w-full", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }

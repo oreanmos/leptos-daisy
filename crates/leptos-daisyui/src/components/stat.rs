@@ -1,140 +1,74 @@
-//! Stat component — daisyUI `stats` + `stat` + parts.
-use crate::utils::class::build_class;
+//! Stat component — daisyUI `stat`.
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Stats container component.
 #[component]
 pub fn Stats(
     children: Children,
     #[prop(optional)] vertical: bool,
+    #[prop(optional)] horizontal: bool,
+    #[prop(optional)] responsive: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let mut mods: Vec<&str> = Vec::new();
-    if vertical {
-        mods.push("stats-vertical");
-    } else {
-        mods.push("stats-horizontal");
+    let mut m: Vec<&str> = Vec::new();
+    if responsive {
+        m.push("stats-vertical md:stats-horizontal");
+    } else if vertical {
+        m.push("stats-vertical");
+    } else if horizontal {
+        m.push("stats-horizontal");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stats",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stats", &m, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Individual stat item.
 #[component]
 pub fn Stat(children: Children, #[prop(optional, into)] class: MaybeProp<String>) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Stat title.
 #[component]
 pub fn StatTitle(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat-title",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat-title", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Stat value (the main number/text).
 #[component]
 pub fn StatValue(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat-value",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat-value", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Stat description.
 #[component]
 pub fn StatDesc(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat-desc",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat-desc", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Stat figure (icon/image).
 #[component]
 pub fn StatFigure(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat-figure",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat-figure", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Stat actions container.
 #[component]
 pub fn StatActions(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "stat-actions",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("stat-actions", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }

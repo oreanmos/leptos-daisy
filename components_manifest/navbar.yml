@@ -43,20 +43,23 @@ modifiers:
 patterns:
   - "basic-navbar"
   - "navbar-with-brand"
+  - "navbar-with-search"
   - "navbar-with-responsive-menu"
-  - "fixed-navbar"
   - "glass-navbar"
+  - "themed-navbar"
 examples:
   - id: "basic-navbar"
     description: "Basic navbar with start, center, and end sections"
   - id: "navbar-with-brand"
     description: "Navbar with brand/logo section"
+  - id: "navbar-with-search"
+    description: "Navbar with inline search and action icons"
   - id: "navbar-with-responsive-menu"
     description: "Navbar with responsive menu toggle"
-  - id: "fixed-navbar"
-    description: "Fixed navbar at top of page"
   - id: "glass-navbar"
     description: "Transparent glass-effect navbar"
+  - id: "themed-navbar"
+    description: "Navbar with themed backgrounds and contrast"
 accessibility:
   semantic_tag: "nav"
   aria_attributes:
@@ -75,7 +78,7 @@ coverage:
   base_classes: true
   color_variants: true
   size_variants: false
-  fixed_modifier: true
+  fixed_modifier: false
   glass_modifier: true
   rounded_modifier: true
   bordered_modifier: true

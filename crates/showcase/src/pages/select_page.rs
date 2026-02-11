@@ -3,36 +3,92 @@ use leptos_daisyui::prelude::*;
 
 #[component]
 pub fn SelectPage() -> impl IntoView {
-    view! {
-        <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"Select"</h1>
+    let (framework, set_framework) = signal("leptos".to_string());
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Colors"</h2>
-                <div class="flex flex-col gap-2 max-w-xs">
+    view! {
+        <div class="space-y-10">
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Select"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "Dropdown controls with complete style variants and semantic form attributes."
+                </p>
+            </header>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Colors"</h2>
+                <div class="flex flex-col gap-3 max-w-md">
                     <Select>
-                        <option disabled=true selected=true>"Pick a color"</option>
-                        <option>"Red"</option>
-                        <option>"Blue"</option>
-                        <option>"Green"</option>
+                        <SelectOption disabled=true selected=true>"Pick a framework"</SelectOption>
+                        <SelectOption value="leptos">"Leptos"</SelectOption>
+                        <SelectOption value="yew">"Yew"</SelectOption>
+                        <SelectOption value="dioxus">"Dioxus"</SelectOption>
                     </Select>
                     <Select color={Color::Primary}>
-                        <option>"Primary Select"</option>
-                        <option>"Option A"</option>
-                        <option>"Option B"</option>
+                        <SelectOption selected=true>"Primary select"</SelectOption>
+                        <SelectOption>"Option A"</SelectOption>
+                        <SelectOption>"Option B"</SelectOption>
+                    </Select>
+                    <Select color={Color::Secondary}><SelectOption>"Secondary"</SelectOption></Select>
+                    <Select color={Color::Accent}><SelectOption>"Accent"</SelectOption></Select>
+                    <Select color={Color::Info}><SelectOption>"Info"</SelectOption></Select>
+                    <Select color={Color::Success}><SelectOption>"Success"</SelectOption></Select>
+                    <Select color={Color::Warning}><SelectOption>"Warning"</SelectOption></Select>
+                    <Select color={Color::Error}><SelectOption>"Error"</SelectOption></Select>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Sizes"</h2>
+                <div class="flex flex-col gap-3 max-w-md">
+                    <Select size={Size::ExtraSmall}>
+                        <SelectOption selected=true>"Extra Small"</SelectOption>
+                    </Select>
+                    <Select size={Size::Small}>
+                        <SelectOption selected=true>"Small"</SelectOption>
+                    </Select>
+                    <Select size={Size::Medium}>
+                        <SelectOption selected=true>"Medium"</SelectOption>
+                    </Select>
+                    <Select size={Size::Large}>
+                        <SelectOption selected=true>"Large"</SelectOption>
+                    </Select>
+                    <Select size={Size::ExtraLarge}>
+                        <SelectOption selected=true>"Extra Large"</SelectOption>
                     </Select>
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Sizes"</h2>
-                <div class="flex flex-col gap-2 max-w-xs">
-                    <Select size={Size::Small}>
-                        <option>"Small"</option>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Styles and states"</h2>
+                <div class="flex flex-col gap-3 max-w-md">
+                    <Select variant={Variant::Outline}>
+                        <SelectOption selected=true>"Bordered / outline style"</SelectOption>
                     </Select>
-                    <Select size={Size::Large}>
-                        <option>"Large"</option>
+                    <Select variant={Variant::Ghost}>
+                        <SelectOption selected=true>"Ghost style"</SelectOption>
                     </Select>
+                    <Select disabled=true>
+                        <SelectOption selected=true>"Disabled select"</SelectOption>
+                    </Select>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Reactive selection"</h2>
+                <div class="max-w-md space-y-3">
+                    <Select
+                        name="framework"
+                        value=framework
+                        on:change=move |ev| set_framework.set(event_target_value(&ev))
+                    >
+                        <SelectOption value="leptos">"Leptos"</SelectOption>
+                        <SelectOption value="yew">"Yew"</SelectOption>
+                        <SelectOption value="dioxus">"Dioxus"</SelectOption>
+                        <SelectOption value="sycamore">"Sycamore"</SelectOption>
+                    </Select>
+                    <p class="text-sm text-base-content/70">
+                        {move || format!("Selected: {}", framework.get())}
+                    </p>
                 </div>
             </section>
         </div>

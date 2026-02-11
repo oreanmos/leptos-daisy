@@ -19,8 +19,10 @@ parts:
     description: "Collapsible content area"
   - name: "Accordion"
     classes:
-      - ""
-    description: "Container for accordion group"
+      - "join"
+      - "join-vertical"
+      - "w-full"
+    description: "Container for grouped accordion items"
 
 modifiers:
   # Trigger types (implementation-based)
@@ -28,7 +30,11 @@ modifiers:
     - "checkbox"
     - "details"
     - "radio"
-  
+
+  icon:
+    - "collapse-arrow"
+    - "collapse-plus"
+
   # State
   state:
     - "collapse-open"
@@ -47,8 +53,12 @@ patterns:
     description: "Collapse with plus/minus indicator"
 
 examples:
-  - "collapse_checkbox"
+  - "collapse_basic_radio_group"
+  - "collapse_checkbox_icon_arrow"
+  - "collapse_checkbox_icon_plus"
   - "collapse_details"
+  - "collapse_details_open_default"
   - "collapse_accordion"
-  - "collapse_arrow"
-  - "collapse_plus"
+  - "collapse_forced_open"
+  - "collapse_forced_close"
+  - "collapse_parts_custom_title"

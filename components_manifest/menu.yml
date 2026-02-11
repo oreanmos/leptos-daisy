@@ -29,9 +29,9 @@ modifiers:
     - "menu-horizontal"
   
   state:
-    - "menu-disabled"
-    - "menu-active"
-    - "menu-focus"
+    - "disabled"
+    - "active"
+    - "focus"
 
 patterns:
   - "basic-menu"
@@ -44,6 +44,8 @@ patterns:
 examples:
   - id: "basic-menu"
     description: "Basic vertical menu"
+  - id: "responsive-menu"
+    description: "Menu that switches orientation by breakpoint"
   - id: "horizontal-menu"
     description: "Horizontal menu layout"
   - id: "menu-with-titles"
@@ -52,6 +54,8 @@ examples:
     description: "Menu with dropdown submenus"
   - id: "sized-menu"
     description: "Menu with different size variants"
+  - id: "menu-states"
+    description: "Active and disabled item states"
 
 accessibility:
   - "Use semantic <ul> and <li> elements"

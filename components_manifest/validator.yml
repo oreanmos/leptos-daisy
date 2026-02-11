@@ -9,21 +9,18 @@ base:
   - "validator"
 
 parts:
-  - name: "hint"
-    description: "Validation message hint"
-    classes: ["validator-hint"]
+  - name: "label"
+    description: "Validation helper text"
+    classes: ["validator-label"]
 
 modifiers:
-  # State modifiers
-  state:
-    - "validator-error"
-    - "validator-success"
+  state: []
 
 patterns:
-  - "with-input"
+  - "with-fieldset"
   - "error-state"
   - "success-state"
-  - "with-hint"
+  - "reactive-hint"
 
 examples:
   - id: "basic"
@@ -33,4 +30,6 @@ examples:
   - id: "success"
     description: "Validator with success state"
   - id: "with-hint"
-    description: "Validator with hint message"
+    description: "Validator with label message"
+  - id: "reactive"
+    description: "Validator with reactive status text"

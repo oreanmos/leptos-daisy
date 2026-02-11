@@ -8,92 +8,52 @@ pub fn StepsPage() -> impl IntoView {
             <h1 class="text-3xl font-bold">"Steps"</h1>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Horizontal Steps"</h2>
-                <Steps
-                    steps={vec![
-                        StepData::new("Register"),
-                        StepData::new("Choose Plan"),
-                        StepData::new("Payment"),
-                        StepData::new("Complete"),
-                    ]}
-                    current_step={1usize}
-                />
+                <h2 class="text-xl font-semibold mb-4">"Basic"</h2>
+                <Steps>
+                    <Step color=Color::Primary>"Register"</Step>
+                    <Step color=Color::Primary>"Choose plan"</Step>
+                    <Step>"Purchase"</Step>
+                    <Step>"Receive product"</Step>
+                </Steps>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Vertical Steps"</h2>
-                <div class="h-96">
-                    <Steps
-                        steps={vec![
-                            StepData::new("Step 1"),
-                            StepData::new("Step 2"),
-                            StepData::new("Step 3"),
-                            StepData::new("Step 4"),
-                        ]}
-                        current_step={2usize}
-                        orientation={Orientation::Vertical}
-                    />
-                </div>
+                <h2 class="text-xl font-semibold mb-4">"Colors"</h2>
+                <Steps>
+                    <Step color=Color::Info>"Info"</Step>
+                    <Step color=Color::Success>"Success"</Step>
+                    <Step color=Color::Warning>"Warning"</Step>
+                    <Step color=Color::Error>"Error"</Step>
+                </Steps>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"With Descriptions"</h2>
-                <Steps
-                    steps={vec![
-                        StepData::with_description("Register", "Create your account"),
-                        StepData::with_description("Choose Plan", "Select a subscription"),
-                        StepData::with_description("Payment", "Enter payment details"),
-                        StepData::with_description("Complete", "Start using the service"),
-                    ]}
-                    current_step={2usize}
-                />
+                <h2 class="text-xl font-semibold mb-4">"Vertical"</h2>
+                <Steps vertical=true>
+                    <Step color=Color::Primary>"Start"</Step>
+                    <Step color=Color::Primary>"Middle"</Step>
+                    <Step>"End"</Step>
+                </Steps>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Different Colors"</h2>
-                <div class="space-y-4">
-                    <Steps
-                        steps={vec![
-                            StepData::new("Step 1"),
-                            StepData::new("Step 2"),
-                            StepData::new("Step 3"),
-                        ]}
-                        current_step={1usize}
-                        color={Color::Primary}
-                    />
-                    <Steps
-                        steps={vec![
-                            StepData::new("Step 1"),
-                            StepData::new("Step 2"),
-                            StepData::new("Step 3"),
-                        ]}
-                        current_step={1usize}
-                        color={Color::Secondary}
-                    />
-                    <Steps
-                        steps={vec![
-                            StepData::new("Step 1"),
-                            StepData::new("Step 2"),
-                            StepData::new("Step 3"),
-                        ]}
-                        current_step={1usize}
-                        color={Color::Accent}
-                    />
-                </div>
+                <h2 class="text-xl font-semibold mb-4">"Responsive"</h2>
+                <Steps responsive=true>
+                    <Step color=Color::Primary>"Register"</Step>
+                    <Step color=Color::Primary>"Choose plan"</Step>
+                    <Step>"Purchase"</Step>
+                    <Step>"Receive product"</Step>
+                </Steps>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Completed Steps"</h2>
-                <Steps
-                    steps={vec![
-                        StepData::new("Cart"),
-                        StepData::new("Shipping"),
-                        StepData::new("Payment"),
-                        StepData::new("Review"),
-                        StepData::new("Confirmation"),
-                    ]}
-                    current_step={3usize}
-                />
+                <h2 class="text-xl font-semibold mb-4">"With Data Content"</h2>
+                <Steps>
+                    <Step data_content="★" color=Color::Primary>"Step 1"</Step>
+                    <Step data_content="★" color=Color::Primary>"Step 2"</Step>
+                    <Step data_content="★">"Step 3"</Step>
+                    <Step data_content="★">"Step 4"</Step>
+                </Steps>
             </section>
         </div>
     }

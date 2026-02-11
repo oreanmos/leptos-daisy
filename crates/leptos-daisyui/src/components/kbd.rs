@@ -1,8 +1,7 @@
-//! Kbd component — daisyUI `kbd` for keyboard keys.
-use crate::utils::class::build_class;
+//! Kbd component — daisyUI `kbd`.
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Kbd size variants.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum KbdSize {
     #[default]
@@ -13,7 +12,6 @@ pub enum KbdSize {
     Large,
     ExtraLarge,
 }
-
 impl KbdSize {
     fn cls(&self) -> &'static str {
         match self {
@@ -27,7 +25,6 @@ impl KbdSize {
     }
 }
 
-/// Keyboard key component.
 #[component]
 pub fn Kbd(
     children: Children,
@@ -39,15 +36,6 @@ pub fn Kbd(
     if !size_cls.is_empty() {
         mods.push(size_cls);
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "kbd",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <kbd class={cls}>{children()}</kbd> }
+    let cls = class_signal("kbd", &mods, class);
+    view! { <kbd class=cls>{children()}</kbd> }
 }

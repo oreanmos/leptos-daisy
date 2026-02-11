@@ -20,6 +20,12 @@ parts:
     description: "Close button"
     classes: ["btn btn-sm btn-circle btn-ghost absolute right-2 top-2"]
 modifiers:
+  state:
+    - "modal-open"
+    - "modal-close"
+  position:
+    - "modal-top"
+    - "modal-bottom"
   color:
     - "modal-primary"
     - "modal-secondary"
@@ -38,8 +44,14 @@ patterns:
 examples:
   - id: "basic-modal"
     description: "Basic modal with dialog pattern"
+  - id: "position-modal"
+    description: "Modal placement top/center/bottom"
   - id: "checkbox-modal"
     description: "SSR-friendly modal with checkbox pattern"
+  - id: "forced-open-modal"
+    description: "State-forced modal for docs/static preview"
+  - id: "forced-close-modal"
+    description: "Explicit closed modal class variant"
   - id: "modal-with-actions"
     description: "Modal with action buttons"
   - id: "controlled-modal"

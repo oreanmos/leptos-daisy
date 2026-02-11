@@ -169,7 +169,7 @@ pub fn ThemeCreatorPage() -> impl IntoView {
         lines.join("\n")
     };
 
-    let (copied, set_copied) = signal(false);
+    let (copied, _set_copied) = signal(false);
 
     view! {
         <div class="space-y-8">
@@ -343,14 +343,14 @@ pub fn ThemeCreatorPage() -> impl IntoView {
                             <button
                                 class="btn btn-sm btn-outline"
                                 on:click={
-                                    let css_output_clone = css_output.clone();
+                                    let _css_output_clone = css_output.clone();
                                     move |_| {
-                                        #[cfg(feature = "csr")]
+                                        #[cfg(any(feature = "csr", feature = "hydrate"))]
                                         {
-                                            let text = css_output_clone();
+                                            let text = _css_output_clone();
                                             let _ = leptos::prelude::window().navigator().clipboard().write_text(&text);
-                                            set_copied.set(true);
-                                            set_timeout(move || set_copied.set(false), std::time::Duration::from_secs(2));
+                                            _set_copied.set(true);
+                                            set_timeout(move || _set_copied.set(false), std::time::Duration::from_secs(2));
                                         }
                                     }
                                 }

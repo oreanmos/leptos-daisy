@@ -1,15 +1,13 @@
 //! Chat component — daisyUI `chat` + `chat-bubble`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Chat message position.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum ChatPosition {
     #[default]
     Start,
     End,
 }
-
 impl ChatPosition {
     fn cls(&self) -> &'static str {
         match self {
@@ -19,7 +17,6 @@ impl ChatPosition {
     }
 }
 
-/// Chat bubble color variants.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum ChatBubbleColor {
     #[default]
@@ -33,7 +30,6 @@ pub enum ChatBubbleColor {
     Warning,
     Error,
 }
-
 impl ChatBubbleColor {
     fn cls(&self) -> &'static str {
         match self {
@@ -50,7 +46,6 @@ impl ChatBubbleColor {
     }
 }
 
-/// Chat container for a single message.
 #[component]
 pub fn Chat(
     children: Children,
@@ -61,58 +56,28 @@ pub fn Chat(
         .into_iter()
         .filter(|s| !s.is_empty())
         .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "chat",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("chat", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Chat image/avatar wrapper.
 #[component]
 pub fn ChatImage(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "chat-image",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("chat-image", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Chat header section.
 #[component]
 pub fn ChatHeader(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "chat-header",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("chat-header", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Chat bubble (message content).
 #[component]
 pub fn ChatBubble(
     children: Children,
@@ -123,34 +88,15 @@ pub fn ChatBubble(
         .into_iter()
         .filter(|s| !s.is_empty())
         .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "chat-bubble",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("chat-bubble", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Chat footer section.
 #[component]
 pub fn ChatFooter(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "chat-footer",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("chat-footer", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }

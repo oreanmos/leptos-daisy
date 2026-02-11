@@ -99,21 +99,21 @@ pub fn IndicatorPage() -> impl IntoView {
                 <h2 class="text-xl font-semibold mb-4">"With Status Dots"</h2>
                 <div class="flex flex-wrap gap-8">
                     <Indicator
-                        item={Arc::new(move || view! { <Status size={StatusSize::Small} color={StatusColor::Success} /> }.into_any())}
+                        item={Arc::new(move || view! { <Status size={Size::Small} color={Color::Success} /> }.into_any())}
                     >
                         <Avatar>
                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Online" alt="User" />
                         </Avatar>
                     </Indicator>
                     <Indicator
-                        item={Arc::new(move || view! { <Status size={StatusSize::Small} color={StatusColor::Warning} /> }.into_any())}
+                        item={Arc::new(move || view! { <Status size={Size::Small} color={Color::Warning} /> }.into_any())}
                     >
                         <Avatar>
                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Away" alt="User" />
                         </Avatar>
                     </Indicator>
                     <Indicator
-                        item={Arc::new(move || view! { <Status size={StatusSize::Small} color={StatusColor::Error} /> }.into_any())}
+                        item={Arc::new(move || view! { <Status size={Size::Small} color={Color::Error} /> }.into_any())}
                     >
                         <Avatar>
                             <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Busy" alt="User" />

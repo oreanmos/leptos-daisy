@@ -1,0 +1,156 @@
+# DaisyUI Sidebar Layout Components Manifest
+# Comprehensive sidebar layout system using daisyUI drawer
+
+components:
+  - name: SidebarLayout
+    description: "Root shell wrapping entire sidebar layout (daisyUI drawer based)"
+    base_class: "drawer"
+    modifiers:
+      - "lg:drawer-open"  # open on large screens
+    props:
+      - variant: SidebarLayoutVariant (Light | Dark | Primary)
+      - width: SidebarLayoutWidth (Narrow | Default | Wide)
+      - open_on_large: bool
+      - id: MaybeProp<String>
+    examples:
+      - "Basic sidebar layout"
+      - "Dark sidebar variant"
+      - "Primary sidebar variant"
+      - "Narrow sidebar width"
+      - "Wide sidebar width"
+
+  - name: SidebarLayoutContent
+    description: "Main content area wrapper (drawer-content)"
+    base_class: "drawer-content flex flex-col min-h-screen"
+    examples:
+      - "Content area with top bar and main"
+
+  - name: SidebarLayoutSide
+    description: "Drawer side wrapper containing overlay and panel"
+    base_class: "drawer-side z-40"
+    examples:
+      - "Side with overlay and panel"
+
+  - name: SidebarLayoutOverlay
+    description: "Backdrop overlay that closes drawer on click"
+    base_class: "drawer-overlay"
+    accessibility:
+      - "aria-label: close sidebar"
+    examples:
+      - "Basic overlay"
+
+  - name: SidebarLayoutPanel
+    description: "Visible sidebar panel with variant-aware styling"
+    base_class: "(variant-dependent)"
+    modifiers:
+      - variant colors: "bg-base-200", "bg-neutral", "bg-primary"
+      - widths: "w-64" (Narrow), "w-72" (Default), "w-80" (Wide)
+    props:
+      - variant: MaybeProp<SidebarLayoutVariant> (override context)
+      - width: MaybeProp<SidebarLayoutWidth> (override context)
+    examples:
+      - "Panel with header, nav, and footer"
+      - "Dark panel variant"
+
+  - name: SidebarLayoutMain
+    description: "Main content area with sidebar-aware padding"
+    base_class: "flex-1 overflow-y-auto"
+    modifiers:
+      - "lg:pl-64" (Narrow)
+      - "lg:pl-72" (Default)
+      - "lg:pl-80" (Wide)
+    examples:
+      - "Main content with padding offset"
+
+  - name: SidebarLayoutTopBar
+    description: "Sticky top bar above content area"
+    base_class: "sticky top-0 z-30 flex h-16 shrink-0 items-center gap-x-4 border-b px-4 shadow-sm bg-base-100 border-base-300"
+    props:
+      - mobile: bool (show on mobile, default true)
+      - desktop: bool (show on desktop, default true)
+    examples:
+      - "Top bar with start/center/end sections"
+      - "Mobile-only top bar"
+      - "Desktop-only top bar"
+
+  - name: SidebarLayoutTopBarStart
+    description: "Start section of top bar"
+    base_class: "flex items-center gap-x-4"
+    examples:
+      - "With mobile menu button"
+
+  - name: SidebarLayoutTopBarCenter
+    description: "Center section of top bar (flex-1)"
+    base_class: "flex flex-1 items-center justify-center"
+    examples:
+      - "With page title"
+
+  - name: SidebarLayoutTopBarEnd
+    description: "End section of top bar"
+    base_class: "flex items-center gap-x-4"
+    examples:
+      - "With action buttons"
+
+  - name: SidebarLayoutMobileMenuButton
+    description: "Hamburger button to toggle sidebar on mobile"
+    base_class: "btn btn-ghost btn-square lg:hidden"
+    accessibility:
+      - "aria-label: open sidebar"
+    props:
+      - drawer_id: MaybeProp<String>
+    examples:
+      - "Default hamburger menu button"
+
+  - name: SidebarLayoutHeader
+    description: "Header/branding area at top of sidebar panel"
+    base_class: "flex h-16 shrink-0 items-center px-6"
+    examples:
+      - "With app logo/brand"
+
+  - name: SidebarLayoutNav
+    description: "Navigation wrapper inside sidebar"
+    base_class: "flex flex-1 flex-col gap-y-7 overflow-y-auto px-6 py-4"
+    examples:
+      - "With nav sections"
+
+  - name: SidebarLayoutNavSection
+    description: "Grouped navigation items with optional title"
+    base_class: "flex flex-col gap-y-2"
+    props:
+      - title: MaybeProp<String>
+    examples:
+      - "Section with title"
+      - "Section without title"
+
+  - name: SidebarLayoutNavItem
+    description: "Individual navigation link with variant-aware styling"
+    base_class: "flex items-center gap-3 rounded-lg px-3 py-2"
+    props:
+      - href: MaybeProp<String>
+      - active: bool
+      - icon: MaybeProp<String>
+    examples:
+      - "Basic nav item"
+      - "Active nav item"
+      - "Nav item with icon"
+
+  - name: SidebarLayoutFooter
+    description: "Footer area at bottom of sidebar (mt-auto)"
+    base_class: "mt-auto border-t px-6 py-4"
+    modifiers:
+      - variant-dependent border colors
+    examples:
+      - "With user profile info"
+
+enums:
+  - name: SidebarLayoutVariant
+    variants: [Light, Dark, Primary]
+    description: "Color scheme for the sidebar panel"
+
+  - name: SidebarLayoutWidth
+    variants: [Narrow, Default, Wide]
+    description: "Width of the sidebar panel"
+    css_mapping:
+      Narrow: "w-64 / lg:pl-64"
+      Default: "w-72 / lg:pl-72"
+      Wide: "w-80 / lg:pl-80"

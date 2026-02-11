@@ -1,5 +1,6 @@
 //! Class merging utilities for combining CSS class strings.
 
+use leptos::prelude::*;
 use std::collections::HashSet;
 
 /// Merges multiple class strings, deduplicating individual classes.
@@ -49,6 +50,21 @@ pub fn build_class(base: &str, modifiers: &[&str], user_class: Option<&str>) -> 
         parts.push(uc);
     }
     merge_classes(parts)
+}
+
+/// Creates a reactive class computation. Pre-computes the static portion
+/// (base + modifiers) once, then merges with the user's `class` prop
+/// reactively on each access. This ensures dynamic class changes propagate.
+pub fn class_signal(
+    base: &str,
+    modifiers: &[&str],
+    user_class: MaybeProp<String>,
+) -> impl Fn() -> String + Send + Sync + 'static + use<> {
+    let static_cls = build_class(base, modifiers, None);
+    move || match user_class.get() {
+        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
+        _ => static_cls.clone(),
+    }
 }
 
 #[cfg(test)]

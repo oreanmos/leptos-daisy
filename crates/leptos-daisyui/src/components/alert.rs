@@ -1,5 +1,5 @@
 //! Alert component — daisyUI `alert`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -57,6 +57,7 @@ impl AlertDirection {
     }
 }
 
+/// A daisyUI alert component.
 #[component]
 pub fn Alert(
     children: Children,
@@ -69,15 +70,46 @@ pub fn Alert(
         .into_iter()
         .filter(|s| !s.is_empty())
         .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "alert",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls} role="alert">{children()}</div> }
+    let cls = class_signal("alert", &mods, class);
+    view! { <div class=cls role="alert">{children()}</div> }
+}
+
+/// Alert icon sub-component.
+#[component]
+pub fn AlertIcon(
+    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
+) -> impl IntoView {
+    let cls = class_signal("alert-icon", &[], class);
+    view! { <div class=cls>{children()}</div> }
+}
+
+/// Alert title sub-component.
+#[component]
+pub fn AlertTitle(
+    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
+) -> impl IntoView {
+    let cls = class_signal("alert-title", &[], class);
+    view! { <div class=cls>{children()}</div> }
+}
+
+/// Alert content sub-component.
+#[component]
+pub fn AlertContent(
+    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
+) -> impl IntoView {
+    let cls = class_signal("alert-content", &[], class);
+    view! { <div class=cls>{children()}</div> }
+}
+
+/// Alert actions sub-component.
+#[component]
+pub fn AlertActions(
+    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
+) -> impl IntoView {
+    let cls = class_signal("alert-actions", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }

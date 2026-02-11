@@ -14,7 +14,7 @@ parts:
     classes: ["rating"]
   - name: "input"
     description: "Individual star input elements"
-    classes: ["mask", "mask-star-2", "mask-half-1"]
+    classes: ["mask", "mask-star", "mask-star-2", "mask-heart", "mask-heart-fill", "mask-half-1", "mask-half-2"]
 
 modifiers:
   # Size modifiers
@@ -31,11 +31,10 @@ modifiers:
     - "rating-hidden"
 
 patterns:
-  - "with-label"
   - "half-stars"
-  - "custom-stars"
+  - "custom-masks"
   - "disabled"
-  - "read-only"
+  - "reactive-selection"
 
 examples:
   - id: "basic"
@@ -44,14 +43,12 @@ examples:
     description: "Shows all size variants"
   - id: "half-stars"
     description: "Rating with half-star precision"
-  - id: "custom-stars"
-    description: "Rating with custom number of stars"
-  - id: "with-label"
-    description: "Rating with label"
+  - id: "mask-shapes"
+    description: "Rating with different mask shapes"
   - id: "disabled"
     description: "Disabled rating"
   - id: "interactive"
-    description: "Interactive rating with change handler"
+    description: "Interactive rating with reactive selected value"
 
 accessibility:
   semantic_element: "div"

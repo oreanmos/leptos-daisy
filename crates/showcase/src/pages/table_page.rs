@@ -9,179 +9,105 @@ pub fn TablePage() -> impl IntoView {
 
             <section>
                 <h2 class="text-xl font-semibold mb-4">"Basic Table"</h2>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>"Name"</TableHead>
-                            <TableHead>"Job"</TableHead>
-                            <TableHead>"Company"</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>"Cy Ganderton"</TableCell>
-                            <TableCell>"Quality Control Specialist"</TableCell>
-                            <TableCell>"Littel, Schaden and Vandervort"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Hart Hagerty"</TableCell>
-                            <TableCell>"Desktop Support Technician"</TableCell>
-                            <TableCell>"Zemlak, Daniel and Leannon"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Brice Swyre"</TableCell>
-                            <TableCell>"Tax Accountant"</TableCell>
-                            <TableCell>"Carroll Group"</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Sizes"</h2>
-                <div class="space-y-4">
-                    <div>
-                        <span class="text-sm text-base-content/70">"Extra Small"</span>
-                        <Table size={TableSize::ExtraSmall}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>"Name"</TableHead>
-                                    <TableHead>"Role"</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell>"John"</TableCell>
-                                    <TableCell>"Admin"</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Small"</span>
-                        <Table size={TableSize::Small}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>"Name"</TableHead>
-                                    <TableHead>"Role"</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell>"John"</TableCell>
-                                    <TableCell>"Admin"</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Large"</span>
-                        <Table size={TableSize::Large}>
-                            <TableHeader>
-                                <TableRow>
-                                    <TableHead>"Name"</TableHead>
-                                    <TableHead>"Role"</TableHead>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody>
-                                <TableRow>
-                                    <TableCell>"John"</TableCell>
-                                    <TableCell>"Admin"</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </div>
+                <div class="overflow-x-auto">
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>"#"</th>
+                                <th>"Name"</th>
+                                <th>"Job"</th>
+                                <th>"Favorite Color"</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>"1"</th>
+                                <td>"Cy Ganderton"</td>
+                                <td>"Quality Control"</td>
+                                <td>"Blue"</td>
+                            </tr>
+                            <tr>
+                                <td>"2"</td>
+                                <td>"Hart Hagerty"</td>
+                                <td>"Desktop Support"</td>
+                                <td>"Purple"</td>
+                            </tr>
+                            <tr>
+                                <td>"3"</td>
+                                <td>"Brice Swyre"</td>
+                                <td>"Tax Accountant"</td>
+                                <td>"Red"</td>
+                            </tr>
+                        </tbody>
+                    </Table>
                 </div>
             </section>
 
             <section>
                 <h2 class="text-xl font-semibold mb-4">"Zebra Striped"</h2>
-                <Table zebra=true>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>"Name"</TableHead>
-                            <TableHead>"Job"</TableHead>
-                            <TableHead>"Favorite Color"</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>"Cy Ganderton"</TableCell>
-                            <TableCell>"Quality Control Specialist"</TableCell>
-                            <TableCell>"Blue"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Hart Hagerty"</TableCell>
-                            <TableCell>"Desktop Support Technician"</TableCell>
-                            <TableCell>"Purple"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Brice Swyre"</TableCell>
-                            <TableCell>"Tax Accountant"</TableCell>
-                            <TableCell>"Red"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Marjy Ferencz"</TableCell>
-                            <TableCell>"Office Assistant I"</TableCell>
-                            <TableCell>"Crimson"</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"With Footer"</h2>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>"Item"</TableHead>
-                            <TableHead>"Quantity"</TableHead>
-                            <TableHead class="text-right">"Price"</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell>"Product A"</TableCell>
-                            <TableCell>"2"</TableCell>
-                            <TableCell class="text-right">"$20.00"</TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>"Product B"</TableCell>
-                            <TableCell>"1"</TableCell>
-                            <TableCell class="text-right">"$35.00"</TableCell>
-                        </TableRow>
-                    </TableBody>
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell>"Total"</TableCell>
-                            <TableCell></TableCell>
-                            <TableCell class="text-right font-bold">"$55.00"</TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Pinned Rows"</h2>
-                <div class="overflow-x-auto h-48">
-                    <Table pin_rows=true>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>"Name"</TableHead>
-                                <TableHead>"Position"</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            <TableRow><TableCell>"Row 1"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 2"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 3"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 4"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 5"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 6"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 7"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                            <TableRow><TableCell>"Row 8"</TableCell><TableCell>"Data"</TableCell></TableRow>
-                        </TableBody>
+                <div class="overflow-x-auto">
+                    <Table zebra=true>
+                        <thead>
+                            <tr>
+                                <th>"#"</th>
+                                <th>"Name"</th>
+                                <th>"Job"</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th>"1"</th><td>"Cy Ganderton"</td><td>"QC"</td></tr>
+                            <tr><th>"2"</th><td>"Hart Hagerty"</td><td>"Support"</td></tr>
+                            <tr><th>"3"</th><td>"Brice Swyre"</td><td>"Tax"</td></tr>
+                        </tbody>
                     </Table>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Pin Rows & Columns"</h2>
+                <div class="overflow-x-auto max-h-48">
+                    <Table pin_rows=true pin_cols=true>
+                        <thead>
+                            <tr>
+                                <th>"#"</th>
+                                <th>"Name"</th>
+                                <th>"Job"</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th>"1"</th><td>"Cy"</td><td>"QC"</td></tr>
+                            <tr><th>"2"</th><td>"Hart"</td><td>"Support"</td></tr>
+                            <tr><th>"3"</th><td>"Brice"</td><td>"Tax"</td></tr>
+                            <tr><th>"4"</th><td>"Marjy"</td><td>"Intern"</td></tr>
+                            <tr><th>"5"</th><td>"Yancy"</td><td>"Manager"</td></tr>
+                        </tbody>
+                    </Table>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4">"Sizes"</h2>
+                <div class="space-y-4">
+                    <div class="overflow-x-auto">
+                        <Table size=Size::ExtraSmall>
+                            <thead><tr><th>"XS"</th><td>"Extra Small"</td></tr></thead>
+                        </Table>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <Table size=Size::Small>
+                            <thead><tr><th>"SM"</th><td>"Small"</td></tr></thead>
+                        </Table>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <Table size=Size::Medium>
+                            <thead><tr><th>"MD"</th><td>"Medium"</td></tr></thead>
+                        </Table>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <Table size=Size::Large>
+                            <thead><tr><th>"LG"</th><td>"Large"</td></tr></thead>
+                        </Table>
+                    </div>
                 </div>
             </section>
         </div>

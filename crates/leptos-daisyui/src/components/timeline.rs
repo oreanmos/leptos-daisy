@@ -1,132 +1,75 @@
-//! Timeline component — daisyUI `timeline` + `timeline-item` + parts.
-use crate::utils::class::build_class;
+//! Timeline component — daisyUI `timeline`.
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Timeline orientation.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum TimelineOrientation {
-    #[default]
-    Vertical,
-    Horizontal,
-}
-
-impl TimelineOrientation {
-    fn cls(&self) -> &'static str {
-        match self {
-            Self::Vertical => "timeline-vertical",
-            Self::Horizontal => "timeline-horizontal",
-        }
-    }
-}
-
-/// Timeline container component.
 #[component]
 pub fn Timeline(
     children: Children,
-    #[prop(optional)] orientation: TimelineOrientation,
+    #[prop(optional)] vertical: bool,
+    #[prop(optional)] horizontal: bool,
+    #[prop(optional)] responsive: bool,
+    #[prop(optional)] compact: bool,
+    #[prop(optional)] snap: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let mods: Vec<&str> = [orientation.cls()]
-        .into_iter()
-        .filter(|s| !s.is_empty())
-        .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "timeline",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <ul class={cls}>{children()}</ul> }
+    let mut m: Vec<&str> = Vec::new();
+    if responsive {
+        m.push("timeline-vertical md:timeline-horizontal");
+    } else if vertical {
+        m.push("timeline-vertical");
+    } else if horizontal {
+        m.push("timeline-horizontal");
+    }
+    if compact {
+        m.push("timeline-compact");
+    }
+    if snap {
+        m.push("timeline-snap-icon");
+    }
+    let cls = class_signal("timeline", &m, class);
+    view! { <ul class=cls>{children()}</ul> }
 }
 
-/// Timeline item component.
 #[component]
 pub fn TimelineItem(
     children: Children,
+    #[prop(optional)] connect_start: bool,
+    #[prop(optional)] connect_end: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "timeline-item",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <li class={cls}>{children()}</li> }
+    let cls = class_signal("", &[], class);
+    view! {
+        <li class=cls>
+            {if connect_start { Some(view! { <hr /> }) } else { None }}
+            {children()}
+            {if connect_end { Some(view! { <hr /> }) } else { None }}
+        </li>
+    }
 }
 
-/// Timeline start content (left/top side).
 #[component]
 pub fn TimelineStart(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "timeline-start",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("timeline-start", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Timeline middle (icon/dot).
 #[component]
 pub fn TimelineMiddle(
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "timeline-middle",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("timeline-middle", &[], class);
+    view! { <div class=cls>{children.map(|c| c())}</div> }
 }
 
-/// Timeline end content (right/bottom side).
 #[component]
 pub fn TimelineEnd(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "timeline-end",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
-}
-
-/// Timeline box (content container).
-#[component]
-pub fn TimelineBox(
-    children: Children,
-    #[prop(optional, into)] class: MaybeProp<String>,
-) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class("", &[], None);
-    let final_cls = format!("{} {}", cls, uc);
-    view! { <div class={final_cls}>{children()}</div> }
+    let cls = class_signal("timeline-end", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }

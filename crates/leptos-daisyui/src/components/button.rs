@@ -1,6 +1,6 @@
 //! Button component — daisyUI `btn`.
 
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::state::State;
@@ -10,18 +10,24 @@ use leptos::prelude::*;
 /// A daisyUI button.
 #[component]
 pub fn Button(
-    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] variant: Option<Variant>,
     #[prop(optional, into)] state: Option<State>,
+    #[prop(optional, into)] button_type: MaybeProp<String>,
+    #[prop(optional, into)] id: MaybeProp<String>,
+    #[prop(optional, into)] name: MaybeProp<String>,
+    #[prop(optional, into)] value: MaybeProp<String>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional)] square: bool,
     #[prop(optional)] circle: bool,
     #[prop(optional)] glass: bool,
     #[prop(optional)] wide: bool,
+    #[prop(optional)] block: bool,
     #[prop(optional)] no_animation: bool,
     #[prop(optional)] disabled: bool,
-    #[prop(optional, into)] class: MaybeProp<String>,
+    children: Children,
 ) -> impl IntoView {
     let mut mods = Vec::new();
     if let Some(c) = color {
@@ -57,24 +63,26 @@ pub fn Button(
     if wide {
         mods.push("btn-wide".into());
     }
+    if block {
+        mods.push("btn-block".into());
+    }
     if no_animation {
         mods.push("no-animation".into());
     }
 
     let refs: Vec<&str> = mods.iter().map(|s| s.as_str()).collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "btn",
-        &refs,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
+    let cls = class_signal("btn", &refs, class);
 
     view! {
-        <button class={cls} type="button" disabled={disabled}>
+        <button
+            class=cls
+            type=move || button_type.get().unwrap_or_else(|| "button".to_string())
+            id=move || id.get()
+            name=move || name.get()
+            value=move || value.get()
+            aria-label=move || aria_label.get()
+            disabled=disabled
+        >
             {children()}
         </button>
     }

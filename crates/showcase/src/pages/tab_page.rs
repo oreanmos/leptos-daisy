@@ -4,92 +4,78 @@ use leptos_daisyui::prelude::*;
 #[component]
 pub fn TabPage() -> impl IntoView {
     view! {
-        <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"Tabs"</h1>
+        <div class="space-y-10">
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Tabs"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "DaisyUI tabs with style variants, sizes, and panel composition examples."
+                </p>
+            </header>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Default Tabs"</h2>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Default"</h2>
                 <Tabs>
-                    <Tab active=true>"Tab 1"</Tab>
-                    <Tab>"Tab 2"</Tab>
-                    <Tab>"Tab 3"</Tab>
-                </Tabs>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Sizes"</h2>
-                <div class="space-y-4">
-                    <div>
-                        <span class="text-sm text-base-content/70">"Extra Small"</span>
-                        <Tabs size={Size::ExtraSmall}>
-                            <Tab active=true>"XS Tab"</Tab>
-                            <Tab>"XS Tab"</Tab>
-                        </Tabs>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Small"</span>
-                        <Tabs size={Size::Small}>
-                            <Tab active=true>"Small Tab"</Tab>
-                            <Tab>"Small Tab"</Tab>
-                        </Tabs>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Large"</span>
-                        <Tabs size={Size::Large}>
-                            <Tab active=true>"Large Tab"</Tab>
-                            <Tab>"Large Tab"</Tab>
-                        </Tabs>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Lift Variant"</h2>
-                <Tabs variant={TabVariant::Lift}>
-                    <Tab active=true>"Home"</Tab>
-                    <Tab>"Profile"</Tab>
-                    <Tab>"Settings"</Tab>
-                </Tabs>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Box Variant"</h2>
-                <Tabs variant={TabVariant::Box}>
-                    <Tab active=true>"Tab 1"</Tab>
-                    <Tab>"Tab 2"</Tab>
-                    <Tab>"Tab 3"</Tab>
-                </Tabs>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Border Variant"</h2>
-                <Tabs variant={TabVariant::Border}>
-                    <Tab active=true>"Tab 1"</Tab>
-                    <Tab>"Tab 2"</Tab>
-                    <Tab>"Tab 3"</Tab>
-                </Tabs>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Bottom Position"</h2>
-                <div class="border rounded-lg p-4">
-                    <div class="h-24 flex items-end">
-                        <Tabs position={TabPosition::Bottom} variant={TabVariant::Lift}>
-                            <Tab active=true>"Tab 1"</Tab>
-                            <Tab>"Tab 2"</Tab>
-                            <Tab>"Tab 3"</Tab>
-                        </Tabs>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Disabled Tab"</h2>
-                <Tabs>
-                    <Tab active=true>"Active"</Tab>
-                    <Tab>"Normal"</Tab>
+                    <Tab active=true>"Overview"</Tab>
+                    <Tab>"Analytics"</Tab>
+                    <Tab>"Reports"</Tab>
                     <Tab disabled=true>"Disabled"</Tab>
                 </Tabs>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Variants"</h2>
+                <div class="space-y-4">
+                    <Tabs variant=TabVariant::Bordered>
+                        <Tab>"Bordered 1"</Tab>
+                        <Tab active=true>"Bordered 2"</Tab>
+                        <Tab>"Bordered 3"</Tab>
+                    </Tabs>
+                    <Tabs variant=TabVariant::Lifted>
+                        <Tab>"Lifted 1"</Tab>
+                        <Tab active=true>"Lifted 2"</Tab>
+                        <Tab>"Lifted 3"</Tab>
+                    </Tabs>
+                    <Tabs variant=TabVariant::Boxed>
+                        <Tab>"Boxed 1"</Tab>
+                        <Tab active=true>"Boxed 2"</Tab>
+                        <Tab>"Boxed 3"</Tab>
+                    </Tabs>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Sizes"</h2>
+                <div class="space-y-3">
+                    <Tabs size={Size::ExtraSmall}>
+                        <Tab active=true>"XS"</Tab>
+                        <Tab>"Tab"</Tab>
+                    </Tabs>
+                    <Tabs size={Size::Small}>
+                        <Tab active=true>"SM"</Tab>
+                        <Tab>"Tab"</Tab>
+                    </Tabs>
+                    <Tabs size={Size::Large}>
+                        <Tab active=true>"LG"</Tab>
+                        <Tab>"Tab"</Tab>
+                    </Tabs>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"With content panel"</h2>
+                <div class="max-w-2xl">
+                    <Tabs variant=TabVariant::Lifted>
+                        <Tab active=true>"Profile"</Tab>
+                        <Tab>"Team"</Tab>
+                        <Tab>"Security"</Tab>
+                    </Tabs>
+                    <TabContent class="bg-base-100 border border-base-300 rounded-box p-4">
+                        <p class="font-medium">"Profile settings"</p>
+                        <p class="text-sm text-base-content/70 mt-1">
+                            "Use `TabContent` to style associated panel blocks with daisyUI classes."
+                        </p>
+                    </TabContent>
+                </div>
             </section>
         </div>
     }

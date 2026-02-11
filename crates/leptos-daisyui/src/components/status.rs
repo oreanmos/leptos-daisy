@@ -1,83 +1,30 @@
-//! Status component — daisyUI `status` for status indicators.
-use crate::utils::class::build_class;
+//! Status component — daisyUI `status`.
+use crate::utils::class::class_signal;
+use crate::variants::color::Color;
+use crate::variants::size::Size;
 use leptos::prelude::*;
 
-/// Status size variants.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum StatusSize {
-    #[default]
-    Default,
-    ExtraSmall,
-    Small,
-    Medium,
-    Large,
-    ExtraLarge,
-}
-
-impl StatusSize {
-    fn cls(&self) -> &'static str {
-        match self {
-            Self::Default => "",
-            Self::ExtraSmall => "status-xs",
-            Self::Small => "status-sm",
-            Self::Medium => "status-md",
-            Self::Large => "status-lg",
-            Self::ExtraLarge => "status-xl",
-        }
-    }
-}
-
-/// Status color/state variants.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum StatusColor {
-    #[default]
-    Default,
-    Primary,
-    Secondary,
-    Accent,
-    Neutral,
-    Info,
-    Success,
-    Warning,
-    Error,
-}
-
-impl StatusColor {
-    fn cls(&self) -> &'static str {
-        match self {
-            Self::Default => "",
-            Self::Primary => "status-primary",
-            Self::Secondary => "status-secondary",
-            Self::Accent => "status-accent",
-            Self::Neutral => "status-neutral",
-            Self::Info => "status-info",
-            Self::Success => "status-success",
-            Self::Warning => "status-warning",
-            Self::Error => "status-error",
-        }
-    }
-}
-
-/// Status indicator component.
 #[component]
 pub fn Status(
-    #[prop(optional)] size: StatusSize,
-    #[prop(optional)] color: StatusColor,
+    #[prop(optional, into)] color: Option<Color>,
+    #[prop(optional, into)] size: Option<Size>,
+    #[prop(optional)] animate: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let mods: Vec<&str> = [size.cls(), color.cls()]
-        .into_iter()
-        .filter(|s| !s.is_empty())
-        .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "status",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls} aria-hidden="true"></div> }
+    let mut m = Vec::new();
+    if let Some(c) = color {
+        let s = c.class("status");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    if let Some(s) = size {
+        m.push(s.class("status"));
+    }
+    if animate {
+        m.push("animate-ping".into());
+    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("status", &refs, class);
+    view! { <div class=cls></div> }
 }

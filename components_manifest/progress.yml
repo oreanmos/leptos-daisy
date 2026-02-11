@@ -10,11 +10,8 @@ base:
 
 parts:
   - name: "progress"
-    description: "The progress container"
+    description: "The native progress element"
     classes: ["progress"]
-  - name: "progress-bar"
-    description: "The progress bar element"
-    classes: ["progress-bar"]
 
 modifiers:
   # Color modifiers
@@ -29,30 +26,24 @@ modifiers:
     - "progress-error"
 
 patterns:
-  - "with-label"
   - "indeterminate"
-  - "custom-width"
-  - "animated"
-  - "striped"
+  - "custom-max"
+  - "reactive-value"
 
 examples:
   - id: "basic"
     description: "Basic progress bar"
   - id: "all-colors"
     description: "Shows all color variants"
-  - id: "with-label"
-    description: "Progress bar with label"
   - id: "custom-max"
     description: "Progress bar with custom maximum value"
   - id: "indeterminate"
     description: "Indeterminate progress bar"
-  - id: "animated"
-    description: "Animated progress bar"
   - id: "interactive"
     description: "Progress bar with dynamic value"
 
 accessibility:
-  semantic_element: "div"
+  semantic_element: "progress"
   aria_attributes:
     - "aria-valuenow"
     - "aria-valuemin"

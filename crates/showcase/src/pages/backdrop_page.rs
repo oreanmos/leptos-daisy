@@ -46,13 +46,13 @@ pub fn BackdropPage() -> impl IntoView {
 
             <section>
                 <h2 class="text-xl font-semibold mb-4">"Modal with Backdrop"</h2>
-                <Modal open=true>
+                <Modal id="backdrop-modal" open=true>
                     <ModalBox>
-                        <ModalTitle>"Modal with Backdrop"</ModalTitle>
+                        <h3 class="font-bold text-lg">"Modal with Backdrop"</h3>
                         <p class="py-4">"This modal has a backdrop that dims the content behind it."</p>
-                        <ModalActions>
+                        <ModalAction>
                             <Button>"Close"</Button>
-                        </ModalActions>
+                        </ModalAction>
                     </ModalBox>
                 </Modal>
             </section>

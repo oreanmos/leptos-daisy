@@ -36,11 +36,11 @@ modifiers:
     - "input-ghost"
 
 patterns:
-  - "with-icon"
-  - "with-label"
-  - "with-validator"
+  - "with-fieldset"
   - "disabled-state"
-  - "loading-state"
+  - "readonly-state"
+  - "required-state"
+  - "reactive-binding"
 
 examples:
   - id: "basic"
@@ -58,9 +58,11 @@ examples:
   - id: "with-icon"
     description: "Input with icon"
   - id: "with-label"
-    description: "Input with label"
+    description: "Input with fieldset label"
+  - id: "styles-and-states"
+    description: "Outline/ghost plus disabled/readonly/required states"
   - id: "interactive"
-    description: "Input with change handler"
+    description: "Input with reactive value binding"
 
 accessibility:
   semantic_element: "input"

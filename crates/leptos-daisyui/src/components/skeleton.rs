@@ -1,47 +1,25 @@
 //! Skeleton component — daisyUI `skeleton`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Skeleton placeholder component — daisyUI `skeleton`.
-///
-/// Used as a content placeholder while loading data.
-///
-/// # Props
-/// - `text`: Enable text animation style (`skeleton-text`)
-/// - `circle`: Make the skeleton circular (for avatar-style placeholders)
-/// - `class`: Additional CSS classes
-/// - `children`: Optional child elements
 #[component]
 pub fn Skeleton(
-    #[prop(optional, into)] text: bool,
-    #[prop(optional, into)] circle: bool,
+    #[prop(optional, into)] width: Option<String>,
+    #[prop(optional, into)] height: Option<String>,
+    #[prop(optional)] circle: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
-    #[prop(optional)] children: Option<Children>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
-
-    if text {
-        m.push("skeleton-text");
-    }
-
+    let mut m: Vec<String> = Vec::new();
     if circle {
-        m.push("rounded-full");
+        m.push("rounded-full".into());
     }
-
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "skeleton",
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-
-    view! {
-        <div class={cls}>
-            {children.map(|c| c())}
-        </div>
+    if let Some(w) = &width {
+        m.push(format!("w-{}", w));
     }
+    if let Some(h) = &height {
+        m.push(format!("h-{}", h));
+    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("skeleton", &refs, class);
+    view! { <div class=cls></div> }
 }

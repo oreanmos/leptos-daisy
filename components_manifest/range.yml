@@ -32,8 +32,10 @@ modifiers:
 
 patterns:
   - "basic"
-  - "with-labels"
+  - "with-label"
   - "disabled-state"
+  - "custom-step"
+  - "reactive-value"
   - "all-colors"
   - "all-sizes"
 
@@ -48,3 +50,5 @@ examples:
     description: "Range with min/max/step values"
   - id: "disabled"
     description: "Disabled range slider"
+  - id: "reactive"
+    description: "Range with reactive value binding"

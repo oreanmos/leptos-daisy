@@ -3,13 +3,21 @@ use leptos_daisyui::prelude::*;
 
 #[component]
 pub fn ProgressPage() -> impl IntoView {
-    view! {
-        <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"Progress"</h1>
+    let (value, set_value) = signal(30.0_f64);
+    let progress_value = Signal::derive(move || value.get());
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Colors"</h2>
-                <div class="flex flex-col gap-2 max-w-md">
+    view! {
+        <div class="space-y-10">
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Progress"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "Determinate and indeterminate progress bars with full color coverage."
+                </p>
+            </header>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Colors"</h2>
+                <div class="flex flex-col gap-3 max-w-md">
                     <Progress value=40.0 />
                     <Progress value=50.0 color={Color::Primary} />
                     <Progress value=60.0 color={Color::Secondary} />
@@ -20,9 +28,41 @@ pub fn ProgressPage() -> impl IntoView {
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Indeterminate"</h2>
-                <Progress color={Color::Primary} class="max-w-md" />
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Custom ranges"</h2>
+                <div class="space-y-3 max-w-md">
+                    <Progress value=7.0 max=10.0 color={Color::Success} />
+                    <Progress value=3.0 max=5.0 color={Color::Warning} />
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Indeterminate"</h2>
+                <div class="space-y-3 max-w-md">
+                    <Progress color={Color::Primary} />
+                    <Progress color={Color::Secondary} class="w-full" />
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Reactive progress"</h2>
+                <div class="space-y-3 max-w-md">
+                    <Progress value=progress_value max=100.0 color={Color::Primary} />
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value=move || value.get().to_string()
+                        class="range range-primary"
+                        on:input=move |ev| {
+                            let next = event_target_value(&ev).parse::<f64>().unwrap_or(0.0);
+                            set_value.set(next);
+                        }
+                    />
+                    <p class="text-sm text-base-content/70">
+                        {move || format!("{:.0}%", value.get())}
+                    </p>
+                </div>
             </section>
         </div>
     }

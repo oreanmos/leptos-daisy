@@ -4,88 +4,77 @@ use leptos_daisyui::prelude::*;
 #[component]
 pub fn MenuPage() -> impl IntoView {
     view! {
-        <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"Menu"</h1>
+        <div class="space-y-10">
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Menu"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "Vertical, horizontal, responsive, and nested menu patterns for sidebars and app navigation."
+                </p>
+            </header>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Vertical Menu (Default)"</h2>
-                <Menu class="bg-base-200 w-56 rounded-box">
-                    <MenuItem><a>"Item 1"</a></MenuItem>
-                    <MenuItem><a>"Item 2"</a></MenuItem>
-                    <MenuItem><a>"Item 3"</a></MenuItem>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Vertical menu"</h2>
+                <Menu class="bg-base-200 w-64 rounded-box">
+                    <MenuTitle>"Workspace"</MenuTitle>
+                    <MenuItem active=true><a>"Dashboard"</a></MenuItem>
+                    <MenuItem><a>"Projects"</a></MenuItem>
+                    <MenuItem><a>"Tasks"</a></MenuItem>
+                    <MenuItem disabled=true><a>"Archived"</a></MenuItem>
                 </Menu>
             </section>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Horizontal Menu"</h2>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Horizontal menu"</h2>
                 <Menu horizontal=true class="bg-base-200 rounded-box">
-                    <MenuItem><a>"Home"</a></MenuItem>
-                    <MenuItem><a>"About"</a></MenuItem>
-                    <MenuItem><a>"Services"</a></MenuItem>
+                    <MenuItem active=true><a>"Overview"</a></MenuItem>
+                    <MenuItem><a>"Reports"</a></MenuItem>
+                    <MenuItem><a>"Team"</a></MenuItem>
+                    <MenuItem><a>"Billing"</a></MenuItem>
+                </Menu>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Responsive menu"</h2>
+                <Menu responsive=true class="bg-base-200 rounded-box">
+                    <MenuItem active=true><a>"Home"</a></MenuItem>
+                    <MenuItem><a>"Features"</a></MenuItem>
+                    <MenuItem><a>"Pricing"</a></MenuItem>
                     <MenuItem><a>"Contact"</a></MenuItem>
                 </Menu>
             </section>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Sizes"</h2>
-                <div class="space-y-4">
-                    <div>
-                        <span class="text-sm text-base-content/70">"Extra Small"</span>
-                        <Menu size={Size::ExtraSmall} class="bg-base-200 w-56 rounded-box">
-                            <MenuItem><a>"Item 1"</a></MenuItem>
-                            <MenuItem><a>"Item 2"</a></MenuItem>
-                        </Menu>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Small"</span>
-                        <Menu size={Size::Small} class="bg-base-200 w-56 rounded-box">
-                            <MenuItem><a>"Item 1"</a></MenuItem>
-                            <MenuItem><a>"Item 2"</a></MenuItem>
-                        </Menu>
-                    </div>
-                    <div>
-                        <span class="text-sm text-base-content/70">"Large"</span>
-                        <Menu size={Size::Large} class="bg-base-200 w-56 rounded-box">
-                            <MenuItem><a>"Item 1"</a></MenuItem>
-                            <MenuItem><a>"Item 2"</a></MenuItem>
-                        </Menu>
-                    </div>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Sizes"</h2>
+                <div class="grid gap-4 md:grid-cols-3">
+                    <Menu size={Size::ExtraSmall} class="bg-base-200 rounded-box">
+                        <MenuItem><a>"XS Item"</a></MenuItem>
+                        <MenuItem><a>"Another"</a></MenuItem>
+                    </Menu>
+                    <Menu size={Size::Small} class="bg-base-200 rounded-box">
+                        <MenuItem><a>"SM Item"</a></MenuItem>
+                        <MenuItem><a>"Another"</a></MenuItem>
+                    </Menu>
+                    <Menu size={Size::Large} class="bg-base-200 rounded-box">
+                        <MenuItem><a>"LG Item"</a></MenuItem>
+                        <MenuItem><a>"Another"</a></MenuItem>
+                    </Menu>
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"With Titles"</h2>
-                <Menu class="bg-base-200 w-56 rounded-box">
-                    <MenuTitle>"Main"</MenuTitle>
-                    <MenuItem><a>"Dashboard"</a></MenuItem>
-                    <MenuItem><a>"Profile"</a></MenuItem>
-                    <MenuTitle>"Settings"</MenuTitle>
-                    <MenuItem><a>"General"</a></MenuItem>
-                    <MenuItem><a>"Security"</a></MenuItem>
-                </Menu>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"Active and Disabled Items"</h2>
-                <Menu class="bg-base-200 w-56 rounded-box">
-                    <MenuItem active=true><a>"Active Item"</a></MenuItem>
-                    <MenuItem><a>"Normal Item"</a></MenuItem>
-                    <MenuItem disabled=true><a>"Disabled Item"</a></MenuItem>
-                </Menu>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-semibold mb-4">"With Dropdowns"</h2>
-                <Menu class="bg-base-200 w-56 rounded-box">
-                    <MenuItem><a>"Parent"</a></MenuItem>
-                    <MenuDropdown trigger=Box::new(|| view! { <a>"Level 1"</a> }.into_any())>
-                        <MenuItem><a>"Level 2"</a></MenuItem>
-                        <MenuDropdown trigger=Box::new(|| view! { <a>"Level 2"</a> }.into_any())>
-                            <MenuItem><a>"Level 3"</a></MenuItem>
-                            <MenuItem><a>"Level 3"</a></MenuItem>
-                        </MenuDropdown>
-                    </MenuDropdown>
-                    <MenuItem><a>"Parent"</a></MenuItem>
+            <section class="space-y-4">
+                <h2 class="text-xl font-semibold">"Nested submenu"</h2>
+                <Menu class="bg-base-200 w-72 rounded-box">
+                    <MenuTitle>"Navigation"</MenuTitle>
+                    <MenuItem><a>"Home"</a></MenuItem>
+                    <SubMenu title="Products">
+                        <MenuItem><a>"Analytics"</a></MenuItem>
+                        <MenuItem><a>"Engagement"</a></MenuItem>
+                        <SubMenu title="Developer">
+                            <MenuItem><a>"API"</a></MenuItem>
+                            <MenuItem><a>"SDK"</a></MenuItem>
+                        </SubMenu>
+                    </SubMenu>
+                    <MenuItem><a>"Support"</a></MenuItem>
                 </Menu>
             </section>
         </div>

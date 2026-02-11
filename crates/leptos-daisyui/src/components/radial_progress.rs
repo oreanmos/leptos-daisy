@@ -1,40 +1,33 @@
-//! RadialProgress component — daisyUI `radial-progress` with CSS variables.
-use crate::utils::class::build_class;
+//! RadialProgress component — daisyUI `radial-progress`.
+use crate::utils::class::class_signal;
+use crate::variants::color::Color;
+use crate::variants::size::Size;
 use leptos::prelude::*;
 
-/// Radial progress component (circular progress indicator).
-/// Uses CSS `--value`, `--size`, and `--thickness` variables.
 #[component]
 pub fn RadialProgress(
-    /// Progress value (0-100)
-    #[prop(into)]
-    value: u8,
-    /// CSS size value (e.g., "12rem", "100px")
-    #[prop(optional, into)]
-    size: Option<String>,
-    /// CSS thickness value (e.g., "4px", "0.5rem")
-    #[prop(optional, into)]
-    thickness: Option<String>,
+    #[prop(into)] value: f64,
+    #[prop(optional, into)] color: Option<Color>,
+    #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional)] children: Option<Children>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "radial-progress",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-
-    let mut style = format!("--value:{};", value);
+    let mut m = Vec::new();
+    if let Some(c) = color {
+        let s = c.class("text");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
     if let Some(s) = size {
-        style.push_str(&format!("--size:{};", s));
+        m.push(s.class("radial-progress"));
     }
-    if let Some(t) = thickness {
-        style.push_str(&format!("--thickness:{};", t));
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("radial-progress", &refs, class);
+    let style = format!("--value:{};", value);
+    view! {
+        <div class=cls style=style role="progressbar" aria-valuenow=value>
+            {children.map(|c| c())}
+        </div>
     }
-
-    view! { <div class={cls} style={style} role="progressbar">{value}"%"</div> }
 }

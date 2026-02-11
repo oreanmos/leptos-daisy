@@ -173,13 +173,13 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
 
 /// Sets `data-theme` on the `<html>` element so daisyUI themes work globally.
 fn set_html_theme(theme: &str) {
-    #[cfg(feature = "csr")]
+    #[cfg(any(feature = "csr", feature = "hydrate"))]
     {
         if let Some(doc) = leptos::prelude::document().document_element() {
             let _ = doc.set_attribute("data-theme", theme);
         }
     }
-    #[cfg(not(feature = "csr"))]
+    #[cfg(not(any(feature = "csr", feature = "hydrate")))]
     {
         let _ = theme;
     }
@@ -187,7 +187,7 @@ fn set_html_theme(theme: &str) {
 
 /// Read current theme from localStorage, or default to "light".
 fn load_saved_theme() -> String {
-    #[cfg(feature = "csr")]
+    #[cfg(any(feature = "csr", feature = "hydrate"))]
     {
         leptos::prelude::window()
             .local_storage()
@@ -196,7 +196,7 @@ fn load_saved_theme() -> String {
             .and_then(|s| s.get_item("daisy-theme").ok().flatten())
             .unwrap_or_else(|| "light".to_string())
     }
-    #[cfg(not(feature = "csr"))]
+    #[cfg(not(any(feature = "csr", feature = "hydrate")))]
     {
         "light".to_string()
     }
@@ -204,13 +204,13 @@ fn load_saved_theme() -> String {
 
 /// Save theme to localStorage.
 fn save_theme(theme: &str) {
-    #[cfg(feature = "csr")]
+    #[cfg(any(feature = "csr", feature = "hydrate"))]
     {
         if let Ok(Some(storage)) = leptos::prelude::window().local_storage() {
             let _ = storage.set_item("daisy-theme", theme);
         }
     }
-    #[cfg(not(feature = "csr"))]
+    #[cfg(not(any(feature = "csr", feature = "hydrate")))]
     {
         let _ = theme;
     }
@@ -221,10 +221,13 @@ fn save_theme(theme: &str) {
 fn NavItemWithActiveState(href: String, children: Children) -> impl IntoView {
     let location = use_location();
     let href_clone = href.clone();
-    let is_active = move || location.pathname.get() == href_clone;
+
+    // Keep active route status reactive to client-side navigation changes.
+    let is_active =
+        Signal::derive(move || location.pathname.with(|pathname| pathname == &href_clone));
 
     view! {
-        <SidebarLayoutNavItem href={href} active=is_active()>
+        <SidebarLayoutNavItem href={href} active=is_active>
             {children()}
         </SidebarLayoutNavItem>
     }

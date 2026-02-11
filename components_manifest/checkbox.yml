@@ -40,8 +40,7 @@ patterns:
   - "with-label"
   - "checkbox-group"
   - "disabled-state"
-  - "indeterminate-state"
-  - "custom-colors"
+  - "reactive-state"
 
 examples:
   - id: "basic"
@@ -57,9 +56,7 @@ examples:
   - id: "disabled"
     description: "Disabled checkbox"
   - id: "interactive"
-    description: "Checkbox with change handler"
-  - id: "indeterminate"
-    description: "Indeterminate state checkbox"
+    description: "Checkbox with reactive checked state"
 
 accessibility:
   semantic_element: "input[type=checkbox]"

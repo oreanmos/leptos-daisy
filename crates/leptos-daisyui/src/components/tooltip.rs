@@ -1,20 +1,8 @@
 //! Tooltip component — daisyUI `tooltip`.
-//!
-//! A hover tooltip that displays additional information when hovering over an element.
-//!
-//! # Props
-//! - `text`: The tooltip content text
-//! - `position`: Tooltip position (Top, Bottom, Left, Right)
-//! - `color`: Optional color variant for the tooltip
-//! - `open`: If true, tooltip is always visible
-//! - `class`: Additional CSS classes
-//! - `children`: The element that triggers the tooltip on hover
-
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use leptos::prelude::*;
 
-/// Tooltip position variants.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum TooltipPosition {
     #[default]
@@ -23,7 +11,6 @@ pub enum TooltipPosition {
     Left,
     Right,
 }
-
 impl TooltipPosition {
     fn cls(&self) -> &'static str {
         match self {
@@ -35,46 +22,27 @@ impl TooltipPosition {
     }
 }
 
-/// A daisyUI tooltip component.
-///
-/// Wraps children with a tooltip container that displays text on hover.
 #[component]
 pub fn Tooltip(
     children: Children,
-    #[prop(into)] text: String,
+    #[prop(into)] tip: String,
     #[prop(optional)] position: TooltipPosition,
-    #[prop(optional)] color: Option<Color>,
+    #[prop(optional, into)] color: Option<Color>,
     #[prop(optional)] open: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = vec![position.cls()];
-
+    let mut m = Vec::new();
+    m.push(position.cls().to_string());
+    if let Some(c) = color {
+        let s = c.class("tooltip");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
     if open {
-        m.push("tooltip-open");
+        m.push("tooltip-open".into());
     }
-
-    // Add color class if specified
-    let color_class = color.map(|c| c.class("tooltip"));
-    if let Some(ref cc) = color_class
-        && !cc.is_empty()
-    {
-        m.push(cc.as_str());
-    }
-
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "tooltip",
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-
-    view! {
-        <div class={cls} data-tip={text}>
-            {children()}
-        </div>
-    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("tooltip", &refs, class);
+    view! { <div class=cls data-tip=tip>{children()}</div> }
 }

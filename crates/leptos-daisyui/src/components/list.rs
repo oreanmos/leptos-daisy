@@ -1,8 +1,7 @@
-//! List component — daisyUI `list` + `list-row`.
-use crate::utils::class::build_class;
+//! List component — daisyUI `list`.
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// List container component.
 #[component]
 pub fn List(
     children: Children,
@@ -13,39 +12,19 @@ pub fn List(
     if row {
         mods.push("list-row");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "list",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <ul class={cls}>{children()}</ul> }
+    let cls = class_signal("list", &mods, class);
+    view! { <ul class=cls>{children()}</ul> }
 }
 
-/// List item component.
 #[component]
 pub fn ListItem(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <li class={cls}>{children()}</li> }
+    let cls = class_signal("", &[], class);
+    view! { <li class=cls>{children()}</li> }
 }
 
-/// List column that grows to fill space.
 #[component]
 pub fn ListCol(
     children: Children,
@@ -56,15 +35,6 @@ pub fn ListCol(
     if grow {
         mods.push("list-col-grow");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "list-col",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("list-col", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }

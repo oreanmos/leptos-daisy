@@ -171,7 +171,7 @@ pub fn PlaygroundPage() -> impl IntoView {
         lines.join("\n")
     };
 
-    let (code_copied, set_code_copied) = signal(false);
+    let (code_copied, _set_code_copied) = signal(false);
 
     let preview_themes = [
         "",
@@ -460,12 +460,12 @@ pub fn PlaygroundPage() -> impl IntoView {
                     <button
                         class="btn btn-sm btn-ghost"
                         on:click=move |_| {
-                            #[cfg(feature = "csr")]
+                            #[cfg(any(feature = "csr", feature = "hydrate"))]
                             {
                                 let text = generated_code();
                                 let _ = leptos::prelude::window().navigator().clipboard().write_text(&text);
-                                set_code_copied.set(true);
-                                set_timeout(move || set_code_copied.set(false), std::time::Duration::from_secs(2));
+                                _set_code_copied.set(true);
+                                set_timeout(move || _set_code_copied.set(false), std::time::Duration::from_secs(2));
                             }
                         }
                     >

@@ -36,11 +36,10 @@ modifiers:
     - "select-ghost"
 
 patterns:
-  - "with-icon"
-  - "with-label"
-  - "with-validator"
+  - "with-select-option"
+  - "with-fieldset"
   - "disabled-state"
-  - "multiple-select"
+  - "reactive-selection"
 
 examples:
   - id: "basic"
@@ -52,15 +51,15 @@ examples:
   - id: "bordered-vs-ghost"
     description: "Compares bordered and ghost styles"
   - id: "with-options"
-    description: "Select with multiple options"
+    description: "Select with SelectOption children"
   - id: "disabled"
     description: "Disabled select field"
-  - id: "with-icon"
-    description: "Select with icon"
+  - id: "styles-and-states"
+    description: "Outline/ghost plus disabled states"
   - id: "with-label"
-    description: "Select with label"
+    description: "Select with fieldset label"
   - id: "interactive"
-    description: "Select with change handler"
+    description: "Select with reactive value binding"
 
 accessibility:
   semantic_element: "select"

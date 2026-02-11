@@ -7,17 +7,20 @@ pub use crate::variants::state::State;
 pub use crate::variants::variant::Variant;
 
 // Class utilities
-pub use crate::utils::class::{merge_classes, merge_with_base};
+pub use crate::utils::class::{class_signal, merge_classes, merge_with_base};
 pub use crate::utils::config::DaisyConfig;
 
-// Components (selective re-exports to avoid ambiguity)
-pub use crate::components::alert::{Alert, AlertDirection, AlertStyle, AlertVariant};
+// Components
+pub use crate::components::alert::{
+    Alert, AlertActions, AlertContent, AlertDirection, AlertIcon, AlertStyle, AlertTitle,
+    AlertVariant,
+};
 pub use crate::components::artboard::{Artboard, ArtboardSize};
 pub use crate::components::avatar::{
     Avatar, AvatarGroup, AvatarImage, AvatarPlaceholder, AvatarPlaceholderContent, AvatarShape,
     AvatarSize, AvatarStatus,
 };
-pub use crate::components::backdrop::{Backdrop, DrawerBackdrop};
+pub use crate::components::backdrop::Backdrop;
 pub use crate::components::badge::Badge;
 pub use crate::components::breadcrumbs::{BreadcrumbItem, Breadcrumbs};
 pub use crate::components::button::Button;
@@ -30,7 +33,8 @@ pub use crate::components::chat::{
 };
 pub use crate::components::checkbox::Checkbox;
 pub use crate::components::collapse::{
-    Accordion, Collapse, CollapseContent, CollapseTitle, CollapseTrigger,
+    Accordion, Collapse, CollapseContent, CollapseIcon, CollapseState, CollapseTitle,
+    CollapseTrigger,
 };
 pub use crate::components::countdown::{Countdown, CountdownTimer};
 pub use crate::components::diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
@@ -38,7 +42,8 @@ pub use crate::components::divider::{Divider, DividerColor, DividerOrientation};
 pub use crate::components::dock::{Dock, DockItem, DockItemComponent};
 pub use crate::components::drawer::{Drawer, DrawerContent, DrawerOverlay, DrawerSide};
 pub use crate::components::dropdown::{
-    Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownTrigger,
+    Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
+    DropdownTrigger,
 };
 pub use crate::components::fieldset::Fieldset;
 pub use crate::components::file_input::FileInput;
@@ -64,13 +69,13 @@ pub use crate::components::link::Link;
 pub use crate::components::list::{List, ListCol, ListItem};
 pub use crate::components::loading::{Loading, LoadingVariant};
 pub use crate::components::mask::{Mask, MaskShape};
-pub use crate::components::menu::{Menu, MenuDropdown, MenuItem, MenuTitle};
+pub use crate::components::menu::{Menu, MenuItem, MenuTitle, SubMenu};
 pub use crate::components::mockup_browser::MockupBrowser;
-pub use crate::components::mockup_code::{CodeLine, MockupCode, MockupCodeRaw};
+pub use crate::components::mockup_code::{MockupCode, MockupCodeLine};
 pub use crate::components::mockup_phone::MockupPhone;
 pub use crate::components::mockup_window::MockupWindow;
 pub use crate::components::modal::{
-    Modal, ModalActions, ModalBackdrop, ModalBox, ModalCloseButton, ModalTitle,
+    Modal, ModalAction, ModalBackdrop, ModalBox, ModalPosition, ModalState,
 };
 pub use crate::components::navbar::{Navbar, NavbarCenter, NavbarEnd, NavbarStart};
 pub use crate::components::pagination::{Pagination, PaginationItem};
@@ -78,8 +83,8 @@ pub use crate::components::progress::Progress;
 pub use crate::components::radial_progress::RadialProgress;
 pub use crate::components::radio::Radio;
 pub use crate::components::range::Range;
-pub use crate::components::rating::Rating;
-pub use crate::components::select::Select;
+pub use crate::components::rating::{Rating, RatingHalf, RatingItem, RatingMask};
+pub use crate::components::select::{Select, SelectOption};
 pub use crate::components::sidebar_layout::{
     SidebarLayout, SidebarLayoutContent, SidebarLayoutFooter, SidebarLayoutHeader,
     SidebarLayoutMain, SidebarLayoutMobileMenuButton, SidebarLayoutNav, SidebarLayoutNavItem,
@@ -92,19 +97,16 @@ pub use crate::components::stack::Stack;
 pub use crate::components::stat::{
     Stat, StatActions, StatDesc, StatFigure, StatTitle, StatValue, Stats,
 };
-pub use crate::components::status::{Status, StatusColor, StatusSize};
-pub use crate::components::steps::{Orientation, Step, StepData, Steps};
-pub use crate::components::swap::{Swap, SwapCheckbox, SwapEffect};
-pub use crate::components::tab::{Tab, TabPanel, TabPosition, TabRadio, TabVariant, Tabs};
-pub use crate::components::table::{
-    Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, TableSize,
-};
+pub use crate::components::status::Status;
+pub use crate::components::steps::{Step, Steps};
+pub use crate::components::swap::{Swap, SwapAnimation};
+pub use crate::components::tab::{Tab, TabContent, TabVariant, Tabs};
+pub use crate::components::table::Table;
 pub use crate::components::textarea::Textarea;
 pub use crate::components::timeline::{
-    Timeline, TimelineBox, TimelineEnd, TimelineItem, TimelineMiddle, TimelineOrientation,
-    TimelineStart,
+    Timeline, TimelineEnd, TimelineItem, TimelineMiddle, TimelineStart,
 };
-pub use crate::components::toast::{HorizontalPosition, Toast, VerticalPosition};
+pub use crate::components::toast::{Toast, ToastHorizontal, ToastVertical};
 pub use crate::components::toggle::Toggle;
 pub use crate::components::tooltip::{Tooltip, TooltipPosition};
-pub use crate::components::validator::{Validator, ValidatorState};
+pub use crate::components::validator::{Validator, ValidatorLabel};

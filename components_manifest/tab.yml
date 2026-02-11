@@ -22,9 +22,9 @@ modifiers:
     - "tabs-xl"
   
   variant:
-    - "tabs-lift"
-    - "tabs-box"
-    - "tabs-border"
+    - "tabs-lifted"
+    - "tabs-boxed"
+    - "tabs-bordered"
   
   position:
     - "tabs-bottom"
@@ -38,9 +38,9 @@ patterns:
   - "lifted-tabs"
   - "boxed-tabs"
   - "bordered-tabs"
+  - "sized-tabs"
   - "tabs-with-content"
-  - "radio-tabs"
-  - "bottom-tabs"
+  - "disabled-tab"
 
 examples:
   - id: "basic-tabs"
@@ -53,8 +53,10 @@ examples:
     description: "Bordered style tabs"
   - id: "tabs-with-content"
     description: "Tabs with content panels"
-  - id: "radio-tabs"
-    description: "Radio-based tabs for state management"
+  - id: "sized-tabs"
+    description: "Tabs with xs/sm/lg size modifiers"
+  - id: "disabled-tab"
+    description: "Tabs including a disabled state"
 
 accessibility:
   - "Use role='tablist' for the container"

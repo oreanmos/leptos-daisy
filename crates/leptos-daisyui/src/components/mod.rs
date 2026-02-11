@@ -63,13 +63,17 @@ pub mod toggle;
 pub mod tooltip;
 pub mod validator;
 
-pub use alert::{Alert, AlertDirection, AlertStyle, AlertVariant};
+// Re-exports
+pub use alert::{
+    Alert, AlertActions, AlertContent, AlertDirection, AlertIcon, AlertStyle, AlertTitle,
+    AlertVariant,
+};
 pub use artboard::{Artboard, ArtboardSize};
 pub use avatar::{
     Avatar, AvatarGroup, AvatarImage, AvatarPlaceholder, AvatarPlaceholderContent, AvatarShape,
     AvatarSize, AvatarStatus,
 };
-pub use backdrop::{Backdrop, DrawerBackdrop};
+pub use backdrop::Backdrop;
 pub use badge::Badge;
 pub use breadcrumbs::{BreadcrumbItem, Breadcrumbs};
 pub use button::Button;
@@ -79,14 +83,18 @@ pub use chat::{
     Chat, ChatBubble, ChatBubbleColor, ChatFooter, ChatHeader, ChatImage, ChatPosition,
 };
 pub use checkbox::Checkbox;
-pub use collapse::{Accordion, Collapse, CollapseContent, CollapseTitle, CollapseTrigger};
+pub use collapse::{
+    Accordion, Collapse, CollapseContent, CollapseIcon, CollapseState, CollapseTitle,
+    CollapseTrigger,
+};
 pub use countdown::{Countdown, CountdownTimer};
 pub use diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
 pub use divider::{Divider, DividerColor, DividerOrientation};
 pub use dock::{Dock, DockItem, DockItemComponent};
 pub use drawer::{Drawer, DrawerContent, DrawerOverlay, DrawerSide};
 pub use dropdown::{
-    Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownTrigger,
+    Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
+    DropdownTrigger,
 };
 pub use fieldset::Fieldset;
 pub use file_input::FileInput;
@@ -110,20 +118,20 @@ pub use link::Link;
 pub use list::{List, ListCol, ListItem};
 pub use loading::{Loading, LoadingVariant};
 pub use mask::{Mask, MaskShape};
-pub use menu::{Menu, MenuDropdown, MenuItem, MenuTitle};
+pub use menu::{Menu, MenuItem, MenuTitle, SubMenu};
 pub use mockup_browser::MockupBrowser;
-pub use mockup_code::{CodeLine, MockupCode, MockupCodeRaw};
+pub use mockup_code::{MockupCode, MockupCodeLine};
 pub use mockup_phone::MockupPhone;
 pub use mockup_window::MockupWindow;
-pub use modal::{Modal, ModalActions, ModalBackdrop, ModalBox, ModalCloseButton, ModalTitle};
+pub use modal::{Modal, ModalAction, ModalBackdrop, ModalBox, ModalPosition, ModalState};
 pub use navbar::{Navbar, NavbarCenter, NavbarEnd, NavbarStart};
 pub use pagination::{Pagination, PaginationItem};
 pub use progress::Progress;
 pub use radial_progress::RadialProgress;
 pub use radio::Radio;
 pub use range::Range;
-pub use rating::Rating;
-pub use select::Select;
+pub use rating::{Rating, RatingHalf, RatingItem, RatingMask};
+pub use select::{Select, SelectOption};
 pub use sidebar_layout::{
     SidebarLayout, SidebarLayoutContent, SidebarLayoutFooter, SidebarLayoutHeader,
     SidebarLayoutMain, SidebarLayoutMobileMenuButton, SidebarLayoutNav, SidebarLayoutNavItem,
@@ -134,19 +142,14 @@ pub use sidebar_layout::{
 pub use skeleton::Skeleton;
 pub use stack::Stack;
 pub use stat::{Stat, StatActions, StatDesc, StatFigure, StatTitle, StatValue, Stats};
-pub use status::{Status, StatusColor, StatusSize};
-pub use steps::{Orientation, Step, StepData, Steps};
-pub use swap::{Swap, SwapCheckbox, SwapEffect};
-pub use tab::{Tab, TabPanel, TabPosition, TabRadio, TabVariant, Tabs};
-pub use table::{
-    Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow, TableSize,
-};
+pub use status::Status;
+pub use steps::{Step, Steps};
+pub use swap::{Swap, SwapAnimation};
+pub use tab::{Tab, TabContent, TabVariant, Tabs};
+pub use table::Table;
 pub use textarea::Textarea;
-pub use timeline::{
-    Timeline, TimelineBox, TimelineEnd, TimelineItem, TimelineMiddle, TimelineOrientation,
-    TimelineStart,
-};
-pub use toast::{HorizontalPosition, Toast, VerticalPosition};
+pub use timeline::{Timeline, TimelineEnd, TimelineItem, TimelineMiddle, TimelineStart};
+pub use toast::{Toast, ToastHorizontal, ToastVertical};
 pub use toggle::Toggle;
 pub use tooltip::{Tooltip, TooltipPosition};
-pub use validator::{Validator, ValidatorState};
+pub use validator::{Validator, ValidatorLabel};

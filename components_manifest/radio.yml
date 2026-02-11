@@ -40,8 +40,8 @@ patterns:
   - "with-label"
   - "radio-group"
   - "disabled-state"
-  - "custom-colors"
-  - "horizontal-layout"
+  - "fieldset-group"
+  - "reactive-selection"
 
 examples:
   - id: "basic"
@@ -57,9 +57,7 @@ examples:
   - id: "disabled"
     description: "Disabled radio button"
   - id: "interactive"
-    description: "Radio button with change handler"
-  - id: "horizontal-group"
-    description: "Radio group with horizontal layout"
+    description: "Radio group with reactive selected value"
 
 accessibility:
   semantic_element: "input[type=radio]"

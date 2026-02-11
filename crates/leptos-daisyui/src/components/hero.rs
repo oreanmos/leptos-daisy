@@ -1,20 +1,7 @@
 //! Hero component — daisyUI `hero`.
-//!
-//! A hero banner section with background image support and overlay.
-
-use crate::utils::class::build_class;
+use crate::utils::class::{build_class, class_signal};
 use leptos::prelude::*;
 
-/// A daisyUI hero component.
-///
-/// Creates a full-width hero section, typically used at the top of a page.
-///
-/// # Props
-/// - `overlay`: Add an overlay to the hero background
-/// - `center`: Center the content both horizontally and vertically
-/// - `min_height`: Custom minimum height CSS value (e.g., "500px", "50vh")
-/// - `class`: Additional CSS classes
-/// - `children`: Hero content
 #[component]
 pub fn Hero(
     children: Children,
@@ -30,36 +17,20 @@ pub fn Hero(
     if center {
         m.push("place-items-center");
     }
-
-    // Default min-height
-    let base = "hero min-h-screen";
-    let base_with_height = if let Some(height) = min_height {
+    let base = if let Some(height) = min_height {
         format!("hero min-h-[{}]", height)
     } else {
-        base.to_string()
+        "hero min-h-screen".to_string()
     };
-
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        &base_with_height,
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-
-    view! {
-        <div class={cls}>
-            {children()}
-        </div>
-    }
+    let refs = m;
+    let static_cls = build_class(&base, &refs, None);
+    let cls = move || match class.get() {
+        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
+        _ => static_cls.clone(),
+    };
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// The content container within a hero.
-///
-/// Centers content and provides text alignment.
 #[component]
 pub fn HeroContent(
     children: Children,
@@ -70,20 +41,6 @@ pub fn HeroContent(
     if center {
         m.push("text-center");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "hero-content",
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-
-    view! {
-        <div class={cls}>
-            {children()}
-        </div>
-    }
+    let cls = class_signal("hero-content", &m, class);
+    view! { <div class=cls>{children()}</div> }
 }

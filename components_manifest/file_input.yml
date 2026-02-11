@@ -37,8 +37,11 @@ modifiers:
 
 patterns:
   - "basic"
-  - "with-label"
+  - "with-fieldset"
   - "disabled-state"
+  - "with-accept"
+  - "with-multiple"
+  - "reactive-change"
   - "all-colors"
   - "all-sizes"
 
@@ -55,3 +58,5 @@ examples:
     description: "Ghost style file input"
   - id: "disabled"
     description: "Disabled file input"
+  - id: "form-attributes"
+    description: "File input with name/accept/multiple/required attributes"

@@ -1,16 +1,25 @@
 //! Textarea component — daisyUI `textarea`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use crate::variants::variant::Variant;
 use leptos::prelude::*;
 
 #[component]
 pub fn Textarea(
-    #[prop(optional, into)] placeholder: Option<String>,
+    #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
-    #[prop(optional)] disabled: bool,
-    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] variant: Option<Variant>,
+    #[prop(optional, into)] id: MaybeProp<String>,
+    #[prop(optional, into)] name: MaybeProp<String>,
+    #[prop(optional, into)] placeholder: MaybeProp<String>,
+    #[prop(optional, into)] value: MaybeProp<String>,
+    #[prop(optional, into)] rows: MaybeProp<u32>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
+    #[prop(optional, into)] readonly: MaybeProp<bool>,
+    #[prop(optional, into)] required: MaybeProp<bool>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -22,16 +31,26 @@ pub fn Textarea(
     if let Some(s) = size {
         m.push(s.class("textarea"));
     }
-    let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "textarea",
-        &r,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <textarea class={cls} placeholder={placeholder} disabled={disabled}></textarea> }
+    if let Some(v) = variant {
+        let s = v.class("textarea");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("textarea", &refs, class);
+    view! {
+        <textarea
+            id=move || id.get()
+            name=move || name.get()
+            class=cls
+            placeholder=move || placeholder.get()
+            prop:value=move || value.get().unwrap_or_default()
+            rows=move || rows.get().map(|v| v.to_string())
+            aria-label=move || aria_label.get()
+            disabled=move || disabled.get().unwrap_or(false)
+            readonly=move || readonly.get().unwrap_or(false)
+            required=move || required.get().unwrap_or(false)
+        ></textarea>
+    }
 }

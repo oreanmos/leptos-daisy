@@ -1,8 +1,7 @@
 //! Avatar component — daisyUI `avatar` + states + groups.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Avatar status indicator position/state.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AvatarStatus {
     #[default]
@@ -10,7 +9,6 @@ pub enum AvatarStatus {
     Online,
     Offline,
 }
-
 impl AvatarStatus {
     fn cls(&self) -> &'static str {
         match self {
@@ -21,7 +19,6 @@ impl AvatarStatus {
     }
 }
 
-/// Avatar placeholder style.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AvatarPlaceholder {
     #[default]
@@ -35,7 +32,6 @@ pub enum AvatarPlaceholder {
     Warning,
     Error,
 }
-
 impl AvatarPlaceholder {
     fn cls(&self) -> &'static str {
         match self {
@@ -52,7 +48,6 @@ impl AvatarPlaceholder {
     }
 }
 
-/// Avatar shape/size variants.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AvatarShape {
     #[default]
@@ -60,7 +55,6 @@ pub enum AvatarShape {
     Circle,
     Rounded,
 }
-
 impl AvatarShape {
     fn cls(&self) -> &'static str {
         match self {
@@ -71,7 +65,6 @@ impl AvatarShape {
     }
 }
 
-/// Avatar size variants.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AvatarSize {
     #[default]
@@ -82,7 +75,6 @@ pub enum AvatarSize {
     Large,
     ExtraLarge,
 }
-
 impl AvatarSize {
     fn cls(&self) -> &'static str {
         match self {
@@ -114,20 +106,10 @@ pub fn Avatar(
     if online {
         mods.push("avatar-online");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "avatar",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("avatar", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Avatar image wrapper.
 #[component]
 pub fn AvatarImage(
     #[prop(into)] src: String,
@@ -135,40 +117,23 @@ pub fn AvatarImage(
     #[prop(optional)] shape: AvatarShape,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let shape_cls = shape.cls();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "",
-        &[shape_cls],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <img src={src} alt={alt} class={cls} /> }
+    let mods: Vec<&str> = [shape.cls()]
+        .into_iter()
+        .filter(|s| !s.is_empty())
+        .collect();
+    let cls = class_signal("", &mods, class);
+    view! { <img src=src alt=alt class=cls /> }
 }
 
-/// Avatar placeholder content (initials or icon).
 #[component]
 pub fn AvatarPlaceholderContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Avatar group container.
 #[component]
 pub fn AvatarGroup(
     children: Children,
@@ -179,15 +144,6 @@ pub fn AvatarGroup(
     if vertical {
         mods.push("avatar-group-vertical");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }

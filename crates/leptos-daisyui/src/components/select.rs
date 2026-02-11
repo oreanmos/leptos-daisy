@@ -1,16 +1,22 @@
 //! Select component — daisyUI `select`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use crate::variants::variant::Variant;
 use leptos::prelude::*;
 
 #[component]
 pub fn Select(
-    children: Children,
+    #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
-    #[prop(optional)] disabled: bool,
-    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] variant: Option<Variant>,
+    #[prop(optional, into)] id: MaybeProp<String>,
+    #[prop(optional, into)] name: MaybeProp<String>,
+    #[prop(optional, into)] value: MaybeProp<String>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
+    children: Children,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -22,16 +28,42 @@ pub fn Select(
     if let Some(s) = size {
         m.push(s.class("select"));
     }
-    let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "select",
-        &r,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <select class={cls} disabled={disabled}>{children()}</select> }
+    if let Some(v) = variant {
+        let s = v.class("select");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("select", &refs, class);
+    view! {
+        <select
+            id=move || id.get()
+            name=move || name.get()
+            class=cls
+            prop:value=move || value.get().unwrap_or_default()
+            aria-label=move || aria_label.get()
+            disabled=move || disabled.get().unwrap_or(false)
+        >
+            {children()}
+        </select>
+    }
+}
+
+#[component]
+pub fn SelectOption(
+    children: Children,
+    #[prop(optional, into)] value: MaybeProp<String>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
+    #[prop(optional, into)] selected: MaybeProp<bool>,
+) -> impl IntoView {
+    view! {
+        <option
+            value=move || value.get()
+            disabled=move || disabled.get().unwrap_or(false)
+            selected=move || selected.get().unwrap_or(false)
+        >
+            {children()}
+        </option>
+    }
 }

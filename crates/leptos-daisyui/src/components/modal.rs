@@ -1,29 +1,74 @@
 //! Modal component — daisyUI `modal`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ModalPosition {
+    #[default]
+    Center,
+    Top,
+    Bottom,
+}
+impl ModalPosition {
+    fn cls(&self) -> &'static str {
+        match self {
+            Self::Center => "",
+            Self::Top => "modal-top",
+            Self::Bottom => "modal-bottom",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ModalState {
+    #[default]
+    Auto,
+    Open,
+    Close,
+}
+impl ModalState {
+    fn cls(&self) -> &'static str {
+        match self {
+            Self::Auto => "",
+            Self::Open => "modal-open",
+            Self::Close => "modal-close",
+        }
+    }
+}
 
 #[component]
 pub fn Modal(
-    children: Children,
-    #[prop(optional)] open: bool,
-    #[prop(optional)] bottom: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] id: MaybeProp<String>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+    #[prop(optional, into)] open: MaybeProp<bool>,
+    #[prop(optional)] position: ModalPosition,
+    #[prop(optional)] state: ModalState,
+    children: Children,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
-    if bottom {
-        m.push("modal-bottom");
+    let pc = position.cls();
+    if !pc.is_empty() {
+        m.push(pc);
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "modal",
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <dialog class={cls} open={open}>{children()}</dialog> }
+    let state_cls = state.cls();
+    if !state_cls.is_empty() {
+        m.push(state_cls);
+    } else if open.get().unwrap_or(false) {
+        m.push("modal-open");
+    }
+    let cls = class_signal("modal", &m, class);
+    view! {
+        <dialog
+            id=move || id.get()
+            class=cls
+            open=move || open.get().unwrap_or(false)
+            aria-label=move || aria_label.get()
+            aria-modal="true"
+        >
+            {children()}
+        </dialog>
+    }
 }
 
 #[component]
@@ -31,81 +76,29 @@ pub fn ModalBox(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "modal-box",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("modal-box", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
 #[component]
-pub fn ModalActions(
+pub fn ModalAction(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "modal-action",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("modal-action", &[], class);
+    view! { <div class=cls>{children()}</div> }
 }
 
 #[component]
-pub fn ModalTitle(
-    children: Children,
+pub fn ModalBackdrop(
+    #[prop(optional, into)] modal_id: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "text-lg font-bold",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <h3 class={cls}>{children()}</h3> }
-}
-
-#[component]
-pub fn ModalCloseButton(#[prop(optional, into)] class: MaybeProp<String>) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "btn btn-sm btn-circle btn-ghost absolute right-2 top-2",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <button class={cls} type="button" aria-label="Close">"✕"</button> }
-}
-
-#[component]
-pub fn ModalBackdrop(#[prop(optional, into)] class: MaybeProp<String>) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "modal-backdrop",
-        &[],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <form method="dialog" class={cls}><button>"close"</button></form> }
+    let cls = class_signal("modal-backdrop", &[], class);
+    let _ = modal_id;
+    view! {
+        <form method="dialog" class=cls>
+            <button type="submit">"close"</button>
+        </form>
+    }
 }

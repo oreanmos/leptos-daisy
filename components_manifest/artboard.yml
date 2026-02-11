@@ -49,10 +49,28 @@ accessibility:
   semantic_element: "div"
   aria_attributes:
     - "aria-label"
+    - "aria-describedby"
+    - "tabindex"
   keyboard_navigation: false
   notes: |
     Artboard is a visual presentation component.
     Add aria-label to describe what is being showcased.
+    Use tabindex="0" for focusable artboards when needed.
+
+props:
+  - name: "size"
+    type: "ArtboardSize enum"
+    values: ["Phone1", "Phone2", "Phone3", "Phone4", "Phone5", "Phone6"]
+    default: "Phone6"
+  - name: "horizontal"
+    type: "bool"
+    default: "false"
+  - name: "demo"
+    type: "bool"
+    default: "false"
+  - name: "class"
+    type: "MaybeProp<String>"
+    description: "Additional CSS classes"
 
 status:
   tier_a: true

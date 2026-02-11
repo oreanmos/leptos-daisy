@@ -1,8 +1,7 @@
 //! Carousel component — daisyUI `carousel` + modifiers.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
-/// Carousel snap position.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum CarouselSnap {
     #[default]
@@ -10,7 +9,6 @@ pub enum CarouselSnap {
     Start,
     End,
 }
-
 impl CarouselSnap {
     fn cls(&self) -> &'static str {
         match self {
@@ -21,14 +19,12 @@ impl CarouselSnap {
     }
 }
 
-/// Carousel orientation.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum CarouselOrientation {
     #[default]
     Horizontal,
     Vertical,
 }
-
 impl CarouselOrientation {
     fn cls(&self) -> &'static str {
         match self {
@@ -38,7 +34,6 @@ impl CarouselOrientation {
     }
 }
 
-/// Carousel container component.
 #[component]
 pub fn Carousel(
     children: Children,
@@ -50,36 +45,16 @@ pub fn Carousel(
         .into_iter()
         .filter(|s| !s.is_empty())
         .collect();
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "carousel",
-        &mods,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("carousel", &mods, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
-/// Carousel item component.
 #[component]
 pub fn CarouselItem(
     children: Children,
     #[prop(optional, into)] id: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let base_cls = "carousel-item";
-    let final_cls = if uc.is_empty() {
-        base_cls.to_string()
-    } else {
-        format!("{} {}", base_cls, uc)
-    };
-    view! {
-        <div id={id} class={final_cls}>
-            {children()}
-        </div>
-    }
+    let cls = class_signal("carousel-item", &[], class);
+    view! { <div id=id class=cls>{children()}</div> }
 }

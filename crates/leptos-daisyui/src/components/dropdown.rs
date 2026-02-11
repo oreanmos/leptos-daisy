@@ -1,5 +1,5 @@
 //! Dropdown component — daisyUI `dropdown`.
-use crate::utils::class::build_class;
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -11,6 +11,7 @@ pub enum DropdownPosition {
     Right,
     Start,
     End,
+    Center,
 }
 impl DropdownPosition {
     fn cls(&self) -> &'static str {
@@ -21,6 +22,7 @@ impl DropdownPosition {
             Self::Right => "dropdown-right",
             Self::Start => "dropdown-start",
             Self::End => "dropdown-end",
+            Self::Center => "dropdown-center",
         }
     }
 }
@@ -40,11 +42,29 @@ impl DropdownHover {
     }
 }
 
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum DropdownState {
+    #[default]
+    Auto,
+    Open,
+    Close,
+}
+impl DropdownState {
+    fn cls(&self) -> &'static str {
+        match self {
+            Self::Auto => "",
+            Self::Open => "dropdown-open",
+            Self::Close => "dropdown-close",
+        }
+    }
+}
+
 #[component]
 pub fn Dropdown(
     children: Children,
     #[prop(optional)] position: DropdownPosition,
     #[prop(optional)] hover: DropdownHover,
+    #[prop(optional)] state: DropdownState,
     #[prop(optional)] open: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
@@ -53,20 +73,14 @@ pub fn Dropdown(
     if !hc.is_empty() {
         m.push(hc);
     }
-    if open {
+    let state_cls = state.cls();
+    if !state_cls.is_empty() {
+        m.push(state_cls);
+    } else if open {
         m.push("dropdown-open");
     }
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
-        "dropdown",
-        &m,
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
-    );
-    view! { <div class={cls}>{children()}</div> }
+    let cls = class_signal("dropdown", &m, class);
+    view! { <div class=cls>{children()}</div> }
 }
 
 #[component]
@@ -74,9 +88,8 @@ pub fn DropdownTrigger(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = if uc.is_empty() { String::new() } else { uc };
-    view! { <div tabindex="0" role="button" class={cls}>{children()}</div> }
+    let cls = class_signal("", &[], class);
+    view! { <div tabindex="0" role="button" class=cls>{children()}</div> }
 }
 
 #[component]
@@ -84,8 +97,7 @@ pub fn DropdownContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let uc = class.get().unwrap_or_default();
-    let cls = build_class(
+    let cls = class_signal(
         "dropdown-content",
         &[
             "menu",
@@ -96,33 +108,60 @@ pub fn DropdownContent(
             "p-2",
             "shadow",
         ],
-        if uc.is_empty() {
-            None
-        } else {
-            Some(uc.as_str())
-        },
+        class,
     );
-    view! { <ul tabindex="0" class={cls}>{children()}</ul> }
+    view! { <ul tabindex="0" class=cls>{children()}</ul> }
 }
 
 #[component]
 pub fn DropdownItem(
     children: Children,
-    #[prop(optional)] active: bool,
-    #[prop(optional)] disabled: bool,
+    #[prop(optional, into)] href: MaybeProp<String>,
+    #[prop(optional, into)] active: MaybeProp<bool>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] class: MaybeProp<String>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
-    if active {
-        m.push("active");
+    let cls = move || {
+        let mut m: Vec<&str> = Vec::new();
+        if active.get().unwrap_or(false) {
+            m.push("active");
+        }
+        if disabled.get().unwrap_or(false) {
+            m.push("disabled");
+        }
+        let user_class = class.get().unwrap_or_default();
+        let static_cls = m.join(" ");
+        if user_class.is_empty() {
+            static_cls
+        } else if static_cls.is_empty() {
+            user_class
+        } else {
+            format!("{static_cls} {user_class}")
+        }
+    };
+
+    view! {
+        <li class=cls>
+            <a
+                href=move || {
+                    if disabled.get().unwrap_or(false) {
+                        None
+                    } else {
+                        let value = href.get().unwrap_or_else(|| "#".to_string());
+                        Some(value)
+                    }
+                }
+                aria-disabled=move || disabled.get().unwrap_or(false)
+                tabindex=move || {
+                    if disabled.get().unwrap_or(false) {
+                        -1
+                    } else {
+                        0
+                    }
+                }
+            >
+                {children()}
+            </a>
+        </li>
     }
-    if disabled {
-        m.push("disabled");
-    }
-    let uc = class.get().unwrap_or_default();
-    if !uc.is_empty() {
-        m.push("");
-    }
-    let cls = m.join(" ");
-    view! { <li class={cls}><a>{children()}</a></li> }
 }

@@ -41,3 +41,7 @@ node_modules/
 .DS_Store
 .idea/
 .vscode/
+/wasm-pack/
+/pkg/
+/wasm-bindgen/
+dist
