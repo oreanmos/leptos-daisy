@@ -12,21 +12,44 @@ This repository contains:
 - SSR / CSR / Hydrate feature builds are supported.
 - The showcase app includes component demos, code snippets, theming pages, and a layout playground.
 
-## Installation
+## Use In Another Private Project
 
-Add the crate to your app:
+Add this crate from GitHub in your app `Cargo.toml`.
+
+Pin to a tag (recommended):
 
 ```toml
 [dependencies]
-leptos-daisyui = "0.1"
+leptos-daisyui = { git = "ssh://git@github.com/<org>/<repo>.git", package = "leptos-daisyui", tag = "v0.1.0", features = ["csr"] }
 ```
 
-Pick the rendering feature(s) you use in your app:
+Pin to a commit SHA:
 
 ```toml
 [dependencies]
-leptos-daisyui = { version = "0.1", features = ["csr"] }
-# or ["ssr"], ["hydrate"], or a combination depending on your setup
+leptos-daisyui = { git = "ssh://git@github.com/<org>/<repo>.git", package = "leptos-daisyui", rev = "<commit-sha>", features = ["ssr"] }
+```
+
+Track a branch (least reproducible, but useful during active development):
+
+```toml
+[dependencies]
+leptos-daisyui = { git = "ssh://git@github.com/<org>/<repo>.git", package = "leptos-daisyui", branch = "main", features = ["hydrate"] }
+```
+
+HTTPS private repo example (useful when SSH keys are not available):
+
+```toml
+[dependencies]
+leptos-daisyui = { git = "https://github.com/<org>/<repo>.git", package = "leptos-daisyui", tag = "v0.1.0", features = ["csr"] }
+```
+
+For HTTPS auth, configure Git/Cargo credentials on the consumer machine (PAT via credential manager, CI token, or `GITHUB_TOKEN` in CI). Do not hardcode tokens in `Cargo.toml`.
+
+Then fetch/update deps in the consumer project:
+
+```bash
+cargo update -p leptos-daisyui
 ```
 
 ## Quick Usage
@@ -83,14 +106,17 @@ cargo leptos build
 
 This crate is currently private. The recommended way to consume it in other private Leptos projects is a git dependency pinned to a tag or commit.
 
-```toml
-[dependencies]
-leptos-daisyui = { git = "ssh://git@github.com/<org>/<repo>.git", package = "leptos-daisyui", tag = "v0.1.0" }
-```
-
 Release flow:
 - Every push to `main` (or `master`) automatically runs `publish-crate.yml`, validates the crate, and produces a packaged `.crate` workflow artifact.
 - For a versioned private release asset, bump `crates/leptos-daisyui` version and push a matching tag like `v0.1.1`; the same workflow attaches the `.crate` file to a private GitHub Release.
+
+Helper script for release prep:
+
+```bash
+scripts/release-tag.sh 0.1.1
+```
+
+This updates the crate version and prints the exact `git commit`/`tag`/`push` commands to run.
 
 Update flow for downstream projects:
 - Pin to this GitHub repo with `tag` or `rev`, then move that pin when you want to upgrade.
