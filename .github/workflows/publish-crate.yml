@@ -1,0 +1,80 @@
+name: Private Crate Release
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  package-leptos-daisyui:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Ensure tag matches crate version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          set -euo pipefail
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          CRATE_VERSION="$(grep '^version = ' crates/leptos-daisyui/Cargo.toml | head -n1 | cut -d '"' -f2)"
+          if [[ "$TAG_VERSION" != "$CRATE_VERSION" ]]; then
+            echo "Tag version ($TAG_VERSION) does not match crates/leptos-daisyui version ($CRATE_VERSION)"
+            exit 1
+          fi
+
+      - name: Format check
+        run: cargo fmt --all -- --check
+
+      - name: Clippy (deny warnings)
+        run: cargo clippy -p leptos-daisyui --all-targets --all-features -- -D warnings
+
+      - name: Test leptos-daisyui
+        run: cargo test -p leptos-daisyui
+
+      - name: Check leptos-daisyui (ssr)
+        run: cargo check -p leptos-daisyui --features ssr
+
+      - name: Check leptos-daisyui (csr)
+        run: cargo check -p leptos-daisyui --features csr
+
+      - name: Check leptos-daisyui (hydrate)
+        run: cargo check -p leptos-daisyui --features hydrate
+
+      - name: Package crate
+        id: package
+        run: |
+          set -euo pipefail
+          cargo package -p leptos-daisyui --locked
+          CRATE_FILE="$(ls target/package/leptos-daisyui-*.crate | head -n1)"
+          echo "crate_file=$CRATE_FILE" >> "$GITHUB_OUTPUT"
+
+      - name: Upload crate artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: leptos-daisyui-crate
+          path: ${{ steps.package.outputs.crate_file }}
+
+      - name: Attach crate to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || \
+            gh release create "$GITHUB_REF_NAME" \
+              --title "$GITHUB_REF_NAME" \
+              --notes "Private crate package for leptos-daisyui."
+          gh release upload "$GITHUB_REF_NAME" "${{ steps.package.outputs.crate_file }}" --clobber
