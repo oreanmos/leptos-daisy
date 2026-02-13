@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -6,7 +6,23 @@ use leptos_daisyui::prelude::*;
 pub fn CarouselPage() -> impl IntoView {
     view! {
         <div class="space-y-12">
-            <h1 class="text-3xl font-bold">"Carousel"</h1>
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Carousel"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "Carousel components for displaying scrollable content with snap behavior."
+                </p>
+            </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "carousel", type_label: "base", description: "Container for carousel items with scroll snap" },
+                    ClassEntry { name: "carousel-item", type_label: "base", description: "Individual item within the carousel" },
+                    ClassEntry { name: "carousel-center", type_label: "modifier", description: "Snaps items to center of carousel" },
+                    ClassEntry { name: "carousel-end", type_label: "modifier", description: "Snaps items to end of carousel" },
+                    ClassEntry { name: "carousel-vertical", type_label: "modifier", description: "Vertical scrolling carousel layout" },
+                ] />
+            </section>
 
             <section>
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,15 @@ pub fn FieldsetPage() -> impl IntoView {
                     "Group related form inputs with optional legend labels."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "fieldset", type_label: "base", description: "Base fieldset container" },
+                    ClassEntry { name: "fieldset-legend", type_label: "base", description: "Legend element inside fieldset" },
+                    ClassEntry { name: "fieldset-label", type_label: "base", description: "Label element inside fieldset" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

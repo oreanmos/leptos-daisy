@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,19 @@ pub fn BottomNavigationPage() -> impl IntoView {
                     "Mobile-style bottom navigation bars with icons, labels, and active states."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "btm-nav", type_label: "base", description: "Base class for bottom navigation" },
+                    ClassEntry { name: "btm-nav-xs", type_label: "size", description: "Extra small" },
+                    ClassEntry { name: "btm-nav-sm", type_label: "size", description: "Small" },
+                    ClassEntry { name: "btm-nav-md", type_label: "size", description: "Medium (default)" },
+                    ClassEntry { name: "btm-nav-lg", type_label: "size", description: "Large" },
+                    ClassEntry { name: "active", type_label: "state", description: "Active navigation item" },
+                    ClassEntry { name: "disabled", type_label: "state", description: "Disabled navigation item" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

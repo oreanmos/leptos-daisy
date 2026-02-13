@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn StatPage() -> impl IntoView {
                     "Display statistics and metrics with titles, values, and descriptions."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "stats", type_label: "base", description: "Base class for stat group container" },
+                    ClassEntry { name: "stat", type_label: "base", description: "Base class for individual stat" },
+                    ClassEntry { name: "stat-title", type_label: "modifier", description: "Title text in a stat" },
+                    ClassEntry { name: "stat-value", type_label: "modifier", description: "Value text in a stat" },
+                    ClassEntry { name: "stat-desc", type_label: "modifier", description: "Description text in a stat" },
+                    ClassEntry { name: "stat-figure", type_label: "modifier", description: "Figure/icon in a stat" },
+                    ClassEntry { name: "stats-horizontal", type_label: "responsive", description: "Horizontal layout for stats" },
+                    ClassEntry { name: "stats-vertical", type_label: "responsive", description: "Vertical layout for stats" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

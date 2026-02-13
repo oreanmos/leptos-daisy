@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,17 @@ pub fn KbdPage() -> impl IntoView {
                     "Display keyboard keys and shortcuts with proper styling."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "kbd", type_label: "base", description: "Base class for keyboard key indicator" },
+                    ClassEntry { name: "kbd-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "kbd-md", type_label: "size", description: "Medium size (default)" },
+                    ClassEntry { name: "kbd-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "kbd-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

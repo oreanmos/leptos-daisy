@@ -1,14 +1,17 @@
 use leptos::prelude::*;
-#[cfg(any(feature = "csr", feature = "hydrate"))]
-use wasm_bindgen::JsCast;
 
-/// A code block component with syntax highlighting and copy-to-clipboard.
-/// Uses highlight.js (loaded via CDN in index.html) for Rust syntax highlighting.
+use super::syntax::highlight_code;
+
+/// A code block component with Rust syntax highlighting and copy-to-clipboard.
+/// Uses syntect for native Rust-based syntax highlighting.
 #[component]
 pub fn CodeBlock(
     /// The code content to display
     #[prop(into)]
     code: String,
+    /// Language extension/token for syntax highlighting (rs, css, html, etc.)
+    #[prop(optional, into)]
+    language: Option<String>,
     /// Optional title/header for the code block
     #[prop(optional, into)]
     title: Option<String>,
@@ -18,7 +21,9 @@ pub fn CodeBlock(
 ) -> impl IntoView {
     let copied = RwSignal::new(false);
     let code_for_copy = code.clone();
-    let code_ref = NodeRef::<leptos::html::Code>::new();
+
+    let language = language.unwrap_or_else(|| "rs".to_string());
+    let highlighted = highlight_code(&code, &language);
 
     let copy_to_clipboard = move |_| {
         let code = code_for_copy.clone();
@@ -43,28 +48,6 @@ pub fn CodeBlock(
         }
     };
 
-    // Apply syntax highlighting after the element is mounted
-    #[cfg(any(feature = "csr", feature = "hydrate"))]
-    {
-        let code_ref_effect = code_ref;
-        Effect::new(move |_| {
-            if let Some(el) = code_ref_effect.get() {
-                let el: &web_sys::HtmlElement = &el;
-                let hljs = js_sys::Reflect::get(&web_sys::window().unwrap(), &"hljs".into());
-                if let Ok(hljs) = hljs
-                    && !hljs.is_undefined()
-                {
-                    let highlight_fn = js_sys::Reflect::get(&hljs, &"highlightElement".into());
-                    if let Ok(func) = highlight_fn
-                        && let Some(func) = func.dyn_ref::<js_sys::Function>()
-                    {
-                        let _ = func.call1(&hljs, el);
-                    }
-                }
-            }
-        });
-    }
-
     view! {
         <div class=move || class.get().unwrap_or_default()>
             {move || title.clone().map(|t| view! {
@@ -82,7 +65,7 @@ pub fn CodeBlock(
                         view! { <span>"Copy"</span> }.into_any()
                     }}
                 </button>
-                <pre class="pr-20"><code class="language-rust" node_ref=code_ref>{code}</code></pre>
+                <pre class="pr-20"><code inner_html=highlighted></code></pre>
             </div>
         </div>
     }

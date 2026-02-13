@@ -1,5 +1,7 @@
 use leptos::prelude::*;
 
+use crate::components::CodeBlock;
+
 /// A single color variable entry for the theme creator.
 struct ColorVar {
     label: &'static str,
@@ -358,9 +360,12 @@ pub fn ThemeCreatorPage() -> impl IntoView {
                                 {move || if copied.get() { "✓ Copied!" } else { "📋 Copy" }}
                             </button>
                         </div>
-                        <div class="mockup-code text-xs overflow-x-auto max-h-96">
-                            <pre><code>{css_output}</code></pre>
-                        </div>
+                        {move || {
+                            let code = css_output();
+                            view! {
+                                <CodeBlock code=code language="css" class="max-h-96 overflow-auto" />
+                            }
+                        }}
                     </div>
 
                     // Instructions

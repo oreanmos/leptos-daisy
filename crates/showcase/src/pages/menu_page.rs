@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,22 @@ pub fn MenuPage() -> impl IntoView {
                     "Vertical, horizontal, responsive, and nested menu patterns for sidebars and app navigation."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "menu", type_label: "base", description: "Base menu container" },
+                    ClassEntry { name: "menu-title", type_label: "base part", description: "Title within menu" },
+                    ClassEntry { name: "menu-lg", type_label: "size", description: "Large menu" },
+                    ClassEntry { name: "menu-md", type_label: "size", description: "Medium menu (default)" },
+                    ClassEntry { name: "menu-sm", type_label: "size", description: "Small menu" },
+                    ClassEntry { name: "menu-xs", type_label: "size", description: "Extra small menu" },
+                    ClassEntry { name: "menu-horizontal", type_label: "modifier", description: "Horizontal layout" },
+                    ClassEntry { name: "menu-vertical", type_label: "modifier", description: "Vertical layout (default)" },
+                    ClassEntry { name: "active", type_label: "state", description: "Active menu item" },
+                    ClassEntry { name: "disabled", type_label: "state", description: "Disabled menu item" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

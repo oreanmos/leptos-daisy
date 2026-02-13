@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -7,6 +7,17 @@ pub fn DockPage() -> impl IntoView {
     view! {
         <div class="space-y-8">
             <h1 class="text-3xl font-bold">"Dock"</h1>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "dock", type_label: "base", description: "Base class for dock" },
+                    ClassEntry { name: "dock-xs", type_label: "size", description: "Extra small dock" },
+                    ClassEntry { name: "dock-sm", type_label: "size", description: "Small dock" },
+                    ClassEntry { name: "dock-md", type_label: "size", description: "Medium dock (default)" },
+                    ClassEntry { name: "dock-lg", type_label: "size", description: "Large dock" },
+                ] />
+            </section>
 
             <section>
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,13 @@ pub fn BackdropPage() -> impl IntoView {
                     "A backdrop is used to dim the content behind modals and drawers, providing visual focus on the overlay content."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "modal-backdrop", type_label: "base", description: "Base class for modal backdrop overlay" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn CardPage() -> impl IntoView {
                     "Cards are used to group and display content in a way that is easily readable."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "card", type_label: "base", description: "Container for card content" },
+                    ClassEntry { name: "card-body", type_label: "base", description: "Card body with padding and spacing" },
+                    ClassEntry { name: "card-title", type_label: "base", description: "Title text style for card" },
+                    ClassEntry { name: "card-actions", type_label: "base", description: "Container for card action buttons" },
+                    ClassEntry { name: "card-bordered", type_label: "modifier", description: "Adds border to card" },
+                    ClassEntry { name: "card-compact", type_label: "modifier", description: "Reduces card padding" },
+                    ClassEntry { name: "card-side", type_label: "modifier", description: "Horizontal card layout with side image" },
+                    ClassEntry { name: "image-full", type_label: "modifier", description: "Makes image cover the entire card as background" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

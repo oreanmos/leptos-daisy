@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 use std::sync::Arc;
@@ -13,6 +13,20 @@ pub fn IndicatorPage() -> impl IntoView {
                     "Badges or status markers positioned at the corners of elements."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "indicator", type_label: "base", description: "Base indicator wrapper" },
+                    ClassEntry { name: "indicator-item", type_label: "base part", description: "Indicator badge element" },
+                    ClassEntry { name: "indicator-top", type_label: "modifier", description: "Position at top" },
+                    ClassEntry { name: "indicator-middle", type_label: "modifier", description: "Position at middle" },
+                    ClassEntry { name: "indicator-bottom", type_label: "modifier", description: "Position at bottom" },
+                    ClassEntry { name: "indicator-start", type_label: "modifier", description: "Position at start" },
+                    ClassEntry { name: "indicator-center", type_label: "modifier", description: "Position at center" },
+                    ClassEntry { name: "indicator-end", type_label: "modifier", description: "Position at end" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -16,6 +16,22 @@ pub fn AlertPage() -> impl IntoView {
                     "Alerts inform users about important events."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "alert", type_label: "base", description: "Container for alert content" },
+                    ClassEntry { name: "alert-info", type_label: "color", description: "Alert with info color" },
+                    ClassEntry { name: "alert-success", type_label: "color", description: "Alert with success color" },
+                    ClassEntry { name: "alert-warning", type_label: "color", description: "Alert with warning color" },
+                    ClassEntry { name: "alert-error", type_label: "color", description: "Alert with error color" },
+                    ClassEntry { name: "alert-outline", type_label: "style", description: "Alert with outline style" },
+                    ClassEntry { name: "alert-dash", type_label: "style", description: "Alert with dashed border style" },
+                    ClassEntry { name: "alert-soft", type_label: "style", description: "Alert with soft background style" },
+                    ClassEntry { name: "alert-vertical", type_label: "modifier", description: "Vertical layout for alert content" },
+                    ClassEntry { name: "alert-horizontal", type_label: "modifier", description: "Horizontal layout for alert content" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

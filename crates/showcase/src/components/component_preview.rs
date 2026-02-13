@@ -1,6 +1,9 @@
 use leptos::prelude::*;
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 use super::CodeBlock;
+
+static TAB_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 #[component]
 pub fn ComponentPreview(
@@ -9,7 +12,7 @@ pub fn ComponentPreview(
     #[prop(into)] code: String,
     children: Children,
 ) -> impl IntoView {
-    let code_len = code.len();
+    let tab_id = TAB_COUNTER.fetch_add(1, Ordering::Relaxed);
     let viewport = RwSignal::new("100%".to_string());
 
     view! {
@@ -18,7 +21,7 @@ pub fn ComponentPreview(
             {move || description.clone().map(|d| view! { <p class="text-base-content/70">{d}</p> })}
 
             <div role="tablist" class="tabs tabs-lifted">
-                <input type="radio" name={format!("tabs_{}", code_len)} role="tab" class="tab" aria-label="Preview" checked=true />
+                <input type="radio" name={format!("tabs_{}", tab_id)} role="tab" class="tab" aria-label="Preview" checked=true />
                 <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
                     <div class="flex justify-end gap-1 mb-3">
                         <button
@@ -48,7 +51,7 @@ pub fn ComponentPreview(
                     </div>
                 </div>
 
-                <input type="radio" name={format!("tabs_{}", code_len)} role="tab" class="tab" aria-label="Code" />
+                <input type="radio" name={format!("tabs_{}", tab_id)} role="tab" class="tab" aria-label="Code" />
                 <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
                     <CodeBlock code=code />
                 </div>

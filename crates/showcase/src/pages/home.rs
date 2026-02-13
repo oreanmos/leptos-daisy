@@ -1,202 +1,170 @@
 use leptos::prelude::*;
 use leptos_router::components::A;
 
+use crate::components::CodeBlock;
+
 #[component]
 pub fn HomePage() -> impl IntoView {
+    let getting_started_code = r#"// Cargo.toml
+[dependencies]
+leptos-daisyui = "0.1"
+
+// src/main.rs
+use leptos::prelude::*;
+use leptos_daisyui::prelude::*;
+
+fn main() {
+    mount_to_body(|| view! {
+        <Button color=Color::Primary size=Size::Lg>
+            "Hello DaisyUI!"
+        </Button>
+    });
+}"#;
+
     view! {
-        <div class="prose max-w-none">
-            <h1>"🌼 leptos-daisyui Showcase"</h1>
-            <p class="text-lg">"A comprehensive Leptos component library wrapping all 65 daisyUI components."</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                // Actions
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🎬 Actions"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/button">"Button"</A></li>
-                            <li><A href="/dropdown">"Dropdown"</A></li>
-                            <li><A href="/modal">"Modal"</A></li>
-                            <li><A href="/swap">"Swap"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Data Display
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"📊 Data Display"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/alert">"Alert"</A></li>
-                            <li><A href="/avatar">"Avatar"</A></li>
-                            <li><A href="/badge">"Badge"</A></li>
-                            <li><A href="/card">"Card"</A></li>
-                            <li><A href="/carousel">"Carousel"</A></li>
-                            <li><A href="/chat">"Chat"</A></li>
-                            <li><A href="/collapse">"Collapse"</A></li>
-                            <li><A href="/countdown">"Countdown"</A></li>
-                            <li><A href="/diff">"Diff"</A></li>
-                            <li><A href="/kbd">"Kbd"</A></li>
-                            <li><A href="/list">"List"</A></li>
-                            <li><A href="/progress">"Progress"</A></li>
-                            <li><A href="/radial-progress">"Radial Progress"</A></li>
-                            <li><A href="/rating">"Rating"</A></li>
-                            <li><A href="/skeleton">"Skeleton"</A></li>
-                            <li><A href="/stat">"Stat"</A></li>
-                            <li><A href="/status">"Status"</A></li>
-                            <li><A href="/table">"Table"</A></li>
-                            <li><A href="/timeline">"Timeline"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Data Input
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"📝 Data Input"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/checkbox">"Checkbox"</A></li>
-                            <li><A href="/fieldset">"Fieldset"</A></li>
-                            <li><A href="/file-input">"File Input"</A></li>
-                            <li><A href="/filter">"Filter"</A></li>
-                            <li><A href="/input">"Input"</A></li>
-                            <li><A href="/label">"Label"</A></li>
-                            <li><A href="/radio">"Radio"</A></li>
-                            <li><A href="/range">"Range"</A></li>
-                            <li><A href="/select">"Select"</A></li>
-                            <li><A href="/textarea">"Textarea"</A></li>
-                            <li><A href="/toggle">"Toggle"</A></li>
-                            <li><A href="/validator">"Validator"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Feedback
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"💬 Feedback"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/loading">"Loading"</A></li>
-                            <li><A href="/skeleton">"Skeleton"</A></li>
-                            <li><A href="/toast">"Toast"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Layout
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"📐 Layout"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/artboard">"Artboard"</A></li>
-                            <li><A href="/divider">"Divider"</A></li>
-                            <li><A href="/drawer">"Drawer"</A></li>
-                            <li><A href="/footer">"Footer"</A></li>
-                            <li><A href="/hero">"Hero"</A></li>
-                            <li><A href="/indicator">"Indicator"</A></li>
-                            <li><A href="/join">"Join"</A></li>
-                            <li><A href="/mask">"Mask"</A></li>
-                            <li><A href="/stack">"Stack"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Mockups
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🖼️ Mockups"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/mockup-browser">"Browser"</A></li>
-                            <li><A href="/mockup-code">"Code"</A></li>
-                            <li><A href="/mockup-phone">"Phone"</A></li>
-                            <li><A href="/mockup-window">"Window"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Navigation
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🧭 Navigation"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/breadcrumbs">"Breadcrumbs"</A></li>
-                            <li><A href="/dock">"Dock"</A></li>
-                            <li><A href="/link">"Link"</A></li>
-                            <li><A href="/menu">"Menu"</A></li>
-                            <li><A href="/navbar">"Navbar"</A></li>
-                            <li><A href="/pagination">"Pagination"</A></li>
-                            <li><A href="/steps">"Steps"</A></li>
-                            <li><A href="/tab">"Tab"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Overlay
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🔲 Overlay"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/backdrop">"Backdrop"</A></li>
-                            <li><A href="/tooltip">"Tooltip"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Layout Components
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🏗️ Layout Components"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/layout">"DaisyUI Layout"</A></li>
-                            <li><A href="/layouts/stacked">"Stacked Layout"</A></li>
-                            <li><A href="/layouts/sidebar">"Sidebar Layout"</A></li>
-                            <li><A href="/layouts/multi-column">"Multi-Column"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Theming
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🎨 Theming"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/themes">"Theme Showcase"</A></li>
-                            <li><A href="/themes/creator">"Theme Creator"</A></li>
-                            <li><A href="/themes/guide">"Theme Guide"</A></li>
-                        </ul>
-                    </div>
-                </div>
-
-                // Tools
-                <div class="card bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">"🛠️ Tools"</h2>
-                        <ul class="menu menu-sm">
-                            <li><A href="/playground">"Playground"</A></li>
-                        </ul>
+        <div>
+            // Hero Section
+            <div class="hero min-h-[60vh] bg-base-200 rounded-box">
+                <div class="hero-content text-center">
+                    <div class="max-w-2xl">
+                        <h1 class="text-5xl md:text-6xl font-bold tracking-tight">"leptos-daisyui"</h1>
+                        <p class="text-xl md:text-2xl font-semibold mt-4 text-base-content/80">
+                            "65+ type-safe Leptos components wrapping DaisyUI"
+                        </p>
+                        <p class="py-6 text-base-content/70 max-w-lg mx-auto">
+                            "A comprehensive Rust component library that brings the full power of DaisyUI to Leptos. "
+                            "Type-checked props, compile-time safety, and seamless integration with the Leptos reactive framework."
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <A href="/button" attr:class="btn btn-primary btn-lg">"Browse Components"</A>
+                            <A href="/playground" attr:class="btn btn-secondary btn-lg">"Playground"</A>
+                            <a href="#" class="btn btn-ghost btn-outline btn-lg">"GitHub"</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-12 p-6 bg-base-200 rounded-lg">
-                <h2>"📚 Quick Stats"</h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-primary">"65+"</div>
-                        <div class="text-sm opacity-70">"Components"</div>
+            // Quick Stats
+            <div class="flex justify-center my-12">
+                <div class="stats stats-vertical md:stats-horizontal shadow bg-base-100">
+                    <div class="stat">
+                        <div class="stat-value text-primary">"65+"</div>
+                        <div class="stat-title">"Components"</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-secondary">"35"</div>
-                        <div class="text-sm opacity-70">"Themes"</div>
+                    <div class="stat">
+                        <div class="stat-value text-secondary">"35"</div>
+                        <div class="stat-title">"Themes"</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-accent">"3"</div>
-                        <div class="text-sm opacity-70">"Render Modes"</div>
+                    <div class="stat">
+                        <div class="stat-value text-accent">"3"</div>
+                        <div class="stat-title">"Render Modes"</div>
                     </div>
-                    <div class="text-center">
-                        <div class="text-4xl font-bold text-info">"0"</div>
-                        <div class="text-sm opacity-70">"Dependencies"</div>
+                    <div class="stat">
+                        <div class="stat-value text-info">"0"</div>
+                        <div class="stat-title">"Custom CSS Files"</div>
                     </div>
+                </div>
+            </div>
+
+            // Feature Highlights
+            <div class="my-16">
+                <h2 class="text-3xl font-bold text-center mb-8">"Why leptos-daisyui?"</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card bg-base-100 shadow-md border border-primary/20">
+                        <div class="card-body">
+                            <h3 class="card-title text-primary">"Type-Safe"</h3>
+                            <p class="text-base-content/70">
+                                "Every component prop is type-checked at compile time with Rust's type system"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-md border border-secondary/20">
+                        <div class="card-body">
+                            <h3 class="card-title text-secondary">"SSR / CSR / Hydrate"</h3>
+                            <p class="text-base-content/70">
+                                "Three rendering modes supported out of the box. Build for any deployment target"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-md border border-accent/20">
+                        <div class="card-body">
+                            <h3 class="card-title text-accent">"35 Themes"</h3>
+                            <p class="text-base-content/70">
+                                "All DaisyUI themes included. Switch themes with a single data attribute"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card bg-base-100 shadow-md border border-info/20">
+                        <div class="card-body">
+                            <h3 class="card-title text-info">"Zero Custom CSS"</h3>
+                            <p class="text-base-content/70">
+                                "Built entirely on Tailwind CSS and DaisyUI utility classes. No custom stylesheets needed"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            // Component Categories
+            <div class="my-16">
+                <h2 class="text-3xl font-bold text-center mb-8">"Component Categories"</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <A href="/button" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Actions"</h3>
+                            <div class="badge badge-primary">"4"</div>
+                        </div>
+                    </A>
+                    <A href="/alert" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Data Display"</h3>
+                            <div class="badge badge-secondary">"18"</div>
+                        </div>
+                    </A>
+                    <A href="/checkbox" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Data Input"</h3>
+                            <div class="badge badge-accent">"12"</div>
+                        </div>
+                    </A>
+                    <A href="/loading" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Feedback"</h3>
+                            <div class="badge badge-info">"3"</div>
+                        </div>
+                    </A>
+                    <A href="/artboard" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Layout"</h3>
+                            <div class="badge badge-success">"13"</div>
+                        </div>
+                    </A>
+                    <A href="/mockup-browser" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Mockups"</h3>
+                            <div class="badge badge-warning">"4"</div>
+                        </div>
+                    </A>
+                    <A href="/breadcrumbs" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Navigation"</h3>
+                            <div class="badge badge-error">"9"</div>
+                        </div>
+                    </A>
+                    <A href="/backdrop" attr:class="card bg-base-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="card-body items-center text-center p-4">
+                            <h3 class="card-title text-sm">"Overlay"</h3>
+                            <div class="badge badge-neutral">"2"</div>
+                        </div>
+                    </A>
+                </div>
+            </div>
+
+            // Getting Started
+            <div class="my-16">
+                <h2 class="text-3xl font-bold text-center mb-8">"Get Started"</h2>
+                <div class="max-w-2xl mx-auto">
+                    <CodeBlock code=getting_started_code.to_string() />
                 </div>
             </div>
         </div>

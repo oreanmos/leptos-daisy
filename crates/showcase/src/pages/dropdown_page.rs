@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,21 @@ pub fn DropdownPage() -> impl IntoView {
                     "DaisyUI dropdown positions, trigger behaviors, and menu item states."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "dropdown", type_label: "base", description: "Base dropdown container" },
+                    ClassEntry { name: "dropdown-content", type_label: "base", description: "Dropdown menu content wrapper" },
+                    ClassEntry { name: "dropdown-top", type_label: "modifier", description: "Open dropdown above trigger" },
+                    ClassEntry { name: "dropdown-bottom", type_label: "modifier", description: "Open dropdown below trigger (default)" },
+                    ClassEntry { name: "dropdown-left", type_label: "modifier", description: "Open dropdown to the left" },
+                    ClassEntry { name: "dropdown-right", type_label: "modifier", description: "Open dropdown to the right" },
+                    ClassEntry { name: "dropdown-end", type_label: "modifier", description: "Align dropdown to the end" },
+                    ClassEntry { name: "dropdown-hover", type_label: "modifier", description: "Open on hover instead of click" },
+                    ClassEntry { name: "dropdown-open", type_label: "state", description: "Force dropdown open" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

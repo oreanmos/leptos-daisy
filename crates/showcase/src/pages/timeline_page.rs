@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn TimelinePage() -> impl IntoView {
                     "Horizontal or vertical timeline layouts for showing sequences of events."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "timeline", type_label: "base", description: "Base class for timeline container" },
+                    ClassEntry { name: "timeline-start", type_label: "base part", description: "Content positioned at the start of a timeline item" },
+                    ClassEntry { name: "timeline-end", type_label: "base part", description: "Content positioned at the end of a timeline item" },
+                    ClassEntry { name: "timeline-middle", type_label: "base part", description: "Middle indicator (icon/dot) of a timeline item" },
+                    ClassEntry { name: "timeline-snap-icon", type_label: "modifier", description: "Snap the icon to the timeline line" },
+                    ClassEntry { name: "timeline-compact", type_label: "modifier", description: "Compact timeline layout without start content" },
+                    ClassEntry { name: "timeline-vertical", type_label: "modifier", description: "Display timeline vertically" },
+                    ClassEntry { name: "timeline-horizontal", type_label: "modifier", description: "Display timeline horizontally" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

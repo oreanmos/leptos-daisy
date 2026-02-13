@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn ArtboardPage() -> impl IntoView {
                     "A container that simulates mobile device screens for responsive design preview and testing."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "artboard", type_label: "base", description: "Base artboard class" },
+                    ClassEntry { name: "artboard-horizontal", type_label: "modifier", description: "Horizontal orientation" },
+                    ClassEntry { name: "phone-1", type_label: "size", description: "320x568" },
+                    ClassEntry { name: "phone-2", type_label: "size", description: "375x667" },
+                    ClassEntry { name: "phone-3", type_label: "size", description: "414x736" },
+                    ClassEntry { name: "phone-4", type_label: "size", description: "375x812" },
+                    ClassEntry { name: "phone-5", type_label: "size", description: "414x896" },
+                    ClassEntry { name: "phone-6", type_label: "size", description: "320x1024" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

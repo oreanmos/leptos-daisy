@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,19 @@ pub fn SwapPage() -> impl IntoView {
                     "Toggle between two states with animated transitions for icons, text, or custom content."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "swap", type_label: "base", description: "Base swap container" },
+                    ClassEntry { name: "swap-on", type_label: "base", description: "Content shown when swap is active" },
+                    ClassEntry { name: "swap-off", type_label: "base", description: "Content shown when swap is inactive" },
+                    ClassEntry { name: "swap-indeterminate", type_label: "base", description: "Content shown in indeterminate state" },
+                    ClassEntry { name: "swap-active", type_label: "state", description: "Activate the swap state" },
+                    ClassEntry { name: "swap-rotate", type_label: "modifier", description: "Rotate animation on toggle" },
+                    ClassEntry { name: "swap-flip", type_label: "modifier", description: "Flip animation on toggle" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,16 @@ pub fn NavbarPage() -> impl IntoView {
                     "Common daisyUI navbar patterns for app headers, marketing navigation, and responsive actions."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "navbar", type_label: "base", description: "Base navbar class" },
+                    ClassEntry { name: "navbar-start", type_label: "base part", description: "Left section" },
+                    ClassEntry { name: "navbar-center", type_label: "base part", description: "Center section" },
+                    ClassEntry { name: "navbar-end", type_label: "base part", description: "Right section" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

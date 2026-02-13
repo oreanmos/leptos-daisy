@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -14,6 +14,26 @@ pub fn TextareaPage() -> impl IntoView {
                     "Multi-line inputs with full variant coverage and common composition patterns."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "textarea", type_label: "base", description: "Base textarea component" },
+                    ClassEntry { name: "textarea-bordered", type_label: "modifier", description: "Adds border to textarea" },
+                    ClassEntry { name: "textarea-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "textarea-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "textarea-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "textarea-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "textarea-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "textarea-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "textarea-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "textarea-ghost", type_label: "color", description: "Ghost style" },
+                    ClassEntry { name: "textarea-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "textarea-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "textarea-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "textarea-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

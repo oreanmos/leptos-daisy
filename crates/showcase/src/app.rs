@@ -54,6 +54,7 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "🎬",
         &[
             ("Button", "/button"),
+            ("FAB", "/fab"),
             ("Dropdown", "/dropdown"),
             ("Modal", "/modal"),
             ("Swap", "/swap"),
@@ -97,6 +98,7 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
             ("Range", "/range"),
             ("Select", "/select"),
             ("Textarea", "/textarea"),
+            ("Theme Controller", "/theme-controller"),
             ("Toggle", "/toggle"),
             ("Validator", "/validator"),
         ],
@@ -278,6 +280,7 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/") view=HomePage />
                                 // Actions
                                 <Route path=path!("/button") view=ButtonPage />
+                                <Route path=path!("/fab") view=FabPage />
                                 <Route path=path!("/dropdown") view=DropdownPage />
                                 <Route path=path!("/modal") view=ModalPage />
                                 <Route path=path!("/swap") view=SwapPage />
@@ -312,6 +315,7 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/range") view=RangePage />
                                 <Route path=path!("/select") view=SelectPage />
                                 <Route path=path!("/textarea") view=TextareaPage />
+                                <Route path=path!("/theme-controller") view=ThemeControllerPage />
                                 <Route path=path!("/toggle") view=TogglePage />
                                 <Route path=path!("/validator") view=ValidatorPage />
                                 // Feedback

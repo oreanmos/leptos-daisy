@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn ModalPage() -> impl IntoView {
                     "Dialog-based modal patterns including forced state, placement, and action layouts."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "modal", type_label: "base", description: "Base modal container" },
+                    ClassEntry { name: "modal-box", type_label: "base", description: "Modal content box" },
+                    ClassEntry { name: "modal-action", type_label: "base", description: "Modal action/footer area" },
+                    ClassEntry { name: "modal-backdrop", type_label: "base", description: "Modal backdrop overlay" },
+                    ClassEntry { name: "modal-top", type_label: "modifier", description: "Position modal at top" },
+                    ClassEntry { name: "modal-middle", type_label: "modifier", description: "Position modal at center (default)" },
+                    ClassEntry { name: "modal-bottom", type_label: "modifier", description: "Position modal at bottom" },
+                    ClassEntry { name: "modal-open", type_label: "state", description: "Force modal open" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

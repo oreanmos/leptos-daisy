@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -7,6 +7,30 @@ pub fn MaskPage() -> impl IntoView {
     view! {
         <div class="space-y-8">
             <h1 class="text-3xl font-bold">"Mask"</h1>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "mask", type_label: "base", description: "Base mask class" },
+                    ClassEntry { name: "mask-squircle", type_label: "modifier", description: "Squircle shape" },
+                    ClassEntry { name: "mask-heart", type_label: "modifier", description: "Heart shape" },
+                    ClassEntry { name: "mask-hexagon", type_label: "modifier", description: "Hexagon shape" },
+                    ClassEntry { name: "mask-hexagon-2", type_label: "modifier", description: "Hexagon variant 2" },
+                    ClassEntry { name: "mask-decagon", type_label: "modifier", description: "Decagon shape" },
+                    ClassEntry { name: "mask-pentagon", type_label: "modifier", description: "Pentagon shape" },
+                    ClassEntry { name: "mask-diamond", type_label: "modifier", description: "Diamond shape" },
+                    ClassEntry { name: "mask-square", type_label: "modifier", description: "Square shape" },
+                    ClassEntry { name: "mask-circle", type_label: "modifier", description: "Circle shape" },
+                    ClassEntry { name: "mask-star", type_label: "modifier", description: "Star shape" },
+                    ClassEntry { name: "mask-star-2", type_label: "modifier", description: "Star variant 2" },
+                    ClassEntry { name: "mask-triangle", type_label: "modifier", description: "Triangle shape" },
+                    ClassEntry { name: "mask-triangle-2", type_label: "modifier", description: "Triangle variant 2" },
+                    ClassEntry { name: "mask-triangle-3", type_label: "modifier", description: "Triangle variant 3" },
+                    ClassEntry { name: "mask-triangle-4", type_label: "modifier", description: "Triangle variant 4" },
+                    ClassEntry { name: "mask-half-1", type_label: "modifier", description: "Half mask variant 1" },
+                    ClassEntry { name: "mask-half-2", type_label: "modifier", description: "Half mask variant 2" },
+                ] />
+            </section>
 
             <section>
                 <ComponentPreview

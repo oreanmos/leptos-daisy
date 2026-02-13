@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn AvatarPage() -> impl IntoView {
                     "Avatars are used to show a thumbnail representation of an individual or business in the interface."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "avatar", type_label: "base", description: "Container for avatar image or placeholder" },
+                    ClassEntry { name: "avatar-group", type_label: "base", description: "Container for grouping multiple avatars together" },
+                    ClassEntry { name: "online", type_label: "state", description: "Shows online status indicator on avatar" },
+                    ClassEntry { name: "offline", type_label: "state", description: "Shows offline status indicator on avatar" },
+                    ClassEntry { name: "placeholder", type_label: "modifier", description: "Shows a placeholder when no image is available" },
+                    ClassEntry { name: "mask mask-squircle", type_label: "modifier", description: "Applies squircle mask shape to avatar" },
+                    ClassEntry { name: "mask mask-hexagon", type_label: "modifier", description: "Applies hexagon mask shape to avatar" },
+                    ClassEntry { name: "mask mask-triangle", type_label: "modifier", description: "Applies triangle mask shape to avatar" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

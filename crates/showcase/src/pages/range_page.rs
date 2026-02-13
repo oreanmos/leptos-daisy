@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -14,6 +14,24 @@ pub fn RangePage() -> impl IntoView {
                     "Slider inputs for continuous values with full size/color/state coverage."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "range", type_label: "base", description: "Base range slider component" },
+                    ClassEntry { name: "range-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "range-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "range-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "range-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "range-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "range-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "range-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "range-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "range-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "range-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "range-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

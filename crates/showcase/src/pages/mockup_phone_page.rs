@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -6,7 +6,19 @@ use leptos_daisyui::prelude::*;
 pub fn MockupPhonePage() -> impl IntoView {
     view! {
         <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"Mockup Phone"</h1>
+            <header class="space-y-3">
+                <h1 class="text-3xl font-bold">"Mockup Phone"</h1>
+                <p class="text-base-content/70 max-w-3xl">
+                    "Phone device mockup for displaying mobile interface previews."
+                </p>
+            </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "mockup-phone", type_label: "base", description: "Base class for phone mockup container" },
+                ] />
+            </section>
 
             <section>
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,24 @@ pub fn StepsPage() -> impl IntoView {
                     "Visual progress indicators for multi-step processes with color states and layouts."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "steps", type_label: "base", description: "Base steps container" },
+                    ClassEntry { name: "step", type_label: "base part", description: "Individual step" },
+                    ClassEntry { name: "step-primary", type_label: "color", description: "Primary color step" },
+                    ClassEntry { name: "step-secondary", type_label: "color", description: "Secondary color step" },
+                    ClassEntry { name: "step-accent", type_label: "color", description: "Accent color step" },
+                    ClassEntry { name: "step-info", type_label: "color", description: "Info color step" },
+                    ClassEntry { name: "step-success", type_label: "color", description: "Success color step" },
+                    ClassEntry { name: "step-warning", type_label: "color", description: "Warning color step" },
+                    ClassEntry { name: "step-error", type_label: "color", description: "Error color step" },
+                    ClassEntry { name: "step-neutral", type_label: "color", description: "Neutral color step" },
+                    ClassEntry { name: "steps-horizontal", type_label: "modifier", description: "Horizontal layout" },
+                    ClassEntry { name: "steps-vertical", type_label: "modifier", description: "Vertical layout" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

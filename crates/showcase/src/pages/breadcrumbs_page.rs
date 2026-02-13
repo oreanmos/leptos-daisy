@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,13 @@ pub fn BreadcrumbsPage() -> impl IntoView {
                     "Navigation trails showing the current page location within the site hierarchy."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "breadcrumbs", type_label: "base", description: "Base class for breadcrumbs container" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -35,6 +35,14 @@ pub fn ValidatorPage() -> impl IntoView {
                     "Validation message wrapper classes composed with native HTML constraints and reactive hints."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "validator", type_label: "base", description: "Base validator wrapper component" },
+                    ClassEntry { name: "validator-hint", type_label: "base", description: "Hint message inside validator" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

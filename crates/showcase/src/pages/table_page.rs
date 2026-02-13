@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,20 @@ pub fn TablePage() -> impl IntoView {
                     "Data tables with zebra stripes, pinned rows/columns, and size variants."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "table", type_label: "base", description: "Base class for table" },
+                    ClassEntry { name: "table-zebra", type_label: "modifier", description: "Zebra striping for rows" },
+                    ClassEntry { name: "table-pin-rows", type_label: "modifier", description: "Pin header and footer rows" },
+                    ClassEntry { name: "table-pin-cols", type_label: "modifier", description: "Pin first column" },
+                    ClassEntry { name: "table-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "table-md", type_label: "size", description: "Medium size (default)" },
+                    ClassEntry { name: "table-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "table-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

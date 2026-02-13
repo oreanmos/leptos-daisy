@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,37 @@ pub fn ButtonPage() -> impl IntoView {
                     "Complete daisyUI button variants with practical combinations and accessibility patterns."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "btn", type_label: "base", description: "Base button class" },
+                    ClassEntry { name: "btn-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "btn-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "btn-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "btn-neutral", type_label: "color", description: "Neutral color" },
+                    ClassEntry { name: "btn-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "btn-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "btn-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "btn-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "btn-ghost", type_label: "color", description: "Ghost color" },
+                    ClassEntry { name: "btn-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "btn-md", type_label: "size", description: "Medium size (default)" },
+                    ClassEntry { name: "btn-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "btn-xs", type_label: "size", description: "Extra small size" },
+                    ClassEntry { name: "btn-outline", type_label: "style", description: "Outline style" },
+                    ClassEntry { name: "btn-link", type_label: "style", description: "Link style" },
+                    ClassEntry { name: "btn-ghost", type_label: "style", description: "Ghost style" },
+                    ClassEntry { name: "btn-soft", type_label: "style", description: "Soft style" },
+                    ClassEntry { name: "btn-dash", type_label: "style", description: "Dash style" },
+                    ClassEntry { name: "btn-wide", type_label: "modifier", description: "Wide button" },
+                    ClassEntry { name: "btn-block", type_label: "modifier", description: "Full width button" },
+                    ClassEntry { name: "btn-circle", type_label: "modifier", description: "Circle shape" },
+                    ClassEntry { name: "btn-square", type_label: "modifier", description: "Square shape" },
+                    ClassEntry { name: "btn-active", type_label: "state", description: "Active state" },
+                    ClassEntry { name: "btn-disabled", type_label: "state", description: "Disabled state" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

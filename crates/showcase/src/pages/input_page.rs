@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -15,6 +15,26 @@ pub fn InputPage() -> impl IntoView {
                     "Single-line text fields with complete daisyUI color, size, and state coverage."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "input", type_label: "base", description: "Base input component" },
+                    ClassEntry { name: "input-bordered", type_label: "modifier", description: "Adds border to input" },
+                    ClassEntry { name: "input-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "input-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "input-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "input-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "input-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "input-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "input-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "input-ghost", type_label: "color", description: "Ghost style" },
+                    ClassEntry { name: "input-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "input-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "input-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "input-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

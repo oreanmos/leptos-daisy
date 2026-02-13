@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -15,6 +15,24 @@ pub fn TogglePage() -> impl IntoView {
                     "Switch-style checkboxes for settings and preferences."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "toggle", type_label: "base", description: "Base toggle switch component" },
+                    ClassEntry { name: "toggle-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "toggle-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "toggle-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "toggle-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "toggle-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "toggle-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "toggle-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "toggle-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "toggle-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "toggle-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "toggle-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

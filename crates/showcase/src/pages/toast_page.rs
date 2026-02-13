@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,19 @@ pub fn ToastPage() -> impl IntoView {
                     "Alert messages positioned at various screen locations."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "toast", type_label: "base", description: "Base class for toast container" },
+                    ClassEntry { name: "toast-start", type_label: "modifier", description: "Align toast to the start (left)" },
+                    ClassEntry { name: "toast-center", type_label: "modifier", description: "Align toast to the center" },
+                    ClassEntry { name: "toast-end", type_label: "modifier", description: "Align toast to the end (right)" },
+                    ClassEntry { name: "toast-top", type_label: "modifier", description: "Position toast at the top" },
+                    ClassEntry { name: "toast-middle", type_label: "modifier", description: "Position toast at the middle" },
+                    ClassEntry { name: "toast-bottom", type_label: "modifier", description: "Position toast at the bottom" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

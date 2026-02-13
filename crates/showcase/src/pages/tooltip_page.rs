@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,25 @@ pub fn TooltipPage() -> impl IntoView {
                     "Tooltip displays a data-tip message when hovering over the children elements."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "tooltip", type_label: "base", description: "Base class for tooltip container" },
+                    ClassEntry { name: "tooltip-top", type_label: "modifier", description: "Position tooltip above the element" },
+                    ClassEntry { name: "tooltip-bottom", type_label: "modifier", description: "Position tooltip below the element" },
+                    ClassEntry { name: "tooltip-left", type_label: "modifier", description: "Position tooltip to the left of the element" },
+                    ClassEntry { name: "tooltip-right", type_label: "modifier", description: "Position tooltip to the right of the element" },
+                    ClassEntry { name: "tooltip-primary", type_label: "color", description: "Primary color tooltip" },
+                    ClassEntry { name: "tooltip-secondary", type_label: "color", description: "Secondary color tooltip" },
+                    ClassEntry { name: "tooltip-accent", type_label: "color", description: "Accent color tooltip" },
+                    ClassEntry { name: "tooltip-info", type_label: "color", description: "Info color tooltip" },
+                    ClassEntry { name: "tooltip-success", type_label: "color", description: "Success color tooltip" },
+                    ClassEntry { name: "tooltip-warning", type_label: "color", description: "Warning color tooltip" },
+                    ClassEntry { name: "tooltip-error", type_label: "color", description: "Error color tooltip" },
+                    ClassEntry { name: "tooltip-open", type_label: "state", description: "Force tooltip to be visible" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

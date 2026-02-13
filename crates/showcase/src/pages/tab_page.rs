@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,23 @@ pub fn TabPage() -> impl IntoView {
                     "DaisyUI tabs with style variants, sizes, and panel composition examples."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "tabs", type_label: "base", description: "Base tabs container" },
+                    ClassEntry { name: "tab", type_label: "base part", description: "Individual tab" },
+                    ClassEntry { name: "tab-content", type_label: "base part", description: "Content panel for tab" },
+                    ClassEntry { name: "tabs-border", type_label: "style", description: "Bordered tabs style" },
+                    ClassEntry { name: "tabs-lift", type_label: "style", description: "Lifted tabs style" },
+                    ClassEntry { name: "tabs-box", type_label: "style", description: "Boxed tabs style" },
+                    ClassEntry { name: "tabs-lg", type_label: "size", description: "Large" },
+                    ClassEntry { name: "tabs-md", type_label: "size", description: "Medium (default)" },
+                    ClassEntry { name: "tabs-sm", type_label: "size", description: "Small" },
+                    ClassEntry { name: "tabs-xs", type_label: "size", description: "Extra small" },
+                    ClassEntry { name: "tab-active", type_label: "state", description: "Active tab" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

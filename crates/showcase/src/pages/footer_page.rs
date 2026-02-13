@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -7,6 +7,15 @@ pub fn FooterPage() -> impl IntoView {
     view! {
         <div class="space-y-8">
             <h1 class="text-3xl font-bold">"Footer"</h1>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "footer", type_label: "base", description: "Base footer class" },
+                    ClassEntry { name: "footer-title", type_label: "base part", description: "Title within footer" },
+                    ClassEntry { name: "footer-center", type_label: "modifier", description: "Centers footer content" },
+                ] />
+            </section>
 
             <section>
                 <ComponentPreview

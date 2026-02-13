@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,19 @@ pub fn DrawerPage() -> impl IntoView {
                     "Drawer is a grid layout that can show/hide a sidebar on the left or right side of the page."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "drawer", type_label: "base", description: "Base drawer container" },
+                    ClassEntry { name: "drawer-toggle", type_label: "base part", description: "Hidden checkbox for state" },
+                    ClassEntry { name: "drawer-content", type_label: "base part", description: "Main content area" },
+                    ClassEntry { name: "drawer-side", type_label: "base part", description: "Sidebar area" },
+                    ClassEntry { name: "drawer-overlay", type_label: "base part", description: "Overlay behind drawer" },
+                    ClassEntry { name: "drawer-open", type_label: "state", description: "Forces drawer open" },
+                    ClassEntry { name: "drawer-end", type_label: "modifier", description: "Drawer on right side" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

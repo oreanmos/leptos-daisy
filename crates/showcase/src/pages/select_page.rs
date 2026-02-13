@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -14,6 +14,26 @@ pub fn SelectPage() -> impl IntoView {
                     "Dropdown controls with complete style variants and semantic form attributes."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "select", type_label: "base", description: "Base select dropdown component" },
+                    ClassEntry { name: "select-bordered", type_label: "modifier", description: "Adds border to select" },
+                    ClassEntry { name: "select-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "select-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "select-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "select-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "select-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "select-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "select-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "select-ghost", type_label: "color", description: "Ghost style" },
+                    ClassEntry { name: "select-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "select-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "select-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "select-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

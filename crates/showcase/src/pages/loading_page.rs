@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,30 @@ pub fn LoadingPage() -> impl IntoView {
                     "Loading indicators with multiple variants, sizes, and colors for showing async states."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "loading", type_label: "base", description: "Base class for loading indicator" },
+                    ClassEntry { name: "loading-spinner", type_label: "modifier", description: "Spinner variant animation" },
+                    ClassEntry { name: "loading-dots", type_label: "modifier", description: "Dots variant animation" },
+                    ClassEntry { name: "loading-ring", type_label: "modifier", description: "Ring variant animation" },
+                    ClassEntry { name: "loading-ball", type_label: "modifier", description: "Ball variant animation" },
+                    ClassEntry { name: "loading-bars", type_label: "modifier", description: "Bars variant animation" },
+                    ClassEntry { name: "loading-infinity", type_label: "modifier", description: "Infinity variant animation" },
+                    ClassEntry { name: "loading-lg", type_label: "size", description: "Large size loading indicator" },
+                    ClassEntry { name: "loading-md", type_label: "size", description: "Medium size loading indicator" },
+                    ClassEntry { name: "loading-sm", type_label: "size", description: "Small size loading indicator" },
+                    ClassEntry { name: "loading-xs", type_label: "size", description: "Extra small size loading indicator" },
+                    ClassEntry { name: "text-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "text-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "text-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "text-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "text-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "text-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "text-error", type_label: "color", description: "Error color" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

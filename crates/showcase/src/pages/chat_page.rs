@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,26 @@ pub fn ChatPage() -> impl IntoView {
                     "Chat components for building messaging interfaces with avatars, bubbles, and metadata."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "chat", type_label: "base", description: "Container for a single chat message" },
+                    ClassEntry { name: "chat-start", type_label: "modifier", description: "Aligns chat message to the start (left)" },
+                    ClassEntry { name: "chat-end", type_label: "modifier", description: "Aligns chat message to the end (right)" },
+                    ClassEntry { name: "chat-image", type_label: "base", description: "Container for the chat avatar image" },
+                    ClassEntry { name: "chat-header", type_label: "base", description: "Header text above the chat bubble" },
+                    ClassEntry { name: "chat-bubble", type_label: "base", description: "The message bubble container" },
+                    ClassEntry { name: "chat-footer", type_label: "base", description: "Footer text below the chat bubble" },
+                    ClassEntry { name: "chat-bubble-primary", type_label: "color", description: "Chat bubble with primary color" },
+                    ClassEntry { name: "chat-bubble-secondary", type_label: "color", description: "Chat bubble with secondary color" },
+                    ClassEntry { name: "chat-bubble-accent", type_label: "color", description: "Chat bubble with accent color" },
+                    ClassEntry { name: "chat-bubble-info", type_label: "color", description: "Chat bubble with info color" },
+                    ClassEntry { name: "chat-bubble-success", type_label: "color", description: "Chat bubble with success color" },
+                    ClassEntry { name: "chat-bubble-warning", type_label: "color", description: "Chat bubble with warning color" },
+                    ClassEntry { name: "chat-bubble-error", type_label: "color", description: "Chat bubble with error color" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

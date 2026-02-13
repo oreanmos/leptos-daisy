@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,24 @@ pub fn StatusPage() -> impl IntoView {
                     "Visual status indicators with sizes, colors, and contextual usage patterns."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "status", type_label: "base", description: "Base class for status indicator dot" },
+                    ClassEntry { name: "status-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "status-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "status-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "status-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "status-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "status-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "status-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "status-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "status-md", type_label: "size", description: "Medium size (default)" },
+                    ClassEntry { name: "status-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "status-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

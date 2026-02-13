@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,19 @@ pub fn CollapsePage() -> impl IntoView {
                     "DaisyUI collapse patterns with checkbox, details, and radio triggers."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "collapse", type_label: "base", description: "Container for collapsible content" },
+                    ClassEntry { name: "collapse-title", type_label: "base", description: "Title/trigger area of the collapse" },
+                    ClassEntry { name: "collapse-content", type_label: "base", description: "Content area that expands and collapses" },
+                    ClassEntry { name: "collapse-arrow", type_label: "modifier", description: "Adds arrow indicator to collapse title" },
+                    ClassEntry { name: "collapse-plus", type_label: "modifier", description: "Adds plus/minus indicator to collapse title" },
+                    ClassEntry { name: "collapse-open", type_label: "state", description: "Forces collapse to stay open" },
+                    ClassEntry { name: "collapse-close", type_label: "state", description: "Forces collapse to stay closed" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,16 @@ pub fn DiffPage() -> impl IntoView {
                     "Diff components for before/after image and content comparisons with a draggable slider."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "diff", type_label: "base", description: "Container for the diff comparison component" },
+                    ClassEntry { name: "diff-item-1", type_label: "base", description: "First item (bottom layer) in the diff comparison" },
+                    ClassEntry { name: "diff-item-2", type_label: "base", description: "Second item (top layer) in the diff comparison" },
+                    ClassEntry { name: "diff-resizer", type_label: "base", description: "Draggable handle for adjusting the comparison split" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

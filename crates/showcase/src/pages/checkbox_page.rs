@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -15,6 +15,24 @@ pub fn CheckboxPage() -> impl IntoView {
                     "Boolean form controls with complete color/size/state coverage and label patterns."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "checkbox", type_label: "base", description: "Base checkbox component" },
+                    ClassEntry { name: "checkbox-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "checkbox-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "checkbox-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "checkbox-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "checkbox-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "checkbox-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "checkbox-error", type_label: "color", description: "Error color" },
+                    ClassEntry { name: "checkbox-lg", type_label: "size", description: "Large size" },
+                    ClassEntry { name: "checkbox-md", type_label: "size", description: "Medium size" },
+                    ClassEntry { name: "checkbox-sm", type_label: "size", description: "Small size" },
+                    ClassEntry { name: "checkbox-xs", type_label: "size", description: "Extra small size" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

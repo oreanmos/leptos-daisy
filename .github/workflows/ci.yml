@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Format check
+        run: cargo fmt --all -- --check
+
+      - name: Clippy (deny warnings)
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Test workspace
+        run: cargo test --workspace
+
+      - name: Check leptos-daisyui (ssr)
+        run: cargo check -p leptos-daisyui --features ssr
+
+      - name: Check leptos-daisyui (csr)
+        run: cargo check -p leptos-daisyui --features csr
+
+      - name: Check leptos-daisyui (hydrate)
+        run: cargo check -p leptos-daisyui --features hydrate
+
+      - name: Check showcase
+        run: cargo check -p showcase

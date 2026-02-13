@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -15,6 +15,20 @@ pub fn ProgressPage() -> impl IntoView {
                     "Determinate and indeterminate progress bars with full color coverage."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "progress", type_label: "base", description: "Base class for progress bar" },
+                    ClassEntry { name: "progress-primary", type_label: "color", description: "Primary color" },
+                    ClassEntry { name: "progress-secondary", type_label: "color", description: "Secondary color" },
+                    ClassEntry { name: "progress-accent", type_label: "color", description: "Accent color" },
+                    ClassEntry { name: "progress-info", type_label: "color", description: "Info color" },
+                    ClassEntry { name: "progress-success", type_label: "color", description: "Success color" },
+                    ClassEntry { name: "progress-warning", type_label: "color", description: "Warning color" },
+                    ClassEntry { name: "progress-error", type_label: "color", description: "Error color" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview

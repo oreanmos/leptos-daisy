@@ -1,4 +1,4 @@
-use crate::components::component_preview::ComponentPreview;
+use crate::components::{ClassEntry, ClassTable, ComponentPreview};
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -12,6 +12,29 @@ pub fn BadgePage() -> impl IntoView {
                     "Badges are used to inform the user of the status of specific data."
                 </p>
             </header>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Class Reference"</h2>
+                <ClassTable entries=vec![
+                    ClassEntry { name: "badge", type_label: "base", description: "Container for badge content" },
+                    ClassEntry { name: "badge-primary", type_label: "color", description: "Badge with primary color" },
+                    ClassEntry { name: "badge-secondary", type_label: "color", description: "Badge with secondary color" },
+                    ClassEntry { name: "badge-accent", type_label: "color", description: "Badge with accent color" },
+                    ClassEntry { name: "badge-neutral", type_label: "color", description: "Badge with neutral color" },
+                    ClassEntry { name: "badge-info", type_label: "color", description: "Badge with info color" },
+                    ClassEntry { name: "badge-success", type_label: "color", description: "Badge with success color" },
+                    ClassEntry { name: "badge-warning", type_label: "color", description: "Badge with warning color" },
+                    ClassEntry { name: "badge-error", type_label: "color", description: "Badge with error color" },
+                    ClassEntry { name: "badge-ghost", type_label: "color", description: "Badge with ghost color" },
+                    ClassEntry { name: "badge-lg", type_label: "size", description: "Large badge size" },
+                    ClassEntry { name: "badge-md", type_label: "size", description: "Medium badge size (default)" },
+                    ClassEntry { name: "badge-sm", type_label: "size", description: "Small badge size" },
+                    ClassEntry { name: "badge-xs", type_label: "size", description: "Extra small badge size" },
+                    ClassEntry { name: "badge-outline", type_label: "style", description: "Badge with outline style" },
+                    ClassEntry { name: "badge-soft", type_label: "style", description: "Badge with soft background style" },
+                    ClassEntry { name: "badge-dash", type_label: "style", description: "Badge with dashed border style" },
+                ] />
+            </section>
 
             <section class="space-y-4">
                 <ComponentPreview
