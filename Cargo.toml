@@ -2,6 +2,10 @@
 members = ["crates/leptos-daisyui", "crates/showcase"]
 resolver = "2"
 
+[profile.dev]
+# Work around an intermittent rust-lld SIGSEGV when linking the large wasm showcase in O0.
+opt-level = 1
+
 # Cargo-leptos metadata for the showcase app
 [[workspace.metadata.leptos]]
 name = "showcase"
@@ -16,5 +20,4 @@ bin-package = "showcase"
 lib-package = "showcase"
 bin-features = ["ssr"]
 lib-features = ["hydrate"]
-
 

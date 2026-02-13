@@ -1,6 +1,7 @@
 //! Steps component — daisyUI `steps`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -10,6 +11,7 @@ pub fn Steps(
     #[prop(optional)] horizontal: bool,
     #[prop(optional)] responsive: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
     if responsive {
@@ -20,15 +22,17 @@ pub fn Steps(
         m.push("steps-horizontal");
     }
     let cls = class_signal("steps", &m, class);
-    view! { <ul class=cls>{children()}</ul> }
+    view! { <ul class=cls>{children()}</ul> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn Step(
     children: Children,
     #[prop(optional, into)] color: Option<Color>,
+    #[prop(optional)] active: bool,
     #[prop(optional, into)] data_content: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -39,5 +43,10 @@ pub fn Step(
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("step", &refs, class);
-    view! { <li class=cls data-content=data_content>{children()}</li> }
+    view! {
+        <li class=cls data-content=data_content
+            aria-current={if active { Some("step") } else { None }}
+        >{children()}</li>
+    }
+    .add_any_attr(attrs)
 }

@@ -9,7 +9,13 @@ enum ComponentKind {
     Alert,
     Input,
     Toggle,
+    Checkbox,
+    Select,
+    Textarea,
     Progress,
+    Loading,
+    Steps,
+    Tooltip,
     Divider,
 }
 
@@ -22,7 +28,13 @@ impl ComponentKind {
             Self::Alert => "Alert",
             Self::Input => "Input",
             Self::Toggle => "Toggle",
+            Self::Checkbox => "Checkbox",
+            Self::Select => "Select",
+            Self::Textarea => "Textarea",
             Self::Progress => "Progress",
+            Self::Loading => "Loading",
+            Self::Steps => "Steps",
+            Self::Tooltip => "Tooltip",
             Self::Divider => "Divider",
         }
     }
@@ -35,7 +47,13 @@ impl ComponentKind {
             Self::Alert => "⚠️",
             Self::Input => "📝",
             Self::Toggle => "🔀",
+            Self::Checkbox => "☑️",
+            Self::Select => "📋",
+            Self::Textarea => "📄",
             Self::Progress => "📊",
+            Self::Loading => "⏳",
+            Self::Steps => "👣",
+            Self::Tooltip => "💬",
             Self::Divider => "➖",
         }
     }
@@ -48,7 +66,13 @@ impl ComponentKind {
             ComponentKind::Alert,
             ComponentKind::Input,
             ComponentKind::Toggle,
+            ComponentKind::Checkbox,
+            ComponentKind::Select,
+            ComponentKind::Textarea,
             ComponentKind::Progress,
+            ComponentKind::Loading,
+            ComponentKind::Steps,
+            ComponentKind::Tooltip,
             ComponentKind::Divider,
         ]
     }
@@ -61,6 +85,7 @@ struct PlacedComponent {
     kind: ComponentKind,
     color: String,
     size: String,
+    variant: String,
     text: String,
 }
 
@@ -81,6 +106,8 @@ pub fn PlaygroundPage() -> impl IntoView {
             ComponentKind::Badge => "New".to_string(),
             ComponentKind::Alert => "This is an alert".to_string(),
             ComponentKind::Input => "placeholder...".to_string(),
+            ComponentKind::Textarea => "Type here...".to_string(),
+            ComponentKind::Tooltip => "Hover me".to_string(),
             _ => String::new(),
         };
         set_components.update(|v| {
@@ -89,6 +116,7 @@ pub fn PlaygroundPage() -> impl IntoView {
                 kind,
                 color: "primary".to_string(),
                 size: "md".to_string(),
+                variant: "default".to_string(),
                 text,
             });
         });
@@ -126,44 +154,7 @@ pub fn PlaygroundPage() -> impl IntoView {
             "    <div class=\"space-y-4\">".to_string(),
         ];
         for c in &comps {
-            let code = match c.kind {
-                ComponentKind::Button => {
-                    format!(
-                        "        <Button color=Color::{} size=Size::{}>{:?}</Button>",
-                        capitalize(&c.color),
-                        capitalize(&c.size),
-                        c.text
-                    )
-                }
-                ComponentKind::Card => {
-                    format!(
-                        "        <Card>\n            <CardBody>\n                <CardTitle>{:?}</CardTitle>\n                <p>\"Card content\"</p>\n            </CardBody>\n        </Card>",
-                        c.text
-                    )
-                }
-                ComponentKind::Badge => {
-                    format!(
-                        "        <Badge color=Color::{}>{:?}</Badge>",
-                        capitalize(&c.color),
-                        c.text
-                    )
-                }
-                ComponentKind::Alert => {
-                    format!(
-                        "        <Alert variant=AlertVariant::{}>\n            <span>{:?}</span>\n        </Alert>",
-                        capitalize(&c.color),
-                        c.text
-                    )
-                }
-                ComponentKind::Input => {
-                    format!("        <Input placeholder={:?} />", c.text)
-                }
-                ComponentKind::Toggle => {
-                    format!("        <Toggle color=Color::{} />", capitalize(&c.color))
-                }
-                ComponentKind::Progress => "        <Progress value=65 max=100 />".to_string(),
-                ComponentKind::Divider => "        <Divider />".to_string(),
-            };
+            let code = generate_code_for(c);
             lines.push(code);
         }
         lines.push("    </div>".to_string());
@@ -351,15 +342,22 @@ pub fn PlaygroundPage() -> impl IntoView {
                                 let kind_label = comp.kind.label();
                                 let current_color = comp.color.clone();
                                 let current_size = comp.size.clone();
+                                let current_variant = comp.variant.clone();
                                 let current_text = comp.text.clone();
                                 let has_text = matches!(comp.kind,
                                     ComponentKind::Button | ComponentKind::Card |
                                     ComponentKind::Badge | ComponentKind::Alert |
-                                    ComponentKind::Input
+                                    ComponentKind::Input | ComponentKind::Textarea |
+                                    ComponentKind::Tooltip
                                 );
                                 let has_size = matches!(comp.kind,
                                     ComponentKind::Button | ComponentKind::Badge |
-                                    ComponentKind::Input | ComponentKind::Toggle
+                                    ComponentKind::Input | ComponentKind::Toggle |
+                                    ComponentKind::Checkbox | ComponentKind::Select |
+                                    ComponentKind::Textarea | ComponentKind::Loading
+                                );
+                                let has_variant = matches!(comp.kind,
+                                    ComponentKind::Button
                                 );
 
                                 view! {
@@ -412,6 +410,33 @@ pub fn PlaygroundPage() -> impl IntoView {
                                                             let s = *s;
                                                             let selected = s == current_size;
                                                             view! { <option value={s} selected=selected>{s}</option> }
+                                                        }).collect_view()}
+                                                    </select>
+                                                </div>
+                                            }
+                                        })}
+
+                                        // Variant (for buttons)
+                                        {has_variant.then(|| {
+                                            let current_variant = current_variant.clone();
+                                            view! {
+                                                <div class="form-control">
+                                                    <label class="label py-0.5"><span class="label-text text-xs">"Variant"</span></label>
+                                                    <select
+                                                        class="select select-bordered select-xs"
+                                                        on:change=move |ev| {
+                                                            let val = event_target_value(&ev);
+                                                            set_components.update(|v| {
+                                                                if let Some(c) = v.iter_mut().find(|c| c.id == id) {
+                                                                    c.variant = val;
+                                                                }
+                                                            });
+                                                        }
+                                                    >
+                                                        {["default", "outline", "link", "glass", "wide", "block"].iter().map(|v| {
+                                                            let v = *v;
+                                                            let selected = v == current_variant;
+                                                            view! { <option value={v} selected=selected>{v}</option> }
                                                         }).collect_view()}
                                                     </select>
                                                 </div>
@@ -480,15 +505,98 @@ pub fn PlaygroundPage() -> impl IntoView {
     }
 }
 
+/// Generate Leptos code for a placed component.
+fn generate_code_for(c: &PlacedComponent) -> String {
+    match c.kind {
+        ComponentKind::Button => {
+            let variant_str = match c.variant.as_str() {
+                "outline" => " variant=Variant::Outline",
+                "link" => " variant=Variant::Link",
+                "glass" => " variant=Variant::Glass",
+                "wide" => " class=\"btn-wide\"",
+                "block" => " class=\"btn-block\"",
+                _ => "",
+            };
+            format!(
+                "        <Button color=Color::{} size=Size::{}{}>{:?}</Button>",
+                capitalize(&c.color),
+                capitalize(&c.size),
+                variant_str,
+                c.text
+            )
+        }
+        ComponentKind::Card => {
+            format!(
+                "        <Card>\n            <CardBody>\n                <CardTitle>{:?}</CardTitle>\n                <p>\"Card content\"</p>\n            </CardBody>\n        </Card>",
+                c.text
+            )
+        }
+        ComponentKind::Badge => {
+            format!(
+                "        <Badge color=Color::{}>{:?}</Badge>",
+                capitalize(&c.color),
+                c.text
+            )
+        }
+        ComponentKind::Alert => {
+            format!(
+                "        <Alert variant=AlertVariant::{}>\n            <span>{:?}</span>\n        </Alert>",
+                capitalize(&c.color),
+                c.text
+            )
+        }
+        ComponentKind::Input => {
+            format!("        <Input placeholder={:?} size=Size::{} />", c.text, capitalize(&c.size))
+        }
+        ComponentKind::Toggle => {
+            format!("        <Toggle color=Color::{} />", capitalize(&c.color))
+        }
+        ComponentKind::Checkbox => {
+            format!("        <Checkbox color=Color::{} />", capitalize(&c.color))
+        }
+        ComponentKind::Select => {
+            "        <Select>\n            <option>\"Option 1\"</option>\n            <option>\"Option 2\"</option>\n            <option>\"Option 3\"</option>\n        </Select>".to_string()
+        }
+        ComponentKind::Textarea => {
+            format!("        <Textarea placeholder={:?} />", c.text)
+        }
+        ComponentKind::Progress => {
+            format!("        <Progress color=Color::{} value=65 max=100 />", capitalize(&c.color))
+        }
+        ComponentKind::Loading => {
+            format!("        <Loading color=Color::{} />", capitalize(&c.color))
+        }
+        ComponentKind::Steps => {
+            "        <Steps>\n            <Step color=Color::Primary>\"Step 1\"</Step>\n            <Step color=Color::Primary>\"Step 2\"</Step>\n            <Step>\"Step 3\"</Step>\n        </Steps>".to_string()
+        }
+        ComponentKind::Tooltip => {
+            format!(
+                "        <Tooltip tip=\"Tooltip text\">\n            <button class=\"btn\">{:?}</button>\n        </Tooltip>",
+                c.text
+            )
+        }
+        ComponentKind::Divider => "        <Divider />".to_string(),
+    }
+}
+
 /// Render a component preview on the canvas.
 fn render_component(comp: &PlacedComponent) -> impl IntoView {
     let color = &comp.color;
     let size = &comp.size;
+    let variant = &comp.variant;
     let text = &comp.text;
 
     match comp.kind {
         ComponentKind::Button => {
-            let cls = format!("btn btn-{} btn-{}", color, size);
+            let variant_cls = match variant.as_str() {
+                "outline" => " btn-outline",
+                "link" => " btn-link",
+                "glass" => " glass",
+                "wide" => " btn-wide",
+                "block" => " btn-block",
+                _ => "",
+            };
+            let cls = format!("btn btn-{} btn-{}{}", color, size, variant_cls);
             view! { <button class={cls}>{text.clone()}</button> }.into_any()
         }
         ComponentKind::Card => view! {
@@ -517,9 +625,50 @@ fn render_component(comp: &PlacedComponent) -> impl IntoView {
             let cls = format!("toggle toggle-{} toggle-{}", color, size);
             view! { <input type="checkbox" class={cls} checked /> }.into_any()
         }
+        ComponentKind::Checkbox => {
+            let cls = format!("checkbox checkbox-{} checkbox-{}", color, size);
+            view! { <input type="checkbox" class={cls} checked /> }.into_any()
+        }
+        ComponentKind::Select => {
+            let cls = format!("select select-bordered select-{}", size);
+            view! {
+                <select class={cls}>
+                    <option>"Option 1"</option>
+                    <option>"Option 2"</option>
+                    <option>"Option 3"</option>
+                </select>
+            }
+            .into_any()
+        }
+        ComponentKind::Textarea => {
+            let cls = format!("textarea textarea-bordered textarea-{}", size);
+            let text = text.clone();
+            view! { <textarea class={cls} placeholder={text}></textarea> }.into_any()
+        }
         ComponentKind::Progress => {
             let cls = format!("progress progress-{} w-full", color);
             view! { <progress class={cls} value="65" max="100"></progress> }.into_any()
+        }
+        ComponentKind::Loading => {
+            let cls = format!("loading loading-spinner loading-{} text-{}", size, color);
+            view! { <span class={cls}></span> }.into_any()
+        }
+        ComponentKind::Steps => view! {
+            <ul class="steps w-full">
+                <li class=format!("step step-{}", color)>"Step 1"</li>
+                <li class=format!("step step-{}", color)>"Step 2"</li>
+                <li class="step">"Step 3"</li>
+            </ul>
+        }
+        .into_any(),
+        ComponentKind::Tooltip => {
+            let text = text.clone();
+            view! {
+                <div class=format!("tooltip tooltip-{}", color) data-tip="Tooltip text">
+                    <button class="btn btn-sm">{text}</button>
+                </div>
+            }
+            .into_any()
         }
         ComponentKind::Divider => view! { <div class="divider">"—"</div> }.into_any(),
     }

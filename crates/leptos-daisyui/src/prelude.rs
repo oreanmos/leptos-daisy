@@ -13,7 +13,6 @@ pub use crate::utils::config::DaisyConfig;
 // Components
 pub use crate::components::alert::{
     Alert, AlertActions, AlertContent, AlertDirection, AlertIcon, AlertStyle, AlertTitle,
-    AlertVariant,
 };
 pub use crate::components::artboard::{Artboard, ArtboardSize};
 pub use crate::components::avatar::{
@@ -22,6 +21,7 @@ pub use crate::components::avatar::{
 };
 pub use crate::components::backdrop::Backdrop;
 pub use crate::components::badge::Badge;
+pub use crate::components::bottom_navigation::{BottomNavigation, BottomNavigationLabel};
 pub use crate::components::breadcrumbs::{BreadcrumbItem, Breadcrumbs};
 pub use crate::components::button::Button;
 pub use crate::components::card::{
@@ -29,7 +29,7 @@ pub use crate::components::card::{
 };
 pub use crate::components::carousel::{Carousel, CarouselItem, CarouselOrientation, CarouselSnap};
 pub use crate::components::chat::{
-    Chat, ChatBubble, ChatBubbleColor, ChatFooter, ChatHeader, ChatImage, ChatPosition,
+    Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPosition,
 };
 pub use crate::components::checkbox::Checkbox;
 pub use crate::components::collapse::{
@@ -38,18 +38,19 @@ pub use crate::components::collapse::{
 };
 pub use crate::components::countdown::{Countdown, CountdownTimer};
 pub use crate::components::diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
-pub use crate::components::divider::{Divider, DividerColor, DividerOrientation};
+pub use crate::components::divider::{Divider, DividerOrientation};
 pub use crate::components::dock::{Dock, DockItem, DockItemComponent};
 pub use crate::components::drawer::{Drawer, DrawerContent, DrawerOverlay, DrawerSide};
 pub use crate::components::dropdown::{
     Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
     DropdownTrigger,
 };
+pub use crate::components::fab::{Fab, FabAction, FabClose, FabMainAction, FabTrigger};
 pub use crate::components::fieldset::Fieldset;
 pub use crate::components::file_input::FileInput;
 pub use crate::components::filter::Filter;
 pub use crate::components::footer::{Footer, FooterTitle};
-pub use crate::components::hero::{Hero, HeroContent};
+pub use crate::components::hero::{Hero, HeroContent, HeroOverlay};
 pub use crate::components::indicator::{
     Indicator, IndicatorHorizontal, IndicatorItem, IndicatorVertical,
 };
@@ -103,6 +104,7 @@ pub use crate::components::swap::{Swap, SwapAnimation};
 pub use crate::components::tab::{Tab, TabContent, TabVariant, Tabs};
 pub use crate::components::table::Table;
 pub use crate::components::textarea::Textarea;
+pub use crate::components::theme_controller::{ThemeController, ThemeControllerType};
 pub use crate::components::timeline::{
     Timeline, TimelineEnd, TimelineItem, TimelineMiddle, TimelineStart,
 };

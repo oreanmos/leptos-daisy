@@ -1,6 +1,7 @@
 //! Rating component — daisyUI `rating`.
 use crate::utils::class::class_signal;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -44,7 +45,9 @@ pub fn Rating(
     children: Children,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional)] half: bool,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(s) = size {
@@ -55,7 +58,12 @@ pub fn Rating(
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("rating", &refs, class);
-    view! { <div class=cls>{children()}</div> }
+    view! {
+        <div class=cls role="radiogroup"
+            aria-label=move || aria_label.get()
+        >{children()}</div>
+    }
+    .add_any_attr(attrs)
 }
 
 #[component]
@@ -68,6 +76,7 @@ pub fn RatingItem(
     #[prop(optional, into)] checked: MaybeProp<bool>,
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut modifiers = vec![mask.cls()];
     if let Some(half_cls) = half.cls() {
@@ -85,4 +94,5 @@ pub fn RatingItem(
             disabled=move || disabled.get().unwrap_or(false)
         />
     }
+    .add_any_attr(attrs)
 }

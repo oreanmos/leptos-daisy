@@ -3,6 +3,8 @@ use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::variant::Variant;
+use leptos::attr::any_attribute::AnyAttribute;
+use leptos::ev;
 use leptos::prelude::*;
 
 #[component]
@@ -20,6 +22,9 @@ pub fn Textarea(
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] readonly: MaybeProp<bool>,
     #[prop(optional, into)] required: MaybeProp<bool>,
+    #[prop(optional, into)] on_input: Option<Callback<ev::Event>>,
+    #[prop(optional, into)] on_change: Option<Callback<ev::Event>>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -39,6 +44,18 @@ pub fn Textarea(
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("textarea", &refs, class);
+
+    let handle_input = move |ev: ev::Event| {
+        if let Some(cb) = on_input {
+            cb.run(ev);
+        }
+    };
+    let handle_change = move |ev: ev::Event| {
+        if let Some(cb) = on_change {
+            cb.run(ev);
+        }
+    };
+
     view! {
         <textarea
             id=move || id.get()
@@ -51,6 +68,9 @@ pub fn Textarea(
             disabled=move || disabled.get().unwrap_or(false)
             readonly=move || readonly.get().unwrap_or(false)
             required=move || required.get().unwrap_or(false)
+            on:input=handle_input
+            on:change=handle_change
         ></textarea>
     }
+    .add_any_attr(attrs)
 }

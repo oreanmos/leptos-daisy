@@ -1,5 +1,6 @@
 //! Toast component — daisyUI `toast`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -42,7 +43,8 @@ pub fn Toast(
     #[prop(optional)] horizontal: ToastHorizontal,
     #[prop(optional)] vertical: ToastVertical,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("toast", &[horizontal.cls(), vertical.cls()], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls role="alert" aria-live="polite">{children()}</div> }.add_any_attr(attrs)
 }

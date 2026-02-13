@@ -1,6 +1,7 @@
 //! Tooltip component — daisyUI `tooltip`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -30,6 +31,7 @@ pub fn Tooltip(
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional)] open: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     m.push(position.cls().to_string());
@@ -44,5 +46,6 @@ pub fn Tooltip(
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("tooltip", &refs, class);
-    view! { <div class=cls data-tip=tip>{children()}</div> }
+    view! { <div class=cls data-tip=tip.clone() aria-label=tip>{children()}</div> }
+        .add_any_attr(attrs)
 }

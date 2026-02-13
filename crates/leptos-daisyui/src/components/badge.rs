@@ -3,16 +3,18 @@ use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::variant::Variant;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
 pub fn Badge(
-    children: Children,
+    #[prop(optional)] children: Option<Children>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] variant: Option<Variant>,
-    #[prop(optional)] outline: bool,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -30,10 +32,12 @@ pub fn Badge(
             m.push(s);
         }
     }
-    if outline {
-        m.push("badge-outline".into());
-    }
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("badge", &r, class);
-    view! { <span class=cls>{children()}</span> }
+    view! {
+        <span class=cls aria-label=move || aria_label.get()>
+            {children.map(|c| c())}
+        </span>
+    }
+    .add_any_attr(attrs)
 }

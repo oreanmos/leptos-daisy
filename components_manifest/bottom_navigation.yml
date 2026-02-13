@@ -1,0 +1,84 @@
+# Bottom Navigation Component Manifest
+#
+# DaisyUI Bottom Navigation component documentation for leptos-daisyui
+
+name: BottomNavigation
+doc: https://daisyui.com/components/bottom-navigation/
+
+base:
+  - "btm-nav"
+
+parts:
+  - name: "btm-nav-label"
+    description: "Text label for bottom navigation items"
+    component: "BottomNavigationLabel"
+
+modifiers:
+  # Size modifiers
+  size:
+    - "btm-nav-xs"
+    - "btm-nav-sm"
+    - "btm-nav-md"
+    - "btm-nav-lg"
+  
+  # State modifiers (applied to child items)
+  state:
+    - "active"
+    - "disabled"
+
+patterns:
+  - "with-icons"
+  - "with-labels"
+  - "active-item"
+  - "disabled-item"
+  - "brand-colors"
+  - "state-colors"
+  - "custom-colors"
+
+examples:
+  - id: "basic"
+    description: "Basic bottom navigation"
+  - id: "with-icons"
+    description: "Bottom nav with icons only"
+  - id: "with-labels"
+    description: "Bottom nav with icons and labels"
+  - id: "all-sizes"
+    description: "All size variants (xs, sm, md, lg)"
+  - id: "active-state"
+    description: "Active item highlighting"
+  - id: "disabled-state"
+    description: "Disabled navigation items"
+  - id: "brand-colors"
+    description: "Bottom nav with brand color items"
+  - id: "state-colors"
+    description: "Bottom nav with state color items"
+  - id: "custom-colors"
+    description: "Bottom nav with custom colored items"
+
+accessibility:
+  semantic_element: "nav"
+  aria_attributes:
+    - "aria-label"
+    - "aria-current"
+  keyboard_navigation: true
+  notes: |
+    - Use <button> elements for navigation items when staying on same page
+    - Use <a> elements for actual page navigation
+    - Active items should use aria-current="page" for screen readers
+    - iOS requires <meta name="viewport" content="viewport-fit=cover"> for proper display
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true
+
+notes: |
+  The Bottom Navigation component is designed for mobile-style navigation.
+  
+  Special considerations:
+  - Items can be buttons or links depending on navigation type
+  - Active state is applied to child items, not the container
+  - Disabled state is applied to child items
+  - The viewport meta tag is required for iOS responsiveness
+  - Brand/state/custom colors can be applied to individual items using utility classes

@@ -5,6 +5,8 @@ use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::state::State;
 use crate::variants::variant::Variant;
+use leptos::attr::any_attribute::AnyAttribute;
+use leptos::ev;
 use leptos::prelude::*;
 
 /// A daisyUI button.
@@ -27,6 +29,8 @@ pub fn Button(
     #[prop(optional)] block: bool,
     #[prop(optional)] no_animation: bool,
     #[prop(optional)] disabled: bool,
+    #[prop(optional, into)] on_click: Option<Callback<ev::MouseEvent>>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
     let mut mods = Vec::new();
@@ -73,6 +77,12 @@ pub fn Button(
     let refs: Vec<&str> = mods.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("btn", &refs, class);
 
+    let handle_click = move |ev: ev::MouseEvent| {
+        if let Some(cb) = on_click {
+            cb.run(ev);
+        }
+    };
+
     view! {
         <button
             class=cls
@@ -82,8 +92,10 @@ pub fn Button(
             value=move || value.get()
             aria-label=move || aria_label.get()
             disabled=disabled
+            on:click=handle_click
         >
             {children()}
         </button>
     }
+    .add_any_attr(attrs)
 }

@@ -1,6 +1,7 @@
 //! Dock component — daisyUI `dock`.
 use crate::utils::class::class_signal;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Debug)]
@@ -43,6 +44,7 @@ pub fn Dock(
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] on_item_click: Option<Callback<usize>>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut mods = Vec::new();
     if let Some(s) = size {
@@ -79,7 +81,7 @@ pub fn Dock(
                 }
             }).collect::<Vec<_>>()}
         </div>
-    }
+    }.add_any_attr(attrs)
 }
 
 #[component]
@@ -89,6 +91,7 @@ pub fn DockItemComponent(
     #[prop(optional, into)] href: Option<String>,
     #[prop(optional, into)] on_click: Option<Callback<()>>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut mods: Vec<&str> = Vec::new();
     if active {
@@ -100,11 +103,13 @@ pub fn DockItemComponent(
             cb.run(());
         }
     };
-    view! {
-        {if let Some(href) = href {
-            view! { <a class=cls href=href aria-current={if active { Some("page") } else { None }}>{children()}</a> }.into_any()
-        } else {
-            view! { <button class=cls on:click=handle_click type="button" aria-current={if active { Some("page") } else { None }}>{children()}</button> }.into_any()
-        }}
+    if let Some(href) = href {
+        view! { <a class=cls href=href aria-current={if active { Some("page") } else { None }}>{children()}</a> }
+            .add_any_attr(attrs)
+            .into_any()
+    } else {
+        view! { <button class=cls on:click=handle_click type="button" aria-current={if active { Some("page") } else { None }}>{children()}</button> }
+            .add_any_attr(attrs)
+            .into_any()
     }
 }

@@ -1,5 +1,6 @@
 //! MockupBrowser component — daisyUI `mockup-browser`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -7,6 +8,7 @@ pub fn MockupBrowser(
     children: Children,
     #[prop(optional, into)] url: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("mockup-browser", &[], class);
     view! {
@@ -14,5 +16,5 @@ pub fn MockupBrowser(
             {url.map(|u| view! { <div class="mockup-browser-toolbar"><div class="input">{u}</div></div> })}
             {children()}
         </div>
-    }
+    }.add_any_attr(attrs)
 }

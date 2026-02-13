@@ -1,5 +1,7 @@
 //! Divider component — daisyUI `divider`.
 use crate::utils::class::class_signal;
+use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -17,53 +19,29 @@ impl DividerOrientation {
     }
 }
 
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum DividerColor {
-    #[default]
-    Default,
-    Primary,
-    Secondary,
-    Accent,
-    Neutral,
-    Info,
-    Success,
-    Warning,
-    Error,
-}
-impl DividerColor {
-    fn cls(&self) -> &'static str {
-        match self {
-            Self::Default => "",
-            Self::Primary => "divider-primary",
-            Self::Secondary => "divider-secondary",
-            Self::Accent => "divider-accent",
-            Self::Neutral => "divider-neutral",
-            Self::Info => "divider-info",
-            Self::Success => "divider-success",
-            Self::Warning => "divider-warning",
-            Self::Error => "divider-error",
-        }
-    }
-}
-
 #[component]
 pub fn Divider(
     #[prop(optional)] children: Option<Children>,
     #[prop(optional)] orientation: DividerOrientation,
-    #[prop(optional)] color: DividerColor,
+    #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] text: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = vec![orientation.cls()];
-    let cc = color.cls();
-    if !cc.is_empty() {
-        m.push(cc);
+    let mut m: Vec<String> = vec![orientation.cls().to_string()];
+    if let Some(c) = color {
+        let s = c.class("divider");
+        if !s.is_empty() {
+            m.push(s);
+        }
     }
-    let cls = class_signal("divider", &m, class);
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("divider", &refs, class);
     view! {
         <div class=cls>
             {text.map(|t| view! { <span>{t}</span> })}
             {children.map(|c| c())}
         </div>
     }
+    .add_any_attr(attrs)
 }

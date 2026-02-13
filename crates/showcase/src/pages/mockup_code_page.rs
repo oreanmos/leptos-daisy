@@ -1,3 +1,4 @@
+use crate::components::component_preview::ComponentPreview;
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -8,44 +9,80 @@ pub fn MockupCodePage() -> impl IntoView {
             <h1 class="text-3xl font-bold">"Mockup Code"</h1>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Basic"</h2>
-                <MockupCode>
-                    <MockupCodeLine prefix="$">"npm i daisyui"</MockupCodeLine>
-                </MockupCode>
+                <ComponentPreview
+                    title="Basic"
+                    code=r#"<MockupCode>
+    <MockupCodeLine prefix="$">"npm i daisyui"</MockupCodeLine>
+</MockupCode>"#
+                >
+                    <MockupCode>
+                        <MockupCodeLine prefix="$">"npm i daisyui"</MockupCodeLine>
+                    </MockupCode>
+                </ComponentPreview>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Without Prefix"</h2>
-                <MockupCode>
-                    <MockupCodeLine>"hello world"</MockupCodeLine>
-                </MockupCode>
+                <ComponentPreview
+                    title="Without Prefix"
+                    code=r#"<MockupCode>
+    <MockupCodeLine>"hello world"</MockupCodeLine>
+</MockupCode>"#
+                >
+                    <MockupCode>
+                        <MockupCodeLine>"hello world"</MockupCodeLine>
+                    </MockupCode>
+                </ComponentPreview>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Multi-line"</h2>
-                <MockupCode>
-                    <MockupCodeLine prefix="1">"fn main() {"</MockupCodeLine>
-                    <MockupCodeLine prefix="2">"    println!(\"Hello\");"</MockupCodeLine>
-                    <MockupCodeLine prefix="3">"}"</MockupCodeLine>
-                </MockupCode>
+                <ComponentPreview
+                    title="Multi-line"
+                    code=r#"<MockupCode>
+    <MockupCodeLine prefix="1">"fn main() {"</MockupCodeLine>
+    <MockupCodeLine prefix="2">"    println!(\"Hello\");"</MockupCodeLine>
+    <MockupCodeLine prefix="3">"}"</MockupCodeLine>
+</MockupCode>"#
+                >
+                    <MockupCode>
+                        <MockupCodeLine prefix="1">"fn main() {"</MockupCodeLine>
+                        <MockupCodeLine prefix="2">"    println!(\"Hello\");"</MockupCodeLine>
+                        <MockupCodeLine prefix="3">"}"</MockupCodeLine>
+                    </MockupCode>
+                </ComponentPreview>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"With Highlighted Line"</h2>
-                <MockupCode>
-                    <MockupCodeLine prefix="1">"Installing..."</MockupCodeLine>
-                    <MockupCodeLine prefix="2" class="bg-warning text-warning-content">"Error!"</MockupCodeLine>
-                    <MockupCodeLine prefix="3">"Retrying..."</MockupCodeLine>
-                </MockupCode>
+                <ComponentPreview
+                    title="With Highlighted Line"
+                    code=r#"<MockupCode>
+    <MockupCodeLine prefix="1">"Installing..."</MockupCodeLine>
+    <MockupCodeLine prefix="2" class="bg-warning text-warning-content">"Error!"</MockupCodeLine>
+    <MockupCodeLine prefix="3">"Retrying..."</MockupCodeLine>
+</MockupCode>"#
+                >
+                    <MockupCode>
+                        <MockupCodeLine prefix="1">"Installing..."</MockupCodeLine>
+                        <MockupCodeLine prefix="2" class="bg-warning text-warning-content">"Error!"</MockupCodeLine>
+                        <MockupCodeLine prefix="3">"Retrying..."</MockupCodeLine>
+                    </MockupCode>
+                </ComponentPreview>
             </section>
 
             <section>
-                <h2 class="text-xl font-semibold mb-4">"Colored Lines"</h2>
-                <MockupCode>
-                    <MockupCodeLine prefix="~" class="text-success">"success"</MockupCodeLine>
-                    <MockupCodeLine prefix="~" class="text-warning">"warning"</MockupCodeLine>
-                    <MockupCodeLine prefix="~" class="text-error">"error"</MockupCodeLine>
-                </MockupCode>
+                <ComponentPreview
+                    title="Colored Lines"
+                    code=r#"<MockupCode>
+    <MockupCodeLine prefix="~" class="text-success">"success"</MockupCodeLine>
+    <MockupCodeLine prefix="~" class="text-warning">"warning"</MockupCodeLine>
+    <MockupCodeLine prefix="~" class="text-error">"error"</MockupCodeLine>
+</MockupCode>"#
+                >
+                    <MockupCode>
+                        <MockupCodeLine prefix="~" class="text-success">"success"</MockupCodeLine>
+                        <MockupCodeLine prefix="~" class="text-warning">"warning"</MockupCodeLine>
+                        <MockupCodeLine prefix="~" class="text-error">"error"</MockupCodeLine>
+                    </MockupCode>
+                </ComponentPreview>
             </section>
         </div>
     }

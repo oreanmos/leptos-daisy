@@ -1,0 +1,66 @@
+# FAB (Floating Action Button) Component Manifest
+#
+# DaisyUI FAB component documentation for leptos-daisyui
+
+name: FAB
+doc: https://daisyui.com/components/fab/
+
+base:
+  - "fab"
+
+parts:
+  - name: "fab-close"
+    description: "Wrapper for close button shown when FAB is open"
+    classes: ["fab-close"]
+  - name: "fab-main-action"
+    description: "Wrapper for main action button shown when FAB is open"
+    classes: ["fab-main-action"]
+
+modifiers:
+  layout:
+    - "fab-flower"
+
+patterns:
+  - "basic-fab"
+  - "speed-dial"
+  - "flower-variant"
+  - "with-labels"
+  - "with-close-button"
+
+examples:
+  - id: "basic"
+    description: "Basic FAB with single button"
+  - id: "speed-dial"
+    description: "FAB with speed dial actions"
+  - id: "flower"
+    description: "FAB with flower (quarter-circle) layout"
+  - id: "with-labels"
+    description: "FAB with text labels next to action buttons"
+  - id: "with-close"
+    description: "FAB with close button when open"
+  - id: "with-main-action"
+    description: "FAB with separate main action when open"
+
+accessibility:
+  semantic_element: "div"
+  aria_attributes:
+    - "role=button"
+    - "tabindex=0"
+  keyboard_navigation: true
+  notes: "FabTrigger uses div with tabindex=0 due to Safari bug with button in FAB context"
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true
+
+notes: |
+  The FAB component is a fixed-position container for floating action buttons.
+  It supports speed dial patterns with multiple actions that appear when triggered.
+  
+  Special considerations:
+  - FabTrigger uses div with tabindex=0 and role=button (Safari compatibility)
+  - Flower variant arranges actions in quarter-circle instead of vertical
+  - Labels appear to the left of action buttons
+  - fab-close and fab-main-action are shown/hidden via CSS when FAB is open

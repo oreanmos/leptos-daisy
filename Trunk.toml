@@ -1,6 +1,7 @@
 [build]
 target = "crates/showcase/index.html"
 dist = "dist"
+no_sri = true
 
 [watch]
 watch = ["crates/showcase/src", "crates/leptos-daisyui/src"]

@@ -1,6 +1,8 @@
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
+use crate::components::component_preview::ComponentPreview;
+
 #[component]
 pub fn StackedLayoutPage() -> impl IntoView {
     view! {
@@ -12,10 +14,25 @@ pub fn StackedLayoutPage() -> impl IntoView {
             </p>
 
             // --- Example 1: Simple header with nav tabs (light) ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"1. Simple Header with Nav Tabs (Light)"</h2>
-                <p class="text-sm text-base-content/60">"Basic light header with horizontal tab navigation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="1. Simple Header with Nav Tabs (Light)"
+                description="Basic light header with horizontal tab navigation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Light>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav>
+        <StackedLayoutNavItem href="/" active=true>"Dashboard"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+    <NavbarEnd>...</NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6">
+    // Main content
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Light class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -46,13 +63,30 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 2: Header with border and nav tabs (light) ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"2. Header with Border and Nav Tabs (Light)"</h2>
-                <p class="text-sm text-base-content/60">"Light header with bottom border for visual separation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="2. Header with Border and Nav Tabs (Light)"
+                description="Light header with bottom border for visual separation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::LightBordered>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav>
+        <StackedLayoutNavItem href="/" active=true>"Home"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+    <NavbarEnd>
+      <Button size=Size::Small color=Color::Primary>"Sign Up"</Button>
+    </NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6">
+    // Content area
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::LightBordered class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -76,13 +110,28 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 3: Dark header with nav tabs ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"3. Dark Header with Nav Tabs"</h2>
-                <p class="text-sm text-base-content/60">"Dark neutral background header with tab navigation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="3. Dark Header with Nav Tabs"
+                description="Dark neutral background header with tab navigation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Dark>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav>
+        <StackedLayoutNavItem href="/" active=true>"Overview"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+    <NavbarEnd>...</NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6 bg-base-100">
+    // Content below dark navbar
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Dark class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -110,13 +159,28 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 4: Indigo branded header with nav tabs ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"4. Indigo Branded Header with Nav Tabs"</h2>
-                <p class="text-sm text-base-content/60">"Primary-colored header with tab navigation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="4. Indigo Branded Header with Nav Tabs"
+                description="Primary-colored header with tab navigation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Primary>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav>
+        <StackedLayoutNavItem href="/" active=true>"Products"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+    <NavbarEnd>...</NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6 bg-base-100">
+    // Content below branded header
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Primary class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -144,13 +208,20 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 5: Dark header with overlap content area ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"5. Dark Header with Overlap Content Area"</h2>
-                <p class="text-sm text-base-content/60">"Dark header with content card overlapping into header."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="5. Dark Header with Overlap Content Area"
+                description="Dark header with content card overlapping into header."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Dark>
+  <StackedLayoutHeader>...</StackedLayoutHeader>
+  <StackedLayoutContent overlap=true>
+    // Content overlaps header
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Dark class="min-h-[24rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -187,13 +258,20 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 6: Indigo branded header with overlap content area ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"6. Indigo Branded Header with Overlap Content Area"</h2>
-                <p class="text-sm text-base-content/60">"Primary header with overlapping content card."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="6. Indigo Branded Header with Overlap Content Area"
+                description="Primary header with overlapping content card."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Primary>
+  <StackedLayoutHeader>...</StackedLayoutHeader>
+  <StackedLayoutContent overlap=true>
+    // Content overlaps branded header
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Primary class="min-h-[24rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -220,13 +298,26 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 7: Indigo branded header with search and secondary nav ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"7. Indigo Branded Header with Search and Secondary Nav"</h2>
-                <p class="text-sm text-base-content/60">"Primary header with search input and secondary navigation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="7. Indigo Branded Header with Search and Secondary Nav"
+                description="Primary header with search input and secondary navigation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Primary>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutSearch placeholder="Search products..." />
+    </NavbarCenter>
+    <NavbarEnd>...</NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6 bg-base-100">
+    // Content with breadcrumbs
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Primary class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -257,13 +348,28 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 8: Dark header with compact nav ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"8. Dark Header with Compact Nav"</h2>
-                <p class="text-sm text-base-content/60">"Dark header with compact minimal navigation."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="8. Dark Header with Compact Nav"
+                description="Dark header with compact minimal navigation."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Dark>
+  <StackedLayoutHeader>
+    <NavbarStart>...</NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav style=NavStyle::Compact>
+        <StackedLayoutNavItem href="/" active=true>"Home"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+    <NavbarEnd>...</NavbarEnd>
+  </StackedLayoutHeader>
+  <StackedLayoutContent class="p-6 bg-base-100">
+    // Content area
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Dark class="min-h-[20rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -288,13 +394,21 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutContent>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Example 9: Indigo header with centered search and footer ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"9. Indigo Header with Centered Search and Footer"</h2>
-                <p class="text-sm text-base-content/60">"Primary header with centered search and page footer."</p>
-                <div class="border border-base-300 rounded-box overflow-hidden">
+            <ComponentPreview
+                title="9. Indigo Header with Centered Search and Footer"
+                description="Primary header with centered search and page footer."
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Primary>
+  <StackedLayoutHeader>...</StackedLayoutHeader>
+  <StackedLayoutContent>...</StackedLayoutContent>
+  <StackedLayoutFooter>
+    // Footer content
+  </StackedLayoutFooter>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
                     <StackedLayout variant=StackedLayoutVariant::Primary class="min-h-[24rem]">
                         <StackedLayoutHeader>
                             <NavbarStart>
@@ -336,29 +450,47 @@ pub fn StackedLayoutPage() -> impl IntoView {
                         </StackedLayoutFooter>
                     </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
 
             // --- Usage Example ---
-            <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"Usage"</h2>
-                <div class="mockup-code text-sm">
-                    <pre data-prefix="1"><code>"<StackedLayout variant=StackedLayoutVariant::Primary>"</code></pre>
-                    <pre data-prefix="2"><code>"  <StackedLayoutHeader>"</code></pre>
-                    <pre data-prefix="3"><code>"    <NavbarStart>"</code></pre>
-                    <pre data-prefix="4"><code>"      <span class=\"text-xl font-bold\">\"Logo\"</span>"</code></pre>
-                    <pre data-prefix="5"><code>"    </NavbarStart>"</code></pre>
-                    <pre data-prefix="6"><code>"    <NavbarCenter>"</code></pre>
-                    <pre data-prefix="7"><code>"      <StackedLayoutNav>"</code></pre>
-                    <pre data-prefix="8"><code>"        <StackedLayoutNavItem href=\"/\" active=true>\"Home\"</StackedLayoutNavItem>"</code></pre>
-                    <pre data-prefix="9"><code>"      </StackedLayoutNav>"</code></pre>
-                    <pre data-prefix="10"><code>"    </NavbarCenter>"</code></pre>
-                    <pre data-prefix="11"><code>"  </StackedLayoutHeader>"</code></pre>
-                    <pre data-prefix="12"><code>"  <StackedLayoutContent>"</code></pre>
-                    <pre data-prefix="13"><code>"    <p>\"Main content here\"</p>"</code></pre>
-                    <pre data-prefix="14"><code>"  </StackedLayoutContent>"</code></pre>
-                    <pre data-prefix="15"><code>"</StackedLayout>"</code></pre>
+            <ComponentPreview
+                title="Usage"
+                code=r#"<StackedLayout variant=StackedLayoutVariant::Primary>
+  <StackedLayoutHeader>
+    <NavbarStart>
+      <span class="text-xl font-bold">"Logo"</span>
+    </NavbarStart>
+    <NavbarCenter>
+      <StackedLayoutNav>
+        <StackedLayoutNavItem href="/" active=true>"Home"</StackedLayoutNavItem>
+      </StackedLayoutNav>
+    </NavbarCenter>
+  </StackedLayoutHeader>
+  <StackedLayoutContent>
+    <p>"Main content here"</p>
+  </StackedLayoutContent>
+</StackedLayout>"#
+            >
+                <div class="border border-base-300 rounded-box overflow-hidden w-full">
+                    <StackedLayout variant=StackedLayoutVariant::Primary class="min-h-[16rem]">
+                        <StackedLayoutHeader>
+                            <NavbarStart>
+                                <span class="text-xl font-bold px-4">"Logo"</span>
+                            </NavbarStart>
+                            <NavbarCenter>
+                                <StackedLayoutNav>
+                                    <StackedLayoutNavItem href="/" active=true>"Home"</StackedLayoutNavItem>
+                                </StackedLayoutNav>
+                            </NavbarCenter>
+                        </StackedLayoutHeader>
+                        <StackedLayoutContent class="p-6 bg-base-100">
+                            <div class="max-w-4xl mx-auto">
+                                <p class="text-base-content/70">"Main content here"</p>
+                            </div>
+                        </StackedLayoutContent>
+                    </StackedLayout>
                 </div>
-            </section>
+            </ComponentPreview>
         </div>
     }
 }

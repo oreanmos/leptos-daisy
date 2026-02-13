@@ -1,3 +1,4 @@
+use crate::components::component_preview::ComponentPreview;
 use leptos::prelude::*;
 use leptos_daisyui::prelude::*;
 
@@ -13,69 +14,129 @@ pub fn TabPage() -> impl IntoView {
             </header>
 
             <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"Default"</h2>
-                <Tabs>
-                    <Tab active=true>"Overview"</Tab>
-                    <Tab>"Analytics"</Tab>
-                    <Tab>"Reports"</Tab>
-                    <Tab disabled=true>"Disabled"</Tab>
-                </Tabs>
+                <ComponentPreview
+                    title="Default"
+                    code=r#"<Tabs>
+    <Tab active=true>"Overview"</Tab>
+    <Tab>"Analytics"</Tab>
+    <Tab>"Reports"</Tab>
+    <Tab disabled=true>"Disabled"</Tab>
+</Tabs>"#
+                >
+                    <Tabs>
+                        <Tab active=true>"Overview"</Tab>
+                        <Tab>"Analytics"</Tab>
+                        <Tab>"Reports"</Tab>
+                        <Tab disabled=true>"Disabled"</Tab>
+                    </Tabs>
+                </ComponentPreview>
             </section>
 
             <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"Variants"</h2>
-                <div class="space-y-4">
-                    <Tabs variant=TabVariant::Bordered>
-                        <Tab>"Bordered 1"</Tab>
-                        <Tab active=true>"Bordered 2"</Tab>
-                        <Tab>"Bordered 3"</Tab>
-                    </Tabs>
-                    <Tabs variant=TabVariant::Lifted>
-                        <Tab>"Lifted 1"</Tab>
-                        <Tab active=true>"Lifted 2"</Tab>
-                        <Tab>"Lifted 3"</Tab>
-                    </Tabs>
-                    <Tabs variant=TabVariant::Boxed>
-                        <Tab>"Boxed 1"</Tab>
-                        <Tab active=true>"Boxed 2"</Tab>
-                        <Tab>"Boxed 3"</Tab>
-                    </Tabs>
-                </div>
+                <ComponentPreview
+                    title="Variants"
+                    code=r#"<Tabs variant={TabVariant::Bordered}>
+    <Tab>"Bordered 1"</Tab>
+    <Tab active=true>"Bordered 2"</Tab>
+    <Tab>"Bordered 3"</Tab>
+</Tabs>
+
+<Tabs variant={TabVariant::Lifted}>
+    <Tab>"Lifted 1"</Tab>
+    <Tab active=true>"Lifted 2"</Tab>
+    <Tab>"Lifted 3"</Tab>
+</Tabs>
+
+<Tabs variant={TabVariant::Boxed}>
+    <Tab>"Boxed 1"</Tab>
+    <Tab active=true>"Boxed 2"</Tab>
+    <Tab>"Boxed 3"</Tab>
+</Tabs>"#
+                >
+                    <div class="space-y-4">
+                        <Tabs variant={TabVariant::Bordered}>
+                            <Tab>"Bordered 1"</Tab>
+                            <Tab active=true>"Bordered 2"</Tab>
+                            <Tab>"Bordered 3"</Tab>
+                        </Tabs>
+                        <Tabs variant={TabVariant::Lifted}>
+                            <Tab>"Lifted 1"</Tab>
+                            <Tab active=true>"Lifted 2"</Tab>
+                            <Tab>"Lifted 3"</Tab>
+                        </Tabs>
+                        <Tabs variant={TabVariant::Boxed}>
+                            <Tab>"Boxed 1"</Tab>
+                            <Tab active=true>"Boxed 2"</Tab>
+                            <Tab>"Boxed 3"</Tab>
+                        </Tabs>
+                    </div>
+                </ComponentPreview>
             </section>
 
             <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"Sizes"</h2>
-                <div class="space-y-3">
-                    <Tabs size={Size::ExtraSmall}>
-                        <Tab active=true>"XS"</Tab>
-                        <Tab>"Tab"</Tab>
-                    </Tabs>
-                    <Tabs size={Size::Small}>
-                        <Tab active=true>"SM"</Tab>
-                        <Tab>"Tab"</Tab>
-                    </Tabs>
-                    <Tabs size={Size::Large}>
-                        <Tab active=true>"LG"</Tab>
-                        <Tab>"Tab"</Tab>
-                    </Tabs>
-                </div>
+                <ComponentPreview
+                    title="Sizes"
+                    code=r#"<Tabs size={Size::ExtraSmall}>
+    <Tab active=true>"XS"</Tab>
+    <Tab>"Tab"</Tab>
+</Tabs>
+
+<Tabs size={Size::Small}>
+    <Tab active=true>"SM"</Tab>
+    <Tab>"Tab"</Tab>
+</Tabs>
+
+<Tabs size={Size::Large}>
+    <Tab active=true>"LG"</Tab>
+    <Tab>"Tab"</Tab>
+</Tabs>"#
+                >
+                    <div class="space-y-3">
+                        <Tabs size={Size::ExtraSmall}>
+                            <Tab active=true>"XS"</Tab>
+                            <Tab>"Tab"</Tab>
+                        </Tabs>
+                        <Tabs size={Size::Small}>
+                            <Tab active=true>"SM"</Tab>
+                            <Tab>"Tab"</Tab>
+                        </Tabs>
+                        <Tabs size={Size::Large}>
+                            <Tab active=true>"LG"</Tab>
+                            <Tab>"Tab"</Tab>
+                        </Tabs>
+                    </div>
+                </ComponentPreview>
             </section>
 
             <section class="space-y-4">
-                <h2 class="text-xl font-semibold">"With content panel"</h2>
-                <div class="max-w-2xl">
-                    <Tabs variant=TabVariant::Lifted>
-                        <Tab active=true>"Profile"</Tab>
-                        <Tab>"Team"</Tab>
-                        <Tab>"Security"</Tab>
-                    </Tabs>
-                    <TabContent class="bg-base-100 border border-base-300 rounded-box p-4">
-                        <p class="font-medium">"Profile settings"</p>
-                        <p class="text-sm text-base-content/70 mt-1">
-                            "Use `TabContent` to style associated panel blocks with daisyUI classes."
-                        </p>
-                    </TabContent>
-                </div>
+                <ComponentPreview
+                    title="With content panel"
+                    code=r#"<Tabs variant={TabVariant::Lifted}>
+    <Tab active=true>"Profile"</Tab>
+    <Tab>"Team"</Tab>
+    <Tab>"Security"</Tab>
+</Tabs>
+<TabContent class="bg-base-100 border border-base-300 rounded-box p-4">
+    <p class="font-medium">"Profile settings"</p>
+    <p class="text-sm text-base-content/70 mt-1">
+        "Use `TabContent` to style associated panel blocks with daisyUI classes."
+    </p>
+</TabContent>"#
+                >
+                    <div class="max-w-2xl">
+                        <Tabs variant={TabVariant::Lifted}>
+                            <Tab active=true>"Profile"</Tab>
+                            <Tab>"Team"</Tab>
+                            <Tab>"Security"</Tab>
+                        </Tabs>
+                        <TabContent class="bg-base-100 border border-base-300 rounded-box p-4">
+                            <p class="font-medium">"Profile settings"</p>
+                            <p class="text-sm text-base-content/70 mt-1">
+                                "Use `TabContent` to style associated panel blocks with daisyUI classes."
+                            </p>
+                        </TabContent>
+                    </div>
+                </ComponentPreview>
             </section>
         </div>
     }

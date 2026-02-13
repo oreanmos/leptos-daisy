@@ -1,25 +1,8 @@
 //! Alert component — daisyUI `alert`.
 use crate::utils::class::class_signal;
+use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
-
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub enum AlertVariant {
-    #[default]
-    Info,
-    Success,
-    Warning,
-    Error,
-}
-impl AlertVariant {
-    fn cls(&self) -> &'static str {
-        match self {
-            Self::Info => "alert-info",
-            Self::Success => "alert-success",
-            Self::Warning => "alert-warning",
-            Self::Error => "alert-error",
-        }
-    }
-}
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AlertStyle {
@@ -61,17 +44,30 @@ impl AlertDirection {
 #[component]
 pub fn Alert(
     children: Children,
-    #[prop(optional)] variant: AlertVariant,
+    #[prop(optional, into)] color: Option<Color>,
     #[prop(optional)] style: AlertStyle,
     #[prop(optional)] direction: AlertDirection,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mods: Vec<&str> = [variant.cls(), style.cls(), direction.cls()]
-        .into_iter()
-        .filter(|s| !s.is_empty())
-        .collect();
-    let cls = class_signal("alert", &mods, class);
-    view! { <div class=cls role="alert">{children()}</div> }
+    let mut mods = Vec::new();
+    if let Some(c) = color {
+        let s = c.class("alert");
+        if !s.is_empty() {
+            mods.push(s);
+        }
+    }
+    let style_cls = style.cls();
+    if !style_cls.is_empty() {
+        mods.push(style_cls.to_string());
+    }
+    let dir_cls = direction.cls();
+    if !dir_cls.is_empty() {
+        mods.push(dir_cls.to_string());
+    }
+    let refs: Vec<&str> = mods.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("alert", &refs, class);
+    view! { <div class=cls role="alert">{children()}</div> }.add_any_attr(attrs)
 }
 
 /// Alert icon sub-component.
@@ -79,9 +75,10 @@ pub fn Alert(
 pub fn AlertIcon(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("alert-icon", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 /// Alert title sub-component.
@@ -89,9 +86,10 @@ pub fn AlertIcon(
 pub fn AlertTitle(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("alert-title", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 /// Alert content sub-component.
@@ -99,9 +97,10 @@ pub fn AlertTitle(
 pub fn AlertContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("alert-content", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 /// Alert actions sub-component.
@@ -109,7 +108,8 @@ pub fn AlertContent(
 pub fn AlertActions(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("alert-actions", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }

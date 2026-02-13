@@ -5,6 +5,7 @@ pub mod artboard;
 pub mod avatar;
 pub mod backdrop;
 pub mod badge;
+pub mod bottom_navigation;
 pub mod breadcrumbs;
 pub mod button;
 pub mod card;
@@ -18,6 +19,7 @@ pub mod divider;
 pub mod dock;
 pub mod drawer;
 pub mod dropdown;
+pub mod fab;
 pub mod fieldset;
 pub mod file_input;
 pub mod filter;
@@ -57,6 +59,7 @@ pub mod swap;
 pub mod tab;
 pub mod table;
 pub mod textarea;
+pub mod theme_controller;
 pub mod timeline;
 pub mod toast;
 pub mod toggle;
@@ -66,7 +69,6 @@ pub mod validator;
 // Re-exports
 pub use alert::{
     Alert, AlertActions, AlertContent, AlertDirection, AlertIcon, AlertStyle, AlertTitle,
-    AlertVariant,
 };
 pub use artboard::{Artboard, ArtboardSize};
 pub use avatar::{
@@ -75,13 +77,12 @@ pub use avatar::{
 };
 pub use backdrop::Backdrop;
 pub use badge::Badge;
+pub use bottom_navigation::{BottomNavigation, BottomNavigationLabel};
 pub use breadcrumbs::{BreadcrumbItem, Breadcrumbs};
 pub use button::Button;
 pub use card::{Card, CardActions, CardBody, CardHeader, CardTitle, CardVariant};
 pub use carousel::{Carousel, CarouselItem, CarouselOrientation, CarouselSnap};
-pub use chat::{
-    Chat, ChatBubble, ChatBubbleColor, ChatFooter, ChatHeader, ChatImage, ChatPosition,
-};
+pub use chat::{Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPosition};
 pub use checkbox::Checkbox;
 pub use collapse::{
     Accordion, Collapse, CollapseContent, CollapseIcon, CollapseState, CollapseTitle,
@@ -89,18 +90,19 @@ pub use collapse::{
 };
 pub use countdown::{Countdown, CountdownTimer};
 pub use diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
-pub use divider::{Divider, DividerColor, DividerOrientation};
+pub use divider::{Divider, DividerOrientation};
 pub use dock::{Dock, DockItem, DockItemComponent};
 pub use drawer::{Drawer, DrawerContent, DrawerOverlay, DrawerSide};
 pub use dropdown::{
     Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
     DropdownTrigger,
 };
+pub use fab::{Fab, FabAction, FabClose, FabMainAction, FabTrigger};
 pub use fieldset::Fieldset;
 pub use file_input::FileInput;
 pub use filter::Filter;
 pub use footer::{Footer, FooterTitle};
-pub use hero::{Hero, HeroContent};
+pub use hero::{Hero, HeroContent, HeroOverlay};
 pub use indicator::{Indicator, IndicatorHorizontal, IndicatorItem, IndicatorVertical};
 pub use input::Input;
 pub use join::{Join, JoinItem};
@@ -148,6 +150,7 @@ pub use swap::{Swap, SwapAnimation};
 pub use tab::{Tab, TabContent, TabVariant, Tabs};
 pub use table::Table;
 pub use textarea::Textarea;
+pub use theme_controller::{ThemeController, ThemeControllerType};
 pub use timeline::{Timeline, TimelineEnd, TimelineItem, TimelineMiddle, TimelineStart};
 pub use toast::{Toast, ToastHorizontal, ToastVertical};
 pub use toggle::Toggle;

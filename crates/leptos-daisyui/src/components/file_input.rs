@@ -2,6 +2,8 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
+use leptos::ev;
 use leptos::prelude::*;
 
 #[component]
@@ -18,6 +20,8 @@ pub fn FileInput(
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] required: MaybeProp<bool>,
     #[prop(optional, into)] multiple: MaybeProp<bool>,
+    #[prop(optional, into)] on_change: Option<Callback<ev::Event>>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -37,6 +41,13 @@ pub fn FileInput(
     }
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("file-input", &r, class);
+
+    let handle_change = move |ev: ev::Event| {
+        if let Some(cb) = on_change {
+            cb.run(ev);
+        }
+    };
+
     view! {
         <input
             type="file"
@@ -48,6 +59,8 @@ pub fn FileInput(
             disabled=move || disabled.get().unwrap_or(false)
             required=move || required.get().unwrap_or(false)
             multiple=move || multiple.get().unwrap_or(false)
+            on:change=handle_change
         />
     }
+    .add_any_attr(attrs)
 }

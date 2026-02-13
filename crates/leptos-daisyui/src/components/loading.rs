@@ -2,6 +2,7 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
@@ -37,7 +38,9 @@ pub fn Loading(
     #[prop(optional, into)] variant: Option<LoadingVariant>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] color: Option<Color>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<String> = Vec::new();
     m.push(variant.unwrap_or_default().as_str().to_string());
@@ -52,5 +55,10 @@ pub fn Loading(
     }
     let mods: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("loading", &mods, class);
-    view! { <span class=cls></span> }
+    view! {
+        <span class=cls role="status" aria-live="polite"
+            aria-label=move || aria_label.get().unwrap_or_else(|| "Loading".to_string())
+        ></span>
+    }
+    .add_any_attr(attrs)
 }

@@ -30,6 +30,24 @@ leptos_meta = "0.8.5"
 leptos_router = "0.8.11"
 ```
 
+## Live Showcase
+
+Explore all components with interactive examples and copy-pasteable code snippets:
+
+```bash
+cd crates/showcase
+trunk serve --port 8080 --open
+```
+
+The showcase includes:
+- 70+ component demonstrations
+- All color, size, and variant options
+- Interactive reactive examples
+- 35 DaisyUI themes with live preview
+- Copy-pasteable code snippets
+
+See [crates/showcase/README.md](crates/showcase/README.md) for more details.
+
 ## Usage
 
 ### Basic Example
@@ -44,7 +62,7 @@ fn MyComponent() -> impl IntoView {
         <ButtonWithChildren variant=ButtonVariant::Primary>
             "Click Me"
         </ButtonWithChildren>
-        
+
         <AlertWithChildren variant=AlertVariant::Success icon=true>
             <strong>"Success:"</strong> "Operation completed!"
         </AlertWithChildren>

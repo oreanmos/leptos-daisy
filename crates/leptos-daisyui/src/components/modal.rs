@@ -1,5 +1,6 @@
 //! Modal component — daisyUI `modal`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -44,6 +45,7 @@ pub fn Modal(
     #[prop(optional, into)] open: MaybeProp<bool>,
     #[prop(optional)] position: ModalPosition,
     #[prop(optional)] state: ModalState,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
@@ -69,30 +71,34 @@ pub fn Modal(
             {children()}
         </dialog>
     }
+    .add_any_attr(attrs)
 }
 
 #[component]
 pub fn ModalBox(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("modal-box", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn ModalAction(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("modal-action", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn ModalBackdrop(
     #[prop(optional, into)] modal_id: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("modal-backdrop", &[], class);
     let _ = modal_id;
@@ -101,4 +107,5 @@ pub fn ModalBackdrop(
             <button type="submit">"close"</button>
         </form>
     }
+    .add_any_attr(attrs)
 }

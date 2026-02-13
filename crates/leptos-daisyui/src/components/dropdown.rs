@@ -1,5 +1,6 @@
 //! Dropdown component — daisyUI `dropdown`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -67,6 +68,7 @@ pub fn Dropdown(
     #[prop(optional)] state: DropdownState,
     #[prop(optional)] open: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = vec![position.cls()];
     let hc = hover.cls();
@@ -80,22 +82,31 @@ pub fn Dropdown(
         m.push("dropdown-open");
     }
     let cls = class_signal("dropdown", &m, class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn DropdownTrigger(
     children: Children,
+    #[prop(optional)] expanded: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("", &[], class);
-    view! { <div tabindex="0" role="button" class=cls>{children()}</div> }
+    view! {
+        <button type="button" tabindex="0" class=cls
+            aria-haspopup="true"
+            aria-expanded=expanded
+        >{children()}</button>
+    }
+    .add_any_attr(attrs)
 }
 
 #[component]
 pub fn DropdownContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal(
         "dropdown-content",
@@ -110,7 +121,7 @@ pub fn DropdownContent(
         ],
         class,
     );
-    view! { <ul tabindex="0" class=cls>{children()}</ul> }
+    view! { <ul tabindex="0" class=cls role="listbox">{children()}</ul> }.add_any_attr(attrs)
 }
 
 #[component]
@@ -120,6 +131,7 @@ pub fn DropdownItem(
     #[prop(optional, into)] active: MaybeProp<bool>,
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = move || {
         let mut m: Vec<&str> = Vec::new();
@@ -164,4 +176,5 @@ pub fn DropdownItem(
             </a>
         </li>
     }
+    .add_any_attr(attrs)
 }

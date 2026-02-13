@@ -1,6 +1,7 @@
 //! Progress component — daisyUI `progress`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -9,6 +10,7 @@ pub fn Progress(
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] value: MaybeProp<f64>,
     #[prop(optional, into)] max: MaybeProp<f64>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -26,4 +28,5 @@ pub fn Progress(
             max=move || max.get().unwrap_or(100.0).to_string()
         ></progress>
     }
+    .add_any_attr(attrs)
 }

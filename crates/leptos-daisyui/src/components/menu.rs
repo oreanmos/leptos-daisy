@@ -1,6 +1,7 @@
 //! Menu component — daisyUI `menu`.
 use crate::utils::class::class_signal;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -10,6 +11,7 @@ pub fn Menu(
     #[prop(optional)] horizontal: bool,
     #[prop(optional)] responsive: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<String> = Vec::new();
     if responsive {
@@ -22,7 +24,7 @@ pub fn Menu(
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("menu", &refs, class);
-    view! { <ul class=cls>{children()}</ul> }
+    view! { <ul class=cls role="menu">{children()}</ul> }.add_any_attr(attrs)
 }
 
 #[component]
@@ -31,6 +33,7 @@ pub fn MenuItem(
     #[prop(optional)] active: bool,
     #[prop(optional)] disabled: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
     if active {
@@ -40,16 +43,17 @@ pub fn MenuItem(
         m.push("disabled");
     }
     let cls = class_signal("", &m, class);
-    view! { <li class=cls>{children()}</li> }
+    view! { <li class=cls role="menuitem">{children()}</li> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn MenuTitle(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("menu-title", &[], class);
-    view! { <li class=cls>{children()}</li> }
+    view! { <li class=cls>{children()}</li> }.add_any_attr(attrs)
 }
 
 #[component]
@@ -57,6 +61,7 @@ pub fn SubMenu(
     children: Children,
     #[prop(into)] title: String,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("", &[], class);
     view! {
@@ -67,4 +72,5 @@ pub fn SubMenu(
             </details>
         </li>
     }
+    .add_any_attr(attrs)
 }

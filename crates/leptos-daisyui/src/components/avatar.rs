@@ -1,5 +1,6 @@
 //! Avatar component — daisyUI `avatar` + states + groups.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -96,7 +97,9 @@ pub fn Avatar(
     #[prop(optional)] shape: AvatarShape,
     #[prop(optional)] size: AvatarSize,
     #[prop(optional)] online: bool,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut mods: Vec<&str> = [status.cls(), placeholder.cls(), shape.cls(), size.cls()]
         .into_iter()
@@ -107,7 +110,12 @@ pub fn Avatar(
         mods.push("avatar-online");
     }
     let cls = class_signal("avatar", &mods, class);
-    view! { <div class=cls>{children()}</div> }
+    view! {
+        <div class=cls aria-label=move || aria_label.get()>
+            {children()}
+        </div>
+    }
+    .add_any_attr(attrs)
 }
 
 #[component]
@@ -116,22 +124,24 @@ pub fn AvatarImage(
     #[prop(into)] alt: String,
     #[prop(optional)] shape: AvatarShape,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mods: Vec<&str> = [shape.cls()]
         .into_iter()
         .filter(|s| !s.is_empty())
         .collect();
     let cls = class_signal("", &mods, class);
-    view! { <img src=src alt=alt class=cls /> }
+    view! { <img src=src alt=alt class=cls /> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn AvatarPlaceholderContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
@@ -139,11 +149,12 @@ pub fn AvatarGroup(
     children: Children,
     #[prop(optional)] vertical: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut mods: Vec<&str> = vec!["avatar-group"];
     if vertical {
         mods.push("avatar-group-vertical");
     }
     let cls = class_signal("", &mods, class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }

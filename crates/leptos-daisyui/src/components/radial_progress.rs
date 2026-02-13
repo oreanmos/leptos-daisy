@@ -2,6 +2,7 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -10,6 +11,7 @@ pub fn RadialProgress(
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
     #[prop(optional)] children: Option<Children>,
 ) -> impl IntoView {
     let mut m = Vec::new();
@@ -30,4 +32,5 @@ pub fn RadialProgress(
             {children.map(|c| c())}
         </div>
     }
+    .add_any_attr(attrs)
 }

@@ -1,5 +1,6 @@
 //! Footer component — daisyUI `footer`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -9,6 +10,7 @@ pub fn Footer(
     #[prop(optional)] horizontal: bool,
     #[prop(optional)] vertical: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
     if center {
@@ -21,14 +23,15 @@ pub fn Footer(
         m.push("footer-vertical");
     }
     let cls = class_signal("footer", &m, class);
-    view! { <footer class=cls>{children()}</footer> }
+    view! { <footer class=cls>{children()}</footer> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn FooterTitle(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("footer-title", &[], class);
-    view! { <h6 class=cls>{children()}</h6> }
+    view! { <h6 class=cls>{children()}</h6> }.add_any_attr(attrs)
 }

@@ -1,5 +1,6 @@
 //! Drawer component — daisyUI `drawer`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -8,6 +9,7 @@ pub fn Drawer(
     #[prop(optional)] end: bool,
     #[prop(into)] id: String,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
     if end {
@@ -20,31 +22,35 @@ pub fn Drawer(
             {children()}
         </div>
     }
+    .add_any_attr(attrs)
 }
 
 #[component]
 pub fn DrawerContent(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("drawer-content", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn DrawerSide(
     children: Children,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("drawer-side", &[], class);
-    view! { <div class=cls>{children()}</div> }
+    view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
 #[component]
 pub fn DrawerOverlay(
     #[prop(into)] drawer_id: String,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("drawer-overlay", &[], class);
-    view! { <label for=drawer_id class=cls aria-hidden="true"></label> }
+    view! { <label for=drawer_id class=cls aria-hidden="true"></label> }.add_any_attr(attrs)
 }

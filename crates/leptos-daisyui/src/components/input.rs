@@ -3,6 +3,8 @@ use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use crate::variants::variant::Variant;
+use leptos::attr::any_attribute::AnyAttribute;
+use leptos::ev;
 use leptos::prelude::*;
 
 #[component]
@@ -20,6 +22,11 @@ pub fn Input(
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] required: MaybeProp<bool>,
     #[prop(optional, into)] readonly: MaybeProp<bool>,
+    #[prop(optional, into)] on_input: Option<Callback<ev::Event>>,
+    #[prop(optional, into)] on_change: Option<Callback<ev::Event>>,
+    #[prop(optional, into)] on_focus: Option<Callback<ev::FocusEvent>>,
+    #[prop(optional, into)] on_blur: Option<Callback<ev::FocusEvent>>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
     if let Some(c) = color {
@@ -39,6 +46,28 @@ pub fn Input(
     }
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("input", &r, class);
+
+    let handle_input = move |ev: ev::Event| {
+        if let Some(cb) = on_input {
+            cb.run(ev);
+        }
+    };
+    let handle_change = move |ev: ev::Event| {
+        if let Some(cb) = on_change {
+            cb.run(ev);
+        }
+    };
+    let handle_focus = move |ev: ev::FocusEvent| {
+        if let Some(cb) = on_focus {
+            cb.run(ev);
+        }
+    };
+    let handle_blur = move |ev: ev::FocusEvent| {
+        if let Some(cb) = on_blur {
+            cb.run(ev);
+        }
+    };
+
     view! {
         <input
             type=move || input_type.get().unwrap_or_else(|| "text".to_string())
@@ -51,6 +80,11 @@ pub fn Input(
             disabled=move || disabled.get().unwrap_or(false)
             required=move || required.get().unwrap_or(false)
             readonly=move || readonly.get().unwrap_or(false)
+            on:input=handle_input
+            on:change=handle_change
+            on:focus=handle_focus
+            on:blur=handle_blur
         />
     }
+    .add_any_attr(attrs)
 }

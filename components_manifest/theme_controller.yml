@@ -1,0 +1,79 @@
+# ThemeController Component Manifest
+#
+# DaisyUI ThemeController component documentation for leptos-daisyui
+
+name: ThemeController
+doc: https://daisyui.com/components/theme-controller/
+
+base:
+  - "theme-controller"
+
+parts:
+  - name: "input"
+    description: "The theme controller input element (checkbox or radio)"
+    classes: ["theme-controller"]
+
+modifiers:
+  # Input type variants (combined via class prop)
+  style:
+    - "toggle"      # Combined: class="toggle theme-controller"
+    - "checkbox"    # Combined: class="checkbox theme-controller"
+    - "radio"       # Combined: class="radio theme-controller"
+    - "btn"         # Combined: class="btn theme-controller"
+
+patterns:
+  - "as-toggle"
+  - "as-checkbox"
+  - "as-radio-group"
+  - "with-swap-icons"
+  - "default-theme-reset"
+
+examples:
+  - id: "basic"
+    description: "Basic checkbox theme controller"
+  - id: "as-toggle"
+    description: "Theme controller as a toggle switch"
+  - id: "as-radio"
+    description: "Theme controller as radio input"
+  - id: "radio-group"
+    description: "Multiple radio theme controllers for theme selection"
+  - id: "with-swap"
+    description: "Theme controller inside a swap with sun/moon icons"
+  - id: "with-btn"
+    description: "Theme controller styled as a button"
+  - id: "default-theme"
+    description: "Reset to default theme with value='default'"
+
+accessibility:
+  semantic_element: "input"
+  aria_attributes:
+    - "aria-label"
+    - "aria-labelledby"
+    - "aria-describedby"
+  keyboard_navigation: true
+  default_attributes:
+    type: "checkbox"
+  notes:
+    - "Use aria-label to describe the theme being selected"
+    - "Radio groups should have consistent name attribute"
+
+status:
+  tier_a: true
+  tier_b: false
+  tested: true
+  documented: true
+
+notes: |
+  The theme-controller is a CSS-only component that uses the :checked pseudo-selector.
+  
+  Special considerations:
+  - The value attribute contains the theme name (e.g., "synthwave", "retro", "cyberpunk")
+  - Special value "default" resets to the default theme
+  - Works with toggle, checkbox, radio, or btn classes via the class prop
+  - For radio inputs, use a consistent name attribute to group them
+  - Combine with the Swap component for sun/moon icon toggle patterns
+  
+  Example usage patterns:
+  - As toggle: `<ThemeController value="synthwave" class="toggle" />`
+  - As radio: `<ThemeController value="retro" input_type=Radio name="theme" class="radio" />`
+  - With swap icons: Use inside a Swap component for light/dark toggle

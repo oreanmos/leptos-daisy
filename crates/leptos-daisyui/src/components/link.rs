@@ -1,6 +1,7 @@
 //! Link component — daisyUI `link`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
@@ -14,6 +15,7 @@ pub fn Link(
     #[prop(optional)] hover: bool,
     #[prop(optional)] external: bool,
     #[prop(optional)] disabled: bool,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut mods: Vec<String> = Vec::new();
     if hover {
@@ -48,4 +50,5 @@ pub fn Link(
             {children()}
         </a>
     }
+    .add_any_attr(attrs)
 }

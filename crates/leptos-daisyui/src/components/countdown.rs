@@ -1,15 +1,23 @@
 //! Countdown component — daisyUI `countdown` with CSS variables.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
 pub fn Countdown(
     #[prop(into)] value: i32,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("countdown", &[], class);
     let style = format!("--value:{};", value);
-    view! { <span class=cls style=style>{value}</span> }
+    view! {
+        <span class=cls style=style role="timer" aria-live="polite"
+            aria-label=move || aria_label.get()
+        >{value}</span>
+    }
+    .add_any_attr(attrs)
 }
 
 #[component]
@@ -21,10 +29,11 @@ pub fn CountdownTimer(
     #[prop(optional)] show_days: bool,
     #[prop(optional)] show_hours: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("", &[], class);
     view! {
-        <div class=cls>
+        <div class=cls role="timer" aria-live="polite">
             {show_days.then(|| view! {
                 <div class="flex flex-col">
                     <span class="countdown font-mono text-5xl" style=format!("--value:{}", days)>{days}</span>
@@ -46,5 +55,5 @@ pub fn CountdownTimer(
                 <span class="text-sm">"sec"</span>
             </div>
         </div>
-    }
+    }.add_any_attr(attrs)
 }

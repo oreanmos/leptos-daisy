@@ -1,5 +1,6 @@
 //! Swap component — daisyUI `swap`.
 use crate::utils::class::class_signal;
+use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
@@ -25,7 +26,9 @@ pub fn Swap(
     off: Children,
     #[prop(optional)] animation: SwapAnimation,
     #[prop(optional)] active: bool,
+    #[prop(optional, into)] aria_label: MaybeProp<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
     let ac = animation.cls();
@@ -38,9 +41,13 @@ pub fn Swap(
     let cls = class_signal("swap", &m, class);
     view! {
         <label class=cls>
-            <input type="checkbox" />
+            <input type="checkbox"
+                aria-label=move || aria_label.get()
+                aria-checked=active
+            />
             <div class="swap-on">{on()}</div>
             <div class="swap-off">{off()}</div>
         </label>
     }
+    .add_any_attr(attrs)
 }
