@@ -72,9 +72,29 @@ fn Example() -> impl IntoView {
 }
 ```
 
-## Built-In Terminal Theme
+## Theming
 
-`leptos-daisyui` now ships a reusable terminal-style custom theme.
+The crate exposes a `Theme` enum covering all 35 built-in daisyUI themes plus custom themes shipped by this crate.
+
+```rust
+use leptos_daisyui::prelude::*;
+
+// Iterate over every available theme
+for theme in Theme::all() {
+    println!("{} (dark: {})", theme.as_str(), theme.is_dark());
+}
+
+// Parse from a string
+let theme: Theme = "dracula".parse().unwrap();
+
+// Check properties
+assert!(theme.is_dark());
+assert!(!theme.is_custom());
+```
+
+### Built-In Terminal Theme
+
+`leptos-daisyui` also ships a reusable terminal-style custom theme (`Theme::Terminal`).
 
 ```rust
 use leptos::prelude::*;

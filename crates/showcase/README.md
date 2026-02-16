@@ -89,7 +89,7 @@ crates/showcase/
 
 ### Theme Switching
 
-The showcase includes a theme selector with all 35 built-in DaisyUI themes:
+The showcase includes a theme selector with all 36 themes (35 built-in daisyUI + Terminal), powered by `Theme::all()` from the library:
 - Themes are applied to `<html data-theme="...">` attribute
 - Current theme persists to localStorage
 - Color swatches preview each theme
