@@ -7,7 +7,7 @@ use leptos_daisyui::prelude::*;
 
 use crate::pages::*;
 
-/// All 35 daisyUI built-in themes.
+/// All 35 daisyUI built-in themes + crate-provided custom themes.
 const THEMES: &[&str] = &[
     "light",
     "dark",
@@ -44,6 +44,7 @@ const THEMES: &[&str] = &[
     "caramellatte",
     "abyss",
     "silk",
+    "terminal",
 ];
 
 /// Navigation items: (category, icon, items).
@@ -249,13 +250,15 @@ pub fn App() -> impl IntoView {
     });
 
     view! {
-        <Router>
-            <SidebarLayout
+        <>
+            <TerminalThemeStyles />
+            <Router>
+                <SidebarLayout
                 variant=SidebarLayoutVariant::Light
                 width=SidebarLayoutWidth::Narrow
                 open_on_large=true
-            >
-                <SidebarLayoutContent>
+                >
+                    <SidebarLayoutContent>
                     // Top bar with mobile menu and theme selector
                     <SidebarLayoutTopBar>
                         <SidebarLayoutTopBarStart>
@@ -365,7 +368,7 @@ pub fn App() -> impl IntoView {
                 </SidebarLayoutContent>
 
                 // Sidebar
-                <SidebarLayoutSide>
+                    <SidebarLayoutSide>
                     <SidebarLayoutOverlay />
                     <SidebarLayoutPanel>
                         <SidebarLayoutHeader>
@@ -401,9 +404,10 @@ pub fn App() -> impl IntoView {
                             </div>
                         </SidebarLayoutFooter>
                     </SidebarLayoutPanel>
-                </SidebarLayoutSide>
-            </SidebarLayout>
-        </Router>
+                    </SidebarLayoutSide>
+                </SidebarLayout>
+            </Router>
+        </>
     }
 }
 

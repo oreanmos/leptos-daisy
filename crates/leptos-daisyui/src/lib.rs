@@ -36,5 +36,8 @@ pub mod utils;
 /// Shared variant enums (Color, Size, Variant, State).
 pub mod variants;
 
+/// Reusable theme helpers and built-in custom themes.
+pub mod themes;
+
 /// Prelude — convenient re-exports.
 pub mod prelude;

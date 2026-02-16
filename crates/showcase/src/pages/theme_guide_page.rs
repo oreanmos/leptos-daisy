@@ -114,6 +114,38 @@ window().local_storage()
             </section>
 
             <section class="space-y-4">
+                <h2 class="text-2xl font-semibold">"Built-In Terminal Theme (Library)"</h2>
+                <p>
+                    "leptos-daisyui ships a reusable terminal theme helper. "
+                    "Inject the CSS once with "
+                    <code>"TerminalThemeStyles"</code>
+                    ", then wrap your app (or a section) with "
+                    <code>"TerminalThemeShell"</code>
+                    "."
+                </p>
+                <CodeBlock
+                    language="rs"
+                    code=r#"use leptos_daisyui::prelude::*;
+
+view! {
+  <TerminalThemeStyles />
+  <TerminalThemeShell>
+    <div class="p-4 space-y-3">
+      <Button color=Color::Primary variant=Variant::Outline>"run"</Button>
+      <Input placeholder="type a command..." class="input-sm" />
+    </div>
+  </TerminalThemeShell>
+}"#
+                />
+                <p>
+                    "The shell component applies " <code>"data-theme=\"terminal\""</code>
+                    ", mono font, text glow, and optional scanlines. Use "
+                    <code>"TERMINAL_THEME_NAME"</code>
+                    " if you want to set the theme manually."
+                </p>
+            </section>
+
+            <section class="space-y-4">
                 <h2 class="text-2xl font-semibold">"CSS Variable Reference"</h2>
                 <p>"All the CSS custom properties you can set in a daisyUI theme:"</p>
 

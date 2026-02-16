@@ -72,6 +72,32 @@ fn Example() -> impl IntoView {
 }
 ```
 
+## Built-In Terminal Theme
+
+`leptos-daisyui` now ships a reusable terminal-style custom theme.
+
+```rust
+use leptos::prelude::*;
+use leptos_daisyui::prelude::*;
+
+#[component]
+fn AppShell() -> impl IntoView {
+    view! {
+        <TerminalThemeStyles />
+        <TerminalThemeShell>
+            <div class="p-4 space-y-3">
+                <Button color=Color::Primary variant=Variant::Outline>
+                    "run"
+                </Button>
+                <Input placeholder="type a command..." class="input-sm" />
+            </div>
+        </TerminalThemeShell>
+    }
+}
+```
+
+If you prefer manual theme switching, set `data-theme` to `TERMINAL_THEME_NAME` (`"terminal"`).
+
 ## Run the Showcase
 
 ```bash

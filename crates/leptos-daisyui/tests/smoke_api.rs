@@ -7,6 +7,8 @@ fn prelude_core_symbols_are_available() {
     let _ = Size::Large;
     let _ = Variant::Outline;
     let _ = State::Active;
+    let _ = TERMINAL_THEME_NAME;
+    let _ = TERMINAL_THEME_CSS;
 
     let merged = merge_classes(["btn", "btn-primary", "btn"]);
     assert_eq!(merged, "btn btn-primary");
@@ -42,6 +44,13 @@ fn key_components_compile_in_view_macro() {
                 class="toggle"
                 aria_label="Enable dark theme"
             />
+
+            <TerminalThemeStyles />
+            <TerminalThemeShell>
+                <Button color=Color::Success>
+                    "terminal"
+                </Button>
+            </TerminalThemeShell>
         </div>
     };
 }

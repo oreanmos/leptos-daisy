@@ -7,6 +7,9 @@ pub use crate::variants::state::State;
 pub use crate::variants::variant::Variant;
 
 // Class utilities
+pub use crate::themes::terminal::{
+    TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
+};
 pub use crate::utils::class::{class_signal, merge_classes, merge_with_base};
 pub use crate::utils::config::DaisyConfig;
 

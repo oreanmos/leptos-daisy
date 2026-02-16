@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-/// All 35 daisyUI built-in themes.
+/// All 35 daisyUI built-in themes + custom themes included in this repo.
 const ALL_THEMES: &[&str] = &[
     "light",
     "dark",
@@ -37,6 +37,7 @@ const ALL_THEMES: &[&str] = &[
     "caramellatte",
     "abyss",
     "silk",
+    "terminal",
 ];
 
 #[component]
@@ -46,7 +47,10 @@ pub fn ThemeShowcasePage() -> impl IntoView {
             <h1 class="text-3xl font-bold">"🎨 Theme Showcase"</h1>
             <p class="text-base-content/70">
                 "Preview all 35 built-in daisyUI themes. Each card shows a live preview "
-                "of the theme's colors and component styles using "
+                "plus the custom "
+                <code class="badge badge-ghost badge-sm">"terminal"</code>
+                " theme. Each card shows a live preview "
+                "of the theme colors and component styles using "
                 <code class="badge badge-ghost badge-sm">"data-theme"</code>
                 " scoping."
             </p>
