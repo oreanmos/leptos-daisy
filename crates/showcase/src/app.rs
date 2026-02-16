@@ -7,46 +7,6 @@ use leptos_daisyui::prelude::*;
 
 use crate::pages::*;
 
-/// All 35 daisyUI built-in themes + crate-provided custom themes.
-const THEMES: &[&str] = &[
-    "light",
-    "dark",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset",
-    "caramellatte",
-    "abyss",
-    "silk",
-    "terminal",
-];
-
 /// Navigation items: (category, icon, items).
 #[allow(clippy::type_complexity)]
 const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
@@ -427,8 +387,8 @@ fn ThemeSelector(theme: ReadSignal<String>, set_theme: WriteSignal<String>) -> i
             </div>
             <div class="dropdown-content bg-base-200 rounded-box z-50 w-56 max-h-96 overflow-y-auto shadow-2xl p-2 mt-2">
                 <div class="grid grid-cols-1 gap-1">
-                    {THEMES.iter().map(|t| {
-                        let t = *t;
+                    {Theme::all().iter().map(|t| {
+                        let t = t.as_str();
                         let is_active = move || theme.get() == t;
                         view! {
                             <button

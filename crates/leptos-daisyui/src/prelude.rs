@@ -7,6 +7,7 @@ pub use crate::variants::state::State;
 pub use crate::variants::variant::Variant;
 
 // Class utilities
+pub use crate::themes::builtin::{Theme, UnknownThemeError};
 pub use crate::themes::terminal::{
     TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
 };
