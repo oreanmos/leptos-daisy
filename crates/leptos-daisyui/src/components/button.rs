@@ -28,7 +28,7 @@ pub fn Button(
     #[prop(optional)] wide: bool,
     #[prop(optional)] block: bool,
     #[prop(optional)] no_animation: bool,
-    #[prop(optional)] disabled: bool,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] on_click: Option<Callback<ev::MouseEvent>>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
@@ -91,7 +91,7 @@ pub fn Button(
             name=move || name.get()
             value=move || value.get()
             aria-label=move || aria_label.get()
-            disabled=disabled
+            disabled=move || disabled.get().unwrap_or(false)
             on:click=handle_click
         >
             {children()}
