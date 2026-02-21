@@ -110,7 +110,7 @@ pub fn ControlledDrawer(
     view! {
         <div class=drawer_class>
             <input
-                id=drawer_id.clone()
+                id=drawer_id
                 type="checkbox"
                 class="drawer-toggle"
                 checked=move || controller.is_open().get()
