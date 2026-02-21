@@ -1,27 +1,33 @@
 //! Steps component — daisyUI `steps`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use crate::variants::size::Size;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[component]
 pub fn Steps(
     children: Children,
+    #[prop(optional, into)] size: Option<Size>,
     #[prop(optional)] vertical: bool,
     #[prop(optional)] horizontal: bool,
     #[prop(optional)] responsive: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
-    if responsive {
-        m.push("steps-vertical md:steps-horizontal");
-    } else if vertical {
-        m.push("steps-vertical");
-    } else if horizontal {
-        m.push("steps-horizontal");
+    let mut m: Vec<String> = Vec::new();
+    if let Some(s) = size {
+        m.push(s.class("steps"));
     }
-    let cls = class_signal("steps", &m, class);
+    if responsive {
+        m.push("steps-vertical md:steps-horizontal".into());
+    } else if vertical {
+        m.push("steps-vertical".into());
+    } else if horizontal {
+        m.push("steps-horizontal".into());
+    }
+    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let cls = class_signal("steps", &refs, class);
     view! { <ul class=cls>{children()}</ul> }.add_any_attr(attrs)
 }
 

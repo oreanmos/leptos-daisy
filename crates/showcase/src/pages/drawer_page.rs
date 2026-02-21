@@ -80,7 +80,7 @@ pub fn DrawerPage() -> impl IntoView {
             <section class="space-y-4">
                 <ComponentPreview
                     title="Right Drawer"
-                     code=r#"<Drawer id="drawer-right" end=true>
+                     code=r#"<Drawer id="drawer-right" position={DrawerPosition::End}>
     <DrawerContent>
         <div class="p-4 bg-base-200 h-full">
             <label for="drawer-right" class="btn btn-secondary drawer-button">
@@ -107,7 +107,7 @@ pub fn DrawerPage() -> impl IntoView {
 </Drawer>"#
                 >
                     <div class="h-64 border border-base-300 rounded-box overflow-hidden relative">
-                        <Drawer id="drawer-right" end=true class="absolute inset-0 w-full h-full">
+                        <Drawer id="drawer-right" position={DrawerPosition::End} class="absolute inset-0 w-full h-full">
                             <DrawerContent>
                                 <div class="p-4 bg-base-200 h-full flex flex-col items-center justify-center">
                                     <label for="drawer-right" class="btn btn-secondary drawer-button">"Open Right Drawer"</label>
@@ -247,6 +247,70 @@ pub fn DrawerPage() -> impl IntoView {
                                 </div>
                             </DrawerSide>
                         </Drawer>
+                    </div>
+                </ComponentPreview>
+            </section>
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Programmatic Control (Tier B)"</h2>
+                <ComponentPreview
+                    title="ControlledDrawer with use_drawer"
+                    description="Use `use_drawer()` and `ControlledDrawer` for easy signal-driven state."
+                    code=r#"let drawer = use_drawer();
+
+view! {
+    <ControlledDrawer
+        controller=drawer
+        position={DrawerPosition::Start}
+    >
+        <DrawerContent>
+            <div class="p-4 bg-base-200 h-full flex flex-col items-center justify-center">
+                <button class="btn btn-primary" on:click=move |_| drawer.open()>"Open Controlled Drawer"</button>
+                <p class="mt-4">"Main content area."</p>
+            </div>
+        </DrawerContent>
+        <DrawerSide>
+            <DrawerOverlay drawer_id="controlled-drawer" />
+            <div class="bg-base-100 min-h-full w-64 p-4 border-r border-base-300">
+                <h2 class="text-xl font-bold mb-4">"Drawer Menu"</h2>
+                <button class="btn btn-sm mb-4" on:click=move |_| drawer.close()>"Close"</button>
+                <ul class="menu p-0">
+                    <li><a>"Home"</a></li>
+                    <li><a>"About"</a></li>
+                </ul>
+            </div>
+        </DrawerSide>
+    </ControlledDrawer>
+}"#
+                >
+                    <div class="h-64 border border-base-300 rounded-box overflow-hidden relative">
+                        {
+                            let drawer = use_drawer();
+                            view! {
+                                <ControlledDrawer
+                                    controller=drawer
+                                    position={DrawerPosition::Start}
+                                    class="absolute inset-0 w-full h-full"
+                                >
+                                    <DrawerContent>
+                                        <div class="p-4 bg-base-200 h-full flex flex-col items-center justify-center">
+                                            <button class="btn btn-primary" on:click=move |_| drawer.open()>"Open Controlled Drawer"</button>
+                                            <p class="mt-4">"Main content area."</p>
+                                        </div>
+                                    </DrawerContent>
+                                    <DrawerSide class="absolute h-full">
+                                        <DrawerOverlay drawer_id="controlled-drawer-id" />
+                                        <div class="bg-base-100 min-h-full w-64 p-4 border-r border-base-300">
+                                            <h2 class="text-xl font-bold mb-4">"Drawer Menu"</h2>
+                                            <button class="btn btn-sm mb-4" on:click=move |_| drawer.close()>"Close"</button>
+                                            <ul class="menu p-0">
+                                                <li><a>"Home"</a></li>
+                                                <li><a>"About"</a></li>
+                                            </ul>
+                                        </div>
+                                    </DrawerSide>
+                                </ControlledDrawer>
+                            }
+                        }
                     </div>
                 </ComponentPreview>
             </section>

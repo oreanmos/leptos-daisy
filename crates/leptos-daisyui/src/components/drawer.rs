@@ -3,17 +3,36 @@ use crate::utils::class::class_signal;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]
+pub enum DrawerPosition {
+    #[default]
+    Start,
+    End,
+}
+
+impl DrawerPosition {
+    pub fn as_str(&self) -> &'static str {
+        match self {
+            Self::Start => "",
+            Self::End => "drawer-end",
+        }
+    }
+}
+
 #[component]
 pub fn Drawer(
     children: Children,
-    #[prop(optional)] end: bool,
+    #[prop(optional)] position: Option<DrawerPosition>,
     #[prop(into)] id: String,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<&str> = Vec::new();
-    if end {
-        m.push("drawer-end");
+    if let Some(pos) = position {
+        let s = pos.as_str();
+        if !s.is_empty() {
+            m.push(s);
+        }
     }
     let cls = class_signal("drawer", &m, class);
     view! {

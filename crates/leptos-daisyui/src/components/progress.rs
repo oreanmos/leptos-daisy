@@ -1,6 +1,7 @@
 //! Progress component — daisyUI `progress`.
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
+use crate::variants::size::Size;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
@@ -8,6 +9,7 @@ use leptos::prelude::*;
 pub fn Progress(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
+    #[prop(optional, into)] size: Option<Size>,
     #[prop(optional, into)] value: MaybeProp<f64>,
     #[prop(optional, into)] max: MaybeProp<f64>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
@@ -15,6 +17,12 @@ pub fn Progress(
     let mut m = Vec::new();
     if let Some(c) = color {
         let s = c.class("progress");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    if let Some(sz) = size {
+        let s = sz.class("progress");
         if !s.is_empty() {
             m.push(s);
         }

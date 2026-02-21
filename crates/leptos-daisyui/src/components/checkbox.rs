@@ -2,6 +2,7 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use crate::variants::variant::Variant;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::ev;
 use leptos::prelude::*;
@@ -11,6 +12,7 @@ pub fn Checkbox(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
+    #[prop(optional, into)] variant: Option<Variant>,
     #[prop(optional, into)] id: MaybeProp<String>,
     #[prop(optional, into)] name: MaybeProp<String>,
     #[prop(optional, into)] value: MaybeProp<String>,
@@ -29,6 +31,12 @@ pub fn Checkbox(
     }
     if let Some(s) = size {
         m.push(s.class("checkbox"));
+    }
+    if let Some(v) = variant {
+        let s = v.class("checkbox");
+        if !s.is_empty() {
+            m.push(s);
+        }
     }
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("checkbox", &r, class);

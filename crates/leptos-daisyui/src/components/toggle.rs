@@ -2,6 +2,7 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use crate::variants::variant::Variant;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::ev;
 use leptos::prelude::*;
@@ -11,6 +12,7 @@ pub fn Toggle(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
+    #[prop(optional, into)] variant: Option<Variant>,
     #[prop(optional, into)] id: MaybeProp<String>,
     #[prop(optional, into)] name: MaybeProp<String>,
     #[prop(optional, into)] value: MaybeProp<String>,
@@ -29,6 +31,12 @@ pub fn Toggle(
     }
     if let Some(s) = size {
         m.push(s.class("toggle"));
+    }
+    if let Some(v) = variant {
+        let s = v.class("toggle");
+        if !s.is_empty() {
+            m.push(s);
+        }
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("toggle", &refs, class);

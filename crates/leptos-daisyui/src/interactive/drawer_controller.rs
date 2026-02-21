@@ -77,3 +77,48 @@ impl Default for DrawerController {
 pub fn use_drawer() -> DrawerController {
     DrawerController::new()
 }
+
+/// Drawer component controlled by DrawerController
+#[component]
+pub fn ControlledDrawer(
+    controller: DrawerController,
+    #[prop(optional, into)] id: MaybeProp<String>,
+    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional)] position: Option<crate::components::drawer::DrawerPosition>,
+    #[prop(optional, into)] always_open_on: Option<String>,
+    children: Children,
+) -> impl IntoView {
+    let drawer_class = move || {
+        let mut classes = vec!["drawer".to_string()];
+        if let Some(pos) = position {
+            let s = pos.as_str();
+            if !s.is_empty() {
+                classes.push(s.to_string());
+            }
+        }
+        if let Some(bp) = &always_open_on {
+            classes.push(format!("{}:drawer-open", bp));
+        }
+        if let Some(c) = class.get() {
+            classes.push(c);
+        }
+        classes.join(" ")
+    };
+
+    let drawer_id = move || id.get().unwrap_or_else(|| "controlled-drawer".to_string());
+
+    view! {
+        <div class=drawer_class>
+            <input
+                id=drawer_id.clone()
+                type="checkbox"
+                class="drawer-toggle"
+                checked=move || controller.is_open().get()
+                on:change=move |ev| {
+                    controller.set(event_target_checked(&ev));
+                }
+            />
+            {children()}
+        </div>
+    }
+}

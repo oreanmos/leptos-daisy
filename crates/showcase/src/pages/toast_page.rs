@@ -131,6 +131,41 @@ pub fn ToastPage() -> impl IntoView {
                     </div>
                 </ComponentPreview>
             </section>
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Programmatic Control (Tier B)"</h2>
+                <ComponentPreview
+                    title="ToastContainer with ToastController"
+                    description="Use `use_toasts()` to imperatively send toasts that auto-dismiss."
+                    code=r#"let toasts = use_toasts();
+
+view! {
+    <div class="flex gap-2">
+        <button class="btn btn-success" on:click=move |_| toasts.success("Operation successful!")>"Success"</button>
+        <button class="btn btn-error" on:click=move |_| toasts.error("Operation failed.")>"Error"</button>
+        <button class="btn btn-info" on:click=move |_| toasts.info("New information available.")>"Info"</button>
+        <button class="btn btn-warning" on:click=move |_| toasts.warning("Warning: Connection low.")>"Warning"</button>
+    </div>
+    <ToastContainer controller=toasts />
+}"#
+                >
+                    <div class="relative h-64 bg-base-200 rounded-lg overflow-hidden flex items-center justify-center">
+                        {
+                            let toasts = use_toasts();
+                            view! {
+                                <div class="flex flex-wrap gap-2 justify-center">
+                                    <button class="btn btn-success" on:click=move |_| toasts.success("Operation successful!")>"Success"</button>
+                                    <button class="btn btn-error" on:click=move |_| toasts.error("Operation failed.")>"Error"</button>
+                                    <button class="btn btn-info" on:click=move |_| toasts.info("New information available.")>"Info"</button>
+                                    <button class="btn btn-warning" on:click=move |_| toasts.warning("Connection is slow.")>"Warning"</button>
+                                </div>
+                                <div class="absolute inset-0 pointer-events-none">
+                                    <ToastContainer controller=toasts />
+                                </div>
+                            }
+                        }
+                    </div>
+                </ComponentPreview>
+            </section>
         </div>
     }
 }

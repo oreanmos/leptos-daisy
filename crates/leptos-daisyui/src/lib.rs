@@ -30,6 +30,9 @@
 /// Components module — all daisyUI component wrappers.
 pub mod components;
 
+/// Interactive helpers (Tier B) — signal-based controllers.
+pub mod interactive;
+
 /// Shared utility functions (class merging, config).
 pub mod utils;
 

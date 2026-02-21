@@ -116,23 +116,23 @@ pub fn FileInputPage() -> impl IntoView {
             <section class="space-y-4">
                 <ComponentPreview
                     title="Styles and states"
-                    code=r##"<FileInput bordered=true />
-<FileInput ghost=true />
-<FileInput bordered=true color={Color::Primary} />
+                    code=r##"<FileInput variant={FileInputVariant::Bordered} />
+<FileInput variant={FileInputVariant::Ghost} />
+<FileInput variant={FileInputVariant::Bordered} color={Color::Primary} />
 <FileInput disabled=true />"##
                 >
                     <div class="space-y-3 max-w-xl">
                         <div class="space-y-1">
                             <span class="text-sm text-base-content/70">"Bordered"</span>
-                            <FileInput bordered=true />
+                            <FileInput variant={FileInputVariant::Bordered} />
                         </div>
                         <div class="space-y-1">
                             <span class="text-sm text-base-content/70">"Ghost"</span>
-                            <FileInput ghost=true />
+                            <FileInput variant={FileInputVariant::Ghost} />
                         </div>
                         <div class="space-y-1">
                             <span class="text-sm text-base-content/70">"Bordered + Primary Color"</span>
-                            <FileInput bordered=true color={Color::Primary} />
+                            <FileInput variant={FileInputVariant::Bordered} color={Color::Primary} />
                         </div>
                         <div class="space-y-1">
                             <span class="text-sm text-base-content/70">"Disabled"</span>

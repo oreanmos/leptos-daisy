@@ -2,6 +2,7 @@
 use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use crate::variants::size::Size;
+use crate::variants::variant::Variant;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::ev;
 use leptos::prelude::*;
@@ -12,6 +13,7 @@ pub fn Radio(
     #[prop(into)] name: String,
     #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
+    #[prop(optional, into)] variant: Option<Variant>,
     #[prop(optional, into)] id: MaybeProp<String>,
     #[prop(optional, into)] value: MaybeProp<String>,
     #[prop(optional, into)] aria_label: MaybeProp<String>,
@@ -29,6 +31,12 @@ pub fn Radio(
     }
     if let Some(s) = size {
         m.push(s.class("radio"));
+    }
+    if let Some(v) = variant {
+        let s = v.class("radio");
+        if !s.is_empty() {
+            m.push(s);
+        }
     }
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("radio", &refs, class);

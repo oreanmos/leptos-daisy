@@ -44,14 +44,16 @@ pub use crate::components::countdown::{Countdown, CountdownTimer};
 pub use crate::components::diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
 pub use crate::components::divider::{Divider, DividerOrientation};
 pub use crate::components::dock::{Dock, DockItem, DockItemComponent};
-pub use crate::components::drawer::{Drawer, DrawerContent, DrawerOverlay, DrawerSide};
+pub use crate::components::drawer::{
+    Drawer, DrawerContent, DrawerOverlay, DrawerPosition, DrawerSide,
+};
 pub use crate::components::dropdown::{
     Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
     DropdownTrigger,
 };
 pub use crate::components::fab::{Fab, FabAction, FabClose, FabMainAction, FabTrigger};
 pub use crate::components::fieldset::Fieldset;
-pub use crate::components::file_input::FileInput;
+pub use crate::components::file_input::{FileInput, FileInputVariant};
 pub use crate::components::filter::Filter;
 pub use crate::components::footer::{Footer, FooterTitle};
 pub use crate::components::hero::{Hero, HeroContent, HeroOverlay};
@@ -116,3 +118,6 @@ pub use crate::components::toast::{Toast, ToastHorizontal, ToastVertical};
 pub use crate::components::toggle::Toggle;
 pub use crate::components::tooltip::{Tooltip, TooltipPosition};
 pub use crate::components::validator::{Validator, ValidatorLabel};
+
+// Interactive controllers
+pub use crate::interactive::*;

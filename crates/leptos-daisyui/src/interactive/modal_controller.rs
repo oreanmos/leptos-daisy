@@ -71,3 +71,44 @@ impl Default for ModalController {
 pub fn use_modal() -> ModalController {
     ModalController::new()
 }
+
+/// Modal component controlled by ModalController
+#[component]
+pub fn ControlledModal(
+    controller: ModalController,
+    #[prop(optional)] position: crate::components::modal::ModalPosition,
+    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(optional)] close_on_backdrop: bool,
+    #[prop(optional)] close_on_escape: bool,
+    children: Children,
+) -> impl IntoView {
+    let handle_keydown = move |ev: leptos::ev::KeyboardEvent| {
+        if close_on_escape && ev.key() == "Escape" {
+            controller.close();
+        }
+    };
+
+    let handle_backdrop_click = move |_| {
+        if close_on_backdrop {
+            controller.close();
+        }
+    };
+
+    view! {
+        <crate::components::modal::Modal
+            class=class
+            open=controller.is_open()
+            position=position
+            on:keydown=handle_keydown
+        >
+            {children()}
+            {close_on_backdrop.then(|| {
+                view! {
+                    <form method="dialog" class="modal-backdrop" on:click=handle_backdrop_click>
+                        <button>"close"</button>
+                    </form>
+                }
+            })}
+        </crate::components::modal::Modal>
+    }
+}

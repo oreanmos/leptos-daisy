@@ -245,6 +245,57 @@ pub fn ModalPage() -> impl IntoView {
                     </div>
                 </ComponentPreview>
             </section>
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Programmatic Control (Tier B)"</h2>
+                <ComponentPreview
+                    title="ControlledModal with use_modal"
+                    description="Use `use_modal()` and `ControlledModal` for easy signal-driven state."
+                    code=r#"let modal = use_modal();
+
+view! {
+    <button class="btn btn-primary" on:click=move |_| modal.open()>"Open Controlled Modal"</button>
+    
+    <ControlledModal
+        controller=modal
+        position={ModalPosition::Middle}
+        close_on_backdrop=true
+        close_on_escape=true
+    >
+        <ModalBox>
+            <h3 class="font-bold text-lg">"Controlled via Signal"</h3>
+            <p class="py-4">"This modal is controlled entirely by `ModalController` signals."</p>
+            <ModalAction>
+                <button class="btn" on:click=move |_| modal.close()>"Close"</button>
+            </ModalAction>
+        </ModalBox>
+    </ControlledModal>
+}"#
+                >
+                    <div class="h-48 flex items-center justify-center">
+                        {
+                            let modal = use_modal();
+                            view! {
+                                <button class="btn btn-primary" on:click=move |_| modal.open()>"Open Controlled Modal"</button>
+
+                                <ControlledModal
+                                    controller=modal
+                                    position={ModalPosition::Center}
+                                    close_on_backdrop=true
+                                    close_on_escape=true
+                                >
+                                    <ModalBox>
+                                        <h3 class="font-bold text-lg">"Controlled via Signal"</h3>
+                                        <p class="py-4">"This modal is controlled entirely by `ModalController` signals."</p>
+                                        <ModalAction>
+                                            <button class="btn" on:click=move |_| modal.close()>"Close"</button>
+                                        </ModalAction>
+                                    </ModalBox>
+                                </ControlledModal>
+                            }
+                        }
+                    </div>
+                </ComponentPreview>
+            </section>
         </div>
     }
 }

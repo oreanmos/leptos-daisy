@@ -1,5 +1,6 @@
 //! Menu component — daisyUI `menu`.
 use crate::utils::class::class_signal;
+use crate::variants::color::Color;
 use crate::variants::size::Size;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
@@ -7,6 +8,7 @@ use leptos::prelude::*;
 #[component]
 pub fn Menu(
     children: Children,
+    #[prop(optional, into)] color: Option<Color>,
     #[prop(optional, into)] size: Option<Size>,
     #[prop(optional)] horizontal: bool,
     #[prop(optional)] responsive: bool,
@@ -14,6 +16,12 @@ pub fn Menu(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m: Vec<String> = Vec::new();
+    if let Some(c) = color {
+        let s = c.class("menu");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
     if responsive {
         m.push("menu-vertical lg:menu-horizontal".into());
     } else if horizontal {
