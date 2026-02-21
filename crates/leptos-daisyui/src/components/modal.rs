@@ -48,18 +48,24 @@ pub fn Modal(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
     let pc = position.cls();
-    if !pc.is_empty() {
-        m.push(pc);
-    }
     let state_cls = state.cls();
-    if !state_cls.is_empty() {
-        m.push(state_cls);
-    } else if open.get().unwrap_or(false) {
-        m.push("modal-open");
-    }
-    let cls = class_signal("modal", &m, class);
+    let cls = move || {
+        let mut parts: Vec<&str> = vec!["modal"];
+        if !pc.is_empty() {
+            parts.push(pc);
+        }
+        if !state_cls.is_empty() {
+            parts.push(state_cls);
+        } else if open.get().unwrap_or(false) {
+            parts.push("modal-open");
+        }
+        let base = parts.join(" ");
+        match class.get() {
+            Some(uc) if !uc.is_empty() => format!("{base} {uc}"),
+            _ => base,
+        }
+    };
     view! {
         <dialog
             id=move || id.get()
