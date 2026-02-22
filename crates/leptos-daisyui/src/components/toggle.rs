@@ -105,8 +105,15 @@ mod tests {
 
     #[test]
     fn test_toggle_modifiers_combined() {
-        let modifiers = get_toggle_modifiers(Some(Color::Secondary), Some(Size::Small), Some(Variant::Ghost));
+        let modifiers = get_toggle_modifiers(
+            Some(Color::Secondary),
+            Some(Size::Small),
+            Some(Variant::Ghost),
+        );
         // Order matters in implementation: color -> size -> variant
-        assert_eq!(modifiers, vec!["toggle-secondary", "toggle-sm", "toggle-ghost"]);
+        assert_eq!(
+            modifiers,
+            vec!["toggle-secondary", "toggle-sm", "toggle-ghost"]
+        );
     }
 }
