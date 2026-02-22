@@ -136,6 +136,9 @@ mod tests {
 
         let classes = get_input_classes(None, None, Some(Variant::Solid));
         assert!(classes.is_empty());
+
+        let classes = get_input_classes(None, None, Some(Variant::Ghost));
+        assert_eq!(classes, vec!["input-ghost"]);
     }
 
     #[test]
