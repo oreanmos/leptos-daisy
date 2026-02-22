@@ -1,4 +1,4 @@
-use crate::utils::class::{build_class, class_signal};
+use crate::utils::class::class_signal;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
