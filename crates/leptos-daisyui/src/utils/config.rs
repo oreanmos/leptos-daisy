@@ -33,3 +33,35 @@ pub fn provide_daisy_config(config: DaisyConfig) {
 pub fn use_daisy_config() -> DaisyConfig {
     use_context::<DaisyConfig>().unwrap_or_default()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_apply_without_prefix() {
+        let config = DaisyConfig::default();
+        assert_eq!(config.apply("btn"), "btn");
+        assert_eq!(config.apply("btn-primary"), "btn-primary");
+    }
+
+    #[test]
+    fn test_apply_with_prefix() {
+        let config = DaisyConfig {
+            daisy_prefix: Some("d-".to_string()),
+        };
+        assert_eq!(config.apply("btn"), "d-btn");
+        assert_eq!(config.apply("btn-primary"), "d-btn-primary");
+    }
+
+    #[test]
+    fn test_apply_empty_class() {
+        let config_no_prefix = DaisyConfig::default();
+        assert_eq!(config_no_prefix.apply(""), "");
+
+        let config_with_prefix = DaisyConfig {
+            daisy_prefix: Some("d-".to_string()),
+        };
+        assert_eq!(config_with_prefix.apply(""), "d-");
+    }
+}
