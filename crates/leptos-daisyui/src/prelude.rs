@@ -11,7 +11,7 @@ pub use crate::themes::builtin::{Theme, UnknownThemeError};
 pub use crate::themes::terminal::{
     TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
 };
-pub use crate::utils::class::{class_signal, merge_classes, merge_with_base};
+pub use crate::utils::class::{class_signal, class_signal_dynamic, merge_classes, merge_with_base};
 pub use crate::utils::config::DaisyConfig;
 
 // Components

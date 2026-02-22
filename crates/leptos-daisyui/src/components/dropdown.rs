@@ -1,5 +1,5 @@
 //! Dropdown component — daisyUI `dropdown`.
-use crate::utils::class::class_signal;
+use crate::utils::class::{class_signal, class_signal_dynamic};
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
@@ -133,24 +133,20 @@ pub fn DropdownItem(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || {
-        let mut m: Vec<&str> = Vec::new();
-        if active.get().unwrap_or(false) {
-            m.push("active");
-        }
-        if disabled.get().unwrap_or(false) {
-            m.push("disabled");
-        }
-        let user_class = class.get().unwrap_or_default();
-        let static_cls = m.join(" ");
-        if user_class.is_empty() {
-            static_cls
-        } else if static_cls.is_empty() {
-            user_class
-        } else {
-            format!("{static_cls} {user_class}")
-        }
-    };
+    let cls = class_signal_dynamic(
+        "",
+        move || {
+            let mut m = Vec::new();
+            if active.get().unwrap_or(false) {
+                m.push("active".to_string());
+            }
+            if disabled.get().unwrap_or(false) {
+                m.push("disabled".to_string());
+            }
+            m
+        },
+        class,
+    );
 
     view! {
         <li class=cls>
