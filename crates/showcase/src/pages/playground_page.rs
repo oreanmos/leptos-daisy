@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use std::fmt::Write;
 
 use crate::components::CodeBlock;
 
@@ -606,10 +607,12 @@ fn render_component_preview(kind: ComponentKind, text: &str, color: &str, size: 
 // Code generation
 // ---------------------------------------------------------------------------
 
-fn generate_code(nodes: &[CanvasNode], indent: usize) -> String {
+fn generate_code(nodes: &[CanvasNode], indent: usize, buf: &mut String) {
     let prefix = "    ".repeat(indent);
-    let mut lines = Vec::new();
-    for node in nodes {
+    for (i, node) in nodes.iter().enumerate() {
+        if i > 0 {
+            buf.push('\n');
+        }
         match node {
             CanvasNode::Container {
                 kind,
@@ -619,11 +622,17 @@ fn generate_code(nodes: &[CanvasNode], indent: usize) -> String {
                 ..
             } => {
                 let class = kind.css_class(gap, padding);
-                lines.push(format!("{}<div class=\"{}\">", prefix, class));
+                buf.push_str(&prefix);
+                let _ = write!(buf, "<div class=\"{}\">", class);
+
                 if !children.is_empty() {
-                    lines.push(generate_code(children, indent + 1));
+                    buf.push('\n');
+                    generate_code(children, indent + 1, buf);
                 }
-                lines.push(format!("{}</div>", prefix));
+
+                buf.push('\n');
+                buf.push_str(&prefix);
+                buf.push_str("</div>");
             }
             CanvasNode::Component {
                 kind,
@@ -632,161 +641,200 @@ fn generate_code(nodes: &[CanvasNode], indent: usize) -> String {
                 size,
                 ..
             } => {
-                lines.push(format!(
-                    "{}{}",
-                    prefix,
-                    generate_component_code(*kind, text, color, size)
-                ));
+                buf.push_str(&prefix);
+                generate_component_code(buf, *kind, text, color, size);
             }
         }
     }
-    lines.join("\n")
 }
 
-fn generate_component_code(kind: ComponentKind, text: &str, color: &str, size: &str) -> String {
-    let color_prop = if color.is_empty() {
-        String::new()
-    } else {
-        format!(" color=Color::{}", capitalize(color))
+fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, color: &str, size: &str) {
+    let write_color_prop = |buf: &mut String, color: &str| {
+        if !color.is_empty() {
+            buf.push_str(" color=Color::");
+            write_capitalized(buf, color);
+        }
     };
-    let size_prop = if size.is_empty() {
-        String::new()
-    } else {
-        format!(" size=Size::{}", capitalize(size))
+    let write_size_prop = |buf: &mut String, size: &str| {
+        if !size.is_empty() {
+            buf.push_str(" size=Size::");
+            write_capitalized(buf, size);
+        }
     };
 
     match kind {
         ComponentKind::Button => {
-            format!(
-                "<Button{}{}>{:?}</Button>",
-                color_prop, size_prop, text
-            )
+            buf.push_str("<Button");
+            write_color_prop(buf, color);
+            write_size_prop(buf, size);
+            buf.push('>');
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Button>");
         }
         ComponentKind::Dropdown => {
-            format!(
-                "<Dropdown><DropdownTrigger><Button>{:?}</Button></DropdownTrigger><DropdownContent><DropdownItem>\"Item 1\"</DropdownItem></DropdownContent></Dropdown>",
-                text
-            )
+            buf.push_str("<Dropdown><DropdownTrigger><Button>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Button></DropdownTrigger><DropdownContent><DropdownItem>\"Item 1\"</DropdownItem></DropdownContent></Dropdown>");
         }
         ComponentKind::Modal => {
-            format!("<Button color=Color::Primary>{:?}</Button>", text)
+             buf.push_str("<Button color=Color::Primary>");
+             let _ = write!(buf, "{:?}", text);
+             buf.push_str("</Button>");
         }
         ComponentKind::Alert => {
-            format!(
-                "<Alert{}><span>{:?}</span></Alert>",
-                color_prop, text
-            )
+            buf.push_str("<Alert");
+            write_color_prop(buf, color);
+            buf.push_str("><span>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</span></Alert>");
         }
         ComponentKind::Avatar => {
-            "<Avatar placeholder=true />".to_string()
+            buf.push_str("<Avatar placeholder=true />");
         }
         ComponentKind::Badge => {
-            format!(
-                "<Badge{}{}>{:?}</Badge>",
-                color_prop, size_prop, text
-            )
+            buf.push_str("<Badge");
+            write_color_prop(buf, color);
+            write_size_prop(buf, size);
+            buf.push('>');
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Badge>");
         }
         ComponentKind::Card => {
-            format!(
-                "<Card><CardBody><CardTitle>{:?}</CardTitle></CardBody></Card>",
-                text
-            )
+            buf.push_str("<Card><CardBody><CardTitle>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</CardTitle></CardBody></Card>");
         }
         ComponentKind::Kbd => {
-            format!("<Kbd{}>{:?}</Kbd>", size_prop, text)
+            buf.push_str("<Kbd");
+            write_size_prop(buf, size);
+            buf.push('>');
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Kbd>");
         }
         ComponentKind::Progress => {
-            format!("<Progress{} value=70 max=100 />", color_prop)
+            buf.push_str("<Progress");
+            write_color_prop(buf, color);
+            buf.push_str(" value=70 max=100 />");
         }
         ComponentKind::Skeleton => {
-            "<Skeleton class=\"h-8 w-full\" />".to_string()
+            buf.push_str("<Skeleton class=\"h-8 w-full\" />");
         }
         ComponentKind::Stat => {
-            format!(
-                "<Stat><StatTitle>\"Total\"</StatTitle><StatValue{}>{:?}</StatValue></Stat>",
-                color_prop, text
-            )
+            buf.push_str("<Stat><StatTitle>\"Total\"</StatTitle><StatValue");
+            write_color_prop(buf, color);
+            buf.push('>');
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</StatValue></Stat>");
         }
         ComponentKind::Table => {
-            "<Table><thead><tr><th>\"#\"</th><th>\"Name\"</th></tr></thead><tbody><tr><th>\"1\"</th><td>\"Item\"</td></tr></tbody></Table>".to_string()
+            buf.push_str("<Table><thead><tr><th>\"#\"</th><th>\"Name\"</th></tr></thead><tbody><tr><th>\"1\"</th><td>\"Item\"</td></tr></tbody></Table>");
         }
         ComponentKind::Timeline => {
-            format!(
-                "<Timeline><TimelineItem><TimelineStart>\"09:00\"</TimelineStart><TimelineMiddle>\"●\"</TimelineMiddle><TimelineEnd>{:?}</TimelineEnd></TimelineItem></Timeline>",
-                text
-            )
+            buf.push_str("<Timeline><TimelineItem><TimelineStart>\"09:00\"</TimelineStart><TimelineMiddle>\"●\"</TimelineMiddle><TimelineEnd>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</TimelineEnd></TimelineItem></Timeline>");
         }
         ComponentKind::Checkbox => {
-            format!("<Checkbox{} />", color_prop)
+            buf.push_str("<Checkbox");
+            write_color_prop(buf, color);
+            buf.push_str(" />");
         }
         ComponentKind::FileInput => {
-            "<FileInput />".to_string()
+             buf.push_str("<FileInput />");
         }
         ComponentKind::Input => {
-            format!("<Input placeholder={:?}{} />", text, size_prop)
+            buf.push_str("<Input placeholder=");
+            let _ = write!(buf, "{:?}", text);
+            write_size_prop(buf, size);
+            buf.push_str(" />");
         }
         ComponentKind::Radio => {
-            format!("<Radio{} />", color_prop)
+            buf.push_str("<Radio");
+            write_color_prop(buf, color);
+            buf.push_str(" />");
         }
         ComponentKind::Range => {
-            format!("<Range{}{} />", color_prop, size_prop)
+            buf.push_str("<Range");
+            write_color_prop(buf, color);
+            write_size_prop(buf, size);
+            buf.push_str(" />");
         }
         ComponentKind::Select => {
-            format!(
-                "<Select{}><option>{:?}</option></Select>",
-                size_prop, text
-            )
+            buf.push_str("<Select");
+            write_size_prop(buf, size);
+            buf.push_str("><option>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</option></Select>");
         }
         ComponentKind::Textarea => {
-            format!("<Textarea placeholder={:?} />", text)
+            buf.push_str("<Textarea placeholder=");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str(" />");
         }
         ComponentKind::Toggle => {
-            format!("<Toggle{} />", color_prop)
+            buf.push_str("<Toggle");
+            write_color_prop(buf, color);
+            buf.push_str(" />");
         }
         ComponentKind::Loading => {
-            format!("<Loading{} />", size_prop)
+            buf.push_str("<Loading");
+            write_size_prop(buf, size);
+            buf.push_str(" />");
         }
         ComponentKind::Toast => {
-            format!("<Toast><Alert color=Color::Success>{:?}</Alert></Toast>", text)
+            buf.push_str("<Toast><Alert color=Color::Success>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Alert></Toast>");
         }
         ComponentKind::Divider => {
-            format!("<Divider>{:?}</Divider>", text)
+            buf.push_str("<Divider>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Divider>");
         }
         ComponentKind::Hero => {
-            format!("<Hero><HeroContent><h1>{:?}</h1></HeroContent></Hero>", text)
+            buf.push_str("<Hero><HeroContent><h1>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</h1></HeroContent></Hero>");
         }
         ComponentKind::Breadcrumbs => {
-            format!(
-                "<Breadcrumbs><li><a>\"Home\"</a></li><li>{:?}</li></Breadcrumbs>",
-                text
-            )
+            buf.push_str("<Breadcrumbs><li><a>\"Home\"</a></li><li>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</li></Breadcrumbs>");
         }
         ComponentKind::Menu => {
-            format!("<Menu><li><a>{:?}</a></li></Menu>", text)
+             buf.push_str("<Menu><li><a>");
+             let _ = write!(buf, "{:?}", text);
+             buf.push_str("</a></li></Menu>");
         }
         ComponentKind::Navbar => {
-            format!("<Navbar><NavbarStart>{:?}</NavbarStart></Navbar>", text)
+             buf.push_str("<Navbar><NavbarStart>");
+             let _ = write!(buf, "{:?}", text);
+             buf.push_str("</NavbarStart></Navbar>");
         }
         ComponentKind::Pagination => {
-            "<Join><button class=\"join-item btn\">\"1\"</button><button class=\"join-item btn btn-active\">\"2\"</button><button class=\"join-item btn\">\"3\"</button></Join>".to_string()
+             buf.push_str("<Join><button class=\"join-item btn\">\"1\"</button><button class=\"join-item btn btn-active\">\"2\"</button><button class=\"join-item btn\">\"3\"</button></Join>");
         }
         ComponentKind::Steps => {
-            format!(
-                "<Steps><Step color=Color::Primary>\"Step 1\"</Step><Step>{:?}</Step></Steps>",
-                text
-            )
+             buf.push_str("<Steps><Step color=Color::Primary>\"Step 1\"</Step><Step>");
+             let _ = write!(buf, "{:?}", text);
+             buf.push_str("</Step></Steps>");
         }
         ComponentKind::Tab => {
-            format!("<Tabs><Tab active=true>{:?}</Tab></Tabs>", text)
+            buf.push_str("<Tabs><Tab active=true>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Tab></Tabs>");
         }
     }
 }
 
-fn capitalize(s: &str) -> String {
+
+fn write_capitalized(buf: &mut String, s: &str) {
     let mut c = s.chars();
-    match c.next() {
-        None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
+    if let Some(f) = c.next() {
+        for char in f.to_uppercase() {
+            buf.push(char);
+        }
+        buf.push_str(c.as_str());
     }
 }
 
@@ -925,7 +973,7 @@ pub fn PlaygroundPage() -> impl IntoView {
             "// Add components from the palette to generate code".to_string()
         } else {
             let mut s = String::from("view! {\n");
-            s.push_str(&generate_code(&nodes, 1));
+            generate_code(&nodes, 1, &mut s);
             s.push('\n');
             s.push('}');
             s
