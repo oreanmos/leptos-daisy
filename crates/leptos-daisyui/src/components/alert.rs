@@ -40,7 +40,11 @@ impl AlertDirection {
     }
 }
 
-fn get_alert_classes(color: Option<Color>, style: AlertStyle, direction: AlertDirection) -> Vec<String> {
+fn get_alert_classes(
+    color: Option<Color>,
+    style: AlertStyle,
+    direction: AlertDirection,
+) -> Vec<String> {
     let mut mods = Vec::new();
     if let Some(c) = color {
         let s = c.class("alert");
@@ -145,7 +149,11 @@ mod tests {
         assert!(classes.is_empty());
 
         // Color only
-        let classes = get_alert_classes(Some(Color::Info), AlertStyle::Default, AlertDirection::Default);
+        let classes = get_alert_classes(
+            Some(Color::Info),
+            AlertStyle::Default,
+            AlertDirection::Default,
+        );
         assert_eq!(classes, vec!["alert-info"]);
 
         // Style only
@@ -157,7 +165,14 @@ mod tests {
         assert_eq!(classes, vec!["alert-horizontal"]);
 
         // Mixed
-        let classes = get_alert_classes(Some(Color::Success), AlertStyle::Dash, AlertDirection::Vertical);
-        assert_eq!(classes, vec!["alert-success", "alert-dash", "alert-vertical"]);
+        let classes = get_alert_classes(
+            Some(Color::Success),
+            AlertStyle::Dash,
+            AlertDirection::Vertical,
+        );
+        assert_eq!(
+            classes,
+            vec!["alert-success", "alert-dash", "alert-vertical"]
+        );
     }
 }
