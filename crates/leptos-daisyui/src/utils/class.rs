@@ -67,6 +67,29 @@ pub fn class_signal(
     }
 }
 
+/// Creates a reactive class computation with dynamic modifiers.
+pub fn class_signal_dynamic<F>(
+    base: &str,
+    modifiers: F,
+    user_class: MaybeProp<String>,
+) -> impl Fn() -> String + Send + Sync + 'static + use<F>
+where
+    F: Fn() -> Vec<String> + Send + Sync + 'static,
+{
+    let base = base.to_string();
+    move || {
+        let mut parts = Vec::new();
+        if !base.is_empty() {
+            parts.push(base.clone());
+        }
+        parts.extend(modifiers());
+        if let Some(uc) = user_class.get() {
+            parts.push(uc);
+        }
+        merge_classes(parts)
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -93,5 +116,31 @@ mod tests {
     fn test_empty_handling() {
         let result = merge_classes(["", "btn", "", "text-sm", ""]);
         assert_eq!(result, "btn text-sm");
+    }
+
+    #[test]
+    fn test_class_signal_dynamic() {
+        use leptos::prelude::*;
+        use std::sync::{Arc, Mutex};
+
+        let active = Arc::new(Mutex::new(false));
+        let active_clone = active.clone();
+        let user_class = MaybeProp::from("custom");
+
+        let cls = class_signal_dynamic(
+            "base",
+            move || {
+                if *active_clone.lock().unwrap() {
+                    vec!["active".to_string()]
+                } else {
+                    vec![]
+                }
+            },
+            user_class,
+        );
+
+        assert_eq!(cls(), "base custom");
+        *active.lock().unwrap() = true;
+        assert_eq!(cls(), "base active custom");
     }
 }
