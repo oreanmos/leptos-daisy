@@ -174,3 +174,32 @@ pub fn DropdownItem(
     }
     .add_any_attr(attrs)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_dropdown_position_classes() {
+        assert_eq!(DropdownPosition::Bottom.cls(), "dropdown-bottom");
+        assert_eq!(DropdownPosition::Top.cls(), "dropdown-top");
+        assert_eq!(DropdownPosition::Left.cls(), "dropdown-left");
+        assert_eq!(DropdownPosition::Right.cls(), "dropdown-right");
+        assert_eq!(DropdownPosition::Start.cls(), "dropdown-start");
+        assert_eq!(DropdownPosition::End.cls(), "dropdown-end");
+        assert_eq!(DropdownPosition::Center.cls(), "dropdown-center");
+    }
+
+    #[test]
+    fn test_dropdown_hover_classes() {
+        assert_eq!(DropdownHover::Click.cls(), "");
+        assert_eq!(DropdownHover::Hover.cls(), "dropdown-hover");
+    }
+
+    #[test]
+    fn test_dropdown_state_classes() {
+        assert_eq!(DropdownState::Auto.cls(), "");
+        assert_eq!(DropdownState::Open.cls(), "dropdown-open");
+        assert_eq!(DropdownState::Close.cls(), "dropdown-close");
+    }
+}
