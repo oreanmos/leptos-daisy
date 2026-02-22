@@ -48,3 +48,24 @@ impl std::fmt::Display for Color {
         f.write_str(self.as_str())
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_class() {
+        assert_eq!(Color::Default.class("btn"), "");
+        assert_eq!(Color::Primary.class("btn"), "btn-primary");
+        assert_eq!(Color::Secondary.class("btn"), "btn-secondary");
+        assert_eq!(Color::Accent.class("btn"), "btn-accent");
+        assert_eq!(Color::Neutral.class("btn"), "btn-neutral");
+        assert_eq!(Color::Info.class("btn"), "btn-info");
+        assert_eq!(Color::Success.class("btn"), "btn-success");
+        assert_eq!(Color::Warning.class("btn"), "btn-warning");
+        assert_eq!(Color::Error.class("btn"), "btn-error");
+
+        // Test with a different component prefix
+        assert_eq!(Color::Primary.class("badge"), "badge-primary");
+    }
+}
