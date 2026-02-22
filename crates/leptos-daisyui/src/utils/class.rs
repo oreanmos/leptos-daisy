@@ -2,6 +2,7 @@
 
 use leptos::prelude::*;
 use std::collections::HashSet;
+use std::sync::Arc;
 
 /// Merges multiple class strings, deduplicating individual classes.
 pub fn merge_classes(classes: impl IntoIterator<Item = impl AsRef<str>>) -> String {
@@ -59,10 +60,10 @@ pub fn class_signal(
     base: &str,
     modifiers: &[&str],
     user_class: MaybeProp<String>,
-) -> impl Fn() -> String + Send + Sync + 'static + use<> {
-    let static_cls = build_class(base, modifiers, None);
+) -> impl Fn() -> Arc<str> + Send + Sync + 'static + use<> {
+    let static_cls: Arc<str> = build_class(base, modifiers, None).into();
     move || match user_class.get() {
-        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
+        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}").into(),
         _ => static_cls.clone(),
     }
 }
