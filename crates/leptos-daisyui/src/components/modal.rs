@@ -102,12 +102,10 @@ pub fn ModalAction(
 
 #[component]
 pub fn ModalBackdrop(
-    #[prop(optional, into)] modal_id: Option<String>,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let cls = class_signal("modal-backdrop", &[], class);
-    let _ = modal_id;
     view! {
         <form method="dialog" class=cls>
             <button type="submit">"close"</button>
