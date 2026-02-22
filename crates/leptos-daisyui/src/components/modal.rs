@@ -37,6 +37,30 @@ impl ModalState {
     }
 }
 
+fn modal_cls(
+    position: ModalPosition,
+    state: ModalState,
+    open: bool,
+    class: Option<String>,
+) -> String {
+    let pc = position.cls();
+    let state_cls = state.cls();
+    let mut parts: Vec<&str> = vec!["modal"];
+    if !pc.is_empty() {
+        parts.push(pc);
+    }
+    if !state_cls.is_empty() {
+        parts.push(state_cls);
+    } else if open {
+        parts.push("modal-open");
+    }
+    let base = parts.join(" ");
+    match class {
+        Some(uc) if !uc.is_empty() => format!("{base} {uc}"),
+        _ => base,
+    }
+}
+
 #[component]
 pub fn Modal(
     #[prop(optional, into)] class: MaybeProp<String>,
@@ -48,24 +72,7 @@ pub fn Modal(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
-    let pc = position.cls();
-    let state_cls = state.cls();
-    let cls = move || {
-        let mut parts: Vec<&str> = vec!["modal"];
-        if !pc.is_empty() {
-            parts.push(pc);
-        }
-        if !state_cls.is_empty() {
-            parts.push(state_cls);
-        } else if open.get().unwrap_or(false) {
-            parts.push("modal-open");
-        }
-        let base = parts.join(" ");
-        match class.get() {
-            Some(uc) if !uc.is_empty() => format!("{base} {uc}"),
-            _ => base,
-        }
-    };
+    let cls = move || modal_cls(position, state, open.get().unwrap_or(false), class.get());
     view! {
         <dialog
             id=move || id.get()
@@ -112,4 +119,100 @@ pub fn ModalBackdrop(
         </form>
     }
     .add_any_attr(attrs)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_modal_position_cls() {
+        assert_eq!(ModalPosition::Center.cls(), "");
+        assert_eq!(ModalPosition::Top.cls(), "modal-top");
+        assert_eq!(ModalPosition::Bottom.cls(), "modal-bottom");
+    }
+
+    #[test]
+    fn test_modal_state_cls() {
+        assert_eq!(ModalState::Auto.cls(), "");
+        assert_eq!(ModalState::Open.cls(), "modal-open");
+        assert_eq!(ModalState::Close.cls(), "modal-close");
+    }
+
+    #[test]
+    fn test_modal_cls_default() {
+        assert_eq!(
+            modal_cls(ModalPosition::Center, ModalState::Auto, false, None),
+            "modal"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_open_prop() {
+        assert_eq!(
+            modal_cls(ModalPosition::Center, ModalState::Auto, true, None),
+            "modal modal-open"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_state_open() {
+        // state=Open overrides open=false
+        assert_eq!(
+            modal_cls(ModalPosition::Center, ModalState::Open, false, None),
+            "modal modal-open"
+        );
+        // state=Open overrides open=true (same result)
+        assert_eq!(
+            modal_cls(ModalPosition::Center, ModalState::Open, true, None),
+            "modal modal-open"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_state_close() {
+        // state=Close overrides open=true
+        assert_eq!(
+            modal_cls(ModalPosition::Center, ModalState::Close, true, None),
+            "modal modal-close"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_position() {
+        assert_eq!(
+            modal_cls(ModalPosition::Top, ModalState::Auto, false, None),
+            "modal modal-top"
+        );
+        assert_eq!(
+            modal_cls(ModalPosition::Bottom, ModalState::Auto, false, None),
+            "modal modal-bottom"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_extra_class() {
+        assert_eq!(
+            modal_cls(
+                ModalPosition::Center,
+                ModalState::Auto,
+                false,
+                Some("custom-class".to_string())
+            ),
+            "modal custom-class"
+        );
+    }
+
+    #[test]
+    fn test_modal_cls_complex() {
+        assert_eq!(
+            modal_cls(
+                ModalPosition::Top,
+                ModalState::Close,
+                true, // ignored due to state
+                Some("custom-class".to_string())
+            ),
+            "modal modal-top modal-close custom-class"
+        );
+    }
 }
