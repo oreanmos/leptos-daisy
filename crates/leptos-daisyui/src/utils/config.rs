@@ -17,6 +17,10 @@ impl DaisyConfig {
 
     /// Apply the prefix to a single daisyUI class token.
     pub fn apply(&self, class: &str) -> String {
+        if class.is_empty() {
+            return String::new();
+        }
+
         match &self.daisy_prefix {
             Some(p) => format!("{p}{class}"),
             None => class.to_string(),
@@ -62,6 +66,6 @@ mod tests {
         let config_with_prefix = DaisyConfig {
             daisy_prefix: Some("d-".to_string()),
         };
-        assert_eq!(config_with_prefix.apply(""), "d-");
+        assert_eq!(config_with_prefix.apply(""), "");
     }
 }
