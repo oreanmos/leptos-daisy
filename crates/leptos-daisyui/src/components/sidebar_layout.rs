@@ -91,6 +91,23 @@ impl SidebarLayoutVariant {
             Self::Primary => "bg-primary text-primary-content",
         }
     }
+
+    /// Returns the CSS classes for navigation items (text, hover, active).
+    fn nav_item_classes(&self) -> (&'static str, &'static str, &'static str) {
+        match self {
+            Self::Light => ("", "hover:bg-base-100/30", "bg-base-100/50 font-medium"),
+            Self::Dark => (
+                "text-neutral-content/80",
+                "hover:bg-neutral-content/10",
+                "bg-neutral-content/20 font-medium",
+            ),
+            Self::Primary => (
+                "text-primary-content/80",
+                "hover:bg-primary-content/10",
+                "bg-primary-content/20 font-medium",
+            ),
+        }
+    }
 }
 
 /// Sidebar width options.
@@ -431,19 +448,7 @@ pub fn SidebarLayoutNavItem(
     let ctx = use_context::<SidebarLayoutContext>();
     let variant = ctx.map(|c| c.variant).unwrap_or_default();
 
-    let (text_class, hover_class, active_class) = match variant {
-        SidebarLayoutVariant::Light => ("", "hover:bg-base-100/30", "bg-base-100/50 font-medium"),
-        SidebarLayoutVariant::Dark => (
-            "text-neutral-content/80",
-            "hover:bg-neutral-content/10",
-            "bg-neutral-content/20 font-medium",
-        ),
-        SidebarLayoutVariant::Primary => (
-            "text-primary-content/80",
-            "hover:bg-primary-content/10",
-            "bg-primary-content/20 font-medium",
-        ),
-    };
+    let (text_class, hover_class, active_class) = variant.nav_item_classes();
 
     let cls = move || {
         let mut m: Vec<&str> = vec![text_class, hover_class];
@@ -517,6 +522,30 @@ mod tests {
         assert_eq!(
             SidebarLayoutVariant::Primary.panel_classes(),
             "bg-primary text-primary-content"
+        );
+    }
+
+    #[test]
+    fn test_nav_item_classes() {
+        assert_eq!(
+            SidebarLayoutVariant::Light.nav_item_classes(),
+            ("", "hover:bg-base-100/30", "bg-base-100/50 font-medium")
+        );
+        assert_eq!(
+            SidebarLayoutVariant::Dark.nav_item_classes(),
+            (
+                "text-neutral-content/80",
+                "hover:bg-neutral-content/10",
+                "bg-neutral-content/20 font-medium",
+            )
+        );
+        assert_eq!(
+            SidebarLayoutVariant::Primary.nav_item_classes(),
+            (
+                "text-primary-content/80",
+                "hover:bg-primary-content/10",
+                "bg-primary-content/20 font-medium",
+            )
         );
     }
 
