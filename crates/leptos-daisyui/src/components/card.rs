@@ -25,15 +25,8 @@ impl CardVariant {
     }
 }
 
-#[component]
-pub fn Card(
-    children: Children,
-    #[prop(optional)] variant: CardVariant,
-    #[prop(optional, into)] size: Option<Size>,
-    #[prop(optional, into)] class: MaybeProp<String>,
-    #[prop(attrs)] attrs: Vec<AnyAttribute>,
-) -> impl IntoView {
-    let mut m: Vec<&'static str> = Vec::new();
+fn get_card_classes(variant: CardVariant, size: Option<Size>) -> Vec<&'static str> {
+    let mut m = Vec::new();
     let vc = variant.cls();
     if !vc.is_empty() {
         m.push(vc);
@@ -47,6 +40,18 @@ pub fn Card(
             Size::ExtraLarge => m.push("card-xl"),
         }
     }
+    m
+}
+
+#[component]
+pub fn Card(
+    children: Children,
+    #[prop(optional)] variant: CardVariant,
+    #[prop(optional, into)] size: Option<Size>,
+    #[prop(optional, into)] class: MaybeProp<String>,
+    #[prop(attrs)] attrs: Vec<AnyAttribute>,
+) -> impl IntoView {
+    let m = get_card_classes(variant, size);
     let cls = class_signal("card", &m, class);
     view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
@@ -89,4 +94,45 @@ pub fn CardActions(
 ) -> impl IntoView {
     let cls = class_signal("card-actions", &[], class);
     view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_card_variant_classes() {
+        assert_eq!(CardVariant::Default.cls(), "");
+        assert_eq!(CardVariant::Bordered.cls(), "card-bordered");
+        assert_eq!(CardVariant::Compact.cls(), "card-compact");
+        assert_eq!(CardVariant::Normal.cls(), "card-normal");
+        assert_eq!(CardVariant::Side.cls(), "card-side");
+    }
+
+    #[test]
+    fn test_card_classes_helper() {
+        // Default variant, no size
+        let m = get_card_classes(CardVariant::Default, None);
+        assert!(m.is_empty());
+
+        // Bordered variant, no size
+        let m = get_card_classes(CardVariant::Bordered, None);
+        assert_eq!(m, vec!["card-bordered"]);
+
+        // Compact variant, no size
+        let m = get_card_classes(CardVariant::Compact, None);
+        assert_eq!(m, vec!["card-compact"]);
+
+        // Default variant, small size
+        let m = get_card_classes(CardVariant::Default, Some(Size::Small));
+        assert_eq!(m, vec!["card-sm"]);
+
+        // Bordered variant, large size
+        let m = get_card_classes(CardVariant::Bordered, Some(Size::Large));
+        assert_eq!(m, vec!["card-bordered", "card-lg"]);
+
+        // Side variant, extra large size
+        let m = get_card_classes(CardVariant::Side, Some(Size::ExtraLarge));
+        assert_eq!(m, vec!["card-side", "card-xl"]);
+    }
 }
