@@ -140,11 +140,8 @@ mod tests {
 
     #[test]
     fn test_input_mixed() {
-        let classes = get_input_classes(
-            Some(Color::Error),
-            Some(Size::Small),
-            Some(Variant::Ghost),
-        );
+        let classes =
+            get_input_classes(Some(Color::Error), Some(Size::Small), Some(Variant::Ghost));
         // The order depends on implementation: color, size, variant
         assert_eq!(classes, vec!["input-error", "input-sm", "input-ghost"]);
     }
