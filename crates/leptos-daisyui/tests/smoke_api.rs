@@ -52,6 +52,18 @@ fn key_components_compile_in_view_macro() {
                 </Button>
             </TerminalThemeShell>
 
+            <Collapse title="Collapse Title">
+                "Collapse Content"
+            </Collapse>
+
+            <Collapse title="Accordion" trigger=CollapseTrigger::Details>
+                "Accordion Content"
+            </Collapse>
+
+            <Collapse header=view! { <span class="text-red-500">"Custom Title"</span> }.into_any()>
+                "Content with Custom Header"
+            </Collapse>
+
             <ModalBackdrop />
         </div>
     };
