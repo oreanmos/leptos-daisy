@@ -9,6 +9,7 @@ use leptos::attr::any_attribute::AnyAttribute;
 use leptos::ev;
 use leptos::prelude::*;
 
+#[allow(clippy::too_many_arguments)]
 fn get_button_classes(
     color: Option<Color>,
     size: Option<Size>,
