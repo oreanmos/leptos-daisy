@@ -143,7 +143,15 @@ mod tests {
     fn test_button_classes_color() {
         let classes = get_button_classes(
             Some(Color::Primary),
-            None, None, None, false, false, false, false, false, false,
+            None,
+            None,
+            None,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
         );
         assert_eq!(classes, vec!["btn-primary"]);
     }
@@ -153,7 +161,14 @@ mod tests {
         let classes = get_button_classes(
             None,
             Some(Size::Large),
-            None, None, false, false, false, false, false, false,
+            None,
+            None,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
         );
         assert_eq!(classes, vec!["btn-lg"]);
     }
@@ -161,9 +176,16 @@ mod tests {
     #[test]
     fn test_button_classes_variant() {
         let classes = get_button_classes(
-            None, None,
+            None,
+            None,
             Some(Variant::Outline),
-            None, false, false, false, false, false, false,
+            None,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
         );
         assert_eq!(classes, vec!["btn-outline"]);
     }
@@ -171,9 +193,16 @@ mod tests {
     #[test]
     fn test_button_classes_state() {
         let classes = get_button_classes(
-            None, None, None,
+            None,
+            None,
+            None,
             Some(State::Active),
-            false, false, false, false, false, false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
         );
         assert_eq!(classes, vec!["btn-active"]);
     }
@@ -181,8 +210,7 @@ mod tests {
     #[test]
     fn test_button_classes_booleans() {
         let classes = get_button_classes(
-            None, None, None, None,
-            true, // square
+            None, None, None, None, true, // square
             true, // circle
             true, // glass
             true, // wide
