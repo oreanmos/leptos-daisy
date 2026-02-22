@@ -33,16 +33,21 @@ pub fn Card(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<String> = Vec::new();
+    let mut m: Vec<&'static str> = Vec::new();
     let vc = variant.cls();
     if !vc.is_empty() {
-        m.push(vc.into());
+        m.push(vc);
     }
     if let Some(s) = size {
-        m.push(s.class("card"));
+        match s {
+            Size::ExtraSmall => m.push("card-xs"),
+            Size::Small => m.push("card-sm"),
+            Size::Medium => m.push("card-md"),
+            Size::Large => m.push("card-lg"),
+            Size::ExtraLarge => m.push("card-xl"),
+        }
     }
-    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
-    let cls = class_signal("card", &refs, class);
+    let cls = class_signal("card", &m, class);
     view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
