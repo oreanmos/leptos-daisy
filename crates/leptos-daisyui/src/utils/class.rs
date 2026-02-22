@@ -10,8 +10,10 @@ pub fn merge_classes(classes: impl IntoIterator<Item = impl AsRef<str>>) -> Stri
 
     for class in classes {
         for token in class.as_ref().split_whitespace() {
-            if !token.is_empty() && seen.insert(token.to_string()) {
-                result.push(token.to_string());
+            if !token.is_empty() && !seen.contains(token) {
+                let s = token.to_string();
+                seen.insert(s.clone());
+                result.push(s);
             }
         }
     }
@@ -26,15 +28,19 @@ pub fn merge_with_base(base: &str, extras: impl IntoIterator<Item = impl AsRef<s
 
     // Base always first
     for token in base.split_whitespace() {
-        if seen.insert(token.to_string()) {
-            result.push(token.to_string());
+        if !seen.contains(token) {
+            let s = token.to_string();
+            seen.insert(s.clone());
+            result.push(s);
         }
     }
 
     for class in extras {
         for token in class.as_ref().split_whitespace() {
-            if !token.is_empty() && seen.insert(token.to_string()) {
-                result.push(token.to_string());
+            if !token.is_empty() && !seen.contains(token) {
+                let s = token.to_string();
+                seen.insert(s.clone());
+                result.push(s);
             }
         }
     }
