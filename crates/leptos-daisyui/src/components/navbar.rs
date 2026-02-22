@@ -3,6 +3,7 @@ use crate::utils::class::class_signal;
 use crate::variants::color::Color;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
+use std::borrow::Cow;
 
 #[component]
 pub fn Navbar(
@@ -13,20 +14,20 @@ pub fn Navbar(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<String> = Vec::new();
+    let mut m: Vec<Cow<'static, str>> = Vec::new();
     if glass {
-        m.push("glass".into());
+        m.push(Cow::Borrowed("glass"));
     }
     if rounded {
-        m.push("rounded-box".into());
+        m.push(Cow::Borrowed("rounded-box"));
     }
     if let Some(c) = color {
         let s = c.class("navbar");
         if !s.is_empty() {
-            m.push(s);
+            m.push(Cow::Owned(s));
         }
     }
-    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let refs: Vec<&str> = m.iter().map(|s| s.as_ref()).collect();
     let cls = class_signal("navbar", &refs, class);
     view! { <nav class=cls>{children()}</nav> }.add_any_attr(attrs)
 }
