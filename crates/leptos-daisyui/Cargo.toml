@@ -9,7 +9,7 @@ keywords = ["leptos", "daisyui", "tailwind", "components", "web"]
 categories = ["gui", "web-programming", "wasm"]
 
 [dependencies]
-leptos = { version = "0.8", default-features = false }
+leptos = { version = "0.8.16", default-features = false }
 
 [features]
 default = []
