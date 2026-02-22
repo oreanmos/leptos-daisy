@@ -3,27 +3,48 @@ use crate::utils::class::class_signal;
 use crate::variants::size::Size;
 use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
+use std::fmt;
+use std::sync::Arc;
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct DockItem {
     pub label: String,
-    pub icon: String,
+    pub icon: Arc<dyn Fn() -> AnyView + Send + Sync>,
     pub active: bool,
     pub href: Option<String>,
 }
+
+impl fmt::Debug for DockItem {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.debug_struct("DockItem")
+            .field("label", &self.label)
+            .field("active", &self.active)
+            .field("href", &self.href)
+            .finish_non_exhaustive()
+    }
+}
+
 impl DockItem {
-    pub fn new(label: impl Into<String>, icon: impl Into<String>) -> Self {
+    pub fn new<V>(label: impl Into<String>, icon: V) -> Self
+    where
+        V: IntoView + Clone + Send + Sync + 'static,
+    {
+        let icon = icon.clone();
         Self {
             label: label.into(),
-            icon: icon.into(),
+            icon: Arc::new(move || icon.clone().into_any()),
             active: false,
             href: None,
         }
     }
-    pub fn active(label: impl Into<String>, icon: impl Into<String>) -> Self {
+    pub fn active<V>(label: impl Into<String>, icon: V) -> Self
+    where
+        V: IntoView + Clone + Send + Sync + 'static,
+    {
+        let icon = icon.clone();
         Self {
             label: label.into(),
-            icon: icon.into(),
+            icon: Arc::new(move || icon.clone().into_any()),
             active: true,
             href: None,
         }
@@ -65,16 +86,16 @@ pub fn Dock(
                     {if let Some(href) = item.href {
                         view! {
                             <a href=href class=item_class aria-current={if item.active { Some("page") } else { None }}>
-                                <span class="dock-icon" inner_html={item.icon.clone()}></span>
-                                <span class="dock-label">{item.label.clone()}</span>
+                                <span class="dock-icon">{(item.icon)()}</span>
+                                <span class="dock-label">{item.label}</span>
                             </a>
                         }.into_any()
                     } else {
                         view! {
                             <button class=item_class on:click=move |_| handle_click(index) type="button"
                                 aria-current={if item.active { Some("page") } else { None }}>
-                                <span class="dock-icon" inner_html={item.icon.clone()}></span>
-                                <span class="dock-label">{item.label.clone()}</span>
+                                <span class="dock-icon">{(item.icon)()}</span>
+                                <span class="dock-label">{item.label}</span>
                             </button>
                         }.into_any()
                     }}
