@@ -145,4 +145,17 @@ mod tests {
         // The order depends on implementation: color, size, variant
         assert_eq!(classes, vec!["input-error", "input-sm", "input-ghost"]);
     }
+
+    #[test]
+    fn test_input_combinations() {
+        let classes = get_input_classes(
+            Some(Color::Secondary),
+            Some(Size::Small),
+            Some(Variant::Outline),
+        );
+        assert_eq!(
+            classes,
+            vec!["input-secondary", "input-sm", "input-outline"]
+        );
+    }
 }
