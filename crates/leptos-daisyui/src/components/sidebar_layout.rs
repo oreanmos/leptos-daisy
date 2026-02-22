@@ -67,6 +67,7 @@
 
 use crate::utils::class::{build_class, class_signal};
 use leptos::prelude::*;
+use std::sync::Arc;
 
 // --- Enums ---
 
@@ -149,7 +150,7 @@ impl SidebarLayoutWidth {
 struct SidebarLayoutContext {
     variant: SidebarLayoutVariant,
     width: SidebarLayoutWidth,
-    drawer_id: String,
+    drawer_id: Arc<str>,
 }
 
 // --- Core Shell Components ---
@@ -182,7 +183,7 @@ pub fn SidebarLayout(
     let ctx = SidebarLayoutContext {
         variant,
         width,
-        drawer_id: drawer_id.clone(),
+        drawer_id: Arc::from(drawer_id.as_str()),
     };
     provide_context(ctx);
 
@@ -229,9 +230,9 @@ pub fn SidebarLayoutOverlay(#[prop(optional, into)] class: MaybeProp<String>) ->
     let ctx = use_context::<SidebarLayoutContext>();
     let drawer_id = ctx
         .map(|c| c.drawer_id)
-        .unwrap_or_else(|| "sidebar-layout-drawer".to_string());
+        .unwrap_or_else(|| Arc::from("sidebar-layout-drawer"));
     let cls = class_signal("drawer-overlay", &[], class);
-    view! { <label for=drawer_id aria-label="close sidebar" class=cls /> }
+    view! { <label for=Oco::Counted(drawer_id) aria-label="close sidebar" class=cls /> }
 }
 
 /// The actual sidebar panel containing navigation.
@@ -361,8 +362,14 @@ pub fn SidebarLayoutMobileMenuButton(
     let inherited_id = ctx
         .as_ref()
         .map(|c| c.drawer_id.clone())
-        .unwrap_or_else(|| "sidebar-layout-drawer".to_string());
-    let target_id = move || drawer_id.get().unwrap_or_else(|| inherited_id.clone());
+        .unwrap_or_else(|| Arc::from("sidebar-layout-drawer"));
+    let target_id = move || {
+        if let Some(id) = drawer_id.get() {
+            Oco::Owned(id)
+        } else {
+            Oco::Counted(inherited_id.clone())
+        }
+    };
     let cls = class_signal("btn btn-ghost btn-square lg:hidden", &[], class);
 
     view! {

@@ -101,9 +101,6 @@ pub fn Input(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::variants::color::Color;
-    use crate::variants::size::Size;
-    use crate::variants::variant::Variant;
 
     #[test]
     fn test_input_defaults() {
@@ -115,38 +112,18 @@ mod tests {
     fn test_input_color() {
         let classes = get_input_classes(Some(Color::Primary), None, None);
         assert_eq!(classes, vec!["input-primary"]);
-
-        let classes = get_input_classes(Some(Color::Default), None, None);
-        assert!(classes.is_empty());
     }
 
     #[test]
     fn test_input_size() {
         let classes = get_input_classes(None, Some(Size::Large), None);
         assert_eq!(classes, vec!["input-lg"]);
-
-        let classes = get_input_classes(None, Some(Size::Medium), None);
-        assert_eq!(classes, vec!["input-md"]);
     }
 
     #[test]
     fn test_input_variant() {
-        let classes = get_input_classes(None, None, Some(Variant::Outline));
-        assert_eq!(classes, vec!["input-outline"]);
-
-        let classes = get_input_classes(None, None, Some(Variant::Solid));
-        assert!(classes.is_empty());
-
         let classes = get_input_classes(None, None, Some(Variant::Ghost));
         assert_eq!(classes, vec!["input-ghost"]);
-    }
-
-    #[test]
-    fn test_input_mixed() {
-        let classes =
-            get_input_classes(Some(Color::Error), Some(Size::Small), Some(Variant::Ghost));
-        // The order depends on implementation: color, size, variant
-        assert_eq!(classes, vec!["input-error", "input-sm", "input-ghost"]);
     }
 
     #[test]

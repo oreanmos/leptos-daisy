@@ -2,6 +2,7 @@
 
 use leptos::prelude::*;
 use std::collections::HashSet;
+use std::sync::Arc;
 
 /// Merges multiple class strings, deduplicating individual classes.
 pub fn merge_classes(classes: impl IntoIterator<Item = impl AsRef<str>>) -> String {
@@ -10,8 +11,10 @@ pub fn merge_classes(classes: impl IntoIterator<Item = impl AsRef<str>>) -> Stri
 
     for class in classes {
         for token in class.as_ref().split_whitespace() {
-            if !token.is_empty() && seen.insert(token.to_string()) {
-                result.push(token.to_string());
+            if !token.is_empty() && !seen.contains(token) {
+                let s = token.to_string();
+                seen.insert(s.clone());
+                result.push(s);
             }
         }
     }
@@ -26,15 +29,19 @@ pub fn merge_with_base(base: &str, extras: impl IntoIterator<Item = impl AsRef<s
 
     // Base always first
     for token in base.split_whitespace() {
-        if seen.insert(token.to_string()) {
-            result.push(token.to_string());
+        if !seen.contains(token) {
+            let s = token.to_string();
+            seen.insert(s.clone());
+            result.push(s);
         }
     }
 
     for class in extras {
         for token in class.as_ref().split_whitespace() {
-            if !token.is_empty() && seen.insert(token.to_string()) {
-                result.push(token.to_string());
+            if !token.is_empty() && !seen.contains(token) {
+                let s = token.to_string();
+                seen.insert(s.clone());
+                result.push(s);
             }
         }
     }
@@ -59,10 +66,10 @@ pub fn class_signal(
     base: &str,
     modifiers: &[&str],
     user_class: MaybeProp<String>,
-) -> impl Fn() -> String + Send + Sync + 'static + use<> {
-    let static_cls = build_class(base, modifiers, None);
+) -> impl Fn() -> Arc<str> + Send + Sync + 'static + use<> {
+    let static_cls: Arc<str> = build_class(base, modifiers, None).into();
     move || match user_class.get() {
-        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
+        Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}").into(),
         _ => static_cls.clone(),
     }
 }

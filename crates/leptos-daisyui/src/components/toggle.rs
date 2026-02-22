@@ -22,23 +22,8 @@ pub fn Toggle(
     #[prop(optional, into)] on_change: Option<Callback<ev::Event>>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m = Vec::new();
-    if let Some(c) = color {
-        let s = c.class("toggle");
-        if !s.is_empty() {
-            m.push(s);
-        }
-    }
-    if let Some(s) = size {
-        m.push(s.class("toggle"));
-    }
-    if let Some(v) = variant {
-        let s = v.class("toggle");
-        if !s.is_empty() {
-            m.push(s);
-        }
-    }
-    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
+    let modifiers = get_toggle_modifiers(color, size, variant);
+    let refs: Vec<&str> = modifiers.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("toggle", &refs, class);
 
     let handle_change = move |ev: ev::Event| {
@@ -61,4 +46,74 @@ pub fn Toggle(
         />
     }
     .add_any_attr(attrs)
+}
+
+fn get_toggle_modifiers(
+    color: Option<Color>,
+    size: Option<Size>,
+    variant: Option<Variant>,
+) -> Vec<String> {
+    let mut m = Vec::new();
+    if let Some(c) = color {
+        let s = c.class("toggle");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    if let Some(s) = size {
+        m.push(s.class("toggle"));
+    }
+    if let Some(v) = variant {
+        let s = v.class("toggle");
+        if !s.is_empty() {
+            m.push(s);
+        }
+    }
+    m
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::variants::color::Color;
+    use crate::variants::size::Size;
+    use crate::variants::variant::Variant;
+
+    #[test]
+    fn test_toggle_modifiers_defaults() {
+        let modifiers = get_toggle_modifiers(None, None, None);
+        assert!(modifiers.is_empty());
+    }
+
+    #[test]
+    fn test_toggle_modifiers_color() {
+        let modifiers = get_toggle_modifiers(Some(Color::Primary), None, None);
+        assert_eq!(modifiers, vec!["toggle-primary"]);
+    }
+
+    #[test]
+    fn test_toggle_modifiers_size() {
+        let modifiers = get_toggle_modifiers(None, Some(Size::Large), None);
+        assert_eq!(modifiers, vec!["toggle-lg"]);
+    }
+
+    #[test]
+    fn test_toggle_modifiers_variant() {
+        let modifiers = get_toggle_modifiers(None, None, Some(Variant::Outline));
+        assert_eq!(modifiers, vec!["toggle-outline"]);
+    }
+
+    #[test]
+    fn test_toggle_modifiers_combined() {
+        let modifiers = get_toggle_modifiers(
+            Some(Color::Secondary),
+            Some(Size::Small),
+            Some(Variant::Ghost),
+        );
+        // Order matters in implementation: color -> size -> variant
+        assert_eq!(
+            modifiers,
+            vec!["toggle-secondary", "toggle-sm", "toggle-ghost"]
+        );
+    }
 }

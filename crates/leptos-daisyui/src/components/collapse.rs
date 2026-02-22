@@ -46,10 +46,15 @@ impl CollapseState {
     }
 }
 
+/// Collapse component.
+///
+/// - `title`: Simple string title.
+/// - `header`: Custom title content (takes precedence over `title`). Pass `view! { ... }.into_any()`.
 #[component]
 pub fn Collapse(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(optional, into)] title: Option<String>,
+    #[prop(optional, into)] header: Option<AnyView>,
     #[prop(optional)] trigger: CollapseTrigger,
     #[prop(optional)] icon: CollapseIcon,
     #[prop(optional)] state: CollapseState,
@@ -68,10 +73,16 @@ pub fn Collapse(
     }
     let cls = class_signal("collapse", &mods, class);
 
+    let title_view = if let Some(h) = header {
+        Some(h)
+    } else {
+        title.map(|t| view! { <>{t}</> }.into_any())
+    };
+
     match trigger {
         CollapseTrigger::Details => view! {
             <details class=cls open=move || open.get().unwrap_or(false)>
-                {title.map(|t| view! { <summary class="collapse-title">{t}</summary> })}
+                {title_view.map(|t| view! { <summary class="collapse-title">{t}</summary> })}
                 <div class="collapse-content">{children()}</div>
             </details>
         }
@@ -79,7 +90,7 @@ pub fn Collapse(
         CollapseTrigger::Checkbox => view! {
             <div class=cls>
                 <input type="checkbox" checked=move || open.get().unwrap_or(false) />
-                {title.map(|t| view! { <div class="collapse-title">{t}</div> })}
+                {title_view.map(|t| view! { <div class="collapse-title">{t}</div> })}
                 <div class="collapse-content">{children()}</div>
             </div>
         }
@@ -91,7 +102,7 @@ pub fn Collapse(
                     name=move || radio_name.get().unwrap_or_else(|| "collapse-radio".to_string())
                     checked=move || open.get().unwrap_or(false)
                 />
-                {title.map(|t| view! { <div class="collapse-title">{t}</div> })}
+                {title_view.map(|t| view! { <div class="collapse-title">{t}</div> })}
                 <div class="collapse-content">{children()}</div>
             </div>
         }
