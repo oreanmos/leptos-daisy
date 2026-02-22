@@ -31,16 +31,17 @@ pub fn Tabs(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<String> = Vec::new();
     let vc = variant.cls();
+    let size_cls = size.map(|s| s.class("tabs"));
+
+    let mut modifiers = Vec::with_capacity(2);
     if !vc.is_empty() {
-        m.push(vc.into());
+        modifiers.push(vc);
     }
-    if let Some(s) = size {
-        m.push(s.class("tabs"));
+    if let Some(ref s) = size_cls {
+        modifiers.push(s);
     }
-    let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
-    let cls = class_signal("tabs", &refs, class);
+    let cls = class_signal("tabs", &modifiers, class);
     view! { <div class=cls role="tablist">{children()}</div> }.add_any_attr(attrs)
 }
 
