@@ -51,6 +51,8 @@ fn key_components_compile_in_view_macro() {
                     "terminal"
                 </Button>
             </TerminalThemeShell>
+
+            <ModalBackdrop />
         </div>
     };
 }
