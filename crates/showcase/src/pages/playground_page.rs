@@ -648,7 +648,13 @@ fn generate_code(nodes: &[CanvasNode], indent: usize, buf: &mut String) {
     }
 }
 
-fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, color: &str, size: &str) {
+fn generate_component_code(
+    buf: &mut String,
+    kind: ComponentKind,
+    text: &str,
+    color: &str,
+    size: &str,
+) {
     let write_color_prop = |buf: &mut String, color: &str| {
         if !color.is_empty() {
             buf.push_str(" color=Color::");
@@ -677,9 +683,9 @@ fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, co
             buf.push_str("</Button></DropdownTrigger><DropdownContent><DropdownItem>\"Item 1\"</DropdownItem></DropdownContent></Dropdown>");
         }
         ComponentKind::Modal => {
-             buf.push_str("<Button color=Color::Primary>");
-             let _ = write!(buf, "{:?}", text);
-             buf.push_str("</Button>");
+            buf.push_str("<Button color=Color::Primary>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Button>");
         }
         ComponentKind::Alert => {
             buf.push_str("<Alert");
@@ -740,7 +746,7 @@ fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, co
             buf.push_str(" />");
         }
         ComponentKind::FileInput => {
-             buf.push_str("<FileInput />");
+            buf.push_str("<FileInput />");
         }
         ComponentKind::Input => {
             buf.push_str("<Input placeholder=");
@@ -802,22 +808,22 @@ fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, co
             buf.push_str("</li></Breadcrumbs>");
         }
         ComponentKind::Menu => {
-             buf.push_str("<Menu><li><a>");
-             let _ = write!(buf, "{:?}", text);
-             buf.push_str("</a></li></Menu>");
+            buf.push_str("<Menu><li><a>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</a></li></Menu>");
         }
         ComponentKind::Navbar => {
-             buf.push_str("<Navbar><NavbarStart>");
-             let _ = write!(buf, "{:?}", text);
-             buf.push_str("</NavbarStart></Navbar>");
+            buf.push_str("<Navbar><NavbarStart>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</NavbarStart></Navbar>");
         }
         ComponentKind::Pagination => {
-             buf.push_str("<Join><button class=\"join-item btn\">\"1\"</button><button class=\"join-item btn btn-active\">\"2\"</button><button class=\"join-item btn\">\"3\"</button></Join>");
+            buf.push_str("<Join><button class=\"join-item btn\">\"1\"</button><button class=\"join-item btn btn-active\">\"2\"</button><button class=\"join-item btn\">\"3\"</button></Join>");
         }
         ComponentKind::Steps => {
-             buf.push_str("<Steps><Step color=Color::Primary>\"Step 1\"</Step><Step>");
-             let _ = write!(buf, "{:?}", text);
-             buf.push_str("</Step></Steps>");
+            buf.push_str("<Steps><Step color=Color::Primary>\"Step 1\"</Step><Step>");
+            let _ = write!(buf, "{:?}", text);
+            buf.push_str("</Step></Steps>");
         }
         ComponentKind::Tab => {
             buf.push_str("<Tabs><Tab active=true>");
@@ -826,7 +832,6 @@ fn generate_component_code(buf: &mut String, kind: ComponentKind, text: &str, co
         }
     }
 }
-
 
 fn write_capitalized(buf: &mut String, s: &str) {
     let mut c = s.chars();
