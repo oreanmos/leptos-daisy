@@ -6,10 +6,19 @@ pub use crate::variants::size::Size;
 pub use crate::variants::state::State;
 pub use crate::variants::variant::Variant;
 
-// Class utilities
+// Theme types
 pub use crate::themes::builtin::{Theme, UnknownThemeError};
 pub use crate::themes::terminal::{
     TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
+};
+
+// Aesthetic system
+pub use crate::themes::aesthetic::{Aesthetic, AestheticPreset, AestheticTokens, UnknownAestheticError};
+pub use crate::themes::aesthetic_components::{AestheticShell, AestheticStyles};
+pub use crate::themes::aesthetic_css::AESTHETIC_CSS;
+pub use crate::themes::switching::{
+    apply_aesthetic, apply_theme, read_stored_aesthetic, read_stored_theme,
+    system_preferred_theme,
 };
 pub use crate::utils::class::{class_signal, class_signal_dynamic, merge_classes, merge_with_base};
 pub use crate::utils::config::DaisyConfig;
@@ -32,6 +41,7 @@ pub use crate::components::card::{
     Card, CardActions, CardBody, CardHeader, CardTitle, CardVariant,
 };
 pub use crate::components::carousel::{Carousel, CarouselItem, CarouselOrientation, CarouselSnap};
+pub use crate::components::combobox::{ComboBox, ComboBoxItem};
 pub use crate::components::chat::{
     Chat, ChatBubble, ChatFooter, ChatHeader, ChatImage, ChatPosition,
 };
@@ -51,12 +61,15 @@ pub use crate::components::dropdown::{
     Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
     DropdownTrigger,
 };
+pub use crate::components::empty_state::EmptyState;
 pub use crate::components::fab::{Fab, FabAction, FabClose, FabMainAction, FabTrigger};
 pub use crate::components::fieldset::Fieldset;
 pub use crate::components::file_input::{FileInput, FileInputVariant};
 pub use crate::components::filter::Filter;
 pub use crate::components::footer::{Footer, FooterTitle};
+pub use crate::components::form_field::FormField;
 pub use crate::components::hero::{Hero, HeroContent, HeroOverlay};
+pub use crate::components::icon_button::IconButton;
 pub use crate::components::indicator::{
     Indicator, IndicatorHorizontal, IndicatorItem, IndicatorVertical,
 };
@@ -73,6 +86,7 @@ pub use crate::components::layout::{
     StackedLayoutVariant, StackedShell,
 };
 pub use crate::components::link::Link;
+pub use crate::components::link_button::LinkButton;
 pub use crate::components::list::{List, ListCol, ListItem};
 pub use crate::components::loading::{Loading, LoadingVariant};
 pub use crate::components::mask::{Mask, MaskShape};
@@ -91,6 +105,7 @@ pub use crate::components::radial_progress::RadialProgress;
 pub use crate::components::radio::Radio;
 pub use crate::components::range::Range;
 pub use crate::components::rating::{Rating, RatingHalf, RatingItem, RatingMask};
+pub use crate::components::secret_input::SecretInput;
 pub use crate::components::select::{Select, SelectOption};
 pub use crate::components::sidebar_layout::{
     SidebarLayout, SidebarLayoutContent, SidebarLayoutFooter, SidebarLayoutHeader,
@@ -105,10 +120,13 @@ pub use crate::components::stat::{
     Stat, StatActions, StatDesc, StatFigure, StatTitle, StatValue, Stats,
 };
 pub use crate::components::status::Status;
+pub use crate::components::status_indicator::StatusIndicator;
 pub use crate::components::steps::{Step, Steps};
 pub use crate::components::swap::{Swap, SwapAnimation};
 pub use crate::components::tab::{Tab, TabContent, TabVariant, Tabs};
-pub use crate::components::table::Table;
+pub use crate::components::table::{
+    Table, TableBody, TableCell, TableFoot, TableHead, TableHeaderCell, TableRow,
+};
 pub use crate::components::textarea::Textarea;
 pub use crate::components::theme_controller::{ThemeController, ThemeControllerType};
 pub use crate::components::timeline::{

@@ -15,8 +15,11 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "🎬",
         &[
             ("Button", "/button"),
+            ("Confirm Dialog", "/confirm-dialog"),
             ("FAB", "/fab"),
             ("Dropdown", "/dropdown"),
+            ("Icon Button", "/icon-button"),
+            ("Link Button", "/link-button"),
             ("Modal", "/modal"),
             ("Swap", "/swap"),
         ],
@@ -40,7 +43,9 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
             ("Radial Progress", "/radial-progress"),
             ("Rating", "/rating"),
             ("Stat", "/stat"),
+            ("Sort Controller", "/sort-controller"),
             ("Status", "/status"),
+            ("Status Indicator", "/status-indicator"),
             ("Table", "/table"),
             ("Timeline", "/timeline"),
         ],
@@ -50,13 +55,16 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "📝",
         &[
             ("Checkbox", "/checkbox"),
+            ("ComboBox", "/combobox"),
             ("Fieldset", "/fieldset"),
             ("File Input", "/file-input"),
             ("Filter", "/filter"),
+            ("Form Field", "/form-field"),
             ("Input", "/input"),
             ("Label", "/label"),
             ("Radio", "/radio"),
             ("Range", "/range"),
+            ("Secret Input", "/secret-input"),
             ("Select", "/select"),
             ("Textarea", "/textarea"),
             ("Theme Controller", "/theme-controller"),
@@ -68,6 +76,7 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "Feedback",
         "💬",
         &[
+            ("Empty State", "/empty-state"),
             ("Loading", "/loading"),
             ("Skeleton", "/skeleton"),
             ("Toast", "/toast"),
@@ -126,6 +135,8 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "Theming",
         "🎨",
         &[
+            ("Aesthetics", "/aesthetics"),
+            ("Aesthetic Gallery", "/aesthetics/gallery"),
             ("Theme Showcase", "/themes"),
             ("Theme Creator", "/themes/creator"),
             ("Theme Guide", "/themes/guide"),
@@ -212,6 +223,7 @@ pub fn App() -> impl IntoView {
     view! {
         <>
             <TerminalThemeStyles />
+            <AestheticStyles />
             <Router>
                 <SidebarLayout
                 variant=SidebarLayoutVariant::Light
@@ -247,6 +259,9 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/dropdown") view=DropdownPage />
                                 <Route path=path!("/modal") view=ModalPage />
                                 <Route path=path!("/swap") view=SwapPage />
+                                <Route path=path!("/confirm-dialog") view=ConfirmDialogPage />
+                                <Route path=path!("/icon-button") view=IconButtonPage />
+                                <Route path=path!("/link-button") view=LinkButtonPage />
                                 // Data Display
                                 <Route path=path!("/alert") view=AlertPage />
                                 <Route path=path!("/avatar") view=AvatarPage />
@@ -267,6 +282,8 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/status") view=StatusPage />
                                 <Route path=path!("/table") view=TablePage />
                                 <Route path=path!("/timeline") view=TimelinePage />
+                                <Route path=path!("/sort-controller") view=SortControllerPage />
+                                <Route path=path!("/status-indicator") view=StatusIndicatorPage />
                                 // Data Input
                                 <Route path=path!("/checkbox") view=CheckboxPage />
                                 <Route path=path!("/fieldset") view=FieldsetPage />
@@ -281,9 +298,13 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/theme-controller") view=ThemeControllerPage />
                                 <Route path=path!("/toggle") view=TogglePage />
                                 <Route path=path!("/validator") view=ValidatorPage />
+                                <Route path=path!("/combobox") view=ComboboxPage />
+                                <Route path=path!("/form-field") view=FormFieldPage />
+                                <Route path=path!("/secret-input") view=SecretInputPage />
                                 // Feedback
                                 <Route path=path!("/loading") view=LoadingPage />
                                 <Route path=path!("/toast") view=ToastPage />
+                                <Route path=path!("/empty-state") view=EmptyStatePage />
                                 // Layout
                                 <Route path=path!("/artboard") view=ArtboardPage />
                                 <Route path=path!("/divider") view=DividerPage />
@@ -320,6 +341,8 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/themes") view=ThemeShowcasePage />
                                 <Route path=path!("/themes/creator") view=ThemeCreatorPage />
                                 <Route path=path!("/themes/guide") view=ThemeGuidePage />
+                                <Route path=path!("/aesthetics") view=AestheticPage />
+                                <Route path=path!("/aesthetics/gallery") view=AestheticGalleryPage />
                                 // Tools
                                 <Route path=path!("/playground") view=PlaygroundPage />
                             </Routes>

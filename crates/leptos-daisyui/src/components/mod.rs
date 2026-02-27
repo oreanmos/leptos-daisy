@@ -13,18 +13,22 @@ pub mod carousel;
 pub mod chat;
 pub mod checkbox;
 pub mod collapse;
+pub mod combobox;
 pub mod countdown;
 pub mod diff;
 pub mod divider;
 pub mod dock;
 pub mod drawer;
 pub mod dropdown;
+pub mod empty_state;
 pub mod fab;
 pub mod fieldset;
 pub mod file_input;
 pub mod filter;
 pub mod footer;
+pub mod form_field;
 pub mod hero;
+pub mod icon_button;
 pub mod indicator;
 pub mod input;
 pub mod join;
@@ -32,6 +36,7 @@ pub mod kbd;
 pub mod label;
 pub mod layout;
 pub mod link;
+pub mod link_button;
 pub mod list;
 pub mod loading;
 pub mod mask;
@@ -48,12 +53,14 @@ pub mod radial_progress;
 pub mod radio;
 pub mod range;
 pub mod rating;
+pub mod secret_input;
 pub mod select;
 pub mod sidebar_layout;
 pub mod skeleton;
 pub mod stack;
 pub mod stat;
 pub mod status;
+pub mod status_indicator;
 pub mod steps;
 pub mod swap;
 pub mod tab;
@@ -88,6 +95,7 @@ pub use collapse::{
     Accordion, Collapse, CollapseContent, CollapseIcon, CollapseState, CollapseTitle,
     CollapseTrigger,
 };
+pub use combobox::{ComboBox, ComboBoxItem};
 pub use countdown::{Countdown, CountdownTimer};
 pub use diff::{Diff, DiffItem1, DiffItem2, DiffResizer};
 pub use divider::{Divider, DividerOrientation};
@@ -97,12 +105,15 @@ pub use dropdown::{
     Dropdown, DropdownContent, DropdownHover, DropdownItem, DropdownPosition, DropdownState,
     DropdownTrigger,
 };
+pub use empty_state::EmptyState;
 pub use fab::{Fab, FabAction, FabClose, FabMainAction, FabTrigger};
 pub use fieldset::Fieldset;
 pub use file_input::FileInput;
 pub use filter::Filter;
 pub use footer::{Footer, FooterTitle};
+pub use form_field::FormField;
 pub use hero::{Hero, HeroContent, HeroOverlay};
+pub use icon_button::IconButton;
 pub use indicator::{Indicator, IndicatorHorizontal, IndicatorItem, IndicatorVertical};
 pub use input::Input;
 pub use join::{Join, JoinItem};
@@ -117,6 +128,7 @@ pub use layout::{
     StackedLayoutVariant, StackedShell,
 };
 pub use link::Link;
+pub use link_button::LinkButton;
 pub use list::{List, ListCol, ListItem};
 pub use loading::{Loading, LoadingVariant};
 pub use mask::{Mask, MaskShape};
@@ -133,6 +145,7 @@ pub use radial_progress::RadialProgress;
 pub use radio::Radio;
 pub use range::Range;
 pub use rating::{Rating, RatingHalf, RatingItem, RatingMask};
+pub use secret_input::SecretInput;
 pub use select::{Select, SelectOption};
 pub use sidebar_layout::{
     SidebarLayout, SidebarLayoutContent, SidebarLayoutFooter, SidebarLayoutHeader,
@@ -145,10 +158,11 @@ pub use skeleton::Skeleton;
 pub use stack::Stack;
 pub use stat::{Stat, StatActions, StatDesc, StatFigure, StatTitle, StatValue, Stats};
 pub use status::Status;
+pub use status_indicator::StatusIndicator;
 pub use steps::{Step, Steps};
 pub use swap::{Swap, SwapAnimation};
 pub use tab::{Tab, TabContent, TabVariant, Tabs};
-pub use table::Table;
+pub use table::{Table, TableBody, TableCell, TableFoot, TableHead, TableHeaderCell, TableRow};
 pub use textarea::Textarea;
 pub use theme_controller::{ThemeController, ThemeControllerType};
 pub use timeline::{Timeline, TimelineEnd, TimelineItem, TimelineMiddle, TimelineStart};

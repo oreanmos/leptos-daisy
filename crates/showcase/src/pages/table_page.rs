@@ -217,6 +217,130 @@ pub fn TablePage() -> impl IntoView {
                     </div>
                 </ComponentPreview>
             </section>
+
+            <section class="space-y-4">
+                <ComponentPreview
+                    title="Using Subcomponents"
+                    code=r##"<Table zebra=true>
+    <TableHead>
+        <TableRow>
+            <TableHeaderCell>"#"</TableHeaderCell>
+            <TableHeaderCell>"Name"</TableHeaderCell>
+            <TableHeaderCell>"Job"</TableHeaderCell>
+            <TableHeaderCell>"Color"</TableHeaderCell>
+        </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow hover=true>
+            <TableHeaderCell>"1"</TableHeaderCell>
+            <TableCell>"Cy Ganderton"</TableCell>
+            <TableCell>"Quality Control"</TableCell>
+            <TableCell>"Blue"</TableCell>
+        </TableRow>
+        <TableRow hover=true>
+            <TableCell>"2"</TableCell>
+            <TableCell>"Hart Hagerty"</TableCell>
+            <TableCell>"Desktop Support"</TableCell>
+            <TableCell>"Purple"</TableCell>
+        </TableRow>
+    </TableBody>
+    <TableFoot>
+        <TableRow>
+            <TableHeaderCell>"#"</TableHeaderCell>
+            <TableHeaderCell>"Name"</TableHeaderCell>
+            <TableHeaderCell>"Job"</TableHeaderCell>
+            <TableHeaderCell>"Color"</TableHeaderCell>
+        </TableRow>
+    </TableFoot>
+</Table>"##
+                >
+                    <div class="overflow-x-auto">
+                        <Table zebra=true>
+                            <TableHead>
+                                <TableRow>
+                                    <TableHeaderCell>"#"</TableHeaderCell>
+                                    <TableHeaderCell>"Name"</TableHeaderCell>
+                                    <TableHeaderCell>"Job"</TableHeaderCell>
+                                    <TableHeaderCell>"Color"</TableHeaderCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow hover=true>
+                                    <TableHeaderCell>"1"</TableHeaderCell>
+                                    <TableCell>"Cy Ganderton"</TableCell>
+                                    <TableCell>"Quality Control"</TableCell>
+                                    <TableCell>"Blue"</TableCell>
+                                </TableRow>
+                                <TableRow hover=true>
+                                    <TableCell>"2"</TableCell>
+                                    <TableCell>"Hart Hagerty"</TableCell>
+                                    <TableCell>"Desktop Support"</TableCell>
+                                    <TableCell>"Purple"</TableCell>
+                                </TableRow>
+                                <TableRow hover=true>
+                                    <TableCell>"3"</TableCell>
+                                    <TableCell>"Brice Swyre"</TableCell>
+                                    <TableCell>"Tax Accountant"</TableCell>
+                                    <TableCell>"Red"</TableCell>
+                                </TableRow>
+                            </TableBody>
+                            <TableFoot>
+                                <TableRow>
+                                    <TableHeaderCell>"#"</TableHeaderCell>
+                                    <TableHeaderCell>"Name"</TableHeaderCell>
+                                    <TableHeaderCell>"Job"</TableHeaderCell>
+                                    <TableHeaderCell>"Color"</TableHeaderCell>
+                                </TableRow>
+                            </TableFoot>
+                        </Table>
+                    </div>
+                </ComponentPreview>
+            </section>
+
+            <section class="space-y-4">
+                <ComponentPreview
+                    title="Active Row"
+                    code=r##"<Table>
+    <TableHead>
+        <TableRow>
+            <TableHeaderCell>"#"</TableHeaderCell>
+            <TableHeaderCell>"Name"</TableHeaderCell>
+        </TableRow>
+    </TableHead>
+    <TableBody>
+        <TableRow active=true>
+            <TableCell>"1"</TableCell>
+            <TableCell>"Selected row"</TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell>"2"</TableCell>
+            <TableCell>"Normal row"</TableCell>
+        </TableRow>
+    </TableBody>
+</Table>"##
+                >
+                    <div class="overflow-x-auto">
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableHeaderCell>"#"</TableHeaderCell>
+                                    <TableHeaderCell>"Name"</TableHeaderCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow active=true>
+                                    <TableCell>"1"</TableCell>
+                                    <TableCell>"Selected row"</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>"2"</TableCell>
+                                    <TableCell>"Normal row"</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </div>
+                </ComponentPreview>
+            </section>
         </div>
     }
 }

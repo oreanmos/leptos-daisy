@@ -10,12 +10,13 @@ categories = ["gui", "web-programming", "wasm"]
 
 [dependencies]
 leptos = { version = "0.8.16", default-features = false }
+web-sys = { version = "0.3", optional = true, features = ["Window", "MediaQueryList", "Storage"] }
 
 [features]
 default = []
-csr = ["leptos/csr"]
+csr = ["leptos/csr", "web-sys"]
 ssr = ["leptos/ssr"]
-hydrate = ["leptos/hydrate"]
+hydrate = ["leptos/hydrate", "web-sys"]
 
 [package.metadata.docs.rs]
 all-features = true

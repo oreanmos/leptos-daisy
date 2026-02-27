@@ -1,4 +1,5 @@
 use leptos::prelude::*;
+use leptos_daisyui::prelude::*;
 
 /// All 35 daisyUI built-in themes + custom themes included in this repo.
 const ALL_THEMES: &[&str] = &[
@@ -42,18 +43,80 @@ const ALL_THEMES: &[&str] = &[
 
 #[component]
 pub fn ThemeShowcasePage() -> impl IntoView {
+    let active_aesthetic = RwSignal::new(String::from("minimal"));
+
     view! {
         <div class="space-y-8">
-            <h1 class="text-3xl font-bold">"🎨 Theme Showcase"</h1>
+            <h1 class="text-3xl font-bold">"Theme Showcase"</h1>
             <p class="text-base-content/70">
-                "Preview all 35 built-in daisyUI themes. Each card shows a live preview "
-                "plus the custom "
+                "Preview all 35 built-in daisyUI themes plus the custom "
                 <code class="badge badge-ghost badge-sm">"terminal"</code>
                 " theme. Each card shows a live preview "
                 "of the theme colors and component styles using "
                 <code class="badge badge-ghost badge-sm">"data-theme"</code>
                 " scoping."
             </p>
+
+            // Aesthetic selector section
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"Aesthetic Presets"</h2>
+                <p class="text-base-content/70">
+                    "Aesthetic presets control typography, spacing, shadows, and radii "
+                    "independently from DaisyUI color themes. Select a preset to see "
+                    "how it transforms the component samples below."
+                </p>
+                <div class="flex flex-wrap gap-2">
+                    {Aesthetic::all().iter().filter(|a| !matches!(a, Aesthetic::Auto)).map(|a| {
+                        let id = a.as_str();
+                        let label = a.preset().label;
+                        let is_active = {
+                            let id = id.to_string();
+                            move || active_aesthetic.get() == id
+                        };
+                        view! {
+                            <button
+                                class="btn btn-sm"
+                                class:btn-primary=is_active
+                                on:click=move |_| {
+                                    active_aesthetic.set(id.to_string());
+                                    #[cfg(feature = "csr")]
+                                    {
+                                        if let Some(doc) = leptos::prelude::document().document_element() {
+                                            let _ = doc.set_attribute("data-aesthetic", id);
+                                        }
+                                    }
+                                }
+                            >
+                                {label}
+                            </button>
+                        }
+                    }).collect_view()}
+                </div>
+
+                // Preview card under selected aesthetic
+                <div class="aesthetic-card p-6 space-y-4">
+                    <h3 class="text-xl font-semibold">"Sample Content"</h3>
+                    <p class="text-base-content/70">
+                        "This card uses aesthetic utility classes. Switch between presets above "
+                        "to see typography, spacing, and shadow changes."
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="btn btn-primary btn-sm">"Primary"</button>
+                        <button class="btn btn-secondary btn-sm">"Secondary"</button>
+                        <button class="btn btn-accent btn-sm">"Accent"</button>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="checkbox checkbox-primary" checked />
+                        <input type="checkbox" class="toggle toggle-primary" checked />
+                        <div class="badge badge-primary">"badge"</div>
+                    </div>
+                    <progress class="progress progress-primary w-full" value="65" max="100"></progress>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold">"DaisyUI Color Themes"</h2>
+            </section>
 
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {ALL_THEMES.iter().map(|theme| {
