@@ -191,6 +191,11 @@ code, pre, .font-mono {
    DaisyUI components (card, alert, collapse, modal-box, tabs-box, btn,
    badge, etc.) honor the aesthetic tokens automatically. */
 [data-theme] {
+  /* daisyUI v5 tokens */
+  --radius-box: var(--radius-card);
+  --radius-field: var(--radius-input);
+  --radius-selector: var(--radius-btn);
+  /* daisyUI v4 backwards-compat tokens */
   --rounded-box: var(--radius-card);
   --rounded-btn: var(--radius-btn);
   --rounded-badge: var(--radius-btn);
