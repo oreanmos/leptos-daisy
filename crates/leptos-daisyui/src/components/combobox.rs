@@ -61,7 +61,11 @@ pub fn ComboBox(
     let open = RwSignal::new(false);
 
     let input_mods = get_combobox_input_classes(color, size);
-    let mut input_parts = vec!["input".to_string(), "input-bordered".to_string(), "w-full".to_string()];
+    let mut input_parts = vec![
+        "input".to_string(),
+        "input-bordered".to_string(),
+        "w-full".to_string(),
+    ];
     input_parts.extend(input_mods);
     let input_base: String = input_parts.join(" ");
 
@@ -86,11 +90,9 @@ pub fn ComboBox(
         open.set(false);
     };
 
-    let input_cls = move || {
-        match class.get() {
-            Some(extra) => format!("{input_base} {extra}"),
-            None => input_base.clone(),
-        }
+    let input_cls = move || match class.get() {
+        Some(extra) => format!("{input_base} {extra}"),
+        None => input_base.clone(),
     };
 
     // Provide context for item selection

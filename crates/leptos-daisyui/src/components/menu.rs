@@ -1,5 +1,5 @@
 //! Menu component — daisyUI `menu`.
-use crate::utils::class::class_signal;
+use crate::utils::class::{class_signal, class_signal_dynamic};
 use crate::variants::color::Color;
 use crate::variants::size::Size;
 use leptos::attr::any_attribute::AnyAttribute;
@@ -38,19 +38,25 @@ pub fn Menu(
 #[component]
 pub fn MenuItem(
     children: Children,
-    #[prop(optional)] active: bool,
-    #[prop(optional)] disabled: bool,
+    #[prop(optional, into)] active: MaybeProp<bool>,
+    #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
-    if active {
-        m.push("active");
-    }
-    if disabled {
-        m.push("disabled");
-    }
-    let cls = class_signal("", &m, class);
+    let cls = class_signal_dynamic(
+        "",
+        move || {
+            let mut m = Vec::new();
+            if active.get().unwrap_or(false) {
+                m.push("active".to_string());
+            }
+            if disabled.get().unwrap_or(false) {
+                m.push("disabled".to_string());
+            }
+            m
+        },
+        class,
+    );
     view! { <li class=cls role="menuitem">{children()}</li> }.add_any_attr(attrs)
 }
 

@@ -40,7 +40,7 @@ pub fn SecretInputPage() -> impl IntoView {
                 <ComponentPreview
                     title="Sizes"
                     code=r#"<SecretInput size=Size::Small placeholder="Small" />
-<SecretInput size=Size::Large placeholder="Large" />"#
+    <SecretInput size=Size::Large placeholder="Large" />"#
                 >
                     <div class="max-w-sm space-y-2">
                         <SecretInput size=Size::Small placeholder="Small" />

@@ -4,6 +4,27 @@ use leptos::attr::any_attribute::AnyAttribute;
 use leptos::prelude::*;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ModalBoxSize {
+    Small,
+    #[default]
+    Medium,
+    Large,
+    ExtraLarge,
+    Full,
+}
+impl ModalBoxSize {
+    fn cls(&self) -> &'static str {
+        match self {
+            Self::Small => "max-w-sm",
+            Self::Medium => "max-w-md",
+            Self::Large => "max-w-lg",
+            Self::ExtraLarge => "max-w-2xl",
+            Self::Full => "max-w-4xl w-full",
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum ModalPosition {
     #[default]
     Center,
@@ -90,10 +111,18 @@ pub fn Modal(
 #[component]
 pub fn ModalBox(
     children: Children,
+    #[prop(optional, into)] size: Option<ModalBoxSize>,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = class_signal("modal-box", &[], class);
+    let mut m: Vec<&str> = Vec::new();
+    if let Some(s) = size {
+        let c = s.cls();
+        if !c.is_empty() {
+            m.push(c);
+        }
+    }
+    let cls = class_signal("modal-box", &m, class);
     view! { <div class=cls>{children()}</div> }.add_any_attr(attrs)
 }
 
@@ -124,6 +153,15 @@ pub fn ModalBackdrop(
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_modal_box_size_cls() {
+        assert_eq!(ModalBoxSize::Small.cls(), "max-w-sm");
+        assert_eq!(ModalBoxSize::Medium.cls(), "max-w-md");
+        assert_eq!(ModalBoxSize::Large.cls(), "max-w-lg");
+        assert_eq!(ModalBoxSize::ExtraLarge.cls(), "max-w-2xl");
+        assert_eq!(ModalBoxSize::Full.cls(), "max-w-4xl w-full");
+    }
 
     #[test]
     fn test_modal_position_cls() {

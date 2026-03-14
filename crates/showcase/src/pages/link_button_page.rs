@@ -17,7 +17,7 @@ pub fn LinkButtonPage() -> impl IntoView {
                 <ComponentPreview
                     title="Colors"
                     code=r##"<LinkButton href="/example" color=Color::Primary>"Primary"</LinkButton>
-<LinkButton href="/example" color=Color::Secondary>"Secondary"</LinkButton>"##
+    <LinkButton href="/example" color=Color::Secondary>"Secondary"</LinkButton>"##
                 >
                     <div class="flex flex-wrap gap-2">
                         <LinkButton href="/example">"Default"</LinkButton>
@@ -36,7 +36,7 @@ pub fn LinkButtonPage() -> impl IntoView {
                 <ComponentPreview
                     title="Variants"
                     code=r##"<LinkButton href="/example" variant=Variant::Outline>"Outline"</LinkButton>
-<LinkButton href="/example" variant=Variant::Ghost>"Ghost"</LinkButton>"##
+    <LinkButton href="/example" variant=Variant::Ghost>"Ghost"</LinkButton>"##
                 >
                     <div class="flex flex-wrap gap-2">
                         <LinkButton href="/example" color=Color::Primary variant=Variant::Outline>"Outline"</LinkButton>

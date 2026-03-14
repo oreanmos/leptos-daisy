@@ -35,7 +35,7 @@ pub fn StatusIndicatorPage() -> impl IntoView {
                 <ComponentPreview
                     title="With Dot"
                     code=r#"<StatusIndicator label="Online" color=Color::Success dot=true />
-<StatusIndicator label="Offline" color=Color::Error dot=true />"#
+    <StatusIndicator label="Offline" color=Color::Error dot=true />"#
                 >
                     <div class="flex flex-wrap gap-2">
                         <StatusIndicator label="Online" color=Color::Success dot=true />
@@ -50,7 +50,7 @@ pub fn StatusIndicatorPage() -> impl IntoView {
                 <ComponentPreview
                     title="Sizes"
                     code=r#"<StatusIndicator label="Small" size=Size::Small />
-<StatusIndicator label="Large" size=Size::Large />"#
+    <StatusIndicator label="Large" size=Size::Large />"#
                 >
                     <div class="flex flex-wrap items-center gap-2">
                         <StatusIndicator label="XS" size=Size::ExtraSmall color=Color::Success dot=true />

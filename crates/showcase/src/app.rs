@@ -19,6 +19,7 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
             ("FAB", "/fab"),
             ("Dropdown", "/dropdown"),
             ("Icon Button", "/icon-button"),
+            ("Label Button", "/label-button"),
             ("Link Button", "/link-button"),
             ("Modal", "/modal"),
             ("Swap", "/swap"),
@@ -76,8 +77,11 @@ const NAV_SECTIONS: &[(&str, &str, &[(&str, &str)])] = &[
         "Feedback",
         "💬",
         &[
+            ("Command Palette", "/command-palette"),
             ("Empty State", "/empty-state"),
+            ("Error State", "/error-state"),
             ("Loading", "/loading"),
+            ("Page Skeleton", "/page-skeleton"),
             ("Skeleton", "/skeleton"),
             ("Toast", "/toast"),
         ],
@@ -261,6 +265,7 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/swap") view=SwapPage />
                                 <Route path=path!("/confirm-dialog") view=ConfirmDialogPage />
                                 <Route path=path!("/icon-button") view=IconButtonPage />
+                                <Route path=path!("/label-button") view=LabelButtonPage />
                                 <Route path=path!("/link-button") view=LinkButtonPage />
                                 // Data Display
                                 <Route path=path!("/alert") view=AlertPage />
@@ -302,9 +307,12 @@ pub fn App() -> impl IntoView {
                                 <Route path=path!("/form-field") view=FormFieldPage />
                                 <Route path=path!("/secret-input") view=SecretInputPage />
                                 // Feedback
+                                <Route path=path!("/command-palette") view=CommandPalettePage />
                                 <Route path=path!("/loading") view=LoadingPage />
                                 <Route path=path!("/toast") view=ToastPage />
                                 <Route path=path!("/empty-state") view=EmptyStatePage />
+                                <Route path=path!("/error-state") view=ErrorStatePage />
+                                <Route path=path!("/page-skeleton") view=PageSkeletonPage />
                                 // Layout
                                 <Route path=path!("/artboard") view=ArtboardPage />
                                 <Route path=path!("/divider") view=DividerPage />

@@ -22,8 +22,12 @@ pub fn Textarea(
     #[prop(optional, into)] disabled: MaybeProp<bool>,
     #[prop(optional, into)] readonly: MaybeProp<bool>,
     #[prop(optional, into)] required: MaybeProp<bool>,
+    #[prop(optional, into)] autofocus: MaybeProp<bool>,
     #[prop(optional, into)] on_input: Option<Callback<ev::Event>>,
     #[prop(optional, into)] on_change: Option<Callback<ev::Event>>,
+    #[prop(optional, into)] on_focus: Option<Callback<ev::FocusEvent>>,
+    #[prop(optional, into)] on_blur: Option<Callback<ev::FocusEvent>>,
+    #[prop(optional, into)] on_keydown: Option<Callback<ev::KeyboardEvent>>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
     let mut m = Vec::new();
@@ -55,6 +59,21 @@ pub fn Textarea(
             cb.run(ev);
         }
     };
+    let handle_focus = move |ev: ev::FocusEvent| {
+        if let Some(cb) = on_focus {
+            cb.run(ev);
+        }
+    };
+    let handle_blur = move |ev: ev::FocusEvent| {
+        if let Some(cb) = on_blur {
+            cb.run(ev);
+        }
+    };
+    let handle_keydown = move |ev: ev::KeyboardEvent| {
+        if let Some(cb) = on_keydown {
+            cb.run(ev);
+        }
+    };
 
     view! {
         <textarea
@@ -68,8 +87,12 @@ pub fn Textarea(
             disabled=move || disabled.get().unwrap_or(false)
             readonly=move || readonly.get().unwrap_or(false)
             required=move || required.get().unwrap_or(false)
+            autofocus=move || autofocus.get().unwrap_or(false)
             on:input=handle_input
             on:change=handle_change
+            on:focus=handle_focus
+            on:blur=handle_blur
+            on:keydown=handle_keydown
         ></textarea>
     }
     .add_any_attr(attrs)

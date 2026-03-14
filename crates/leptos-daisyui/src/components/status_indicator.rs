@@ -61,7 +61,10 @@ pub fn StatusIndicator(
     let refs: Vec<&str> = mods.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("badge gap-1.5", &refs, class);
 
-    let dot_cls = format!("inline-block w-2 h-2 rounded-full {}", dot_color_class(color));
+    let dot_cls = format!(
+        "inline-block w-2 h-2 rounded-full {}",
+        dot_color_class(color)
+    );
 
     view! {
         <span class=cls>

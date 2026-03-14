@@ -58,7 +58,12 @@ pub fn SecretInput(
     let visible = RwSignal::new(false);
 
     let input_mods = get_input_classes(color, size);
-    let mut input_cls_parts = vec!["input".to_string(), "input-bordered".to_string(), "join-item".to_string(), "flex-1".to_string()];
+    let mut input_cls_parts = vec![
+        "input".to_string(),
+        "input-bordered".to_string(),
+        "join-item".to_string(),
+        "flex-1".to_string(),
+    ];
     input_cls_parts.extend(input_mods);
     let input_base: String = input_cls_parts.join(" ");
 

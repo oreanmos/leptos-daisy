@@ -61,7 +61,7 @@ pub fn IconButtonPage() -> impl IntoView {
                 <ComponentPreview
                     title="Sizes"
                     code=r#"<IconButton size=Size::Small>...</IconButton>
-<IconButton size=Size::Large>...</IconButton>"#
+    <IconButton size=Size::Large>...</IconButton>"#
                 >
                     <div class="flex items-center gap-2">
                         <IconButton size=Size::Small aria_label="Small">

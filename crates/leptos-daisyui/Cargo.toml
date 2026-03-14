@@ -10,13 +10,14 @@ categories = ["gui", "web-programming", "wasm"]
 
 [dependencies]
 leptos = { version = "0.8.16", default-features = false }
-web-sys = { version = "0.3", optional = true, features = ["Window", "MediaQueryList", "Storage"] }
+web-sys = { version = "0.3", optional = true, features = ["Window", "MediaQueryList", "Storage", "EventTarget", "KeyboardEvent", "HtmlInputElement"] }
+wasm-bindgen = { version = "0.2", optional = true }
 
 [features]
 default = []
-csr = ["leptos/csr", "web-sys"]
+csr = ["leptos/csr", "web-sys", "wasm-bindgen"]
 ssr = ["leptos/ssr"]
-hydrate = ["leptos/hydrate", "web-sys"]
+hydrate = ["leptos/hydrate", "web-sys", "wasm-bindgen"]
 
 [package.metadata.docs.rs]
 all-features = true
