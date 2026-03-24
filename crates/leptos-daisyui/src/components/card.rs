@@ -17,9 +17,9 @@ impl CardVariant {
     fn cls(&self) -> &'static str {
         match self {
             Self::Default => "",
-            Self::Bordered => "card-bordered",
-            Self::Compact => "card-compact",
-            Self::Normal => "card-normal",
+            Self::Bordered => "card-border",
+            Self::Compact => "card-sm",
+            Self::Normal => "",
             Self::Side => "card-side",
         }
     }
@@ -103,9 +103,9 @@ mod tests {
     #[test]
     fn test_card_variant_classes() {
         assert_eq!(CardVariant::Default.cls(), "");
-        assert_eq!(CardVariant::Bordered.cls(), "card-bordered");
-        assert_eq!(CardVariant::Compact.cls(), "card-compact");
-        assert_eq!(CardVariant::Normal.cls(), "card-normal");
+        assert_eq!(CardVariant::Bordered.cls(), "card-border");
+        assert_eq!(CardVariant::Compact.cls(), "card-sm");
+        assert_eq!(CardVariant::Normal.cls(), "");
         assert_eq!(CardVariant::Side.cls(), "card-side");
     }
 
@@ -117,11 +117,11 @@ mod tests {
 
         // Bordered variant, no size
         let m = get_card_classes(CardVariant::Bordered, None);
-        assert_eq!(m, vec!["card-bordered"]);
+        assert_eq!(m, vec!["card-border"]);
 
         // Compact variant, no size
         let m = get_card_classes(CardVariant::Compact, None);
-        assert_eq!(m, vec!["card-compact"]);
+        assert_eq!(m, vec!["card-sm"]);
 
         // Default variant, small size
         let m = get_card_classes(CardVariant::Default, Some(Size::Small));
@@ -129,7 +129,7 @@ mod tests {
 
         // Bordered variant, large size
         let m = get_card_classes(CardVariant::Bordered, Some(Size::Large));
-        assert_eq!(m, vec!["card-bordered", "card-lg"]);
+        assert_eq!(m, vec!["card-border", "card-lg"]);
 
         // Side variant, extra large size
         let m = get_card_classes(CardVariant::Side, Some(Size::ExtraLarge));

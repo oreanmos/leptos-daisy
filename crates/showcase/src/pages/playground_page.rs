@@ -595,7 +595,7 @@ fn render_component_preview(kind: ComponentKind, text: &str, color: &str, size: 
         }
         .into_any(),
         ComponentKind::Tab => view! {
-            <div role="tablist" class="tabs tabs-lifted">
+            <div role="tablist" class="tabs tabs-lift">
                 <a role="tab" class="tab tab-active">{text}</a>
             </div>
         }

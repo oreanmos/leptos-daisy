@@ -20,7 +20,7 @@ pub fn ComponentPreview(
             {move || title.clone().map(|t| view! { <h2 class="text-2xl font-bold">{t}</h2> })}
             {move || description.clone().map(|d| view! { <p class="text-base-content/70">{d}</p> })}
 
-            <div role="tablist" class="tabs tabs-lifted">
+            <div role="tablist" class="tabs tabs-lift">
                 <input type="radio" name={format!("tabs_{}", tab_id)} role="tab" class="tab" aria-label="Preview" checked=true />
                 <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
                     <div class="flex justify-end gap-1 mb-3">

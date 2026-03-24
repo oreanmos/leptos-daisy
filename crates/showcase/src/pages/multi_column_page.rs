@@ -400,7 +400,7 @@ pub fn MultiColumnPage() -> impl IntoView {
                                 <div class="border-b border-base-300 bg-base-100 px-4 py-3 flex items-center justify-between">
                                     <div class="flex items-center gap-4">
                                         <h2 class="font-bold">"Team Management"</h2>
-                                        <div class="tabs tabs-boxed tabs-sm">
+                                        <div class="tabs tabs-box tabs-sm">
                                             <a class="tab tab-active">"Members"</a>
                                             <a class="tab">"Groups"</a>
                                             <a class="tab">"Permissions"</a>

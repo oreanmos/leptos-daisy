@@ -20,8 +20,8 @@ pub fn CardPage() -> impl IntoView {
                     ClassEntry { name: "card-body", type_label: "base", description: "Card body with padding and spacing" },
                     ClassEntry { name: "card-title", type_label: "base", description: "Title text style for card" },
                     ClassEntry { name: "card-actions", type_label: "base", description: "Container for card action buttons" },
-                    ClassEntry { name: "card-bordered", type_label: "modifier", description: "Adds border to card" },
-                    ClassEntry { name: "card-compact", type_label: "modifier", description: "Reduces card padding" },
+                    ClassEntry { name: "card-border", type_label: "modifier", description: "Adds border to card" },
+                    ClassEntry { name: "card-sm", type_label: "modifier", description: "Reduces card padding" },
                     ClassEntry { name: "card-side", type_label: "modifier", description: "Horizontal card layout with side image" },
                     ClassEntry { name: "image-full", type_label: "modifier", description: "Makes image cover the entire card as background" },
                 ] />

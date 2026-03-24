@@ -16,9 +16,9 @@ impl TabVariant {
     fn cls(&self) -> &'static str {
         match self {
             Self::Default => "",
-            Self::Bordered => "tabs-bordered",
-            Self::Lifted => "tabs-lifted",
-            Self::Boxed => "tabs-boxed",
+            Self::Bordered => "tabs-border",
+            Self::Lifted => "tabs-lift",
+            Self::Boxed => "tabs-box",
         }
     }
 }
