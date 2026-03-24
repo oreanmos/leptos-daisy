@@ -48,22 +48,26 @@ pub fn Tabs(
 #[component]
 pub fn Tab(
     children: Children,
-    #[prop(optional)] active: bool,
+    #[prop(optional, into)] active: MaybeProp<bool>,
     #[prop(optional)] disabled: bool,
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let mut m: Vec<&str> = Vec::new();
-    if active {
-        m.push("tab-active");
-    }
-    if disabled {
-        m.push("tab-disabled");
-    }
-    let cls = class_signal("tab", &m, class);
+    let disabled_cls = if disabled { " tab-disabled" } else { "" };
+    let cls = move || {
+        let base = if active.get().unwrap_or(false) {
+            "tab tab-active"
+        } else {
+            "tab"
+        };
+        match class.get() {
+            Some(c) if !c.is_empty() => format!("{base}{disabled_cls} {c}"),
+            _ => format!("{base}{disabled_cls}"),
+        }
+    };
     view! {
         <button type="button" role="tab" class=cls
-            aria-selected=active
+            aria-selected=move || active.get().unwrap_or(false)
             disabled=disabled
         >{children()}</button>
     }
