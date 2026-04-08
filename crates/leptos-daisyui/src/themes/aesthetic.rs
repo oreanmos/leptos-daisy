@@ -143,7 +143,7 @@ const TOKENS_CLEAN_MINIMAL: AestheticTokens = AestheticTokens {
     spacing_page_x: "1.5rem",
     spacing_page_y: "2rem",
     spacing_section: "1.5rem",
-    border_card: "1px solid oklch(var(--bc) / 0.1)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 10%, transparent)",
     transition_card: "all 200ms ease",
 };
 
@@ -159,7 +159,7 @@ const TOKENS_TUI: AestheticTokens = AestheticTokens {
     spacing_page_x: "1rem",
     spacing_page_y: "1rem",
     spacing_section: "0.75rem",
-    border_card: "1px solid oklch(var(--bc) / 0.2)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 20%, transparent)",
     transition_card: "none",
 };
 
@@ -175,7 +175,7 @@ const TOKENS_COZY_JOURNAL: AestheticTokens = AestheticTokens {
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "1.75rem",
-    border_card: "1px solid oklch(var(--bc) / 0.08)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 8%, transparent)",
     transition_card: "all 300ms ease",
 };
 
@@ -191,7 +191,7 @@ const TOKENS_OBSIDIAN: AestheticTokens = AestheticTokens {
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1rem",
-    border_card: "1px solid oklch(var(--bc) / 0.15)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent)",
     transition_card: "all 150ms ease",
 };
 
@@ -207,7 +207,7 @@ const TOKENS_SYNTHWAVE_NEON: AestheticTokens = AestheticTokens {
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1.25rem",
-    border_card: "1px solid oklch(var(--bc) / 0.15)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent)",
     transition_card: "all 200ms ease",
 };
 
@@ -218,12 +218,12 @@ const TOKENS_PAPER_MANUSCRIPT: AestheticTokens = AestheticTokens {
     radius_card: "0.125rem",
     radius_btn: "0.125rem",
     radius_input: "0.125rem",
-    shadow_card: "2px 2px 0 oklch(var(--bc) / 0.15)",
-    shadow_card_hover: "3px 3px 0 oklch(var(--bc) / 0.2)",
+    shadow_card: "2px 2px 0 color-mix(in oklch, var(--color-base-content) 15%, transparent)",
+    shadow_card_hover: "3px 3px 0 color-mix(in oklch, var(--color-base-content) 20%, transparent)",
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "2rem",
-    border_card: "1px solid oklch(var(--bc) / 0.2)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 20%, transparent)",
     transition_card: "all 150ms ease",
 };
 
@@ -234,12 +234,12 @@ const TOKENS_BRUTALIST: AestheticTokens = AestheticTokens {
     radius_card: "0",
     radius_btn: "0",
     radius_input: "0",
-    shadow_card: "4px 4px 0 oklch(var(--bc) / 0.8)",
-    shadow_card_hover: "6px 6px 0 oklch(var(--bc) / 0.9)",
+    shadow_card: "4px 4px 0 color-mix(in oklch, var(--color-base-content) 80%, transparent)",
+    shadow_card_hover: "6px 6px 0 color-mix(in oklch, var(--color-base-content) 90%, transparent)",
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1.5rem",
-    border_card: "2px solid oklch(var(--bc) / 0.8)",
+    border_card: "2px solid color-mix(in oklch, var(--color-base-content) 80%, transparent)",
     transition_card: "none",
 };
 
@@ -255,7 +255,7 @@ const TOKENS_GLASS_FROST: AestheticTokens = AestheticTokens {
     spacing_page_x: "2rem",
     spacing_page_y: "2rem",
     spacing_section: "1.75rem",
-    border_card: "1px solid oklch(var(--bc) / 0.08)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 8%, transparent)",
     transition_card: "all 250ms ease",
 };
 
@@ -271,7 +271,7 @@ const TOKENS_INK_CALLIGRAPHY: AestheticTokens = AestheticTokens {
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "2rem",
-    border_card: "1px solid oklch(var(--bc) / 0.12)",
+    border_card: "1px solid color-mix(in oklch, var(--color-base-content) 12%, transparent)",
     transition_card: "all 200ms ease",
 };
 

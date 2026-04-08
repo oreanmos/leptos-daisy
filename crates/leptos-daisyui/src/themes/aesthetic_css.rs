@@ -23,7 +23,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 1.5rem;
   --spacing-page-y: 2rem;
   --spacing-section: 1.5rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.1);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 10%, transparent);
   --transition-card: all 200ms ease;
 }
 
@@ -39,7 +39,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 1rem;
   --spacing-page-y: 1rem;
   --spacing-section: 0.75rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.2);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 20%, transparent);
   --transition-card: none;
 }
 
@@ -55,7 +55,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 2rem;
   --spacing-page-y: 2.5rem;
   --spacing-section: 1.75rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.08);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 8%, transparent);
   --transition-card: all 300ms ease;
 }
 
@@ -71,7 +71,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 1.5rem;
   --spacing-page-y: 1.5rem;
   --spacing-section: 1rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.15);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent);
   --transition-card: all 150ms ease;
 }
 
@@ -87,7 +87,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 1.5rem;
   --spacing-page-y: 2rem;
   --spacing-section: 1.5rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.1);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 10%, transparent);
   --transition-card: all 200ms ease;
 }
 
@@ -103,7 +103,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 1.5rem;
   --spacing-page-y: 1.5rem;
   --spacing-section: 1.25rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.15);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 15%, transparent);
   --transition-card: all 200ms ease;
 }
 
@@ -115,12 +115,12 @@ pub const AESTHETIC_CSS: &str = r#"
   --radius-card: 0.125rem;
   --radius-btn: 0.125rem;
   --radius-input: 0.125rem;
-  --shadow-card: 2px 2px 0 oklch(var(--bc) / 0.15);
-  --shadow-card-hover: 3px 3px 0 oklch(var(--bc) / 0.2);
+  --shadow-card: 2px 2px 0 color-mix(in oklch, var(--color-base-content) 15%, transparent);
+  --shadow-card-hover: 3px 3px 0 color-mix(in oklch, var(--color-base-content) 20%, transparent);
   --spacing-page-x: 2rem;
   --spacing-page-y: 2.5rem;
   --spacing-section: 2rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.2);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 20%, transparent);
   --transition-card: all 150ms ease;
 }
 
@@ -132,12 +132,12 @@ pub const AESTHETIC_CSS: &str = r#"
   --radius-card: 0;
   --radius-btn: 0;
   --radius-input: 0;
-  --shadow-card: 4px 4px 0 oklch(var(--bc) / 0.8);
-  --shadow-card-hover: 6px 6px 0 oklch(var(--bc) / 0.9);
+  --shadow-card: 4px 4px 0 color-mix(in oklch, var(--color-base-content) 80%, transparent);
+  --shadow-card-hover: 6px 6px 0 color-mix(in oklch, var(--color-base-content) 90%, transparent);
   --spacing-page-x: 1.5rem;
   --spacing-page-y: 1.5rem;
   --spacing-section: 1.5rem;
-  --border-card: 2px solid oklch(var(--bc) / 0.8);
+  --border-card: 2px solid color-mix(in oklch, var(--color-base-content) 80%, transparent);
   --transition-card: none;
 }
 
@@ -153,7 +153,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 2rem;
   --spacing-page-y: 2rem;
   --spacing-section: 1.75rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.08);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 8%, transparent);
   --transition-card: all 250ms ease;
 }
 
@@ -169,7 +169,7 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-page-x: 2rem;
   --spacing-page-y: 2.5rem;
   --spacing-section: 2rem;
-  --border-card: 1px solid oklch(var(--bc) / 0.12);
+  --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 12%, transparent);
   --transition-card: all 200ms ease;
 }
 
