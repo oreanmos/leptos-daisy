@@ -108,7 +108,7 @@ pub const FIELD_THEME_CSS: &str = r#":root:has(input.theme-controller[value="fie
   /* Oikonotes roles */
   --color-base-content-muted: #5a615b;
   --color-border: #e2ddcf;
-  --color-border-strong: #d6d0bf;
+  --color-border-strong: #928c7d;
   --color-link: #2f5a3c;
   --color-suggestion: #f6e7c8;
   --color-suggestion-rule: #b7791f;
@@ -172,7 +172,7 @@ pub const FIELD_DARK_THEME_CSS: &str = r#":root:has(input.theme-controller[value
   /* Oikonotes roles */
   --color-base-content-muted: #aeb3a8;
   --color-border: #343b35;
-  --color-border-strong: #4a524b;
+  --color-border-strong: #69726a;
   --color-link: #9fd1ad;
   --color-suggestion: #3d3220;
   --color-suggestion-rule: #e0a84a;
@@ -236,7 +236,7 @@ pub const ALMANAC_THEME_CSS: &str = r#":root:has(input.theme-controller[value="a
   /* Oikonotes roles */
   --color-base-content-muted: #57534e;
   --color-border: #e7e1d8;
-  --color-border-strong: #cfc6bb;
+  --color-border-strong: #988f85;
   --color-link: #8f3a18;
   --color-suggestion: #fff6e0;
   --color-suggestion-rule: #c89a2c;
@@ -258,7 +258,7 @@ pub const ALMANAC_THEME_CSS: &str = r#":root:has(input.theme-controller[value="a
   --color-chart-3: #d27a50;
   --color-chart-4: #e9ad8c;
   --color-chart-5: #f3d2bf;
-  --color-chart-6: #cfc6bb;
+  --color-chart-6: #988f85;
   --color-chart-7: color-mix(in oklch, var(--color-chart-2) 65%, white);
   --color-chart-8: color-mix(in oklch, var(--color-chart-4) 65%, white);
   --shadow-overlay: 0 10px 30px rgba(18, 18, 18, 0.12);
@@ -300,7 +300,7 @@ pub const DARKROOM_THEME_CSS: &str = r#":root:has(input.theme-controller[value="
   /* Oikonotes roles */
   --color-base-content-muted: #b8afa2;
   --color-border: #34302a;
-  --color-border-strong: #4a453d;
+  --color-border-strong: #746f66;
   --color-link: #e6b86e;
   --color-suggestion: rgba(224, 162, 74, 0.16);
   --color-suggestion-rule: #e0a24a;
@@ -380,6 +380,52 @@ mod tests {
     fn defines(css: &str, var: &str) -> bool {
         css.lines()
             .any(|l| l.trim_start().starts_with(&format!("{var}:")))
+    }
+
+    fn hex_of(css: &str, var: &str) -> [f64; 3] {
+        let line = css
+            .lines()
+            .find(|l| l.trim_start().starts_with(&format!("{var}:")))
+            .unwrap_or_else(|| panic!("{var} missing"));
+        let hex = line.split('#').nth(1).expect("hex value")[..6].to_string();
+        let ch = |i: usize| u8::from_str_radix(&hex[i..i + 2], 16).unwrap() as f64 / 255.0;
+        [ch(0), ch(2), ch(4)]
+    }
+
+    fn luminance(rgb: [f64; 3]) -> f64 {
+        let lin = |c: f64| {
+            if c <= 0.03928 {
+                c / 12.92
+            } else {
+                ((c + 0.055) / 1.055).powf(2.4)
+            }
+        };
+        0.2126 * lin(rgb[0]) + 0.7152 * lin(rgb[1]) + 0.0722 * lin(rgb[2])
+    }
+
+    fn contrast(css: &str, fg: &str, bg: &str) -> f64 {
+        let (a, b) = (luminance(hex_of(css, fg)), luminance(hex_of(css, bg)));
+        (a.max(b) + 0.05) / (a.min(b) + 0.05)
+    }
+
+    #[test]
+    fn border_strong_holds_3_to_1_on_base_100_and_200() {
+        for (name, css) in THEMES {
+            for bg in ["--color-base-100", "--color-base-200"] {
+                let c = contrast(css, "--color-border-strong", bg);
+                assert!(c >= 3.0, "{name} border-strong on {bg} is {c:.2}:1");
+            }
+        }
+    }
+
+    #[test]
+    fn base_content_muted_holds_4_5_to_1_on_base_surfaces() {
+        for (name, css) in THEMES {
+            for bg in ["--color-base-100", "--color-base-200", "--color-base-300"] {
+                let c = contrast(css, "--color-base-content-muted", bg);
+                assert!(c >= 4.5, "{name} muted on {bg} is {c:.2}:1");
+            }
+        }
     }
 
     #[test]
