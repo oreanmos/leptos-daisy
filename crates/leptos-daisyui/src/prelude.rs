@@ -8,6 +8,11 @@ pub use crate::variants::variant::Variant;
 
 // Theme types
 pub use crate::themes::builtin::{Theme, UnknownThemeError};
+pub use crate::themes::looks::{
+    ALMANAC_THEME_CSS, ALMANAC_THEME_NAME, DARKROOM_THEME_CSS, DARKROOM_THEME_NAME,
+    FIELD_DARK_THEME_CSS, FIELD_DARK_THEME_NAME, FIELD_THEME_CSS, FIELD_THEME_NAME,
+    LooksThemeStyles, OIKONOTES_ROLE_VARS,
+};
 pub use crate::themes::terminal::{
     TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
 };

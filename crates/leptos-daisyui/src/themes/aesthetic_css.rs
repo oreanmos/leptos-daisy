@@ -15,9 +15,14 @@ pub const AESTHETIC_CSS: &str = r#"
   --font-heading: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  --font-writing: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-numeric: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --radius-card: 0.5rem;
   --radius-btn: 0.375rem;
   --radius-input: 0.375rem;
+  --radius-check: 0.375rem;
+  --radius-pill: 999px;
+  --row-height: 2.125rem;
   --shadow-card: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-card-hover: 0 4px 8px rgba(0,0,0,0.1);
   --spacing-page-x: 1.5rem;
@@ -31,9 +36,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="tui"] {
   --font-heading: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
   --font-body: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  --font-writing: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
+  --font-numeric: ui-monospace, 'Fira Code', 'Cascadia Code', monospace;
   --radius-card: 0;
   --radius-btn: 0;
   --radius-input: 0;
+  --radius-check: 0;
   --shadow-card: none;
   --shadow-card-hover: none;
   --spacing-page-x: 1rem;
@@ -47,9 +55,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="journal"] {
   --font-heading: Georgia, 'Times New Roman', serif;
   --font-body: Georgia, 'Times New Roman', serif;
+  --font-writing: Georgia, 'Times New Roman', serif;
+  --font-numeric: Georgia, 'Times New Roman', serif;
   --radius-card: 0.75rem;
   --radius-btn: 0.5rem;
   --radius-input: 0.5rem;
+  --radius-check: 0.5rem;
   --shadow-card: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-card-hover: 0 6px 20px rgba(0,0,0,0.1);
   --spacing-page-x: 2rem;
@@ -63,9 +74,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="obsidian"] {
   --font-heading: ui-sans-serif, system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, sans-serif;
+  --font-writing: ui-sans-serif, system-ui, sans-serif;
+  --font-numeric: ui-sans-serif, system-ui, sans-serif;
   --radius-card: 0.375rem;
   --radius-btn: 0.25rem;
   --radius-input: 0.25rem;
+  --radius-check: 0.25rem;
   --shadow-card: 0 1px 3px rgba(0,0,0,0.3);
   --shadow-card-hover: 0 4px 12px rgba(0,0,0,0.4);
   --spacing-page-x: 1.5rem;
@@ -79,9 +93,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="minimal"] {
   --font-heading: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-writing: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-numeric: ui-sans-serif, system-ui, -apple-system, sans-serif;
   --radius-card: 0.5rem;
   --radius-btn: 0.375rem;
   --radius-input: 0.375rem;
+  --radius-check: 0.375rem;
   --shadow-card: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-card-hover: 0 4px 8px rgba(0,0,0,0.1);
   --spacing-page-x: 1.5rem;
@@ -95,9 +112,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="synthwave-neon"] {
   --font-heading: 'Inter', 'Segoe UI', system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, sans-serif;
+  --font-writing: ui-sans-serif, system-ui, sans-serif;
+  --font-numeric: ui-sans-serif, system-ui, sans-serif;
   --radius-card: 0.25rem;
   --radius-btn: 0.25rem;
   --radius-input: 0.25rem;
+  --radius-check: 0.25rem;
   --shadow-card: 0 0 12px rgba(255,0,255,0.15), 0 0 4px rgba(0,255,255,0.1);
   --shadow-card-hover: 0 0 24px rgba(255,0,255,0.25), 0 0 8px rgba(0,255,255,0.2);
   --spacing-page-x: 1.5rem;
@@ -112,9 +132,12 @@ pub const AESTHETIC_CSS: &str = r#"
   --font-heading: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
   --font-body: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
   --font-mono: 'Courier New', Courier, monospace;
+  --font-writing: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
+  --font-numeric: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
   --radius-card: 0.125rem;
   --radius-btn: 0.125rem;
   --radius-input: 0.125rem;
+  --radius-check: 0.125rem;
   --shadow-card: 2px 2px 0 color-mix(in oklch, var(--color-base-content) 15%, transparent);
   --shadow-card-hover: 3px 3px 0 color-mix(in oklch, var(--color-base-content) 20%, transparent);
   --spacing-page-x: 2rem;
@@ -129,9 +152,12 @@ pub const AESTHETIC_CSS: &str = r#"
   --font-heading: ui-monospace, 'Courier New', monospace;
   --font-body: ui-monospace, 'Courier New', monospace;
   --font-mono: ui-monospace, 'Courier New', monospace;
+  --font-writing: ui-monospace, 'Courier New', monospace;
+  --font-numeric: ui-monospace, 'Courier New', monospace;
   --radius-card: 0;
   --radius-btn: 0;
   --radius-input: 0;
+  --radius-check: 0;
   --shadow-card: 4px 4px 0 color-mix(in oklch, var(--color-base-content) 80%, transparent);
   --shadow-card-hover: 6px 6px 0 color-mix(in oklch, var(--color-base-content) 90%, transparent);
   --spacing-page-x: 1.5rem;
@@ -145,9 +171,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="glass"] {
   --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-writing: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-numeric: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --radius-card: 1rem;
   --radius-btn: 0.75rem;
   --radius-input: 0.75rem;
+  --radius-check: 0.75rem;
   --shadow-card: 0 4px 16px rgba(0,0,0,0.06);
   --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.1);
   --spacing-page-x: 2rem;
@@ -161,9 +190,12 @@ pub const AESTHETIC_CSS: &str = r#"
 [data-aesthetic="ink"] {
   --font-heading: 'Didot', 'Bodoni MT', 'Noto Serif Display', serif;
   --font-body: 'Garamond', 'Noto Serif', Georgia, serif;
+  --font-writing: 'Garamond', 'Noto Serif', Georgia, serif;
+  --font-numeric: 'Garamond', 'Noto Serif', Georgia, serif;
   --radius-card: 0;
   --radius-btn: 0;
   --radius-input: 0;
+  --radius-check: 0;
   --shadow-card: none;
   --shadow-card-hover: 0 1px 4px rgba(0,0,0,0.08);
   --spacing-page-x: 2rem;
@@ -171,6 +203,69 @@ pub const AESTHETIC_CSS: &str = r#"
   --spacing-section: 2rem;
   --border-card: 1px solid color-mix(in oklch, var(--color-base-content) 12%, transparent);
   --transition-card: all 200ms ease;
+}
+
+/* ── Field Notebook Aesthetic ─────────────────────────────── */
+[data-aesthetic="field"] {
+  --font-heading: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-body: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-writing: 'Source Serif 4', Georgia, serif;
+  --font-numeric: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --radius-card: 0.75rem;
+  --radius-btn: 0.5rem;
+  --radius-input: 0.5rem;
+  --radius-check: 0.375rem;
+  --row-height: 2.125rem;
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --spacing-page-x: 2.25rem;
+  --spacing-page-y: 2rem;
+  --spacing-section: 1.25rem;
+  --border-card: 1px solid var(--color-border);
+  --transition-card: none;
+}
+
+/* ── Almanac Aesthetic ─────────────────────────────── */
+[data-aesthetic="almanac"] {
+  --font-heading: 'Fraunces', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-writing: 'Fraunces', Georgia, serif;
+  --font-numeric: 'Fraunces', Georgia, serif;
+  --radius-card: 1.25rem;
+  --radius-btn: 999px;
+  --radius-input: 999px;
+  --radius-check: 0.375rem;
+  --row-height: 2.125rem;
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --spacing-page-x: 2.25rem;
+  --spacing-page-y: 2rem;
+  --spacing-section: 1.25rem;
+  --border-card: 1px solid var(--color-border);
+  --transition-card: none;
+}
+
+/* ── Darkroom Aesthetic ─────────────────────────────── */
+[data-aesthetic="darkroom"] {
+  --font-heading: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-writing: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-numeric: 'IBM Plex Mono', ui-monospace, monospace;
+  --radius-card: 0.25rem;
+  --radius-btn: 0.25rem;
+  --radius-input: 0.25rem;
+  --radius-check: 0.25rem;
+  --row-height: 2rem;
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --spacing-page-x: 2.25rem;
+  --spacing-page-y: 1.5rem;
+  --spacing-section: 1rem;
+  --border-card: 1px solid var(--color-border);
+  --transition-card: none;
 }
 
 /* ── Typography rules ─────────────────────────────────── */
@@ -186,19 +281,33 @@ code, pre, .font-mono {
   font-family: var(--font-mono);
 }
 
+/* Text the user wrote, and numbers (tabular figures so columns line up). */
+.font-writing {
+  font-family: var(--font-writing);
+}
+
+.font-numeric {
+  font-family: var(--font-numeric);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── DaisyUI radius bridge ────────────────────────────── */
 /* Maps aesthetic tokens to DaisyUI's built-in radius variables so ALL
    DaisyUI components (card, alert, collapse, modal-box, tabs-box, btn,
-   badge, etc.) honor the aesthetic tokens automatically. */
-[data-theme] {
+   badge, etc.) honor the aesthetic tokens automatically.
+   The selector is doubled (specificity 0,2,0) so the look's radii beat the
+   radii that daisyUI's own `[data-theme="x"]` rules declare, with no
+   `!important`. Controls (btn, input), cards (box) and checks (selector)
+   each take their own token, so a look can mix pill controls with 20px cards. */
+[data-theme][data-theme] {
   /* daisyUI v5 tokens */
   --radius-box: var(--radius-card);
   --radius-field: var(--radius-input);
-  --radius-selector: var(--radius-btn);
+  --radius-selector: var(--radius-check);
   /* daisyUI v4 backwards-compat tokens */
   --rounded-box: var(--radius-card);
   --rounded-btn: var(--radius-btn);
-  --rounded-badge: var(--radius-btn);
+  --rounded-badge: var(--radius-check);
 }
 
 /* ── Form element radius overrides ────────────────────── */
@@ -208,6 +317,11 @@ code, pre, .font-mono {
 
 .btn {
   border-radius: var(--radius-btn);
+}
+
+.textarea {
+  /* a pill-radius look must not turn multi-line fields into capsules */
+  border-radius: min(var(--radius-input), 1.25rem);
 }
 
 .btn-circle {

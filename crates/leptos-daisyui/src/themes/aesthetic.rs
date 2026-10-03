@@ -15,11 +15,19 @@ pub struct AestheticTokens {
     pub font_heading: &'static str,
     pub font_body: &'static str,
     pub font_mono: &'static str,
+    /// Face for text the user wrote (note titles and bodies, record names).
+    pub font_writing: &'static str,
+    /// Face for numbers; applied with tabular figures by `.font-numeric`.
+    pub font_numeric: &'static str,
     pub radius_card: &'static str,
     pub radius_btn: &'static str,
     pub radius_input: &'static str,
+    /// Radius of checkboxes, toggles and badges (daisyUI `--radius-selector`).
+    pub radius_check: &'static str,
     pub shadow_card: &'static str,
     pub shadow_card_hover: &'static str,
+    /// Height of dense list and navigation rows.
+    pub row_height: &'static str,
     pub spacing_page_x: &'static str,
     pub spacing_page_y: &'static str,
     pub spacing_section: &'static str,
@@ -59,6 +67,9 @@ pub enum Aesthetic {
     Brutalist,
     GlassFrost,
     InkCalligraphy,
+    Field,
+    Almanac,
+    Darkroom,
 }
 
 const ALL: &[Aesthetic] = &[
@@ -72,6 +83,9 @@ const ALL: &[Aesthetic] = &[
     Aesthetic::Brutalist,
     Aesthetic::GlassFrost,
     Aesthetic::InkCalligraphy,
+    Aesthetic::Field,
+    Aesthetic::Almanac,
+    Aesthetic::Darkroom,
 ];
 
 impl Aesthetic {
@@ -88,6 +102,9 @@ impl Aesthetic {
             Self::Brutalist => "brutalist",
             Self::GlassFrost => "glass",
             Self::InkCalligraphy => "ink",
+            Self::Field => "field",
+            Self::Almanac => "almanac",
+            Self::Darkroom => "darkroom",
         }
     }
 
@@ -135,11 +152,15 @@ const TOKENS_CLEAN_MINIMAL: AestheticTokens = AestheticTokens {
     font_heading: "ui-sans-serif, system-ui, -apple-system, sans-serif",
     font_body: "ui-sans-serif, system-ui, -apple-system, sans-serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "ui-sans-serif, system-ui, -apple-system, sans-serif",
+    font_numeric: "ui-sans-serif, system-ui, -apple-system, sans-serif",
     radius_card: "0.5rem",
     radius_btn: "0.375rem",
     radius_input: "0.375rem",
+    radius_check: "0.375rem",
     shadow_card: "0 1px 2px rgba(0,0,0,0.05)",
     shadow_card_hover: "0 4px 8px rgba(0,0,0,0.1)",
+    row_height: "2.125rem",
     spacing_page_x: "1.5rem",
     spacing_page_y: "2rem",
     spacing_section: "1.5rem",
@@ -151,11 +172,15 @@ const TOKENS_TUI: AestheticTokens = AestheticTokens {
     font_heading: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
     font_body: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_numeric: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
     radius_card: "0",
     radius_btn: "0",
     radius_input: "0",
+    radius_check: "0",
     shadow_card: "none",
     shadow_card_hover: "none",
+    row_height: "2.125rem",
     spacing_page_x: "1rem",
     spacing_page_y: "1rem",
     spacing_section: "0.75rem",
@@ -167,11 +192,15 @@ const TOKENS_COZY_JOURNAL: AestheticTokens = AestheticTokens {
     font_heading: "Georgia, 'Times New Roman', serif",
     font_body: "Georgia, 'Times New Roman', serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "Georgia, 'Times New Roman', serif",
+    font_numeric: "Georgia, 'Times New Roman', serif",
     radius_card: "0.75rem",
     radius_btn: "0.5rem",
     radius_input: "0.5rem",
+    radius_check: "0.5rem",
     shadow_card: "0 2px 8px rgba(0,0,0,0.06)",
     shadow_card_hover: "0 6px 20px rgba(0,0,0,0.1)",
+    row_height: "2.125rem",
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "1.75rem",
@@ -183,11 +212,15 @@ const TOKENS_OBSIDIAN: AestheticTokens = AestheticTokens {
     font_heading: "ui-sans-serif, system-ui, sans-serif",
     font_body: "ui-sans-serif, system-ui, sans-serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "ui-sans-serif, system-ui, sans-serif",
+    font_numeric: "ui-sans-serif, system-ui, sans-serif",
     radius_card: "0.375rem",
     radius_btn: "0.25rem",
     radius_input: "0.25rem",
+    radius_check: "0.25rem",
     shadow_card: "0 1px 3px rgba(0,0,0,0.3)",
     shadow_card_hover: "0 4px 12px rgba(0,0,0,0.4)",
+    row_height: "2.125rem",
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1rem",
@@ -199,11 +232,15 @@ const TOKENS_SYNTHWAVE_NEON: AestheticTokens = AestheticTokens {
     font_heading: "'Inter', 'Segoe UI', system-ui, sans-serif",
     font_body: "ui-sans-serif, system-ui, sans-serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "ui-sans-serif, system-ui, sans-serif",
+    font_numeric: "ui-sans-serif, system-ui, sans-serif",
     radius_card: "0.25rem",
     radius_btn: "0.25rem",
     radius_input: "0.25rem",
+    radius_check: "0.25rem",
     shadow_card: "0 0 12px rgba(255,0,255,0.15), 0 0 4px rgba(0,255,255,0.1)",
     shadow_card_hover: "0 0 24px rgba(255,0,255,0.25), 0 0 8px rgba(0,255,255,0.2)",
+    row_height: "2.125rem",
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1.25rem",
@@ -215,11 +252,15 @@ const TOKENS_PAPER_MANUSCRIPT: AestheticTokens = AestheticTokens {
     font_heading: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
     font_body: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
     font_mono: "'Courier New', Courier, monospace",
+    font_writing: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
+    font_numeric: "'Palatino Linotype', Palatino, 'Book Antiqua', serif",
     radius_card: "0.125rem",
     radius_btn: "0.125rem",
     radius_input: "0.125rem",
+    radius_check: "0.125rem",
     shadow_card: "2px 2px 0 color-mix(in oklch, var(--color-base-content) 15%, transparent)",
     shadow_card_hover: "3px 3px 0 color-mix(in oklch, var(--color-base-content) 20%, transparent)",
+    row_height: "2.125rem",
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "2rem",
@@ -231,11 +272,15 @@ const TOKENS_BRUTALIST: AestheticTokens = AestheticTokens {
     font_heading: "ui-monospace, 'Courier New', monospace",
     font_body: "ui-monospace, 'Courier New', monospace",
     font_mono: "ui-monospace, 'Courier New', monospace",
+    font_writing: "ui-monospace, 'Courier New', monospace",
+    font_numeric: "ui-monospace, 'Courier New', monospace",
     radius_card: "0",
     radius_btn: "0",
     radius_input: "0",
+    radius_check: "0",
     shadow_card: "4px 4px 0 color-mix(in oklch, var(--color-base-content) 80%, transparent)",
     shadow_card_hover: "6px 6px 0 color-mix(in oklch, var(--color-base-content) 90%, transparent)",
+    row_height: "2.125rem",
     spacing_page_x: "1.5rem",
     spacing_page_y: "1.5rem",
     spacing_section: "1.5rem",
@@ -247,11 +292,15 @@ const TOKENS_GLASS_FROST: AestheticTokens = AestheticTokens {
     font_heading: "'Inter', ui-sans-serif, system-ui, sans-serif",
     font_body: "'Inter', ui-sans-serif, system-ui, sans-serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "'Inter', ui-sans-serif, system-ui, sans-serif",
+    font_numeric: "'Inter', ui-sans-serif, system-ui, sans-serif",
     radius_card: "1rem",
     radius_btn: "0.75rem",
     radius_input: "0.75rem",
+    radius_check: "0.75rem",
     shadow_card: "0 4px 16px rgba(0,0,0,0.06)",
     shadow_card_hover: "0 8px 32px rgba(0,0,0,0.1)",
+    row_height: "2.125rem",
     spacing_page_x: "2rem",
     spacing_page_y: "2rem",
     spacing_section: "1.75rem",
@@ -263,16 +312,80 @@ const TOKENS_INK_CALLIGRAPHY: AestheticTokens = AestheticTokens {
     font_heading: "'Didot', 'Bodoni MT', 'Noto Serif Display', serif",
     font_body: "'Garamond', 'Noto Serif', Georgia, serif",
     font_mono: "ui-monospace, 'Fira Code', 'Cascadia Code', monospace",
+    font_writing: "'Garamond', 'Noto Serif', Georgia, serif",
+    font_numeric: "'Garamond', 'Noto Serif', Georgia, serif",
     radius_card: "0",
     radius_btn: "0",
     radius_input: "0",
+    radius_check: "0",
     shadow_card: "none",
     shadow_card_hover: "0 1px 4px rgba(0,0,0,0.08)",
+    row_height: "2.125rem",
     spacing_page_x: "2rem",
     spacing_page_y: "2.5rem",
     spacing_section: "2rem",
     border_card: "1px solid color-mix(in oklch, var(--color-base-content) 12%, transparent)",
     transition_card: "all 200ms ease",
+};
+
+const TOKENS_FIELD: AestheticTokens = AestheticTokens {
+    font_heading: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif",
+    font_body: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif",
+    font_mono: "'JetBrains Mono', ui-monospace, monospace",
+    font_writing: "'Source Serif 4', Georgia, serif",
+    font_numeric: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif",
+    radius_card: "0.75rem",
+    radius_btn: "0.5rem",
+    radius_input: "0.5rem",
+    radius_check: "0.375rem",
+    shadow_card: "none",
+    shadow_card_hover: "none",
+    row_height: "2.125rem",
+    spacing_page_x: "2.25rem",
+    spacing_page_y: "2rem",
+    spacing_section: "1.25rem",
+    border_card: "1px solid var(--color-border)",
+    transition_card: "none",
+};
+
+const TOKENS_ALMANAC: AestheticTokens = AestheticTokens {
+    font_heading: "'Fraunces', Georgia, serif",
+    font_body: "'Public Sans', system-ui, sans-serif",
+    font_mono: "'JetBrains Mono', ui-monospace, monospace",
+    font_writing: "'Fraunces', Georgia, serif",
+    font_numeric: "'Fraunces', Georgia, serif",
+    radius_card: "1.25rem",
+    radius_btn: "999px",
+    radius_input: "999px",
+    radius_check: "0.375rem",
+    shadow_card: "none",
+    shadow_card_hover: "none",
+    row_height: "2.125rem",
+    spacing_page_x: "2.25rem",
+    spacing_page_y: "2rem",
+    spacing_section: "1.25rem",
+    border_card: "1px solid var(--color-border)",
+    transition_card: "none",
+};
+
+const TOKENS_DARKROOM: AestheticTokens = AestheticTokens {
+    font_heading: "'IBM Plex Sans', system-ui, sans-serif",
+    font_body: "'IBM Plex Sans', system-ui, sans-serif",
+    font_mono: "'IBM Plex Mono', ui-monospace, monospace",
+    font_writing: "'IBM Plex Sans', system-ui, sans-serif",
+    font_numeric: "'IBM Plex Mono', ui-monospace, monospace",
+    radius_card: "0.25rem",
+    radius_btn: "0.25rem",
+    radius_input: "0.25rem",
+    radius_check: "0.25rem",
+    shadow_card: "none",
+    shadow_card_hover: "none",
+    row_height: "2rem",
+    spacing_page_x: "2.25rem",
+    spacing_page_y: "1.5rem",
+    spacing_section: "1rem",
+    border_card: "1px solid var(--color-border)",
+    transition_card: "none",
 };
 
 // ── Preset definitions ────────────────────────────────────────────
@@ -368,6 +481,33 @@ const PRESETS: &[AestheticPreset] = &[
         light_theme: Theme::Fantasy,
         tokens: TOKENS_INK_CALLIGRAPHY,
     },
+    AestheticPreset {
+        id: "field",
+        label: "Field Notebook",
+        description: "Warm paper and ink: 8px controls, 12px cards, hairlines, no card shadows",
+        daisy_theme: Some(Theme::Field),
+        dark_theme: Theme::FieldDark,
+        light_theme: Theme::Field,
+        tokens: TOKENS_FIELD,
+    },
+    AestheticPreset {
+        id: "almanac",
+        label: "Almanac",
+        description: "Editorial: Fraunces titles and numerals, pill controls, 20px cards",
+        daisy_theme: Some(Theme::Almanac),
+        dark_theme: Theme::Almanac,
+        light_theme: Theme::Almanac,
+        tokens: TOKENS_ALMANAC,
+    },
+    AestheticPreset {
+        id: "darkroom",
+        label: "Darkroom",
+        description: "Dense and dark: IBM Plex, 4px corners, 32px rows, borders not shadows",
+        daisy_theme: Some(Theme::Darkroom),
+        dark_theme: Theme::Darkroom,
+        light_theme: Theme::Darkroom,
+        tokens: TOKENS_DARKROOM,
+    },
 ];
 
 #[cfg(test)]
@@ -376,7 +516,7 @@ mod tests {
 
     #[test]
     fn all_contains_every_variant() {
-        assert_eq!(Aesthetic::all().len(), 10);
+        assert_eq!(Aesthetic::all().len(), 13);
     }
 
     #[test]
@@ -419,6 +559,114 @@ mod tests {
                 "{} should have a daisy_theme",
                 aesthetic
             );
+        }
+    }
+
+    #[test]
+    fn preset_order_is_stable_and_looks_are_appended() {
+        let ids: Vec<&str> = Aesthetic::all().iter().map(Aesthetic::as_str).collect();
+        assert_eq!(
+            ids,
+            [
+                "auto",
+                "tui",
+                "journal",
+                "obsidian",
+                "minimal",
+                "synthwave-neon",
+                "paper",
+                "brutalist",
+                "glass",
+                "ink",
+                "field",
+                "almanac",
+                "darkroom"
+            ]
+        );
+    }
+
+    #[test]
+    fn looks_pair_with_their_themes() {
+        let field = Aesthetic::Field.preset();
+        assert_eq!(field.light_theme, Theme::Field);
+        assert_eq!(field.dark_theme, Theme::FieldDark);
+        assert_eq!(
+            Aesthetic::Almanac.preset().daisy_theme,
+            Some(Theme::Almanac)
+        );
+        assert_eq!(
+            Aesthetic::Darkroom.preset().daisy_theme,
+            Some(Theme::Darkroom)
+        );
+    }
+
+    #[test]
+    fn looks_shapes_follow_the_design_system() {
+        let f = &Aesthetic::Field.preset().tokens;
+        assert_eq!((f.radius_btn, f.radius_card), ("0.5rem", "0.75rem"));
+        let a = &Aesthetic::Almanac.preset().tokens;
+        assert_eq!((a.radius_btn, a.radius_card), ("999px", "1.25rem"));
+        let d = &Aesthetic::Darkroom.preset().tokens;
+        assert_eq!(
+            (d.radius_btn, d.radius_card, d.row_height),
+            ("0.25rem", "0.25rem", "2rem")
+        );
+        assert_eq!(d.font_numeric, "'IBM Plex Mono', ui-monospace, monospace");
+    }
+
+    #[test]
+    fn existing_aesthetics_keep_body_font_for_writing_and_numeric() {
+        for a in &Aesthetic::all()[..10] {
+            let t = &a.preset().tokens;
+            assert_eq!(t.font_writing, t.font_body, "{a}");
+            assert_eq!(t.font_numeric, t.font_body, "{a}");
+            assert_eq!(t.radius_check, t.radius_btn, "{a}");
+        }
+    }
+
+    #[test]
+    fn css_defines_every_token_for_the_looks() {
+        for id in ["field", "almanac", "darkroom"] {
+            let a: Aesthetic = id.parse().unwrap();
+            let t = &a.preset().tokens;
+            let css = crate::themes::aesthetic_css::AESTHETIC_CSS;
+            let block = css
+                .split(&format!("[data-aesthetic=\"{id}\"] {{"))
+                .nth(1)
+                .unwrap_or_else(|| panic!("no css block for {id}"))
+                .split('}')
+                .next()
+                .unwrap();
+            for (var, val) in [
+                ("--font-writing", t.font_writing),
+                ("--font-numeric", t.font_numeric),
+                ("--radius-card", t.radius_card),
+                ("--radius-btn", t.radius_btn),
+                ("--radius-input", t.radius_input),
+                ("--radius-check", t.radius_check),
+                ("--row-height", t.row_height),
+            ] {
+                assert!(block.contains(&format!("{var}: {val};")), "{id} {var}");
+            }
+        }
+    }
+
+    #[test]
+    fn every_aesthetic_block_sets_the_new_tokens_explicitly() {
+        // Scoped shells resolve `var()` at the root, so each block must carry
+        // its own values rather than inherit a computed one.
+        let css = crate::themes::aesthetic_css::AESTHETIC_CSS;
+        for a in &Aesthetic::all()[1..] {
+            let block = css
+                .split(&format!("[data-aesthetic=\"{}\"] {{", a.as_str()))
+                .nth(1)
+                .unwrap()
+                .split('}')
+                .next()
+                .unwrap();
+            for var in ["--font-writing:", "--font-numeric:", "--radius-check:"] {
+                assert!(block.contains(var), "{a} lacks {var}");
+            }
         }
     }
 }

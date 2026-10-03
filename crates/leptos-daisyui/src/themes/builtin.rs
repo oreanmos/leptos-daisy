@@ -48,6 +48,14 @@ pub enum Theme {
     Silk,
     // ── custom (crate-provided) ─────────────────────────────────────
     Terminal,
+    /// Oikonotes Field notebook (light).
+    Field,
+    /// Oikonotes Field notebook (dark).
+    FieldDark,
+    /// Oikonotes Almanac (light).
+    Almanac,
+    /// Oikonotes Darkroom (dark).
+    Darkroom,
 }
 
 /// All variants in display order (matches daisyUI docs, custom themes last).
@@ -88,6 +96,10 @@ const ALL: &[Theme] = &[
     Theme::Abyss,
     Theme::Silk,
     Theme::Terminal,
+    Theme::Field,
+    Theme::FieldDark,
+    Theme::Almanac,
+    Theme::Darkroom,
 ];
 
 impl Theme {
@@ -130,6 +142,10 @@ impl Theme {
             Self::Abyss => "abyss",
             Self::Silk => "silk",
             Self::Terminal => "terminal",
+            Self::Field => "field",
+            Self::FieldDark => "field-dark",
+            Self::Almanac => "almanac",
+            Self::Darkroom => "darkroom",
         }
     }
 
@@ -156,13 +172,18 @@ impl Theme {
                 | Self::Sunset
                 | Self::Abyss
                 | Self::Terminal
+                | Self::FieldDark
+                | Self::Darkroom
         )
     }
 
     /// Whether this is a custom theme shipped by this crate (not built into
     /// daisyUI).
     pub fn is_custom(&self) -> bool {
-        matches!(self, Self::Terminal)
+        matches!(
+            self,
+            Self::Terminal | Self::Field | Self::FieldDark | Self::Almanac | Self::Darkroom
+        )
     }
 }
 
@@ -199,7 +220,7 @@ mod tests {
 
     #[test]
     fn all_contains_every_variant() {
-        assert_eq!(Theme::all().len(), 36);
+        assert_eq!(Theme::all().len(), 40);
     }
 
     #[test]
@@ -223,6 +244,34 @@ mod tests {
         assert!(Theme::Terminal.is_dark());
         assert!(!Theme::Light.is_dark());
         assert!(!Theme::Cupcake.is_dark());
+    }
+
+    #[test]
+    fn looks_themes_are_appended_after_terminal_with_stable_ids() {
+        let all = Theme::all();
+        assert_eq!(all[35], Theme::Terminal);
+        let tail: Vec<&str> = all[36..].iter().map(Theme::as_str).collect();
+        assert_eq!(tail, ["field", "field-dark", "almanac", "darkroom"]);
+    }
+
+    #[test]
+    fn looks_themes_colour_scheme() {
+        assert!(Theme::FieldDark.is_dark());
+        assert!(Theme::Darkroom.is_dark());
+        assert!(!Theme::Field.is_dark());
+        assert!(!Theme::Almanac.is_dark());
+    }
+
+    #[test]
+    fn looks_themes_are_custom() {
+        for t in [
+            Theme::Field,
+            Theme::FieldDark,
+            Theme::Almanac,
+            Theme::Darkroom,
+        ] {
+            assert!(t.is_custom());
+        }
     }
 
     #[test]

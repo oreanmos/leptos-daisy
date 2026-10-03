@@ -109,6 +109,35 @@ fn App() -> impl IntoView {
 }
 ```
 
+### Oikonotes looks (Field, Almanac, Darkroom)
+Four themes (`field`, `field-dark`, `almanac`, `darkroom`) and three aesthetics
+(`field`, `almanac`, `darkroom`) carry the Oikonotes design system. Inject
+`LooksThemeStyles` and `AestheticStyles` once, set `data-theme` and
+`data-aesthetic`, and pair them (`Aesthetic::Field.preset()` names its light and
+dark theme).
+
+Beyond the daisyUI roles each theme defines these custom properties, all in the
+`--color-*` namespace (plus one shadow). Use them with Tailwind 4 arbitrary
+values, e.g. `bg-(--color-app-1-tint)`:
+
+| Variable | Role |
+|---|---|
+| `--color-base-content-muted` | labels, metadata, timestamps |
+| `--color-border`, `--color-border-strong` | hairlines; control edges |
+| `--color-link` | inline links, quiet actions |
+| `--color-suggestion`, `--color-suggestion-rule`, `--color-suggestion-content` | AI proposals waiting on the user |
+| `--color-app-1` .. `--color-app-6`, `--color-app-N-tint` | app palette slots and washes |
+| `--color-chart-1` .. `--color-chart-8` | chart series (7, 8 are tints of 2 and 4) |
+| `--shadow-overlay` | menus, popovers, dialogs |
+
+`OIKONOTES_ROLE_VARS` lists them. Aesthetic tokens add `--font-writing`,
+`--font-numeric`, `--radius-check`, `--radius-pill` and `--row-height`, and the
+`.font-writing` / `.font-numeric` (tabular figures) utilities. The crate ships no
+font files: it names families and the app must load them. The radius bridge sets
+daisyUI's `--radius-box`, `--radius-field` and `--radius-selector` from the
+aesthetic's card, control and check radii at specificity (0,2,0), so no
+`!important` override is needed.
+
 ---
 
 ## Component Reference: Actions

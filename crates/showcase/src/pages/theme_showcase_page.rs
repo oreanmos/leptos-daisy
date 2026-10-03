@@ -39,6 +39,10 @@ const ALL_THEMES: &[&str] = &[
     "abyss",
     "silk",
     "terminal",
+    "field",
+    "field-dark",
+    "almanac",
+    "darkroom",
 ];
 
 #[component]
