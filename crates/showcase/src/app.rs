@@ -227,6 +227,7 @@ pub fn App() -> impl IntoView {
     view! {
         <>
             <TerminalThemeStyles />
+            <LooksThemeStyles />
             <AestheticStyles />
             <Router>
                 <SidebarLayout
