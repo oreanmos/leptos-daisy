@@ -57,7 +57,7 @@ pub fn Loading(
     let cls = class_signal("loading", &mods, class);
     view! {
         <span class=cls role="status" aria-live="polite"
-            aria-label=move || aria_label.get().unwrap_or_else(|| "Loading".to_string())
+            aria-label=move || aria_label.try_get().flatten().unwrap_or_else(|| "Loading".to_string())
         ></span>
     }
     .add_any_attr(attrs)

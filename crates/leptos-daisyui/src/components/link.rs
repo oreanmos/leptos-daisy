@@ -33,15 +33,15 @@ pub fn Link(
     view! {
         <a
             class=cls
-            id=move || id.get()
+            id=move || id.try_get().flatten()
             href=move || {
                 if disabled {
                     None
                 } else {
-                    Some(href.get().unwrap_or_else(|| "#".to_string()))
+                    Some(href.try_get().flatten().unwrap_or_else(|| "#".to_string()))
                 }
             }
-            aria-label=move || aria_label.get()
+            aria-label=move || aria_label.try_get().flatten()
             aria-disabled=disabled
             tabindex=if disabled { -1 } else { 0 }
             target={if external && !disabled { Some("_blank") } else { None }}

@@ -27,6 +27,9 @@ jobs:
       - name: Test workspace
         run: cargo test --workspace
 
+      - name: Test disposed-signal reads (ssr)
+        run: cargo test -p leptos-daisyui --features ssr --test disposed_reads
+
       - name: Check leptos-daisyui (ssr)
         run: cargo check -p leptos-daisyui --features ssr
 

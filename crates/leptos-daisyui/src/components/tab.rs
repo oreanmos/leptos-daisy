@@ -55,19 +55,19 @@ pub fn Tab(
 ) -> impl IntoView {
     let disabled_cls = if disabled { " tab-disabled" } else { "" };
     let cls = move || {
-        let base = if active.get().unwrap_or(false) {
+        let base = if active.try_get().flatten().unwrap_or(false) {
             "tab tab-active"
         } else {
             "tab"
         };
-        match class.get() {
+        match class.try_get().flatten() {
             Some(c) if !c.is_empty() => format!("{base}{disabled_cls} {c}"),
             _ => format!("{base}{disabled_cls}"),
         }
     };
     view! {
         <button type="button" role="tab" class=cls
-            aria-selected=move || active.get().unwrap_or(false)
+            aria-selected=move || active.try_get().flatten().unwrap_or(false)
             disabled=disabled
         >{children()}</button>
     }

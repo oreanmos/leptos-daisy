@@ -49,12 +49,12 @@ pub fn Select(
 
     view! {
         <select
-            id=move || id.get()
-            name=move || name.get()
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
             class=cls
-            prop:value=move || value.get().unwrap_or_default()
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
+            prop:value=move || value.try_get().flatten().unwrap_or_default()
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
             on:change=handle_change
         >
             {children()}
@@ -72,9 +72,9 @@ pub fn SelectOption(
 ) -> impl IntoView {
     view! {
         <option
-            value=move || value.get()
-            disabled=move || disabled.get().unwrap_or(false)
-            selected=move || selected.get().unwrap_or(false)
+            value=move || value.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
+            selected=move || selected.try_get().flatten().unwrap_or(false)
         >
             {children()}
         </option>

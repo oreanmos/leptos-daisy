@@ -21,12 +21,12 @@ pub fn PageHeader(
         class,
     );
 
-    let has_title = move || title.get().is_some();
+    let has_title = move || title.try_get().flatten().is_some();
 
     let title_view = move || {
-        title.get().map(|t| {
+        title.try_get().flatten().map(|t| {
             let bc = breadcrumbs.clone();
-            let sub = subtitle.get();
+            let sub = subtitle.try_get().flatten();
             view! {
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>

@@ -49,7 +49,7 @@ pub fn FabAction(
     let cls = class_signal("btn", &[], class);
     view! {
         <div>
-            {move || label.get()}
+            {move || label.try_get().flatten()}
             <button type="button" class=cls>
                 {children()}
             </button>
@@ -65,12 +65,12 @@ pub fn FabClose(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
-    let has_label = move || label.get().is_some();
+    let has_label = move || label.try_get().flatten().is_some();
     let cls = class_signal("fab-close", &[], class);
     view! {
         <div class=cls>
             <Show when=has_label>
-                {move || label.get()}
+                {move || label.try_get().flatten()}
             </Show>
             {children()}
         </div>

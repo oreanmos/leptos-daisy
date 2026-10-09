@@ -50,7 +50,7 @@ pub fn AestheticShell(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
 
     view! {
         <div data-aesthetic=aesthetic.as_str() class=cls>

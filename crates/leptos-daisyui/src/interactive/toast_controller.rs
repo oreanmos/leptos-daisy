@@ -69,7 +69,7 @@ impl ToastController {
 
     /// Push a toast message with the given content, color, and duration.
     pub fn push(&self, content: impl Into<String>, color: ToastColor, duration_ms: u32) {
-        let id = self.next_id.get_untracked();
+        let id = self.next_id.try_get_untracked().unwrap_or_default();
         self.next_id.set(id + 1);
         let msg = ToastMessage {
             id,
@@ -148,7 +148,7 @@ pub fn ToastContainer(controller: ToastController) -> impl IntoView {
     view! {
         <div class="toast toast-end toast-bottom z-50">
             {move || {
-                messages.get().into_iter().map(|msg| {
+                messages.try_get().unwrap_or_default().into_iter().map(|msg| {
                     let id = msg.id;
                     let class = msg.color.alert_class();
                     view! {

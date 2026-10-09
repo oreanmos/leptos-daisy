@@ -38,7 +38,7 @@ pub fn FormField(
 ) -> impl IntoView {
     let cls = move || {
         let base = "fieldset";
-        match class.get() {
+        match class.try_get().flatten() {
             Some(extra) => format!("{base} {extra}"),
             None => base.to_string(),
         }
@@ -60,7 +60,7 @@ pub fn FormField(
             </label>
             {children()}
             {move || {
-                error.get().map(|e| view! { <p class="label-text text-error text-sm mt-1">{e}</p> })
+                error.try_get().flatten().map(|e| view! { <p class="label-text text-error text-sm mt-1">{e}</p> })
             }}
             {hint.map(|h| view! { <p class="label-text text-base-content/60 text-sm mt-1">{h}</p> })}
         </fieldset>

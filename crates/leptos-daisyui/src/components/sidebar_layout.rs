@@ -178,7 +178,8 @@ pub fn SidebarLayout(
     id: MaybeProp<String>,
 ) -> impl IntoView {
     let drawer_id = id
-        .get()
+        .try_get()
+        .flatten()
         .unwrap_or_else(|| "sidebar-layout-drawer".to_string());
     let ctx = SidebarLayoutContext {
         variant,
@@ -254,8 +255,8 @@ pub fn SidebarLayoutPanel(
     let inherited_variant = ctx.as_ref().map(|c| c.variant).unwrap_or_default();
     let inherited_width = ctx.as_ref().map(|c| c.width).unwrap_or_default();
     let cls = move || {
-        let resolved_variant = variant.get().unwrap_or(inherited_variant);
-        let resolved_width = width.get().unwrap_or(inherited_width);
+        let resolved_variant = variant.try_get().flatten().unwrap_or(inherited_variant);
+        let resolved_width = width.try_get().flatten().unwrap_or(inherited_width);
         let static_cls = build_class(
             resolved_variant.panel_classes(),
             &[
@@ -266,7 +267,7 @@ pub fn SidebarLayoutPanel(
             ],
             None,
         );
-        match class.get() {
+        match class.try_get().flatten() {
             Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
             _ => static_cls,
         }
@@ -364,7 +365,7 @@ pub fn SidebarLayoutMobileMenuButton(
         .map(|c| c.drawer_id.clone())
         .unwrap_or_else(|| Arc::from("sidebar-layout-drawer"));
     let target_id = move || {
-        if let Some(id) = drawer_id.get() {
+        if let Some(id) = drawer_id.try_get().flatten() {
             Oco::Owned(id)
         } else {
             Oco::Counted(inherited_id.clone())
@@ -418,7 +419,7 @@ pub fn SidebarLayoutNavSection(
     view! {
         <div class=cls>
             {move || {
-                let title_text = title.get().unwrap_or_default();
+                let title_text = title.try_get().flatten().unwrap_or_default();
                 if title_text.is_empty() {
                     None
                 } else {
@@ -459,11 +460,11 @@ pub fn SidebarLayoutNavItem(
 
     let cls = move || {
         let mut m: Vec<&str> = vec![text_class, hover_class];
-        if active.get().unwrap_or(false) {
+        if active.try_get().flatten().unwrap_or(false) {
             m.push(active_class);
         }
         let static_cls = build_class("flex items-center gap-3 rounded-lg px-3 py-2", &m, None);
-        match class.get() {
+        match class.try_get().flatten() {
             Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
             _ => static_cls,
         }
@@ -472,17 +473,17 @@ pub fn SidebarLayoutNavItem(
     view! {
         <li>
             <a
-                href=move || href.get().unwrap_or_else(|| "#".to_string())
+                href=move || href.try_get().flatten().unwrap_or_else(|| "#".to_string())
                 class=cls
-                aria-current=move || if active.get().unwrap_or(false) { Some("page") } else { None }
+                aria-current=move || if active.try_get().flatten().unwrap_or(false) { Some("page") } else { None }
             >
                 {move || {
-                    let raw_icon_html = unsafe_icon_html.get().unwrap_or_default();
+                    let raw_icon_html = unsafe_icon_html.try_get().flatten().unwrap_or_default();
                     if !raw_icon_html.is_empty() {
                         return Some(view! { <span class="w-5 h-5" inner_html=raw_icon_html /> }.into_any());
                     }
 
-                    let icon_val = icon.get().unwrap_or_default();
+                    let icon_val = icon.try_get().flatten().unwrap_or_default();
                     if icon_val.is_empty() || icon_val.contains('<') || icon_val.contains('>') {
                         None
                     } else {

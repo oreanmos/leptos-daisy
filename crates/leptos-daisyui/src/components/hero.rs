@@ -25,7 +25,7 @@ pub fn Hero(
     };
     let refs = m;
     let static_cls = build_class(&base, &refs, None);
-    let cls = move || match class.get() {
+    let cls = move || match class.try_get().flatten() {
         Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
         _ => static_cls.clone(),
     };

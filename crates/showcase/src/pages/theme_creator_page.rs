@@ -155,7 +155,7 @@ pub fn ThemeCreatorPage() -> impl IntoView {
     let color_signals_for_output = color_signals.clone();
     let css_output = move || {
         let name = theme_name.get();
-        let mut lines = vec![format!("@plugin \"daisyui/theme\" {{")];
+        let mut lines = vec!["@plugin \"daisyui/theme\" {".to_string()];
         lines.push(format!("  name: \"{}\";", name));
         for (label, css_var, read, _) in &color_signals_for_output {
             let val = read.get();

@@ -60,7 +60,7 @@ pub fn Rating(
     let cls = class_signal("rating", &refs, class);
     view! {
         <div class=cls role="radiogroup"
-            aria-label=move || aria_label.get()
+            aria-label=move || aria_label.try_get().flatten()
         >{children()}</div>
     }
     .add_any_attr(attrs)
@@ -87,11 +87,11 @@ pub fn RatingItem(
         <input
             type="radio"
             name=name
-            value=move || value.get()
+            value=move || value.try_get().flatten()
             class=cls
-            aria-label=move || aria_label.get()
-            checked=move || checked.get().unwrap_or(false)
-            disabled=move || disabled.get().unwrap_or(false)
+            aria-label=move || aria_label.try_get().flatten()
+            checked=move || checked.try_get().flatten().unwrap_or(false)
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
         />
     }
     .add_any_attr(attrs)

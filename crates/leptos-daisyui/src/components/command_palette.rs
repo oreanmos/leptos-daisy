@@ -48,8 +48,8 @@ pub fn CommandPalette(
 
     // Filtered items based on search query
     let filtered = Memo::new(move |_| {
-        let q = query.get().to_lowercase();
-        let all_items = items.get();
+        let q = query.try_get().unwrap_or_default().to_lowercase();
+        let all_items = items.try_get().unwrap_or_default();
         if q.is_empty() {
             all_items
         } else {
@@ -68,13 +68,13 @@ pub fn CommandPalette(
 
     // Reset selection when query changes
     Effect::new(move || {
-        let _ = query.get();
+        let _ = query.try_get().unwrap_or_default();
         set_selected_index.set(0);
     });
 
     // Reset query when palette closes
     Effect::new(move || {
-        if !open.get() {
+        if !open.try_get().unwrap_or_default() {
             set_query.set(String::new());
             set_selected_index.set(0);
         }
@@ -103,7 +103,7 @@ pub fn CommandPalette(
 
     // Keyboard navigation within the palette
     let handle_keydown = move |ev: ev::KeyboardEvent| {
-        let items = filtered.get();
+        let items = filtered.try_get().unwrap_or_default();
         let len = items.len();
         match ev.key().as_str() {
             "ArrowDown" => {
@@ -122,7 +122,7 @@ pub fn CommandPalette(
             }
             "Enter" => {
                 ev.prevent_default();
-                let idx = selected_index.get_untracked();
+                let idx = selected_index.try_get_untracked().unwrap_or_default();
                 if let Some(item) = items.get(idx) {
                     on_select.run(item.id.clone());
                     open.set(false);
@@ -142,14 +142,15 @@ pub fn CommandPalette(
     };
 
     let placeholder_text = placeholder
-        .get_untracked()
+        .try_get_untracked()
+        .flatten()
         .unwrap_or_else(|| "Search...".to_string());
 
     let extra_class = class;
 
     view! {
-        <Show when=move || open.get()>
-            <div class=move || extra_class.get().unwrap_or_default()>
+        <Show when=move || open.try_get().unwrap_or_default()>
+            <div class=move || extra_class.try_get().flatten().unwrap_or_default()>
                 // Backdrop
                 <div
                     class="fixed inset-0 bg-black/50 z-50"
@@ -167,7 +168,7 @@ pub fn CommandPalette(
                                 class="input input-ghost w-full focus:outline-none"
                                 placeholder=placeholder_text.clone()
                                 autofocus=true
-                                prop:value=move || query.get()
+                                prop:value=move || query.try_get().unwrap_or_default()
                                 on:input=handle_input
                                 on:keydown=handle_keydown
                             />
@@ -176,7 +177,7 @@ pub fn CommandPalette(
                         // Results
                         <div class="max-h-80 overflow-y-auto p-2">
                             {move || {
-                                let items = filtered.get();
+                                let items = filtered.try_get().unwrap_or_default();
                                 if items.is_empty() {
                                     view! {
                                         <div class="text-center py-8 text-base-content/50">
@@ -184,7 +185,7 @@ pub fn CommandPalette(
                                         </div>
                                     }.into_any()
                                 } else {
-                                    let sel = selected_index.get();
+                                    let sel = selected_index.try_get().unwrap_or_default();
                                     let mut current_group: Option<String> = None;
                                     let views: Vec<_> = items.iter().enumerate().map(|(i, item)| {
                                         let id = item.id.clone();

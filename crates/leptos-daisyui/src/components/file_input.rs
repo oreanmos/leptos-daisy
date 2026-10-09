@@ -77,14 +77,14 @@ pub fn FileInput(
     view! {
         <input
             type="file"
-            id=move || id.get()
-            name=move || name.get()
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
             class=cls
-            accept=move || accept.get()
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
-            required=move || required.get().unwrap_or(false)
-            multiple=move || multiple.get().unwrap_or(false)
+            accept=move || accept.try_get().flatten()
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
+            required=move || required.try_get().flatten().unwrap_or(false)
+            multiple=move || multiple.try_get().flatten().unwrap_or(false)
             on:change=handle_change
         />
     }

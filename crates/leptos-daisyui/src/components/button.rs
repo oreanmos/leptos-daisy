@@ -114,12 +114,12 @@ pub fn Button(
     view! {
         <button
             class=cls
-            type=move || button_type.get().unwrap_or_else(|| "button".to_string())
-            id=move || id.get()
-            name=move || name.get()
-            value=move || value.get()
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
+            type=move || button_type.try_get().flatten().unwrap_or_else(|| "button".to_string())
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
+            value=move || value.try_get().flatten()
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
             on:click=handle_click
         >
             {children()}

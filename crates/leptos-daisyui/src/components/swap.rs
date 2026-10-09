@@ -42,7 +42,7 @@ pub fn Swap(
     view! {
         <label class=cls>
             <input type="checkbox"
-                aria-label=move || aria_label.get()
+                aria-label=move || aria_label.try_get().flatten()
                 aria-checked=active
             />
             <div class="swap-on">{on()}</div>

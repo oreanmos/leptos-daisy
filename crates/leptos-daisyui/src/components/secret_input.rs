@@ -80,7 +80,7 @@ pub fn SecretInput(
 
     let input_cls = move || {
         let base = &input_base;
-        match class.get() {
+        match class.try_get().flatten() {
             Some(extra) => format!("{base} {extra}"),
             None => base.clone(),
         }
@@ -89,15 +89,15 @@ pub fn SecretInput(
     view! {
         <div class="join w-full">
             {move || {
-                let input_type = if visible.get() { "text" } else { "password" };
+                let input_type = if visible.try_get().unwrap_or_default() { "text" } else { "password" };
                 view! {
                     <input
                         type=input_type
                         class=input_cls.clone()
-                        placeholder=move || placeholder.get().unwrap_or_default()
-                        name=move || name.get()
-                        disabled=move || disabled.get().unwrap_or(false)
-                        prop:value=move || value.get().unwrap_or_default()
+                        placeholder=move || placeholder.try_get().flatten().unwrap_or_default()
+                        name=move || name.try_get().flatten()
+                        disabled=move || disabled.try_get().flatten().unwrap_or(false)
+                        prop:value=move || value.try_get().flatten().unwrap_or_default()
                         on:input=handle_input
                     />
                 }
@@ -107,7 +107,7 @@ pub fn SecretInput(
                 class=btn_cls
                 on:click=move |_| visible.update(|v| *v = !*v)
             >
-                {move || if visible.get() {
+                {move || if visible.try_get().unwrap_or_default() {
                     // Eye-slash icon (visible — click to hide)
                     view! {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

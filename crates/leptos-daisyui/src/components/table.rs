@@ -50,7 +50,7 @@ pub fn TableHead(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
     view! { <thead class=cls>{children()}</thead> }.add_any_attr(attrs)
 }
 
@@ -61,7 +61,7 @@ pub fn TableBody(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
     view! { <tbody class=cls>{children()}</tbody> }.add_any_attr(attrs)
 }
 
@@ -72,7 +72,7 @@ pub fn TableFoot(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
     view! { <tfoot class=cls>{children()}</tfoot> }.add_any_attr(attrs)
 }
 
@@ -108,7 +108,7 @@ pub fn TableHeaderCell(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
     view! { <th class=cls>{children()}</th> }.add_any_attr(attrs)
 }
 
@@ -119,7 +119,7 @@ pub fn TableCell(
     #[prop(optional, into)] class: MaybeProp<String>,
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
 ) -> impl IntoView {
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
     view! { <td class=cls>{children()}</td> }.add_any_attr(attrs)
 }
 

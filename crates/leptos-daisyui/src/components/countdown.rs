@@ -14,7 +14,7 @@ pub fn Countdown(
     let style = format!("--value:{};", value);
     view! {
         <span class=cls style=style role="timer" aria-live="polite"
-            aria-label=move || aria_label.get()
+            aria-label=move || aria_label.try_get().flatten()
         >{value}</span>
     }
     .add_any_attr(attrs)
