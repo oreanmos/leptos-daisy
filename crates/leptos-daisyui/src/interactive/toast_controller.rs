@@ -148,7 +148,7 @@ pub fn ToastContainer(controller: ToastController) -> impl IntoView {
     view! {
         <div class="toast toast-end toast-bottom z-50">
             {move || {
-                messages.get().into_iter().map(|msg| {
+                messages.try_get().unwrap_or_default().into_iter().map(|msg| {
                     let id = msg.id;
                     let class = msg.color.alert_class();
                     view! {

@@ -19,7 +19,7 @@ pub fn Pagination(
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("join", &refs, class);
     view! {
-        <nav aria-label=move || aria_label.get().unwrap_or_else(|| "Pagination".to_string())>
+        <nav aria-label=move || aria_label.try_get().flatten().unwrap_or_else(|| "Pagination".to_string())>
             <div class=cls>{children()}</div>
         </nav>
     }

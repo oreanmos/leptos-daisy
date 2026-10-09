@@ -50,15 +50,15 @@ pub fn Range(
     view! {
         <input
             type="range"
-            id=move || id.get()
-            name=move || name.get()
-            min=move || min.get().map(|v| v.to_string())
-            max=move || max.get().map(|v| v.to_string())
-            value=move || value.get().map(|v| v.to_string())
-            step=move || step.get().map(|v| v.to_string())
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
+            min=move || min.try_get().flatten().map(|v| v.to_string())
+            max=move || max.try_get().flatten().map(|v| v.to_string())
+            value=move || value.try_get().flatten().map(|v| v.to_string())
+            step=move || step.try_get().flatten().map(|v| v.to_string())
             class=cls
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
             on:input=handle_input
             on:change=handle_change
         />

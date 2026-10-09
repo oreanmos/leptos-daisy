@@ -135,7 +135,7 @@ pub fn LinkButton(
             href=href
             target=target
             rel=rel
-            aria-label=move || aria_label.get()
+            aria-label=move || aria_label.try_get().flatten()
             tabindex=disabled.then_some("-1")
             aria-disabled=disabled.then_some("true")
             on:click=handle_click

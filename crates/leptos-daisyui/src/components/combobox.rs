@@ -90,7 +90,7 @@ pub fn ComboBox(
         open.set(false);
     };
 
-    let input_cls = move || match class.get() {
+    let input_cls = move || match class.try_get().flatten() {
         Some(extra) => format!("{input_base} {extra}"),
         None => input_base.clone(),
     };
@@ -102,7 +102,7 @@ pub fn ComboBox(
     let rendered_children = children();
 
     let dropdown_cls = move || {
-        if open.get() {
+        if open.try_get().unwrap_or_default() {
             "absolute z-50 mt-1 w-full bg-base-100 border border-base-300 rounded-box shadow-lg max-h-60 overflow-y-auto"
         } else {
             "hidden"
@@ -110,7 +110,12 @@ pub fn ComboBox(
     };
 
     let clear_btn_cls = move || {
-        if value.get().map(|v| !v.is_empty()).unwrap_or(false) {
+        if value
+            .try_get()
+            .flatten()
+            .map(|v| !v.is_empty())
+            .unwrap_or(false)
+        {
             "btn btn-ghost btn-circle btn-xs absolute right-2"
         } else {
             "hidden"
@@ -123,9 +128,9 @@ pub fn ComboBox(
                 <input
                     type="text"
                     class=input_cls
-                    placeholder=move || placeholder.get().unwrap_or_default()
-                    disabled=move || disabled.get().unwrap_or(false)
-                    prop:value=move || value.get().unwrap_or_default()
+                    placeholder=move || placeholder.try_get().flatten().unwrap_or_default()
+                    disabled=move || disabled.try_get().flatten().unwrap_or(false)
+                    prop:value=move || value.try_get().flatten().unwrap_or_default()
                     on:input=handle_input
                     on:focus=handle_focus
                     on:blur=handle_blur
@@ -182,7 +187,7 @@ pub fn ComboBoxItem(
         }
     };
 
-    let cls = move || class.get().unwrap_or_default();
+    let cls = move || class.try_get().flatten().unwrap_or_default();
 
     view! {
         <li>

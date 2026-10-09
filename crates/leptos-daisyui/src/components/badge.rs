@@ -35,7 +35,7 @@ pub fn Badge(
     let r: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("badge", &r, class);
     view! {
-        <span class=cls aria-label=move || aria_label.get()>
+        <span class=cls aria-label=move || aria_label.try_get().flatten()>
             {children.map(|c| c())}
         </span>
     }

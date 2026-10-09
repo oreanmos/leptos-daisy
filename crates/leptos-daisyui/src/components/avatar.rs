@@ -111,7 +111,7 @@ pub fn Avatar(
     }
     let cls = class_signal("avatar", &mods, class);
     view! {
-        <div class=cls aria-label=move || aria_label.get()>
+        <div class=cls aria-label=move || aria_label.try_get().flatten()>
             {children()}
         </div>
     }

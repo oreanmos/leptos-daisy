@@ -20,7 +20,7 @@ pub fn BottomNavigation(
     let refs: Vec<&str> = m.iter().map(|s| s.as_str()).collect();
     let cls = class_signal("btm-nav", &refs, class);
     view! {
-        <nav class=cls aria-label=move || aria_label.get().unwrap_or_else(|| "Bottom navigation".to_string())>
+        <nav class=cls aria-label=move || aria_label.try_get().flatten().unwrap_or_else(|| "Bottom navigation".to_string())>
             {children()}
         </nav>
     }.add_any_attr(attrs)

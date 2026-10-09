@@ -77,7 +77,7 @@ pub fn LabelButton(
         <label
             class=cls
             for=for_id
-            aria-label=move || aria_label.get()
+            aria-label=move || aria_label.try_get().flatten()
         >
             {children()}
         </label>

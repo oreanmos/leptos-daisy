@@ -81,7 +81,7 @@ pub fn Collapse(
 
     match trigger {
         CollapseTrigger::Details => view! {
-            <details class=cls open=move || open.get().unwrap_or(false)>
+            <details class=cls open=move || open.try_get().flatten().unwrap_or(false)>
                 {title_view.map(|t| view! { <summary class="collapse-title">{t}</summary> })}
                 <div class="collapse-content">{children()}</div>
             </details>
@@ -89,7 +89,7 @@ pub fn Collapse(
         .into_any(),
         CollapseTrigger::Checkbox => view! {
             <div class=cls>
-                <input type="checkbox" checked=move || open.get().unwrap_or(false) />
+                <input type="checkbox" checked=move || open.try_get().flatten().unwrap_or(false) />
                 {title_view.map(|t| view! { <div class="collapse-title">{t}</div> })}
                 <div class="collapse-content">{children()}</div>
             </div>
@@ -99,8 +99,8 @@ pub fn Collapse(
             <div class=cls>
                 <input
                     type="radio"
-                    name=move || radio_name.get().unwrap_or_else(|| "collapse-radio".to_string())
-                    checked=move || open.get().unwrap_or(false)
+                    name=move || radio_name.try_get().flatten().unwrap_or_else(|| "collapse-radio".to_string())
+                    checked=move || open.try_get().flatten().unwrap_or(false)
                 />
                 {title_view.map(|t| view! { <div class="collapse-title">{t}</div> })}
                 <div class="collapse-content">{children()}</div>

@@ -93,13 +93,20 @@ pub fn Modal(
     #[prop(attrs)] attrs: Vec<AnyAttribute>,
     children: Children,
 ) -> impl IntoView {
-    let cls = move || modal_cls(position, state, open.get().unwrap_or(false), class.get());
+    let cls = move || {
+        modal_cls(
+            position,
+            state,
+            open.try_get().flatten().unwrap_or(false),
+            class.try_get().flatten(),
+        )
+    };
     view! {
         <dialog
-            id=move || id.get()
+            id=move || id.try_get().flatten()
             class=cls
-            open=move || open.get().unwrap_or(false)
-            aria-label=move || aria_label.get()
+            open=move || open.try_get().flatten().unwrap_or(false)
+            aria-label=move || aria_label.try_get().flatten()
             aria-modal="true"
         >
             {children()}

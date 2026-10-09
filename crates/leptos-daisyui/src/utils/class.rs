@@ -68,7 +68,7 @@ pub fn class_signal(
     user_class: MaybeProp<String>,
 ) -> impl Fn() -> Arc<str> + Send + Sync + 'static + use<> {
     let static_cls: Arc<str> = build_class(base, modifiers, None).into();
-    move || match user_class.get() {
+    move || match user_class.try_get().flatten() {
         Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}").into(),
         _ => static_cls.clone(),
     }
@@ -90,7 +90,7 @@ where
             parts.push(base.clone());
         }
         parts.extend(modifiers());
-        if let Some(uc) = user_class.get() {
+        if let Some(uc) = user_class.try_get().flatten() {
             parts.push(uc);
         }
         merge_classes(parts)

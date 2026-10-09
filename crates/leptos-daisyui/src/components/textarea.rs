@@ -77,17 +77,17 @@ pub fn Textarea(
 
     view! {
         <textarea
-            id=move || id.get()
-            name=move || name.get()
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
             class=cls
-            placeholder=move || placeholder.get()
-            prop:value=move || value.get().unwrap_or_default()
-            rows=move || rows.get().map(|v| v.to_string())
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
-            readonly=move || readonly.get().unwrap_or(false)
-            required=move || required.get().unwrap_or(false)
-            autofocus=move || autofocus.get().unwrap_or(false)
+            placeholder=move || placeholder.try_get().flatten()
+            prop:value=move || value.try_get().flatten().unwrap_or_default()
+            rows=move || rows.try_get().flatten().map(|v| v.to_string())
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
+            readonly=move || readonly.try_get().flatten().unwrap_or(false)
+            required=move || required.try_get().flatten().unwrap_or(false)
+            autofocus=move || autofocus.try_get().flatten().unwrap_or(false)
             on:input=handle_input
             on:change=handle_change
             on:focus=handle_focus

@@ -47,10 +47,10 @@ pub fn MenuItem(
         "",
         move || {
             let mut m = Vec::new();
-            if active.get().unwrap_or(false) {
+            if active.try_get().flatten().unwrap_or(false) {
                 m.push("active".to_string());
             }
-            if disabled.get().unwrap_or(false) {
+            if disabled.try_get().flatten().unwrap_or(false) {
                 m.push("disabled".to_string());
             }
             m

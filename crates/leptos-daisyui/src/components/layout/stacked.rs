@@ -119,7 +119,7 @@ pub fn StackedLayoutNav(
     provide_context(NavStyleContext { style });
     let sc = style.container_classes();
     let static_cls = build_class(sc, &[], None);
-    let cls = move || match class.get() {
+    let cls = move || match class.try_get().flatten() {
         Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
         _ => static_cls.clone(),
     };
@@ -139,7 +139,7 @@ pub fn StackedLayoutNavItem(
         .map(|c| c.style)
         .unwrap_or_default();
     let cls = move || {
-        let is_active = active.get().unwrap_or(false);
+        let is_active = active.try_get().flatten().unwrap_or(false);
         let item_base = nav_style.item_classes();
         let active_extra = if is_active {
             nav_style.active_classes()
@@ -158,14 +158,14 @@ pub fn StackedLayoutNavItem(
         }
         m.push(state_classes);
         let static_cls = build_class("", &m, None);
-        match class.get() {
+        match class.try_get().flatten() {
             Some(uc) if !uc.is_empty() => format!("{static_cls} {uc}"),
             _ => static_cls,
         }
     };
 
     view! {
-        <a href=move || href.get().unwrap_or_else(|| "#".to_string()) class=cls>
+        <a href=move || href.try_get().flatten().unwrap_or_else(|| "#".to_string()) class=cls>
             {children()}
         </a>
     }
@@ -198,7 +198,7 @@ pub fn StackedLayoutSearch(
         <input
             type="text"
             class=cls
-            placeholder=move || placeholder.get().unwrap_or_else(|| "Search...".to_string())
+            placeholder=move || placeholder.try_get().flatten().unwrap_or_else(|| "Search...".to_string())
         />
     }
 }

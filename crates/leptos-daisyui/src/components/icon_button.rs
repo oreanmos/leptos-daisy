@@ -82,8 +82,8 @@ pub fn IconButton(
         <button
             type="button"
             class=cls
-            aria-label=move || aria_label.get()
-            disabled=move || disabled.get().unwrap_or(false)
+            aria-label=move || aria_label.try_get().flatten()
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
             on:click=handle_click
         >
             {children()}

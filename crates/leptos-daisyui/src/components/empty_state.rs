@@ -33,7 +33,7 @@ pub fn EmptyState(
 ) -> impl IntoView {
     let cls = move || {
         let base = "flex flex-col items-center justify-center py-16 text-base-content/60";
-        match class.get() {
+        match class.try_get().flatten() {
             Some(extra) => format!("{base} {extra}"),
             None => base.to_string(),
         }

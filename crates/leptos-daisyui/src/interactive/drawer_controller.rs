@@ -99,13 +99,17 @@ pub fn ControlledDrawer(
         if let Some(bp) = &always_open_on {
             classes.push(format!("{}:drawer-open", bp));
         }
-        if let Some(c) = class.get() {
+        if let Some(c) = class.try_get().flatten() {
             classes.push(c);
         }
         classes.join(" ")
     };
 
-    let drawer_id = move || id.get().unwrap_or_else(|| "controlled-drawer".to_string());
+    let drawer_id = move || {
+        id.try_get()
+            .flatten()
+            .unwrap_or_else(|| "controlled-drawer".to_string())
+    };
 
     view! {
         <div class=drawer_class>
@@ -113,7 +117,7 @@ pub fn ControlledDrawer(
                 id=drawer_id
                 type="checkbox"
                 class="drawer-toggle"
-                checked=move || controller.is_open().get()
+                checked=move || controller.is_open().try_get().unwrap_or_default()
                 on:change=move |ev| {
                     controller.set(event_target_checked(&ev));
                 }

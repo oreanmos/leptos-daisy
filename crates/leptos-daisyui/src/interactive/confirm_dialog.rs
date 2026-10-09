@@ -45,7 +45,11 @@ pub fn ConfirmDialog(
     let cancel_text = cancel_label.unwrap_or_else(|| "Cancel".to_string());
     let btn_color = color.unwrap_or(Color::Error);
 
-    let is_loading = Signal::derive(move || loading.map(|l| l.get()).unwrap_or(false));
+    let is_loading = Signal::derive(move || {
+        loading
+            .map(|l| l.try_get().unwrap_or_default())
+            .unwrap_or(false)
+    });
 
     let confirm_text_clone = confirm_text.clone();
     let handle_confirm = move |_: ev::MouseEvent| {
@@ -89,7 +93,7 @@ pub fn ConfirmDialog(
                         on:click=handle_confirm
                     >
                         {move || {
-                            if is_loading.get() {
+                            if is_loading.try_get().unwrap_or_default() {
                                 "Processing\u{2026}".to_string()
                             } else {
                                 confirm_text_clone.clone()

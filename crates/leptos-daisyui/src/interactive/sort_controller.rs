@@ -54,8 +54,8 @@ impl SortController {
     /// Returns `" \u{25B2}"` (up) if ascending, `" \u{25BC}"` (down) if descending,
     /// or `""` if the column is not active.
     pub fn indicator(&self, col: &str) -> String {
-        if self.column.get() == col {
-            if self.ascending.get() {
+        if self.column.try_get().unwrap_or_default() == col {
+            if self.ascending.try_get().unwrap_or_default() {
                 " \u{25B2}".to_string()
             } else {
                 " \u{25BC}".to_string()
@@ -67,17 +67,17 @@ impl SortController {
 
     /// Whether the given column is the currently sorted column.
     pub fn is_active(&self, col: &str) -> bool {
-        self.column.get() == col
+        self.column.try_get().unwrap_or_default() == col
     }
 
     /// Returns the current sort column name (empty if none).
     pub fn column(&self) -> String {
-        self.column.get()
+        self.column.try_get().unwrap_or_default()
     }
 
     /// Whether the current sort direction is ascending.
     pub fn is_ascending(&self) -> bool {
-        self.ascending.get()
+        self.ascending.try_get().unwrap_or_default()
     }
 
     /// Returns a sort parameter string suitable for API query params.
@@ -85,10 +85,10 @@ impl SortController {
     /// Returns `Some("+column")` for ascending, `Some("-column")` for descending,
     /// or `None` if no column is active.
     pub fn sort_param(&self) -> Option<String> {
-        let col = self.column.get();
+        let col = self.column.try_get().unwrap_or_default();
         if col.is_empty() {
             None
-        } else if self.ascending.get() {
+        } else if self.ascending.try_get().unwrap_or_default() {
             Some(format!("+{col}"))
         } else {
             Some(format!("-{col}"))
@@ -141,7 +141,7 @@ pub fn SortableHeaderCell(
 
     let cls = move || {
         let base = "cursor-pointer select-none hover:bg-base-200";
-        match class.get() {
+        match class.try_get().flatten() {
             Some(extra) => format!("{base} {extra}"),
             None => base.to_string(),
         }

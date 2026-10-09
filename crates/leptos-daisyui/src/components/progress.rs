@@ -32,8 +32,8 @@ pub fn Progress(
     view! {
         <progress
             class=cls
-            value=move || value.get().map(|v| v.to_string())
-            max=move || max.get().unwrap_or(100.0).to_string()
+            value=move || value.try_get().flatten().map(|v| v.to_string())
+            max=move || max.try_get().flatten().unwrap_or(100.0).to_string()
         ></progress>
     }
     .add_any_attr(attrs)

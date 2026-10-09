@@ -35,13 +35,13 @@ pub fn ThemeController(
     view! {
         <input
             type=input_type.as_str()
-            id=move || id.get()
-            name=move || name.get()
+            id=move || id.try_get().flatten()
+            name=move || name.try_get().flatten()
             value=value
             class=cls
-            aria-label=move || aria_label.get()
-            checked=move || checked.get().unwrap_or(false)
-            disabled=move || disabled.get().unwrap_or(false)
+            aria-label=move || aria_label.try_get().flatten()
+            checked=move || checked.try_get().flatten().unwrap_or(false)
+            disabled=move || disabled.try_get().flatten().unwrap_or(false)
         />
     }
 }
