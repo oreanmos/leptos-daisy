@@ -69,7 +69,7 @@ impl ToastController {
 
     /// Push a toast message with the given content, color, and duration.
     pub fn push(&self, content: impl Into<String>, color: ToastColor, duration_ms: u32) {
-        let id = self.next_id.get_untracked();
+        let id = self.next_id.try_get_untracked().unwrap_or_default();
         self.next_id.set(id + 1);
         let msg = ToastMessage {
             id,

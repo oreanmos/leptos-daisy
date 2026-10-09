@@ -42,6 +42,10 @@ fn button_survives_disposed_props() {
     });
     assert!(html.contains("<button"));
     assert!(!html.contains("disabled"));
+
+    // A live prop must still render, so an always-default sweep fails.
+    let live = render(|| view! { <Button disabled=true>"ok"</Button> });
+    assert!(live.contains("disabled"));
 }
 
 #[test]

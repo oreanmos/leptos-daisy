@@ -41,7 +41,7 @@ impl SortController {
     /// Toggle sort on a column. If the column is already active, flips direction.
     /// If a different column, sets it as active (ascending).
     pub fn toggle(&self, col: &str) {
-        if self.column.get_untracked() == col {
+        if self.column.try_get_untracked().unwrap_or_default() == col {
             self.ascending.update(|v| *v = !*v);
         } else {
             self.column.set(col.to_string());
@@ -55,7 +55,7 @@ impl SortController {
     /// or `""` if the column is not active.
     pub fn indicator(&self, col: &str) -> String {
         if self.column.try_get().unwrap_or_default() == col {
-            if self.ascending.try_get().unwrap_or_default() {
+            if self.ascending.try_get().unwrap_or(true) {
                 " \u{25B2}".to_string()
             } else {
                 " \u{25BC}".to_string()
@@ -77,7 +77,7 @@ impl SortController {
 
     /// Whether the current sort direction is ascending.
     pub fn is_ascending(&self) -> bool {
-        self.ascending.try_get().unwrap_or_default()
+        self.ascending.try_get().unwrap_or(true)
     }
 
     /// Returns a sort parameter string suitable for API query params.
@@ -88,7 +88,7 @@ impl SortController {
         let col = self.column.try_get().unwrap_or_default();
         if col.is_empty() {
             None
-        } else if self.ascending.try_get().unwrap_or_default() {
+        } else if self.ascending.try_get().unwrap_or(true) {
             Some(format!("+{col}"))
         } else {
             Some(format!("-{col}"))

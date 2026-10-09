@@ -122,7 +122,7 @@ pub fn CommandPalette(
             }
             "Enter" => {
                 ev.prevent_default();
-                let idx = selected_index.get_untracked();
+                let idx = selected_index.try_get_untracked().unwrap_or_default();
                 if let Some(item) = items.get(idx) {
                     on_select.run(item.id.clone());
                     open.set(false);
@@ -142,7 +142,8 @@ pub fn CommandPalette(
     };
 
     let placeholder_text = placeholder
-        .get_untracked()
+        .try_get_untracked()
+        .flatten()
         .unwrap_or_else(|| "Search...".to_string());
 
     let extra_class = class;
