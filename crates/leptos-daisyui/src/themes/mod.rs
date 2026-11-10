@@ -18,7 +18,8 @@ pub use looks::{
     LooksThemeStyles, OIKONOTES_ROLE_VARS,
 };
 pub use switching::{
-    apply_aesthetic, apply_theme, read_stored_aesthetic, read_stored_theme, system_preferred_theme,
+    apply_aesthetic, apply_theme, apply_theme_id, is_valid_aesthetic_id, is_valid_theme_id,
+    read_stored_aesthetic, read_stored_theme, read_stored_theme_id, system_preferred_theme,
 };
 pub use terminal::{
     TERMINAL_THEME_CSS, TERMINAL_THEME_NAME, TerminalThemeShell, TerminalThemeStyles,
