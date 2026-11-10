@@ -23,5 +23,8 @@ hydrate = ["leptos/hydrate", "web-sys", "wasm-bindgen"]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
 [lib]
 crate-type = ["cdylib", "rlib"]
