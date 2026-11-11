@@ -92,6 +92,32 @@ assert!(theme.is_dark());
 assert!(!theme.is_custom());
 ```
 
+### Custom theme and aesthetic ids
+
+Apps that ship user-created themes (ids outside the `Theme` enum) use the string-based API. Ids must match `^[a-z0-9-]{1,64}$`; custom ids conventionally start with `user-`.
+
+```rust
+use leptos_daisyui::prelude::*;
+
+// Validate an id before applying it
+assert!(is_valid_theme_id("user-moss"));
+assert!(!is_valid_theme_id("User_Moss!"));
+
+// Apply any valid id — built-in or custom — and persist it
+apply_theme_id(Theme::Dracula.as_str(), "my-app-theme");
+apply_theme_id("user-moss", "my-app-theme");
+
+// Read the stored id back as a raw string (Theme::from_str rejects custom ids)
+let stored: Option<String> = read_stored_theme_id("my-app-theme");
+
+// Aesthetics accept built-in presets and `user-…` ids
+assert!(is_valid_aesthetic_id("journal"));
+assert!(is_valid_aesthetic_id("user-moss"));
+apply_aesthetic("user-moss", "my-app-aesthetic");
+```
+
+`apply_theme_id` and `apply_aesthetic` ignore ids that fail validation, and all of these functions are no-ops on the server.
+
 ### Built-In Terminal Theme
 
 `leptos-daisyui` also ships a reusable terminal-style custom theme (`Theme::Terminal`).
