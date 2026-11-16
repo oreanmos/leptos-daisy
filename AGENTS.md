@@ -1,5 +1,12 @@
 # AGENTS.md — Implementing `leptos-daisyui` (65 components + variations)
 
+> **Oiko flow (2026-11-16).** Work on this library for Oikonotes runs through the Oiko agent kit in
+> `~/Development/oikonotes` (`oiko-build`: claims, `wt` worktree slots under `.worktrees/`, TDD with
+> `oiko-test-author` then `oiko-implementer`, code and security review, Mistral models in Pi or
+> Vibe). Start orchestrators there, not here. Base branch `master`; after a merge push
+> `master:staging` and pin that rev in Oikonotes; `master` is pushed after the spec's `GATE: GO`,
+> before Oikonotes. The gate for this repo is "Verify with builds" below.
+
 This file gives step-by-step instructions for coding agents contributing to the `leptos-daisyui` library.
 
 The project goal is to wrap **all 65 daisyUI components** with their documented variations, producing an ergonomic Leptos library that works in **SSR / CSR / Hydrate / Islands** modes.
